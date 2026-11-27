@@ -3,28 +3,25 @@
 Avance por puertas. Ninguna etapa empieza sin cerrar la anterior y, en GATE 0, sin
 aprobación del usuario. Las fechas no se fijan: dependen de los resultados.
 
-## GATE 0 — Selección del mercado · *pendiente de aprobación*
+## GATE 0 — Selección del mercado · **APROBADO (2026-11-27)**
 - [x] CLAUDE.md con reglas permanentes
 - [x] Investigación bibliográfica verificada (`RESEARCH_FOUNDATIONS.md`)
 - [x] Auditoría de fuentes (`DATA_FEASIBILITY_REPORT.md`)
 - [x] Matriz y sensibilidad (`MARKET_SELECTION_REPORT.md`)
-- [ ] **Aprobación del usuario del mercado, el sellado y el universo**
+- [x] Aprobación del usuario (O/U 2,5 prepartido, 22 divisiones, holdout 2024/25-2025/26)
 
-## GATE 1 — Infraestructura de datos (si se aprueba O/U 2,5)
-1. Módulo `src/markets/odds.py`: probabilidad implícita, overround de mercado completo,
-   normalización proporcional y de potencia, EV. Tests con los 4 casos de referencia del
-   encargo.
-2. Ingesta `src/ingestion/football_data.py`: parser tolerante (columnas extra, alias,
-   cabeceras duplicadas), esquema normalizado y Parquet en `data/processed/`.
-3. Point-in-time: columna `odds_available_at` reconstruida (regla viernes/martes),
-   `kickoff_at`, `result_available_at`.
-4. Validación (`src/validation/`): cuotas ≥ 1,01, overround en rango, duplicados,
-   coherencia de resultados, liquidación O/U (`FTHG+FTAG > 2,5`).
-5. Pruebas de leakage desde el inicio: ninguna feature con timestamp ≥ momento de
-   predicción.
-6. Añadir dependencias justificadas: SciPy, statsmodels, DuckDB, PyArrow.
+## GATE 1 — Infraestructura de datos · **COMPLETADO, pendiente de revisión** (ver `GATE_1_REPORT.md`)
+Implementado y probado (paquete `src/qsports/`, 59 pruebas):
+- [x] `odds.py`, `ou.py`: probabilidad implícita, overround, normalización proporcional y de potencia, EV, CLV, liquidación, Poisson
+- [x] `ingest.py`: descarga enrutada por partición; parser tolerante; esquema canónico; procedencia por fila
+- [x] `temporal.py`: regla de captura, corte de información conservador, ambigüedad, hora UK → UTC
+- [x] `holdout.py`: separación física, registro de ids, guardas, autorización ligada al protocolo, log de accesos
+- [x] `benchmark.py`: A/A′/A*/B/C, reglas por fuente/período (Pinnacle), muestras idénticas
+- [x] `quality.py`, `verify.py`: inventario (nivel 0), calidad, exclusiones, diagnósticos, hashes
+- [x] Reconstrucción desde cero verificada; `requirements-lock.txt`
+- Dependencias de GATE 2 (SciPy y, si se justifica, statsmodels) se añadirán al iniciar GATE 2
 
-## GATE 2 — Modelo inicial
+## GATE 2 — Modelo inicial · **NO AUTORIZADO** (detalle en `MODEL_ROADMAP.md`)
 1. Baselines: tasa histórica por liga (expanding), promedio de la competición, mercado
    sin margen (proporcional y potencia).
 2. Modelo principal: Poisson independiente ataque/defensa/localía por liga, con

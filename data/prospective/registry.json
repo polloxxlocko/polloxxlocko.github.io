@@ -1,6 +1,6 @@
 {
  "partition": "prospective",
- "sealed_at_utc": "2026-11-27T01:25:32.874380+00:00",
+ "sealed_at_utc": "2026-11-27T01:38:46.145538+00:00",
  "seasons": [
   "2627"
  ],
@@ -2693,7 +2693,7 @@
    "sha256": "91f57d2f687f87781d3d07347eea2b8acedbf51f74e8ced2f84d52df50b11cdf"
   }
  },
- "full_content_sha256": "54a981e65c63d603b3c21a7495cd97ceac68dfb10475a4c114f75ae6c2cf0c7e",
+ "full_content_sha256": "22f2fe5e86fd94931aefcc6dbca9f4c738393558c15e0d16a005e05883c91f74",
  "level0_content_sha256": "552032c958ad5227d812812d5ef77a9af4620104d4d23b840b74b6783e578f9a",
  "file_reports_level0": [
   {

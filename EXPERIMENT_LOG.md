@@ -59,3 +59,61 @@ borran entradas. Las correcciones se registran como entradas nuevas.
   extrajo localmente con `pdftotext` y se leyó.
 
 **Decisiones abiertas:** ver `MARKET_SELECTION_REPORT.md` §9.
+
+---
+
+## E-001 · 2026-11-27 · GATE 1: infraestructura de datos y protección del holdout
+
+**Tipo:** infraestructura y auditoría (sin modelos, sin evaluación de modelos, sin acceso
+al holdout).
+**Autorización:** GATE 0 aprobado por el usuario (mercado O/U 2,5 prepartido, 22
+divisiones, holdout 2024/25-2025/26).
+
+**Acciones (en orden):**
+1. **Separación física inmediata** de 2024/25-2025/26 (`data/holdout/raw/`) y 2026/27
+   (`data/prospective/raw/`), antes de cualquier otro trabajo. Hashes verificados contra
+   el manifiesto original.
+2. Paquete `qsports` (ingesta, temporalidad, holdout, benchmarks, calidad, verificación,
+   CLI) y configuraciones (`holdout`, `source_reliability`, `exclusion_criteria`,
+   `team_aliases`).
+3. Sellado: registros de match_ids, metadatos de nivel 0 y hashes. Dataset de desarrollo
+   con guarda anti-reservados.
+4. Benchmarks A/A′/A*/B/C para desarrollo; inventario, calidad, exclusiones y diagnósticos
+   temporales y de Pinnacle.
+5. 59 pruebas automáticas (todas pasan); pruebas de mutación del tripwire y de la
+   verificación de hashes (ambas detectaron la alteración).
+6. Reconstrucción desde cero en un clon limpio + venv nuevo + descarga nueva: hashes RAW y
+   de contenido idénticos.
+
+**Decisiones metodológicas:**
+- 2026/27 sellada como reserva prospectiva (conservador; pendiente de confirmar por el usuario).
+- Benchmark A = promedio pre-cierre de la fuente (proporcional). B = cierre, solo
+  retrospectivo. C = frecuencia histórica point-in-time.
+- Corte de información: resultados con fecha estrictamente anterior a la captura estimada.
+- Regla PIN-2025-07-23: enmascarar todas las cuotas de Pinnacle desde esa fecha, sin
+  eliminar partidos.
+- Validez de un par: cuotas ≥ 1,01 y margen en [0; 0,25]. Sin combinar casas.
+- 5 alias de equipos (1 empírico, 4 por juicio); `match_id` con nombres crudos.
+- Criterios de exclusión objetivos predefinidos: ninguna división excluida.
+
+**Resultados verificables:** desarrollo 182.821 filas (182.818 en el universo de
+entrenamiento); muestra primaria A 146.350; holdout 15.328 filas y prospectivo 2.680
+(nivel 0); `verify` 10/10; pytest 59/59.
+
+**Problemas encontrados (todos resueltos o registrados):**
+- `git mv -k` no movió los archivos no versionados en la primera separación física: se
+  detectó al listar y se corrigió con `mv` antes de seguir.
+- pandas 3: `astype(str)` no convierte nulos → claves duplicadas por `match_id`.
+- Fila artefacto `#REF!` (T1 2013/14); 2 partidos griegos sin resultado.
+- Variante de nombre "Raith"/"Raith Rvs" (misma temporada) no detectada por la primera
+  prueba de colisiones: se añadió una búsqueda de prefijos/subcadenas.
+- Invariante temporal falso por una fila sin fecha: la comprobación ahora excluye filas
+  sin fecha y las reporta.
+- Hash de contenido distinto entre reconstrucciones por la marca de descarga: se excluyen
+  las columnas de procedencia temporal (registradas aparte).
+- `process.py` leía manifiestos reservados (solo fechas y hashes): se movió a `holdout.py`
+  para cumplir el tripwire.
+
+**Exposición del holdout:** ver `HOLDOUT_PROTECTION_PROTOCOL.md` §5. Ningún resultado
+reservado observado. Las cifras de desarrollo usadas para la potencia (σ_Δ sustituto =
+0,114, de LL_C − LL_A en 2005/06-2021/22) **no** usan la validación ni el holdout.

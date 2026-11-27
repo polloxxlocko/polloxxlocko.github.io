@@ -107,9 +107,14 @@ def reserved_retrieved_at() -> dict[str, str]:
 
 
 # ---------------------------------------------------------------- hashes
+PROVENANCE_TIME_COLUMNS = ("dataset_retrieved_at_utc",)
+
+
 def content_hash(df: pd.DataFrame) -> str:
-    """Hash determinista del contenido (independiente del formato Parquet)."""
-    d = df.sort_values("match_id").reset_index(drop=True)
+    """Hash determinista del CONTENIDO (independiente del formato Parquet y de la fecha de
+    descarga: las columnas de procedencia temporal se excluyen y se registran aparte)."""
+    d = df.drop(columns=[c for c in PROVENANCE_TIME_COLUMNS if c in df.columns])
+    d = d.sort_values("match_id").reset_index(drop=True)
     d = d[sorted(d.columns)]
     csv = d.to_csv(index=False, float_format="%.6g", date_format="%Y-%m-%dT%H:%M:%S%z")
     return hashlib.sha256(csv.encode("utf-8")).hexdigest()

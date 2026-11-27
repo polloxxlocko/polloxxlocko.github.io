@@ -1,7 +1,7 @@
 {
- "dataset_version": "fd-2026-11-27-81dbe9fd981d",
- "created_at_utc": "2026-11-27T01:25:27.086274+00:00",
- "code_git_head": "2fede676110b290a5c2a9d3afa2dbea829a6225e",
+ "dataset_version": "fd-2026-11-27-41d9503c0d33",
+ "created_at_utc": "2026-11-27T01:38:40.251158+00:00",
+ "code_git_head": "a6c5b0d64f9a4071fa3327abdb7f4faf3e161987",
  "python": "3.13.18",
  "packages": {
   "numpy": "2.5.3",
@@ -110,7 +110,7 @@
  "outputs": {
   "processed/dev/matches.parquet": {
    "rows": 182821,
-   "content_sha256": "81dbe9fd981d3f69d7f8e33af790ac92ca6f622d1fd6011d562fdfdc8efde2b9",
+   "content_sha256": "41d9503c0d33477ce57b100f66cb35082590a3f4d85600aa1acd692d76b4f5b9",
    "seasons": [
     "0001",
     "0102",
@@ -150,7 +150,7 @@
  "reserved": {
   "holdout": {
    "partition": "holdout",
-   "sealed_at_utc": "2026-11-27T01:25:30.518908+00:00",
+   "sealed_at_utc": "2026-11-27T01:38:43.572721+00:00",
    "seasons": [
     "2425",
     "2526"
@@ -166,12 +166,12 @@
      "sha256": "0cf572edf7185ac08bb56b0940056ed693a6300d7ca348c91700bbd5f9bbfa66"
     }
    },
-   "full_content_sha256": "999b87dd36ba672a4423c1921b7056157172d7804d0de4a6e25b8a3fb83f4512",
+   "full_content_sha256": "b859bdab4e6950bf0671808336852ba1458525d6f0c56f94af832d7b76b6e592",
    "level0_content_sha256": "8f841a5ec2d81b5a5ecef5f67f661926545f193542397ee7c2b3dc41f25438b9"
   },
   "prospective": {
    "partition": "prospective",
-   "sealed_at_utc": "2026-11-27T01:25:32.874380+00:00",
+   "sealed_at_utc": "2026-11-27T01:38:46.145538+00:00",
    "seasons": [
     "2627"
    ],
@@ -182,7 +182,7 @@
      "sha256": "91f57d2f687f87781d3d07347eea2b8acedbf51f74e8ced2f84d52df50b11cdf"
     }
    },
-   "full_content_sha256": "54a981e65c63d603b3c21a7495cd97ceac68dfb10475a4c114f75ae6c2cf0c7e",
+   "full_content_sha256": "22f2fe5e86fd94931aefcc6dbca9f4c738393558c15e0d16a005e05883c91f74",
    "level0_content_sha256": "552032c958ad5227d812812d5ef77a9af4620104d4d23b840b74b6783e578f9a"
   }
  }

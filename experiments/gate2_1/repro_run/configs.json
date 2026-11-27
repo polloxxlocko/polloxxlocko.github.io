@@ -48,5 +48,15 @@
   "blocks": [
    "tuning"
   ]
+ },
+ "M1__w730_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
  }
 }

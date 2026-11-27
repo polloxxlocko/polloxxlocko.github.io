@@ -1,0 +1,140 @@
+{
+ "_doc": "Candidatos CONGELADOS para GATE 3 (validación 2022/23-2023/24, una sola evaluación). Creado por instrucción expresa del usuario. El ejecutor (qsports.gate3) verifica identidad e hiperparámetros frente a la reproducción de referencia y frente a los modelos instanciados.",
+ "frozen_at_utc": "2026-11-27T18:59:18.832185+00:00",
+ "validation_seasons": [
+  "2223",
+  "2324"
+ ],
+ "reference_run": {
+  "dir": "experiments/gate3/repro_run",
+  "git_commit": "ea5598dde4b3a811ebb8b73282e75065fb40b878"
+ },
+ "code_hash": "ec1c590e6babf78814a028c8fb6a684c53fb2ae6541d249dec17015c46b5a6ee",
+ "candidates": {
+  "M2": {
+   "family": "M2",
+   "config_id": "M2__h480_r64",
+   "model": "PoissonModel",
+   "constructor_args": {
+    "half_life_days": 480,
+    "ridge": 64.0,
+    "max_history_days": 1460,
+    "promoted_prior": false
+   },
+   "scope": "division",
+   "refit_every": 1,
+   "columns": [
+    "home_team",
+    "away_team",
+    "fthg",
+    "ftag"
+   ]
+  },
+  "M4cal": {
+   "family": "M4cal",
+   "config_id": "M4cal__h730",
+   "model": "MarketModel",
+   "constructor_args": {
+    "sport_cols": [],
+    "ridge": 100.0,
+    "half_life_days": 730,
+    "require_cols": [
+     "inp_m2"
+    ],
+    "market_col": "p_A_consensus"
+   },
+   "scope": "pooled",
+   "refit_every": 4,
+   "columns": [
+    "p_A_consensus",
+    "over25",
+    "inp_m2"
+   ],
+   "inputs": {
+    "inp_m2": "M2"
+   }
+  },
+  "M4sport": {
+   "family": "M4sport",
+   "config_id": "M4sport__h730_r1000",
+   "model": "MarketModel",
+   "constructor_args": {
+    "sport_cols": [
+     "inp_m2"
+    ],
+    "ridge": 1000.0,
+    "half_life_days": 730,
+    "require_cols": [
+     "inp_m2"
+    ],
+    "market_col": "p_A_consensus"
+   },
+   "scope": "pooled",
+   "refit_every": 4,
+   "columns": [
+    "p_A_consensus",
+    "over25",
+    "inp_m2"
+   ],
+   "inputs": {
+    "inp_m2": "M2"
+   }
+  }
+ },
+ "input_files_sha256": {
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__tuning.parquet": "a4183f552b4bd02be590601d686c3a88acd092871b74ed156201b92d7984f25d",
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__tuning.json": "529319a19f06e8ce65404eed899b45c7f120943b8f68b0e035e05ac482958195",
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__inner.parquet": "43b4c0718614f4a5129e28ad47b5fbfc640e1bdc15f30a2e5d55567fd42324b3",
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__inner.json": "275e757fd5111821201af8555855c70b569bf0a1bf31833ad5eb14ed3056cda2"
+ },
+ "benchmarks": {
+  "A": "p_A_consensus",
+  "C": "p_C_hist_freq"
+ },
+ "universe": "temporadas de validación, resultado conocido, captura estimable, elig_A",
+ "protocol": {
+  "sesoi_nats": 0.001,
+  "bootstrap": {
+   "week_mode": "calendar",
+   "block_weeks": 4,
+   "n_boot": 10000,
+   "seed": 20261127
+  },
+  "sensitivity_block_weeks": [
+   2,
+   4,
+   8,
+   12
+  ],
+  "decision_partition": "EXPERIMENTAL_PROTOCOL.md §6 (S-R, S-NR, EQ, INC, I-NR, I-R)",
+  "primary_comparison": "M4sport-M4cal",
+  "comparisons": [
+   [
+    "M4sport",
+    "M4cal"
+   ],
+   [
+    "M4sport",
+    "A"
+   ],
+   [
+    "M4cal",
+    "A"
+   ],
+   [
+    "M2",
+    "A"
+   ],
+   [
+    "M2",
+    "C"
+   ],
+   [
+    "A",
+    "C"
+   ]
+  ],
+  "per_season": true,
+  "q2_validity_condition_1": "Δ̄ < 0 de M4-sport frente a A en la validación (dirección consistente)"
+ }
+}

@@ -255,3 +255,40 @@ partidos de divisiones sin historia previa, p. ej. EC 2005/06); M4-cal 421 y M4-
 `audit_package.py`, que nombraba rutas reservadas para excluirlas). Corregido en `ec0b3d0`
 centralizando las marcas en `holdout.py`. Desde entonces los commits se condicionan al
 código de salida de pytest.
+
+## E-005 · 2026-11-27 · GATE 2.1: correcciones de la auditoría independiente de GATE 2
+
+**Motivo:** auditoría independiente de GATE 2 sobre `1780027b`, con aprobación metodológica
+condicionada (D-1 aceptada; D-2 aceptada condicionalmente; GATE 3 no autorizado). Respuesta
+punto por punto en `AUDIT_RESPONSE_GATE2.md`.
+
+**Cambios de código** (rama `gate2.1`; `7af9669`, `a6c8745`, `a724e84`):
+- Ejecución reproducible: directorio propio por ejecución, `--clean`, cachés solo con
+  manifiesto de completitud (clave de caché + SHA-256), escrituras atómicas, `RUN_MANIFEST.json`
+  con hashes; `experiments/gate2/` en solo lectura.
+- Evaluador: validación de entradas, log loss exacta (`log1p`), bootstrap por semanas
+  **calendario** (D-4), sensibilidad de bloque, autocorrelación semanal, potencia de
+  superioridad frente a equivalencia.
+- Uniones 1:1, universo explícito y cobertura completa en la prueba interna; sin `pivot_table`.
+- Holdout: registro fail-closed; `verify` exige 0 accesos en estado sellado; valla de GATE 3
+  con autorización ligada a candidatos congelados y registro de intentos, comprobada también
+  en el universo de evaluación.
+- M3: forma `log1p` del preregistro disponible para la sensibilidad (D-3).
+
+**Desviaciones nuevas:**
+- **D-3** (detectada por la auditoría): M3 usó el conteo lineal de partidos previos, no
+  log(1 + n). Los resultados de GATE 2 son los de la forma lineal. Sensibilidad con log1p solo
+  en el bloque de ajuste.
+- **D-4** (detectada por la auditoría): el bootstrap usó bloques de semanas activas, no de
+  semanas calendario. Corregido; el método antiguo se conserva solo para comparar.
+
+**Incidencias de proceso en GATE 2.1 (registradas por transparencia):**
+- La primera ejecución limpia se detuvo sola porque el archivo de registro, creado dentro del
+  repositorio, ensuciaba el árbol. Se movió fuera del repositorio.
+- Se reinició una vez para añadir la valla al universo de evaluación (cambio de código, y por
+  tanto de hash).
+- Se reinició otra vez porque el modo limpio recalculaba, dentro de la misma ejecución, las
+  configuraciones ya validadas al extender la grilla. El resultado no cambiaba, pero el tiempo de
+  cálculo más que se duplicaba. Corregido en `a724e84`.
+- Ninguna de las ejecuciones interrumpidas llegó a la prueba interna ni se usó para nada; sus
+  directorios se borraron antes de relanzar.

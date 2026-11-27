@@ -40,8 +40,10 @@ OUT = PUBLISHED  # directorio activo (lo cambia configure); por defecto solo lec
 N_JOBS = 4
 _RUN: dict = {"mode": "read_only", "features": paths.FEATURES_DEV}
 
-CODE_FILES_GLOBS = ("src/qsports/*.py", "experiments/gate2/run.py", "configs/*.json", "requirements-lock.txt",
-                    "pyproject.toml")
+CODE_FILES_GLOBS = ("src/qsports/*.py", "experiments/gate2/run.py", "experiments/gate3/*.py", "configs/*.json",
+                    "requirements-lock.txt", "pyproject.toml")
+# El archivo de candidatos congelados de GATE 3 guarda el hash del código: se excluye para evitar la circularidad.
+CODE_FILES_EXCLUDE = ("configs/gate3_frozen_candidates.json",)
 
 
 class SelectionLeakError(RuntimeError):
@@ -94,7 +96,8 @@ def sha256_file(p: Path) -> str:
 
 
 def code_files() -> dict[str, str]:
-    files = sorted({p for g in CODE_FILES_GLOBS for p in paths.ROOT.glob(g) if p.is_file()})
+    files = sorted({p for g in CODE_FILES_GLOBS for p in paths.ROOT.glob(g)
+                    if p.is_file() and str(p.relative_to(paths.ROOT)) not in CODE_FILES_EXCLUDE})
     return {str(p.relative_to(paths.ROOT)): sha256_file(p) for p in files}
 
 

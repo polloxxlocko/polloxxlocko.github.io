@@ -148,7 +148,7 @@ class PoissonModel:
         self._new_prior = (0.0, 0.0)
         if self.promoted_prior and self._last:
             departed = self._teams_prev - self._teams_cur if self._teams_cur else set()
-            dep = [self._last[k] for k in departed if k in self._last]
+            dep = [self._last[k] for k in sorted(departed) if k in self._last]  # orden fijo: determinista
             if dep:
                 self._new_prior = (float(np.mean([d[0] for d in dep])), float(np.mean([d[1] for d in dep])))
                 for k in self._teams_cur - self._teams_prev:
@@ -175,7 +175,7 @@ class PoissonModel:
             return self.params["att"][name], self.params["def"][name]
         if self.promoted_prior and self._last and not self._teams_cur:
             departed = self._teams_prev - rows_teams
-            dep = [self._last[k] for k in departed if k in self._last]
+            dep = [self._last[k] for k in sorted(departed) if k in self._last]  # orden fijo: determinista
             if dep:
                 return float(np.mean([d[0] for d in dep])), float(np.mean([d[1] for d in dep]))
         return self._new_prior if self.promoted_prior else (0.0, 0.0)

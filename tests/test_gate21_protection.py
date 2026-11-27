@@ -114,11 +114,16 @@ def test_incomplete_gate3_authorization_refused(tmp_path, monkeypatch):
         wf.check_fence(["2223"], "incompleta")
 
 
-def test_real_fence_log_has_no_crossings():
-    """El registro versionado no contiene cruces de la valla (las pruebas escriben en uno temporal)."""
+def test_real_fence_log_crossings_only_with_valid_authorization(monkeypatch):
+    """El registro versionado (las pruebas escriben en uno temporal): todo cruce 'allowed' debe corresponder a la
+    autorización de GATE 3 vigente (ligada al hash de los candidatos congelados); sin autorización, ninguno."""
     real = paths.ROOT / "logs" / "GATE3_FENCE_LOG.jsonl"
     assert real.exists()
-    assert not [x for x in real.read_text().splitlines() if '"allowed"' in x]
+    monkeypatch.setattr(paths, "FENCE_LOG", real)
+    allowed = [x for x in real.read_text().splitlines() if '"allowed"' in x]
+    if not (paths.ROOT / wf.gate2_config()["gate3_fence"]["authorization_file"]).exists():
+        assert not allowed
+    assert wf.fence_log_summary()["ok"]
 
 
 def test_evaluation_universe_is_fenced_too():

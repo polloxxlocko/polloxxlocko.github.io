@@ -124,7 +124,7 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 `MARKET_SELECTION_REPORT.md`. GATE 1: `DATA_INVENTORY.md`, `DATA_QUALITY_REPORT.md`,
 `TEMPORAL_INTEGRITY_REPORT.md`, `HOLDOUT_PROTECTION_PROTOCOL.md`,
 `MARKET_BENCHMARK_SPECIFICATION.md`, `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`,
-`GATE_1_REPORT.md`. Transversales: `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `ROADMAP.md`,
+`GATE_1_REPORT.md`. Publicación: `AUDIT_GUIDE.md`. Transversales: `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `ROADMAP.md`,
 `README.md`. Futuros: `MODEL_SPECIFICATION.md` (G2), `BACKTEST_REPORT.md` (G3),
 `MODEL_AUDIT_REPORT.md` (G4).
 
@@ -133,4 +133,10 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 1. Revisar y aprobar GATE 1; autorizar o no GATE 2.
 2. Confirmar el sellado conservador de 2026/27.
 3. Revisar los 4 alias de equipos basados en juicio (`configs/team_aliases.json`).
-4. Repositorio remoto (GitHub) opcional para persistencia adicional.
+4. Repositorio remoto: publicado en https://github.com/polloxxlocko/polloxxlocko.github.io (público; 2026-11-27).
+
+## 12. Publicación
+
+Nunca versionar: CSV/ZIP de la fuente, datos reservados (solo registro y log), resúmenes de
+artículos en texto plano (`research/abstracts_local.json`), credenciales. Antes de cada push:
+escaneo de secretos, `python -m qsports verify` y `python -m pytest`.

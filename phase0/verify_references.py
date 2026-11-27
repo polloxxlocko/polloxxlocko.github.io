@@ -108,8 +108,23 @@ SEARCH = {  # sin DOI conocido: buscar candidatos
 }
 
 
+def http(method: str, url: str, attempts: int = 6, **kw) -> requests.Response:
+    """Petición con reintentos ante 429/5xx (respeta Retry-After; espera exponencial).
+    Corrección tras la verificación de reproducibilidad (E-002): sin reintentos, un 429 de
+    Crossref degradaba silenciosamente el resultado."""
+    wait = 2.0
+    for i in range(attempts):
+        r = requests.request(method, url, headers=UA, timeout=60, **kw)
+        if r.status_code not in (429, 500, 502, 503, 504) or i == attempts - 1:
+            return r
+        ra = r.headers.get("Retry-After")
+        time.sleep(float(ra) if ra and ra.replace(".", "", 1).isdigit() else wait)
+        wait = min(wait * 2, 60)
+    return r
+
+
 def openalex(doi: str) -> dict:
-    r = requests.get(f"https://api.openalex.org/works/doi:{doi}", headers=UA, timeout=30)
+    r = http("GET", f"https://api.openalex.org/works/doi:{doi}")
     if r.status_code != 200:
         return {"openalex_status": r.status_code}
     j = r.json()
@@ -122,24 +137,24 @@ def openalex(doi: str) -> dict:
             "open_access_url": (j.get("open_access") or {}).get("oa_url"), "_abstract": abstract}
 
 
-def semantic_scholar_abstracts(dois: dict[str, str]) -> dict[str, str | None]:
+def semantic_scholar_abstracts(dois: dict[str, str]) -> tuple[dict[str, str | None], int]:
     """Resúmenes (o TLDR) vía Semantic Scholar batch, para los DOIs sin resumen en OpenAlex
     (p. ej. Elsevier). Reproduce el paso usado en la Fase Cero."""
     keys = list(dois)
-    r = requests.post("https://api.semanticscholar.org/graph/v1/paper/batch",
-                      params={"fields": "title,year,abstract,tldr"},
-                      json={"ids": ["DOI:" + dois[k] for k in keys]}, headers=UA, timeout=60)
+    r = http("POST", "https://api.semanticscholar.org/graph/v1/paper/batch",
+             params={"fields": "title,year,abstract,tldr"}, json={"ids": ["DOI:" + dois[k] for k in keys]})
     out: dict[str, str | None] = {k: None for k in keys}
+    if r.status_code != 200:
+        return out, r.status_code
     if r.status_code == 200:
         for k, p in zip(keys, r.json()):
             p = p or {}
             out[k] = p.get("abstract") or (("TLDR: " + p["tldr"]["text"]) if (p.get("tldr") or {}).get("text") else None)
-    return out
+    return out, r.status_code
 
 
 def crossref(doi: str) -> dict:
-    r = requests.get(f"https://api.crossref.org/works/{requests.utils.quote(doi, safe='/')}",
-                     headers=UA, timeout=30)
+    r = http("GET", f"https://api.crossref.org/works/{requests.utils.quote(doi, safe='/')}")
     if r.status_code != 200:
         return {"crossref_status": r.status_code}
     m = r.json()["message"]
@@ -171,8 +186,7 @@ def main() -> None:
         res["dois"][key] = rec
         print(f"{key:30s} {rec.get('crossref_status')} {rec.get('year')} | {str(rec.get('title'))[:90]}")
     for key, q in SEARCH.items():
-        r = requests.get("https://api.crossref.org/works", params={"query.bibliographic": q, "rows": 5},
-                         headers=UA, timeout=30)
+        r = http("GET", "https://api.crossref.org/works", params={"query.bibliographic": q, "rows": 5})
         items = r.json()["message"]["items"] if r.status_code == 200 else []
         res["searches"][key] = [{"doi": it.get("DOI"), "title": (it.get("title") or [None])[0],
                                  "journal": (it.get("container-title") or [None])[0],
@@ -180,7 +194,7 @@ def main() -> None:
                                  "authors": [a.get("family") for a in it.get("author", [])]}
                                 for it in items]
         time.sleep(0.3)
-    s2 = semantic_scholar_abstracts(DOIS)
+    s2, s2_status = semantic_scholar_abstracts(DOIS)
     for key in DOIS:
         abstracts[key]["semanticscholar"] = s2.get(key)
         res["dois"][key]["abstract_available_semanticscholar"] = bool(s2.get(key))
@@ -188,8 +202,14 @@ def main() -> None:
                     "legales y los derechos pertenecen a las editoriales. Regenerables localmente con "
                     "phase0/verify_references.py (salida en research/abstracts_local.json, ignorada por git).")
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(res, indent=1, ensure_ascii=False))
+    failed = [k for k, v in res["dois"].items() if v.get("crossref_status") != 200]
     ABSTRACTS_LOCAL.write_text(json.dumps(abstracts, indent=1, ensure_ascii=False))
+    if failed or s2_status != 200:
+        partial = OUT.with_name("references_verified.partial.json")
+        partial.write_text(json.dumps(res, indent=1, ensure_ascii=False))
+        raise SystemExit(f"Verificación incompleta (Crossref fallidos: {failed}; Semantic Scholar HTTP {s2_status}). "
+                         f"NO se sobrescribió {OUT.name}; salida parcial en {partial.name}. Reintente más tarde.")
+    OUT.write_text(json.dumps(res, indent=1, ensure_ascii=False))
 
 
 if __name__ == "__main__":

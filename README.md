@@ -9,6 +9,10 @@ apuestas.**
 **Estado:** GATE 0 aprobado · GATE 1 (infraestructura de datos) completado y pendiente de
 revisión · GATE 2 no autorizado.
 
+> **¿Auditas este proyecto?** Empieza por [`AUDIT_GUIDE.md`](AUDIT_GUIDE.md): contenido,
+> exclusiones (datos de la fuente, holdout sellado, resúmenes de artículos), reproducción y
+> resultados de la verificación de reproducibilidad.
+
 ## Requisitos
 - Python ≥ 3.11 (probado con 3.13.18)
 - Conexión a internet para descargar los datos (~17 MB)
@@ -16,8 +20,8 @@ revisión · GATE 2 no autorizado.
 
 ## Reconstrucción desde cero (otro ordenador)
 ```bash
-# 1. Obtener el código (desde el archivo descargable o un clon git)
-tar -xzf quantitative-sports-gate1.tar.gz && cd quantitative-sports
+# 1. Obtener el código
+git clone https://github.com/polloxxlocko/polloxxlocko.github.io quantitative-sports && cd quantitative-sports
 
 # 2. Entorno reproducible
 python3 -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
@@ -57,6 +61,7 @@ cambio de versión de datos. Hay que registrarlo antes de continuar.
 | `phase0/` | Scripts históricos de la Fase Cero |
 
 ## Documentos (orden de lectura sugerido)
+0. `AUDIT_GUIDE.md`: guía para auditores
 1. `GATE_1_REPORT.md`: informe ejecutivo de GATE 1
 2. `HOLDOUT_PROTECTION_PROTOCOL.md`, `MARKET_BENCHMARK_SPECIFICATION.md`,
    `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`

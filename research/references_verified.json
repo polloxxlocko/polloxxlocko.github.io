@@ -16,7 +16,7 @@
    "cited_by_count": 520,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "dixon_coles1997": {
    "doi": "10.1111/1467-9876.00065",
@@ -35,7 +35,7 @@
    "cited_by_count": 656,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "rue_salvesen2000": {
    "doi": "10.1111/1467-9884.00243",
@@ -54,7 +54,7 @@
    "cited_by_count": 284,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "karlis_ntzoufras2003": {
    "doi": "10.1111/1467-9884.00366",
@@ -73,7 +73,7 @@
    "cited_by_count": 509,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "goddard2005": {
    "doi": "10.1016/j.ijforecast.2004.08.002",
@@ -110,7 +110,7 @@
    "cited_by_count": 214,
    "open_access_url": "https://boa.unimib.it/bitstream/10281/4811/2/Bayesian_hierarchical.pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "koopman_lit2015": {
    "doi": "10.1111/rssa.12042",
@@ -129,7 +129,7 @@
    "cited_by_count": 174,
    "open_access_url": "http://papers.tinbergen.nl/12099.pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "koopman_lit2019": {
    "doi": "10.1016/j.ijforecast.2018.10.011",
@@ -148,7 +148,7 @@
    "cited_by_count": 80,
    "open_access_url": "https://pure.au.dk/portal/en/publications/6c2757ae-160b-46c3-9066-14890467f17c",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "boshnakov2017": {
    "doi": "10.1016/j.ijforecast.2016.11.006",
@@ -188,7 +188,7 @@
    "cited_by_count": 31,
    "open_access_url": "https://arxiv.org/pdf/1802.08848",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "ley2019": {
    "doi": "10.1177/1471082X18817650",
@@ -208,7 +208,7 @@
    "cited_by_count": 73,
    "open_access_url": "https://biblio.ugent.be/publication/8609274/file/8637571.pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "hvattum_arntzen2010": {
    "doi": "10.1016/j.ijforecast.2009.10.002",
@@ -247,7 +247,7 @@
    "cited_by_count": 168,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "mead2023_xg": {
    "doi": "10.1371/journal.pone.0282295",
@@ -303,7 +303,7 @@
    "cited_by_count": 37,
    "open_access_url": "https://content.iospress.com:443/download/journal-of-sports-analytics/jsa200462?id=journal-of-sports-analytics%2Fjsa200462",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "wheatcroft2021_rps": {
    "doi": "10.1515/jqas-2019-0089",
@@ -321,7 +321,7 @@
    "cited_by_count": 34,
    "open_access_url": "https://www.degruyter.com/document/doi/10.1515/jqas-2019-0089/pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "constantinou_fenton2012": {
    "doi": "10.1515/1559-0410.1418",
@@ -340,7 +340,7 @@
    "cited_by_count": 117,
    "open_access_url": "http://qmro.qmul.ac.uk/xmlui/handle/123456789/10783",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "constantinou2013": {
    "doi": "10.1016/j.knosys.2013.05.008",
@@ -360,7 +360,7 @@
    "cited_by_count": 88,
    "open_access_url": "https://www.sciencedirect.com/science/article/pii/S095070511300169X/pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "hubacek2019": {
    "doi": "10.1016/j.ijforecast.2019.01.001",
@@ -399,7 +399,7 @@
    "cited_by_count": 17,
    "open_access_url": "https://doi.org/10.1016/j.mlwa.2024.100539",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "bunker_susnjak2022": {
    "doi": "10.1613/jair.1.13509",
@@ -418,7 +418,7 @@
    "cited_by_count": 222,
    "open_access_url": "https://doi.org/10.1613/jair.1.13509",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "horvat_job2020": {
    "doi": "10.1002/widm.1380",
@@ -437,7 +437,7 @@
    "cited_by_count": 240,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "dixon_pope2004": {
    "doi": "10.1016/j.ijforecast.2003.12.007",
@@ -494,7 +494,7 @@
    "cited_by_count": 190,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "cain2000": {
    "doi": "10.1111/1467-9485.00151",
@@ -514,7 +514,7 @@
    "cited_by_count": 166,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "levitt2004": {
    "doi": "10.1111/j.1468-0297.2004.00207.x",
@@ -608,7 +608,7 @@
    "cited_by_count": 373,
    "open_access_url": "https://econpapers.repec.org/RePEc:iza:izadps:dp4884",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "gandar1998_nba": {
    "doi": "10.1111/0022-1082.155346",
@@ -724,7 +724,7 @@
    "cited_by_count": 193,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "shin1993": {
    "doi": "10.2307/2234240",
@@ -742,7 +742,7 @@
    "cited_by_count": 228,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "strumbelj2014": {
    "doi": "10.1016/j.ijforecast.2014.02.008",
@@ -821,7 +821,7 @@
    "cited_by_count": 398,
    "open_access_url": "https://www.tandfonline.com/doi/pdf/10.1080/02640410601038576?download=true",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "brier1950": {
    "doi": "10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
@@ -839,7 +839,7 @@
    "cited_by_count": 7688,
    "open_access_url": null,
    "abstract_available_openalex": false,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "murphy1973": {
    "doi": "10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2",
@@ -857,7 +857,7 @@
    "cited_by_count": 1364,
    "open_access_url": "https://journals.ametsoc.org/downloadpdf/journals/apme/12/4/1520-0450_1973_012_0595_anvpot_2_0_co_2.pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "gneiting_raftery2007": {
    "doi": "10.1198/016214506000001437",
@@ -876,7 +876,7 @@
    "cited_by_count": 9099,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "cox1958": {
    "doi": "10.1093/biomet/45.3-4.562",
@@ -894,7 +894,7 @@
    "cited_by_count": 640,
    "open_access_url": null,
    "abstract_available_openalex": false,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "zadrozny_elkan2002": {
    "doi": "10.1145/775047.775151",
@@ -913,7 +913,7 @@
    "cited_by_count": 2134,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "niculescu_caruana2005": {
    "doi": "10.1145/1102351.1102430",
@@ -932,7 +932,7 @@
    "cited_by_count": 3238,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "vancalster2019": {
    "doi": "10.1186/s12916-019-1466-7",
@@ -955,7 +955,7 @@
    "cited_by_count": 3964,
    "open_access_url": "https://bmcmedicine.biomedcentral.com/track/pdf/10.1186/s12916-019-1466-7",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "diebold_mariano1995": {
    "doi": "10.1080/07350015.1995.10524599",
@@ -974,7 +974,7 @@
    "cited_by_count": 7677,
    "open_access_url": "https://ink.library.smu.edu.sg/soe_research/347",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "kunsch1989": {
    "doi": "10.1214/aos/1176347265",
@@ -992,7 +992,7 @@
    "cited_by_count": 3392,
    "open_access_url": "https://projecteuclid.org/journals/annals-of-statistics/volume-17/issue-3/The-Jackknife-and-the-Bootstrap-for-General-Stationary-Observations/10.1214/aos/1176347265.pdf",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "politis_romano1994": {
    "doi": "10.1080/01621459.1994.10476870",
@@ -1011,7 +1011,7 @@
    "cited_by_count": 3232,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "white2000": {
    "doi": "10.1111/1468-0262.00152",
@@ -1029,7 +1029,7 @@
    "cited_by_count": 2232,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "hansen2005": {
    "doi": "10.1198/073500105000000063",
@@ -1047,7 +1047,7 @@
    "cited_by_count": 1454,
    "open_access_url": "https://doi.org/10.17615/wehz-da64",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "benjamini_hochberg1995": {
    "doi": "10.1111/j.2517-6161.1995.tb02031.x",
@@ -1066,7 +1066,7 @@
    "cited_by_count": 124157,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "bailey2017_pbo": {
    "doi": "10.21314/JCF.2016.322",
@@ -1106,7 +1106,7 @@
    "cited_by_count": 373,
    "open_access_url": "https://doi.org/10.2139/ssrn.2460551",
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   },
   "harvey_liu2015": {
    "doi": "10.3905/jpm.2015.42.1.013",
@@ -1125,7 +1125,7 @@
    "cited_by_count": 127,
    "open_access_url": null,
    "abstract_available_openalex": true,
-   "abstract_available_semanticscholar": false
+   "abstract_available_semanticscholar": null
   }
  },
  "searches": {
@@ -1483,5 +1483,6 @@
    }
   ]
  },
- "_note": "Resúmenes no incluidos: OpenAlex no redistribuye resúmenes en texto plano por razones legales y los derechos pertenecen a las editoriales. Regenerables localmente con phase0/verify_references.py (salida en research/abstracts_local.json, ignorada por git)."
+ "_note": "Resúmenes no incluidos: OpenAlex no redistribuye resúmenes en texto plano por razones legales y los derechos pertenecen a las editoriales. Regenerables localmente con phase0/verify_references.py (salida en research/abstracts_local.json, ignorada por git).",
+ "_note_semanticscholar": "En la Fase Cero solo se consultaron en Semantic Scholar 21 DOIs (sin resumen en OpenAlex); null = no consultado. La versión actual del script consulta los 59."
 }

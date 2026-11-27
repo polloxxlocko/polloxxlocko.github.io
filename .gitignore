@@ -15,3 +15,4 @@ dist/
 # Resúmenes de artículos: restricción legal de redistribución (solo uso local)
 research/abstracts_local.json
 research/abstracts_semanticscholar.json
+research/references_verified.partial.json

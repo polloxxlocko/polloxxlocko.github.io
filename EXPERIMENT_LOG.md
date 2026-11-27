@@ -117,3 +117,35 @@ entrenamiento); muestra primaria A 146.350; holdout 15.328 filas y prospectivo 2
 **Exposición del holdout:** ver `HOLDOUT_PROTECTION_PROTOCOL.md` §5. Ningún resultado
 reservado observado. Las cifras de desarrollo usadas para la potencia (σ_Δ sustituto =
 0,114, de LL_C − LL_A en 2005/06-2021/22) **no** usan la validación ni el holdout.
+
+---
+
+## E-002 · 2026-11-27 · Publicación para auditoría independiente
+
+**Solicitud del usuario:** publicar el proyecto en `polloxxlocko/polloxxlocko.github.io`,
+eliminando los archivos previos y conservando el historial, para una auditoría externa.
+
+**Acciones:**
+1. Escaneo de secretos y datos personales en los 76 archivos versionados y en todo el
+   historial: sin hallazgos.
+2. **Exclusión de resúmenes de artículos en texto plano** (OpenAlex no los redistribuye por
+   razones legales): reescritura del historial limitada a `research/` (banderas
+   `abstract_available_*`). Commits antiguos purgados. Respaldo local no publicado.
+3. `verify_references.py`: resúmenes solo locales (gitignored); el paso de Semantic Scholar
+   (antes un comando suelto) queda como código reproducible.
+4. Descargador de la Fase Cero: por defecto solo temporadas de desarrollo (≤ 2023/24).
+5. **Verificación de reproducibilidad en un clon limpio** (venv nuevo + descarga nueva):
+   - Fase Cero: estadísticas de resultados, sensibilidad y filas de desarrollo idénticas.
+     Las cifras que incluían temporadas hoy selladas no son reproducibles por diseño; su
+     versión solo con desarrollo lleva a la misma conclusión (AUDIT_GUIDE §5).
+   - GATE 1: 7/7 hashes de contenido idénticos, informes idénticos, verify ok, 59/59 pruebas.
+6. `AUDIT_GUIDE.md` para auditores.
+
+**Resultado negativo / defecto encontrado:** `verify_references.py` no reintentaba ante
+HTTP 429 y sobrescribía el archivo verificado con 8 referencias vacías. Corregido
+(reintentos con espera exponencial; sin sobrescritura si algo falla). Tras la corrección:
+59/59 DOIs idénticos. En `research/references_verified.json`, la bandera de Semantic
+Scholar pasa a `null` en los 38 DOIs no consultados en la Fase Cero (antes `False`).
+
+**Holdout:** sin accesos (ACCESS_LOG vacío). Solo se publican registros (ids hash, conteos,
+hashes), sin cuotas ni resultados.

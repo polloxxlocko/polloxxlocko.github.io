@@ -1,8 +1,16 @@
 # GATE_2_REPORT — Informe ejecutivo de GATE 2 (Modelos y validación interna)
 
-Fecha: 2026-11-27 · Estado: **COMPLETADO, pendiente de revisión del usuario** ·
-GATE 3: **no iniciado ni autorizado** · Holdout y reserva: **sellados, 0 accesos** ·
-Bloque de validación 2022/23-2023/24: **vallado, sin usar**
+Fecha: 2026-11-27 · Estado: **COMPLETADO; auditoría independiente: aprobación metodológica
+condicionada** · GATE 3: **no iniciado ni autorizado** · Holdout y reserva: **sellados, 0 accesos
+registrados** · Bloque de validación 2022/23-2023/24: **vallado, sin usar**
+
+> **Nota de GATE 2.1 (2026-11-27).** Este informe se conserva como registro de GATE 2. La auditoría
+> encontró problemas de reproducibilidad, evaluación, validación, protección, convergencia,
+> documentación e interpretación. Las correcciones, la reproducción limpia y los resultados con el
+> método corregido están en `GATE_2_1_REPORT.md`, `AUDIT_RESPONSE_GATE2.md` y
+> `REPRODUCIBILITY_REPORT.md`. Las frases de interpretación marcadas *[corregido en GATE 2.1]* se
+> reescribieron para limitarlas a lo evaluado. Los IC de esta página usan bloques de semanas
+> **activas** (desviación D-4).
 
 ## 1. Resumen
 
@@ -14,9 +22,11 @@ siguiendo un preregistro con dos desviaciones documentadas.
 - Los modelos deportivos superan a la frecuencia histórica (S-R), pero son **claramente
   peores que el mercado** pre-cierre: M2 − A = +0,0048 nats, I-R, en todas las temporadas.
 - Recalibrar el mercado (M4-cal) **no** lo mejora de forma distinguible: −0,00008, EQ.
-- **Las variables deportivas no aportan información incremental sobre una recalibración
-  del mercado:** M4-sport − M4-cal = −0,00001 [−0,00006; +0,00004], **EQ**. El intervalo
-  excluye cualquier mejora del orden del mínimo efecto de interés (0,001).
+- *[corregido en GATE 2.1]* **Con M4-sport definido por la desviación logit p_M2* − logit p_A,
+  no se demostró aporte incremental sobre una recalibración del mercado en 2014/15-2021/22:**
+  M4-sport − M4-cal = −0,00001 [−0,00006; +0,00004], **EQ**. El intervalo excluye una mejora
+  del orden del mínimo efecto de interés (0,001) **para esa formulación y ese período**; no
+  dice nada de otras variables, formulaciones o modelos.
 
 Estos resultados **no son veredictos** de Q1-Q3 (eso exige GATE 3 y el holdout), pero
 anticipan con fuerza un resultado **VENTAJA ESTADÍSTICA NO DEMOSTRADA** en Q2 para este
@@ -65,9 +75,9 @@ Poisson están bien calibrados (pendiente 1,00-1,01).
 
 ### 3.3 Potencia para el holdout
 Con N = 15.154 filas elegibles (conteo de nivel 0), el MDE es 0,00014-0,00036 nats para
-las comparaciones de M4, muy por debajo de δ = 0,001. El holdout bastaría para clasificar
-esas comparaciones como EQ o S-R/S-NR, no INC. Para M2 frente a A, el MDE (0,0022) supera
-δ.
+las comparaciones de M4, muy por debajo de δ = 0,001. Para M2 frente a A, el MDE (0,0022)
+supera δ. *[corregido en GATE 2.1]* El MDE mide la potencia para detectar **superioridad**,
+no para demostrar **equivalencia**; ambas se calculan por separado en `GATE_2_1_REPORT.md`.
 
 ## 4. Problemas encontrados (todos registrados en `EXPERIMENT_LOG.md`)
 
@@ -92,8 +102,9 @@ esas comparaciones como EQ o S-R/S-NR, no INC. Para M2 frente a A, el MDE (0,002
    mejor y es el que alimenta a M4).
 4. El benchmark A es el consenso de cuotas pre-cierre. Batirlo no implicaría batir a cada
    casa individual ni el precio de cierre.
-5. Q3 (rentabilidad) no se evaluó en GATE 2. Con Q2 en EQ en desarrollo, la expectativa
-   económica es negativa tras el margen (~6%).
+5. Q3 (rentabilidad) no se evaluó en GATE 2. *[corregido en GATE 2.1]* La equivalencia
+   predictiva en desarrollo **no** demuestra una rentabilidad simulada negativa ni positiva:
+   eso solo puede establecerlo Q3, con la regla de selección y los precios observados.
 
 ## 6. Paquete de auditoría
 ```bash
@@ -116,9 +127,9 @@ CSV ni parquet sellado.
    y M2* (modelo independiente). Una evaluación en 2022/23-2023/24 con la partición del §6.
 2. **Mantener δ = 0,001.** La potencia del holdout es suficiente para las comparaciones de
    M4.
-3. **Expectativa honesta:** la evidencia de desarrollo hace muy probable que GATE 3
-   confirme EQ (sin aporte deportivo) y que Q2 termine en VENTAJA ESTADÍSTICA NO
-   DEMOSTRADA. Abrir el holdout seguiría teniendo valor: es el único veredicto formal y
+3. **Expectativa honesta:** *[corregido en GATE 2.1]* la evidencia de desarrollo hace
+   probable que GATE 3 vuelva a dar EQ para M4-sport − M4-cal con esta formulación y que Q2
+   termine en VENTAJA ESTADÍSTICA NO DEMOSTRADA para estos candidatos. Abrir el holdout seguiría teniendo valor: es el único veredicto formal y
    preregistrado.
 4. **Alternativa legítima:** detener la línea aquí y documentar el resultado negativo, o
    ampliar el conjunto de información (p. ej. xG prospectivo desde 2026/27). Esto último

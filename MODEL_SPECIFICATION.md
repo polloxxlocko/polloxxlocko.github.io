@@ -172,9 +172,12 @@ M2 1,008.
    **peores que el mercado** (M2 − A: I-R, en todas las temporadas y en ambos regímenes).
 2. Recalibrar el mercado (M4-cal) corrige su pendiente, pero no mejora el log loss de forma
    distinguible (EQ).
-3. **Aporte deportivo incremental: no demostrado.** Δ(M4-sport − M4-cal) es EQ, con un IC
-   cuya amplitud (±0,00005) excluye cualquier mejora del orden de δ = 0,001. Igual en
-   Betbrain (2014/15-2018/19) y Oddsportal (2019/20-2021/22).
+3. **Aporte deportivo incremental de M4-sport (desviación logit p_M2* − logit p_A): no
+   demostrado** en 2014/15-2021/22. Δ(M4-sport − M4-cal) es EQ, con un IC cuya amplitud
+   (±0,00005) excluye una mejora del orden de δ = 0,001 para esa formulación. Igual en
+   Betbrain (2014/15-2018/19) y Oddsportal (2019/20-2021/22). *Alcance (GATE 2.1):* no se
+   evaluaron otras variables (xG, alineaciones, lesiones), otras formulaciones ni otros
+   períodos; la equivalencia predictiva no implica nada sobre la rentabilidad (Q3).
 
 ### B3. Potencia para el holdout (supuestos en `EXPERIMENTAL_PROTOCOL.md` §5)
 N elegible en el holdout (conteo de nivel 0) = 15.154. MDE (α = 5% bilateral, potencia

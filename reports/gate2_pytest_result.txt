@@ -1,3 +1,5 @@
+# HISTÓRICO (GATE 2). Este registro NO indica commit ni entorno, y su conteo (114) no corresponde al
+# commit publicado 1780027 (115 pruebas). Sustituido en GATE 2.1 por reports/gate2_1/pytest_<commit>.*
 ........................................................................ [ 63%]
 ..........................................                               [100%]
 114 passed in 45.19s

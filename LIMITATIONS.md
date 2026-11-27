@@ -66,3 +66,12 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | G5 | La prueba interna es de desarrollo; las categorías no son veredictos | Confirmación formal solo en GATE 3 y en el holdout |
 | G6 | Primeras temporadas de M3 y M4 con poco entrenamiento (NaN excluidos) | Muestras comunes algo menores al inicio del bloque de ajuste |
 
+## GATE 2.1 (correcciones de auditoría)
+| # | Limitación | Impacto |
+|---|---|---|
+| G7 | Con dependencia serial muy persistente (AR(1) semanal φ = 0,7, sintético), ningún bloque de 2-12 semanas alcanza la cobertura nominal del 95% (82% con 4 semanas, 87% con 12) | Los IC con bloque de 4 semanas podrían ser algo estrechos si la dependencia real fuese así; se informa la autocorrelación semanal real y la sensibilidad a 2-12 semanas (`GATE_2_1_REPORT.md` §3) |
+| G8 | La valla de GATE 3 protege las vías del código (motor walk-forward y universo de evaluación). Las temporadas 2022/23-2023/24 pertenecen a la partición de desarrollo y no están selladas físicamente | Una lectura deliberada fuera del código no quedaría registrada; la protección frente a eso es de procedimiento (CLAUDE.md) |
+| G9 | D-3: M3 usó el conteo lineal de partidos previos, no log(1 + n) como especificaba el preregistro | Los resultados de M3 de GATE 2 corresponden a la forma lineal; sensibilidad con log1p solo en el bloque de ajuste |
+| G10 | La potencia de superioridad y de equivalencia usa una aproximación normal y escala el error estándar de desarrollo por √(n_dev/n_holdout) | Supone estacionariedad de la varianza de Δ y de la dependencia entre desarrollo y holdout |
+| G11 | "0 accesos registrados" demuestra que no se usó la apertura autorizada, no la ausencia absoluta de exposición | Exposición previa documentada en HOLDOUT_PROTECTION_PROTOCOL §5 |
+

@@ -1,0 +1,21 @@
+{
+ "checks": {
+  "raw_dev_hashes_match_manifest": true,
+  "raw_dev_hashes_match_original_download": true,
+  "no_reserved_seasons_in_raw_dev": true,
+  "dev_contains_no_reserved": true,
+  "dev_content_hash_matches_manifest": true,
+  "benchmarks_content_hash_matches_manifest": true,
+  "holdout_raw_unchanged": true,
+  "holdout_level0_unchanged": true,
+  "prospective_raw_unchanged": true,
+  "prospective_level0_unchanged": true
+ },
+ "holdout_sealed": true,
+ "prospective_sealed": true,
+ "access_log_entries": {
+  "holdout": 0,
+  "prospective": 0
+ },
+ "ok": true
+}

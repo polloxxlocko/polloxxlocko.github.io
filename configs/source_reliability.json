@@ -1,0 +1,20 @@
+{
+  "_doc": "Reglas de exclusión por fuente y período. Se aplican enmascarando SOLO las cuotas afectadas (columna *_reliable=False); nunca se eliminan partidos completos.",
+  "rules": [
+    {
+      "id": "PIN-2025-07-23",
+      "source": "Pinnacle",
+      "column_prefixes": ["ou_pre_pin_", "ou_close_pin_", "x12_pre_pin_", "x12_close_pin_"],
+      "unreliable_from": "2025-07-23",
+      "unreliable_to": null,
+      "reason": "football-data.co.uk/data.php: 'Since 23/07/2025 Pinnacle's public API for odds delivery has become unreliable meaning their odds are systematically out of date relative to odds for other bookmakers, including both the pre-closing and closing odds.' Corroborado en Fase Cero (cierre: |dif. con Bet365| media 0,0060 -> 0,0127).",
+      "evidence_level": "fuente oficial + verificación empírica de Fase Cero"
+    }
+  ],
+  "regime_markers": [
+    {"id": "AVG-SRC-1920", "columns": ["ou_pre_avg_", "ou_pre_max_", "x12_pre_avg_"], "from_season": "1920",
+     "note": "Promedios/máximos: Betbrain (2005/06-2018/19) -> Oddsportal (2019/20+). No comparables entre regímenes."},
+    {"id": "AVG-NOPIN-2025-07-23", "columns": ["ou_pre_avg_", "ou_close_avg_", "ou_pre_max_", "ou_close_max_"], "from_date": "2025-07-23",
+     "note": "Pinnacle deja de incluirse en el cálculo de promedios y máximos (data.php)."}
+  ]
+}

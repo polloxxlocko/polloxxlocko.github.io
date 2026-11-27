@@ -1,0 +1,328 @@
+{
+ "dev_pin_vs_b365_by_season": [
+  {
+   "season": "1920",
+   "kind": "pre",
+   "n": 6829,
+   "mean_absdiff": 0.008,
+   "p90_absdiff": 0.0165
+  },
+  {
+   "season": "1920",
+   "kind": "close",
+   "n": 6890,
+   "mean_absdiff": 0.0072,
+   "p90_absdiff": 0.0151
+  },
+  {
+   "season": "2021",
+   "kind": "pre",
+   "n": 7549,
+   "mean_absdiff": 0.0074,
+   "p90_absdiff": 0.0151
+  },
+  {
+   "season": "2021",
+   "kind": "close",
+   "n": 7600,
+   "mean_absdiff": 0.007,
+   "p90_absdiff": 0.0144
+  },
+  {
+   "season": "2122",
+   "kind": "pre",
+   "n": 7787,
+   "mean_absdiff": 0.0082,
+   "p90_absdiff": 0.0173
+  },
+  {
+   "season": "2122",
+   "kind": "close",
+   "n": 7815,
+   "mean_absdiff": 0.0075,
+   "p90_absdiff": 0.0156
+  },
+  {
+   "season": "2223",
+   "kind": "pre",
+   "n": 7763,
+   "mean_absdiff": 0.0072,
+   "p90_absdiff": 0.0154
+  },
+  {
+   "season": "2223",
+   "kind": "close",
+   "n": 7785,
+   "mean_absdiff": 0.0065,
+   "p90_absdiff": 0.0137
+  },
+  {
+   "season": "2324",
+   "kind": "pre",
+   "n": 7741,
+   "mean_absdiff": 0.0063,
+   "p90_absdiff": 0.0133
+  },
+  {
+   "season": "2324",
+   "kind": "close",
+   "n": 7767,
+   "mean_absdiff": 0.0062,
+   "p90_absdiff": 0.013
+  }
+ ],
+ "reserved_presence_by_month_level0": [
+  {
+   "month": "2024-07",
+   "n": 8,
+   "pin_pre": 100.0,
+   "pin_close": 100.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2024-08",
+   "n": 693,
+   "pin_pre": 99.1,
+   "pin_close": 100.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2024-09",
+   "n": 734,
+   "pin_pre": 99.7,
+   "pin_close": 99.7,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2024-10",
+   "n": 741,
+   "pin_pre": 99.6,
+   "pin_close": 99.7,
+   "b365_pre": 99.7,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2024-11",
+   "n": 715,
+   "pin_pre": 99.6,
+   "pin_close": 99.6,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2024-12",
+   "n": 862,
+   "pin_pre": 99.3,
+   "pin_close": 99.8,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-01",
+   "n": 762,
+   "pin_pre": 99.3,
+   "pin_close": 99.6,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-02",
+   "n": 847,
+   "pin_pre": 99.8,
+   "pin_close": 99.8,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-03",
+   "n": 868,
+   "pin_pre": 99.8,
+   "pin_close": 99.8,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-04",
+   "n": 885,
+   "pin_pre": 99.9,
+   "pin_close": 99.9,
+   "b365_pre": 99.9,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-05",
+   "n": 556,
+   "pin_pre": 99.8,
+   "pin_close": 99.8,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-06",
+   "n": 10,
+   "pin_pre": 100.0,
+   "pin_close": 100.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-07",
+   "n": 8,
+   "pin_pre": 100.0,
+   "pin_close": 100.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-08",
+   "n": 744,
+   "pin_pre": 97.3,
+   "pin_close": 99.9,
+   "b365_pre": 98.3,
+   "avg_pre": 98.4,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-09",
+   "n": 713,
+   "pin_pre": 99.7,
+   "pin_close": 99.9,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-10",
+   "n": 709,
+   "pin_pre": 93.8,
+   "pin_close": 93.9,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-11",
+   "n": 793,
+   "pin_pre": 36.7,
+   "pin_close": 38.6,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2025-12",
+   "n": 763,
+   "pin_pre": 47.7,
+   "pin_close": 47.7,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-01",
+   "n": 822,
+   "pin_pre": 19.5,
+   "pin_close": 19.1,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-02",
+   "n": 880,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-03",
+   "n": 820,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-04",
+   "n": 868,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-05",
+   "n": 527,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 97.9,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-07",
+   "n": 1,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-08",
+   "n": 605,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 100.0,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-09",
+   "n": 733,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 100.0,
+   "avg_pre": 99.9,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-10",
+   "n": 819,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 99.9,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  },
+  {
+   "month": "2026-11",
+   "n": 522,
+   "pin_pre": 0.0,
+   "pin_close": 0.0,
+   "b365_pre": 99.8,
+   "avg_pre": 100.0,
+   "avg_close": 100.0
+  }
+ ]
+}

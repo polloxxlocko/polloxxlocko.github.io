@@ -1,0 +1,230 @@
+{
+ "n_dev_rows": 182821,
+ "rows_without_result": [
+  {
+   "season_code": "1314",
+   "div": "T1",
+   "source_file": "1314/T1.csv",
+   "source_row": "308",
+   "home_team": NaN,
+   "away_team": NaN
+  },
+  {
+   "season_code": "1415",
+   "div": "G1",
+   "source_file": "1415/G1.csv",
+   "source_row": "302",
+   "home_team": "Niki Volos",
+   "away_team": "OFI Crete"
+  },
+  {
+   "season_code": "1819",
+   "div": "G1",
+   "source_file": "1819/G1.csv",
+   "source_row": "199",
+   "home_team": "Panathinaikos",
+   "away_team": "Olympiakos"
+  }
+ ],
+ "ftr_inconsistent": 0,
+ "ht_goals_gt_ft_goals": 0,
+ "htr_inconsistent": 1,
+ "goals_out_of_range_0_15": 0,
+ "non_integer_goals": 0,
+ "shots_on_target_gt_shots": 16,
+ "red_cards_gt_5": 1,
+ "corners_gt_30": 0,
+ "odds_below_1_01": {
+  "ou_close_b365_over": 1,
+  "ou_close_b365_under": 1,
+  "ou_close_avg_over": 1,
+  "x12_pre_b365_h": 10
+ },
+ "ou_overround_by_pair": {
+  "ou_pre_avg": {
+   "n": 146635,
+   "median": 0.066,
+   "p01": 0.0447,
+   "p99": 0.1019,
+   "n_lt_0": 18,
+   "n_gt_0_25": 31
+  },
+  "ou_pre_b365": {
+   "n": 42670,
+   "median": 0.0588,
+   "p01": 0.0259,
+   "p99": 0.0819,
+   "n_lt_0": 12,
+   "n_gt_0_25": 0
+  },
+  "ou_pre_pin": {
+   "n": 37737,
+   "median": 0.0358,
+   "p01": 0.0236,
+   "p99": 0.065,
+   "n_lt_0": 0,
+   "n_gt_0_25": 0
+  },
+  "ou_pre_gb": {
+   "n": 17047,
+   "median": 0.0992,
+   "p01": 0.0753,
+   "p99": 0.1214,
+   "n_lt_0": 11,
+   "n_gt_0_25": 2
+  },
+  "ou_close_avg": {
+   "n": 37971,
+   "median": 0.0582,
+   "p01": 0.0432,
+   "p99": 0.0749,
+   "n_lt_0": 0,
+   "n_gt_0_25": 0
+  },
+  "ou_close_b365": {
+   "n": 37937,
+   "median": 0.0581,
+   "p01": 0.0259,
+   "p99": 0.0703,
+   "n_lt_0": 0,
+   "n_gt_0_25": 0
+  },
+  "ou_close_pin": {
+   "n": 37889,
+   "median": 0.0344,
+   "p01": 0.0232,
+   "p99": 0.0552,
+   "n_lt_0": 0,
+   "n_gt_0_25": 1
+  },
+  "ou_pre_max": {
+   "n": 146635,
+   "median": 0.0172,
+   "p01": -0.0107,
+   "p99": 0.0604,
+   "n_lt_0": 7469,
+   "n_gt_0_25": 6
+  },
+  "ou_close_max": {
+   "n": 37972,
+   "median": 0.0095,
+   "p01": -0.0381,
+   "p99": 0.0387,
+   "n_lt_0": 10036,
+   "n_gt_0_25": 0
+  }
+ },
+ "ou_pre_avg_overround_by_regime": {
+  "betbrain": {
+   "n": 108680,
+   "median": 0.069,
+   "seasons": "0506-1819"
+  },
+  "oddsportal": {
+   "n": 37955,
+   "median": 0.0587,
+   "seasons": "1920-2324"
+  }
+ },
+ "non_numeric_values_by_file": {
+  "0001/E2": {
+   "attendance": [
+    "NA"
+   ]
+  },
+  "1314/T1": {
+   "x12_close_pin_h": [
+    "#REF!"
+   ]
+  },
+  "2223/N1": {
+   "x12_close_b365_h": [
+    "#"
+   ]
+  }
+ },
+ "files_with_rows_wider_than_header": {
+  "0102/D1": 144,
+  "0102/D2": 139,
+  "0102/E0": 211,
+  "0102/E1": 264,
+  "0102/E2": 289,
+  "0102/E3": 289,
+  "0102/F2": 29,
+  "0102/I2": 48,
+  "0102/SC0": 115,
+  "0102/SC1": 85,
+  "0102/SC2": 95,
+  "0102/SC3": 95,
+  "0102/SP2": 48,
+  "0203/B1": 161,
+  "0203/D1": 16,
+  "0203/D2": 163,
+  "0203/E1": 32,
+  "0203/E2": 201,
+  "0203/E3": 217,
+  "0203/F1": 189,
+  "0203/F2": 221,
+  "0203/I2": 221,
+  "0203/N1": 176,
+  "0203/P1": 208,
+  "0203/SC0": 53,
+  "0203/SC1": 101,
+  "0203/SC2": 101,
+  "0203/SC3": 101,
+  "0203/SP2": 223,
+  "0203/T1": 176,
+  "0304/D1": 112,
+  "0304/D2": 291,
+  "0304/E0": 45,
+  "0304/E2": 48,
+  "0304/E3": 80,
+  "0304/F1": 157,
+  "0304/F2": 365,
+  "0304/I1": 112,
+  "0304/I2": 224,
+  "0304/P1": 16,
+  "0304/SC0": 117,
+  "0304/SC3": 69,
+  "0304/SP2": 304,
+  "0405/B1": 144,
+  "0405/D2": 35,
+  "0405/E0": 45,
+  "0405/E1": 160,
+  "0405/E2": 176,
+  "0405/E3": 112,
+  "0405/G1": 96,
+  "0405/I1": 80,
+  "0405/I2": 368,
+  "0405/N1": 80,
+  "0405/SC0": 101,
+  "0405/SC1": 16,
+  "0405/SC3": 16,
+  "0405/SP1": 112,
+  "0607/T1": 16,
+  "0708/F2": 32,
+  "0708/N1": 32,
+  "0708/P1": 32,
+  "0708/SP2": 16,
+  "0910/SP2": 10
+ },
+ "files_with_duplicate_header_names": {
+  "0405/D2": [
+   "LB"
+  ]
+ },
+ "date_outside_season_window": 0,
+ "unparsed_dates": 1,
+ "teams_per_division_season": {
+  "min": 10,
+  "max": 24,
+  "min_at": "SC1/0001",
+  "max_at": "E1/0001"
+ },
+ "team_seasons_with_lt_10_appearances": [],
+ "team_name_variant_collisions": [],
+ "non_ascii_team_names": [
+  "King’s Lynn"
+ ],
+ "team_names_in_multiple_countries": []
+}

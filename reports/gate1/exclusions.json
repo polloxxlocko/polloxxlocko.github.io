@@ -1,0 +1,16 @@
+{
+ "training_universe_rows": 182818,
+ "training_excluded": {
+  "resultado_faltante": 2,
+  "fecha_no_parseable": 1
+ },
+ "market_A_eligible_rows_0506_2324": 146350,
+ "market_A_excluded_reasons_0506+": {
+  "valido": 146585,
+  "missing": 256,
+  "overround_out_of_range": 49
+ },
+ "market_A_excluded_capture_ambiguous": 235,
+ "division_seasons_below_min": [],
+ "divisions_excluded_from_market_universe": []
+}

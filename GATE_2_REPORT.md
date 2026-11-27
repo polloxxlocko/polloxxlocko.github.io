@@ -81,6 +81,7 @@ esas comparaciones como EQ o S-R/S-NR, no INC. Para M2 frente a A, el MDE (0,002
 | Error en la sintaxis de selección (`query`) | Corregido; las configuraciones ya calculadas se reutilizaron |
 | Un commit con 1 prueba fallida (tripwire sobre `audit_package.py`) | La tripwire funcionó; marcas centralizadas en `holdout.py`; commits posteriores condicionados a pytest |
 | Archivos de predicciones > 50 MB | Un archivo por configuración; `p_over` exacto bit a bit verificado |
+| El verificador del paquete rechazaba los manifiestos de hashes versionados (falso positivo) | Revisa solo archivos con una función pura y probada (`is_forbidden`); los datos sellados siguen prohibidos |
 
 ## 5. Limitaciones relevantes para la interpretación
 1. Espacio de información limitado: sin xG histórico, alineaciones, lesiones, clima ni
@@ -97,11 +98,18 @@ esas comparaciones como EQ o S-R/S-NR, no INC. Para M2 frente a A, el MDE (0,002
 ## 6. Paquete de auditoría
 ```bash
 pip install -r requirements-lock.txt && pip install -e .
-python -m pytest                  # 114 pruebas (las de integración se omiten sin datos)
+python -m pytest                  # 115 pruebas (las 15 de integración se omiten sin datos)
 python -m qsports audit-synthetic # pipeline M0-M4 en mundos sintéticos; termina con "ok": true
 python -m qsports audit-package   # dist/audit_package_gate2.tar.gz (git archive verificado)
 ```
 Detalle en `AUDIT_RUN.md`. Ningún paso requiere abrir el holdout ni la reserva.
+
+**Verificación del paquete (commit 5142044):** se extrajo en un directorio vacío y se instaló
+en un entorno virtual limpio con `requirements-lock.txt`. Resultado: 100 pruebas superadas y
+15 omitidas (integración, sin datos de la fuente). `audit-synthetic` terminó con `"ok": true`
+en 43 s. El paquete pesa 186 MB, casi todo predicciones guardadas, y tiene 208 archivos.
+Contiene los manifiestos de hashes de las particiones selladas (nivel 0), pero ningún ZIP,
+CSV ni parquet sellado.
 
 ## 7. Recomendaciones para GATE 3 (requiere tu autorización)
 1. **Candidatos congelados:** M4-sport (h730, r1000, X = desviación de M2*), M4-cal (h730)

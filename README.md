@@ -58,7 +58,7 @@ cambio de versión de datos. Hay que registrarlo antes de continuar.
 | `data/raw/` | RAW de desarrollo (no versionado; manifiesto sí) |
 | `data/holdout/`, `data/reserve/` | **Sellados.** Solo se versionan el registro y el log de accesos |
 | `reports/gate1/` | Salidas reproducibles de GATE 1 |
-| `tests/` | 114 pruebas (unitarias, anti-filtración, metodología sintética, protección del holdout, integración) |
+| `tests/` | 115 pruebas (unitarias, anti-filtración, metodología sintética, protección del holdout, integración) |
 | `experiments/gate2/` | Ejecutor, todas las predicciones fuera de muestra, registros de ajuste, resultados |
 | `phase0/` | Scripts históricos de la Fase Cero |
 

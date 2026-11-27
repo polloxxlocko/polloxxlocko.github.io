@@ -1,0 +1,19 @@
+{
+ "commit": "a27897a9a0564987b8c0f204f8b8715483adefc8",
+ "tree_clean_at_start": true,
+ "executed_by": "Claude (agente), contenedor cloud del proyecto",
+ "command": "python -m pytest -v -p no:cacheprovider --junitxml=...",
+ "started_utc": "2026-11-27T19:05:54.406171+00:00",
+ "finished_utc": "2026-11-27T19:07:09.357524+00:00",
+ "python": "3.13.18",
+ "platform": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+ "exit_code": 0,
+ "counts": {
+  "tests": 178,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 178
+ },
+ "tree_clean_at_end_excluding_this_record": true
+}

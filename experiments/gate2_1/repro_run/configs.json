@@ -58,5 +58,197 @@
   "blocks": [
    "tuning"
   ]
+ },
+ "M1__w1095_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
  }
 }

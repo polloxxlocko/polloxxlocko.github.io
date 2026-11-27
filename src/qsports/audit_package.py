@@ -10,10 +10,11 @@ import subprocess
 import tarfile
 
 from . import paths
+from .holdout import RESERVED_PATH_MARKERS
 
 FORBIDDEN_SUFFIXES = (".zip", ".env")
-FORBIDDEN_PARTS = ("data/holdout/raw", "data/reserve/raw", "matches_full.parquet", "metadata_level0.parquet",
-                   "abstracts_local.json", "data/processed/dev/matches.parquet")
+FORBIDDEN_PARTS = RESERVED_PATH_MARKERS + ("metadata_level0.parquet", "abstracts_local.json",
+                                           "data/processed/dev/matches.parquet")
 
 
 def build(out_name: str = "audit_package_gate2.tar.gz") -> str:

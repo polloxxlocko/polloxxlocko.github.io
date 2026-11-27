@@ -107,6 +107,11 @@ def reserved_retrieved_at() -> dict[str, str]:
     return out
 
 
+# Marcas de rutas/archivos reservados que NUNCA deben aparecer en un paquete o repositorio publicado.
+RESERVED_PATH_MARKERS = ("data/holdout/raw", "data/reserve/raw", "data/holdout/processed", "data/reserve/processed",
+                         "matches_full.parquet")
+
+
 def has_raw(partition: str) -> bool:
     return any((_part_dir(partition) / "raw" / "football_data").glob("*/data.zip"))
 

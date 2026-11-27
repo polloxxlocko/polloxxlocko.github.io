@@ -250,5 +250,269 @@
   "blocks": [
    "tuning"
   ]
+ },
+ "M2__h120_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
  }
 }

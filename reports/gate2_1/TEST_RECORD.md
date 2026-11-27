@@ -6,7 +6,7 @@ Cada ejecución indica el commit exacto. "Árbol limpio" = `git status --porcela
 
 | # | Qué | Commit | Resultado | Registro |
 |---|---|---|---|---|
-| A1 | `python -m pytest` (registro formal con JUnit) | ver `pytest_<commit>.json` | ver archivo | `reports/gate2_1/pytest_<commit>.{txt,xml,json}` (generado por `experiments/gate2_1/record_pytest.py`, que exige árbol limpio) |
+| A1 | `python -m pytest -v` (registro formal con JUnit) | `2603793` (árbol limpio al empezar y al terminar) | **159 superadas, 0 fallos, 0 errores, 0 omitidas** (con datos de desarrollo presentes) | `reports/gate2_1/pytest_2603793.{txt,xml,json}` (`experiments/gate2_1/record_pytest.py`). Los commits posteriores solo añaden registros, manifiesto de hashes y documentos, sin tocar `src/`, `tests/`, `configs/` ni `run.py` |
 | A2 | `python -m pytest` antes de cada commit de código de GATE 2.1 | `7af9669`, `a6c8745`, `a724e84` | 157, 158 y 159 superadas, 0 fallos (salida en el historial de la sesión; el registro formal es A1) | — |
 | A3 | `python -m qsports verify` | todos los commits de GATE 2.1 | `ok: true`; accesos registrados 0/0; valla sin cruces | salida de `verify` (JSON) |
 | A4 | Reproducción limpia completa (`run.py all --clean`) + `m3_spec_sensitivity` + `stability.py` | `a724e84` (árbol limpio) | 2.400 s + 208 s; selecciones y categorías idénticas a lo publicado; 99,83% de predicciones bit a bit | `experiments/gate2_1/repro_run/RUN_MANIFEST.json`; `experiments/gate2_1/logs/` |

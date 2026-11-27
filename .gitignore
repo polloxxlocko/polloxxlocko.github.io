@@ -1,0 +1,6 @@
+# RAW: se re-descarga y se verifica por SHA-256 (manifest.jsonl sí se versiona)
+data/raw/**/*.zip
+data/raw/**/*.part
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

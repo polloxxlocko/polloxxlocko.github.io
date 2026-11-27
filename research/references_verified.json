@@ -1,0 +1,1487 @@
+{
+ "dois": {
+  "maher1982": {
+   "doi": "10.1111/j.1467-9574.1982.tb00782.x",
+   "crossref_status": 200,
+   "title": "Modelling association football scores",
+   "authors": [
+    "Maher, M. J."
+   ],
+   "journal": "Statistica Neerlandica",
+   "year": 1982,
+   "volume": "36",
+   "issue": "3",
+   "pages": "109-118",
+   "openalex_status": 200,
+   "cited_by_count": 520,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "dixon_coles1997": {
+   "doi": "10.1111/1467-9876.00065",
+   "crossref_status": 200,
+   "title": "Modelling Association Football Scores and Inefficiencies in the Football Betting Market",
+   "authors": [
+    "Dixon, Mark J.",
+    "Coles, Stuart G."
+   ],
+   "journal": "Journal of the Royal Statistical Society Series C: Applied Statistics",
+   "year": 1997,
+   "volume": "46",
+   "issue": "2",
+   "pages": "265-280",
+   "openalex_status": 200,
+   "cited_by_count": 656,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "rue_salvesen2000": {
+   "doi": "10.1111/1467-9884.00243",
+   "crossref_status": 200,
+   "title": "Prediction and Retrospective Analysis of Soccer Matches in a League",
+   "authors": [
+    "Rue, Havard",
+    "Salvesen, Oyvind"
+   ],
+   "journal": "Journal of the Royal Statistical Society: Series D (The Statistician)",
+   "year": 2000,
+   "volume": "49",
+   "issue": "3",
+   "pages": "399-418",
+   "openalex_status": 200,
+   "cited_by_count": 284,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "karlis_ntzoufras2003": {
+   "doi": "10.1111/1467-9884.00366",
+   "crossref_status": 200,
+   "title": "Analysis of sports data by using bivariate Poisson models",
+   "authors": [
+    "Karlis, Dimitris",
+    "Ntzoufras, Ioannis"
+   ],
+   "journal": "Journal of the Royal Statistical Society: Series D (The Statistician)",
+   "year": 2003,
+   "volume": "52",
+   "issue": "3",
+   "pages": "381-393",
+   "openalex_status": 200,
+   "cited_by_count": 509,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "goddard2005": {
+   "doi": "10.1016/j.ijforecast.2004.08.002",
+   "crossref_status": 200,
+   "title": "Regression models for forecasting goals and match results in association football",
+   "authors": [
+    "Goddard, John"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2005,
+   "volume": "21",
+   "issue": "2",
+   "pages": "331-340",
+   "openalex_status": 200,
+   "cited_by_count": 249,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "baio_blangiardo2010": {
+   "doi": "10.1080/02664760802684177",
+   "crossref_status": 200,
+   "title": "Bayesian hierarchical model for the prediction of football results",
+   "authors": [
+    "Baio, Gianluca",
+    "Blangiardo, Marta"
+   ],
+   "journal": "Journal of Applied Statistics",
+   "year": 2010,
+   "volume": "37",
+   "issue": "2",
+   "pages": "253-264",
+   "openalex_status": 200,
+   "cited_by_count": 214,
+   "open_access_url": "https://boa.unimib.it/bitstream/10281/4811/2/Bayesian_hierarchical.pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "koopman_lit2015": {
+   "doi": "10.1111/rssa.12042",
+   "crossref_status": 200,
+   "title": "A Dynamic Bivariate Poisson Model for Analysing and Forecasting Match Results in the English Premier League",
+   "authors": [
+    "Koopman, Siem Jan",
+    "Lit, Rutger"
+   ],
+   "journal": "Journal of the Royal Statistical Society Series A: Statistics in Society",
+   "year": 2015,
+   "volume": "178",
+   "issue": "1",
+   "pages": "167-186",
+   "openalex_status": 200,
+   "cited_by_count": 174,
+   "open_access_url": "http://papers.tinbergen.nl/12099.pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "koopman_lit2019": {
+   "doi": "10.1016/j.ijforecast.2018.10.011",
+   "crossref_status": 200,
+   "title": "Forecasting football match results in national league competitions using score-driven time series models",
+   "authors": [
+    "Koopman, Siem Jan",
+    "Lit, Rutger"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2019,
+   "volume": "35",
+   "issue": "2",
+   "pages": "797-809",
+   "openalex_status": 200,
+   "cited_by_count": 80,
+   "open_access_url": "https://pure.au.dk/portal/en/publications/6c2757ae-160b-46c3-9066-14890467f17c",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "boshnakov2017": {
+   "doi": "10.1016/j.ijforecast.2016.11.006",
+   "crossref_status": 200,
+   "title": "A bivariate Weibull count model for forecasting association football scores",
+   "authors": [
+    "Boshnakov, Georgi",
+    "Kharrat, Tarak",
+    "McHale, Ian G."
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2017,
+   "volume": "33",
+   "issue": "2",
+   "pages": "458-466",
+   "openalex_status": 200,
+   "cited_by_count": 135,
+   "open_access_url": "https://research.manchester.ac.uk/en/publications/7f8bfe1a-2b32-407f-9997-a45cc5a345d3",
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "egidi2018": {
+   "doi": "10.1177/1471082X18798414",
+   "crossref_status": 200,
+   "title": "Combining historical data and bookmakers’ odds in modelling football scores",
+   "authors": [
+    "Egidi, Leonardo",
+    "Pauli, Francesco",
+    "Torelli, Nicola"
+   ],
+   "journal": "Statistical Modelling",
+   "year": 2018,
+   "volume": "18",
+   "issue": "5-6",
+   "pages": "436-459",
+   "openalex_status": 200,
+   "cited_by_count": 31,
+   "open_access_url": "https://arxiv.org/pdf/1802.08848",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "ley2019": {
+   "doi": "10.1177/1471082X18817650",
+   "crossref_status": 200,
+   "title": "Ranking soccer teams on the basis of their current strength: A comparison of maximum likelihood approaches",
+   "authors": [
+    "Ley, Christophe",
+    "Wiele, Tom Van de",
+    "Eetvelde, Hans Van"
+   ],
+   "journal": "Statistical Modelling",
+   "year": 2019,
+   "volume": "19",
+   "issue": "1",
+   "pages": "55-73",
+   "openalex_status": 200,
+   "cited_by_count": 73,
+   "open_access_url": "https://biblio.ugent.be/publication/8609274/file/8637571.pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "hvattum_arntzen2010": {
+   "doi": "10.1016/j.ijforecast.2009.10.002",
+   "crossref_status": 200,
+   "title": "Using ELO ratings for match result prediction in association football",
+   "authors": [
+    "Hvattum, Lars Magnus",
+    "Arntzen, Halvard"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2010,
+   "volume": "26",
+   "issue": "3",
+   "pages": "460-470",
+   "openalex_status": 200,
+   "cited_by_count": 402,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": true
+  },
+  "lasek2013": {
+   "doi": "10.1504/IJAPR.2013.052339",
+   "crossref_status": 200,
+   "title": "The predictive power of ranking systems in association football",
+   "authors": [
+    "Lasek, Jan",
+    "Szlávik, Zoltán",
+    "Bhulai, Sandjai"
+   ],
+   "journal": "International Journal of Applied Pattern Recognition",
+   "year": 2013,
+   "volume": "1",
+   "issue": "1",
+   "pages": "27",
+   "openalex_status": 200,
+   "cited_by_count": 168,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "mead2023_xg": {
+   "doi": "10.1371/journal.pone.0282295",
+   "crossref_status": 200,
+   "title": "Expected goals in football: Improving model performance and demonstrating value",
+   "authors": [
+    "Mead, James",
+    "O’Hare, Anthony",
+    "McMenemy, Paul"
+   ],
+   "journal": "PLOS ONE",
+   "year": 2023,
+   "volume": "18",
+   "issue": "4",
+   "pages": "e0282295",
+   "openalex_status": 200,
+   "cited_by_count": 162,
+   "open_access_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0282295&type=printable",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": true
+  },
+  "wheatcroft2020_ou": {
+   "doi": "10.1016/j.ijforecast.2019.11.001",
+   "crossref_status": 200,
+   "title": "A profitable model for predicting the over/under market in football",
+   "authors": [
+    "Wheatcroft, Edward"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2020,
+   "volume": "36",
+   "issue": "3",
+   "pages": "916-932",
+   "openalex_status": 200,
+   "cited_by_count": 30,
+   "open_access_url": "https://researchonline.lse.ac.uk/id/eprint/103712/1/Predict_total_goals_LSE.pdf",
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": true
+  },
+  "wheatcroft2021_stats": {
+   "doi": "10.3233/JSA-200462",
+   "crossref_status": 200,
+   "title": "Forecasting football matches by predicting match statistics",
+   "authors": [
+    "Wheatcroft, Edward"
+   ],
+   "journal": "Journal of Sports Analytics",
+   "year": 2021,
+   "volume": "7",
+   "issue": "2",
+   "pages": "77-97",
+   "openalex_status": 200,
+   "cited_by_count": 37,
+   "open_access_url": "https://content.iospress.com:443/download/journal-of-sports-analytics/jsa200462?id=journal-of-sports-analytics%2Fjsa200462",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "wheatcroft2021_rps": {
+   "doi": "10.1515/jqas-2019-0089",
+   "crossref_status": 200,
+   "title": "Evaluating probabilistic forecasts of football matches: the case against the ranked probability score",
+   "authors": [
+    "Wheatcroft, Edward"
+   ],
+   "journal": "Journal of Quantitative Analysis in Sports",
+   "year": 2021,
+   "volume": "17",
+   "issue": "4",
+   "pages": "273-287",
+   "openalex_status": 200,
+   "cited_by_count": 34,
+   "open_access_url": "https://www.degruyter.com/document/doi/10.1515/jqas-2019-0089/pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "constantinou_fenton2012": {
+   "doi": "10.1515/1559-0410.1418",
+   "crossref_status": 200,
+   "title": "Solving the Problem of Inadequate Scoring Rules for Assessing Probabilistic Football Forecast Models",
+   "authors": [
+    "Constantinou, Anthony Costa",
+    "Fenton, Norman Elliott"
+   ],
+   "journal": "Journal of Quantitative Analysis in Sports",
+   "year": 2012,
+   "volume": "8",
+   "issue": "1",
+   "pages": null,
+   "openalex_status": 200,
+   "cited_by_count": 117,
+   "open_access_url": "http://qmro.qmul.ac.uk/xmlui/handle/123456789/10783",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "constantinou2013": {
+   "doi": "10.1016/j.knosys.2013.05.008",
+   "crossref_status": 200,
+   "title": "Profiting from an inefficient association football gambling market: Prediction, risk and uncertainty using Bayesian networks",
+   "authors": [
+    "Constantinou, Anthony Costa",
+    "Fenton, Norman Elliott",
+    "Neil, Martin"
+   ],
+   "journal": "Knowledge-Based Systems",
+   "year": 2013,
+   "volume": "50",
+   "issue": null,
+   "pages": "60-86",
+   "openalex_status": 200,
+   "cited_by_count": 88,
+   "open_access_url": "https://www.sciencedirect.com/science/article/pii/S095070511300169X/pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "hubacek2019": {
+   "doi": "10.1016/j.ijforecast.2019.01.001",
+   "crossref_status": 200,
+   "title": "Exploiting sports-betting market using machine learning",
+   "authors": [
+    "Hubáček, Ondřej",
+    "Šourek, Gustav",
+    "Železný, Filip"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2019,
+   "volume": "35",
+   "issue": "2",
+   "pages": "783-796",
+   "openalex_status": 200,
+   "cited_by_count": 105,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": true
+  },
+  "walsh_joshi2024": {
+   "doi": "10.1016/j.mlwa.2024.100539",
+   "crossref_status": 200,
+   "title": "Machine learning for sports betting: Should model selection be based on accuracy or calibration?",
+   "authors": [
+    "Walsh, Conor",
+    "Joshi, Alok"
+   ],
+   "journal": "Machine Learning with Applications",
+   "year": 2024,
+   "volume": "16",
+   "issue": null,
+   "pages": "100539",
+   "openalex_status": 200,
+   "cited_by_count": 17,
+   "open_access_url": "https://doi.org/10.1016/j.mlwa.2024.100539",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "bunker_susnjak2022": {
+   "doi": "10.1613/jair.1.13509",
+   "crossref_status": 200,
+   "title": "The Application of Machine Learning Techniques for Predicting Match Results in Team Sport: A Review",
+   "authors": [
+    "Bunker, Rory",
+    "Susnjak, Teo"
+   ],
+   "journal": "Journal of Artificial Intelligence Research",
+   "year": 2022,
+   "volume": "73",
+   "issue": null,
+   "pages": "1285-1322",
+   "openalex_status": 200,
+   "cited_by_count": 222,
+   "open_access_url": "https://doi.org/10.1613/jair.1.13509",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "horvat_job2020": {
+   "doi": "10.1002/widm.1380",
+   "crossref_status": 200,
+   "title": "The use of machine learning in sport outcome prediction: A review",
+   "authors": [
+    "Horvat, Tomislav",
+    "Job, Josip"
+   ],
+   "journal": "WIREs Data Mining and Knowledge Discovery",
+   "year": 2020,
+   "volume": "10",
+   "issue": "5",
+   "pages": null,
+   "openalex_status": 200,
+   "cited_by_count": 240,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "dixon_pope2004": {
+   "doi": "10.1016/j.ijforecast.2003.12.007",
+   "crossref_status": 200,
+   "title": "The value of statistical forecasts in the UK association football betting market",
+   "authors": [
+    "Dixon, Mark J.",
+    "Pope, Peter F."
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2004,
+   "volume": "20",
+   "issue": "4",
+   "pages": "697-711",
+   "openalex_status": 200,
+   "cited_by_count": 123,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "forrest2005": {
+   "doi": "10.1016/j.ijforecast.2005.03.003",
+   "crossref_status": 200,
+   "title": "Odds-setters as forecasters: The case of English football",
+   "authors": [
+    "Forrest, David",
+    "Goddard, John",
+    "Simmons, Robert"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2005,
+   "volume": "21",
+   "issue": "3",
+   "pages": "551-564",
+   "openalex_status": 200,
+   "cited_by_count": 267,
+   "open_access_url": "http://usir.salford.ac.uk/id/eprint/815/",
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": true
+  },
+  "kuypers2000": {
+   "doi": "10.1080/00036840050151449",
+   "crossref_status": 200,
+   "title": "Information and efficiency: an empirical study of a fixed odds betting market",
+   "authors": [
+    "Kuypers, Tim"
+   ],
+   "journal": "Applied Economics",
+   "year": 2000,
+   "volume": "32",
+   "issue": "11",
+   "pages": "1353-1363",
+   "openalex_status": 200,
+   "cited_by_count": 190,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "cain2000": {
+   "doi": "10.1111/1467-9485.00151",
+   "crossref_status": 200,
+   "title": "The Favourite‐Longshot Bias and Market Efficiency in UK Football betting",
+   "authors": [
+    "Cain, Michael",
+    "Law, David",
+    "Peel, David"
+   ],
+   "journal": "Scottish Journal of Political Economy",
+   "year": 2000,
+   "volume": "47",
+   "issue": "1",
+   "pages": "25-36",
+   "openalex_status": 200,
+   "cited_by_count": 166,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "levitt2004": {
+   "doi": "10.1111/j.1468-0297.2004.00207.x",
+   "crossref_status": 200,
+   "title": "Why are Gambling Markets Organised so Differently from Financial Markets?",
+   "authors": [
+    "Levitt, Steven D."
+   ],
+   "journal": "The Economic Journal",
+   "year": 2004,
+   "volume": "114",
+   "issue": "495",
+   "pages": "223-246",
+   "openalex_status": 200,
+   "cited_by_count": 457,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "spann_skiera2009": {
+   "doi": "10.1002/for.1091",
+   "crossref_status": 200,
+   "title": "Sports forecasting: a comparison of the forecast accuracy of prediction markets, betting odds and tipsters",
+   "authors": [
+    "Spann, Martin",
+    "Skiera, Bernd"
+   ],
+   "journal": "Journal of Forecasting",
+   "year": 2009,
+   "volume": "28",
+   "issue": "1",
+   "pages": "55-72",
+   "openalex_status": 200,
+   "cited_by_count": 231,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "angelini2019": {
+   "doi": "10.1016/j.ijforecast.2018.07.008",
+   "crossref_status": 200,
+   "title": "Efficiency of online football betting markets",
+   "authors": [
+    "Angelini, Giovanni",
+    "De Angelis, Luca"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2019,
+   "volume": "35",
+   "issue": "2",
+   "pages": "712-721",
+   "openalex_status": 200,
+   "cited_by_count": 110,
+   "open_access_url": "https://doi.org/10.2139/ssrn.3070329",
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": true
+  },
+  "wunderlich_memmert2018": {
+   "doi": "10.1371/journal.pone.0198668",
+   "crossref_status": 200,
+   "title": "The Betting Odds Rating System: Using soccer forecasts to forecast soccer",
+   "authors": [
+    "Wunderlich, Fabian",
+    "Memmert, Daniel"
+   ],
+   "journal": "PLOS ONE",
+   "year": 2018,
+   "volume": "13",
+   "issue": "6",
+   "pages": "e0198668",
+   "openalex_status": 200,
+   "cited_by_count": 58,
+   "open_access_url": "https://doi.org/10.1371/journal.pone.0198668",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": true
+  },
+  "snowberg_wolfers2010": {
+   "doi": "10.1086/655844",
+   "crossref_status": 200,
+   "title": "Explaining the Favorite–Long Shot Bias: Is it Risk-Love or Misperceptions?",
+   "authors": [
+    "Snowberg, Erik",
+    "Wolfers, Justin"
+   ],
+   "journal": "Journal of Political Economy",
+   "year": 2010,
+   "volume": "118",
+   "issue": "4",
+   "pages": "723-746",
+   "openalex_status": 200,
+   "cited_by_count": 373,
+   "open_access_url": "https://econpapers.repec.org/RePEc:iza:izadps:dp4884",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "gandar1998_nba": {
+   "doi": "10.1111/0022-1082.155346",
+   "crossref_status": 200,
+   "title": "Informed Traders and Price Variations in the Betting Market for Professional Basketball Games",
+   "authors": [
+    "Gandar, John M.",
+    "Dare, William H.",
+    "Brown, Craig R.",
+    "Zuber, Richard A."
+   ],
+   "journal": "The Journal of Finance",
+   "year": 1998,
+   "volume": "53",
+   "issue": "1",
+   "pages": "385-401",
+   "openalex_status": 200,
+   "cited_by_count": 115,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "manner2016_nba": {
+   "doi": "10.1515/jqas-2015-0088",
+   "crossref_status": 200,
+   "title": "Modeling and forecasting the outcomes of NBA basketball games",
+   "authors": [
+    "Manner, Hans"
+   ],
+   "journal": "Journal of Quantitative Analysis in Sports",
+   "year": 2016,
+   "volume": "12",
+   "issue": "1",
+   "pages": "31-41",
+   "openalex_status": 200,
+   "cited_by_count": 58,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "gandar2000_nba_totals": {
+   "doi": "10.1177/152700250000100205",
+   "crossref_status": 200,
+   "title": "The Search for Informed Traders in the Totals Betting Market for National Basketball Association Games",
+   "authors": [
+    "Gandar, John M.",
+    "Zuber, Richard A.",
+    "Dare, William H."
+   ],
+   "journal": "Journal of Sports Economics",
+   "year": 2000,
+   "volume": "1",
+   "issue": "2",
+   "pages": "177-186",
+   "openalex_status": 200,
+   "cited_by_count": 18,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "paul_weinbach2002_totals": {
+   "doi": "10.1177/1527002502003003003",
+   "crossref_status": 200,
+   "title": "Market Efficiency and a Profitable Betting Rule",
+   "authors": [
+    "Paul, Rodney J.",
+    "Weinbach, Andrew P."
+   ],
+   "journal": "Journal of Sports Economics",
+   "year": 2002,
+   "volume": "3",
+   "issue": "3",
+   "pages": "256-263",
+   "openalex_status": 200,
+   "cited_by_count": 75,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "nba_player_absence2015": {
+   "doi": "10.1016/j.frl.2015.02.004",
+   "crossref_status": 200,
+   "title": "Player absence and betting lines in the NBA",
+   "authors": [
+    "Dare, William H.",
+    "Dennis, Steven A.",
+    "Paul, Rodney J."
+   ],
+   "journal": "Finance Research Letters",
+   "year": 2015,
+   "volume": "13",
+   "issue": null,
+   "pages": "130-136",
+   "openalex_status": 200,
+   "cited_by_count": 8,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "shin1991": {
+   "doi": "10.2307/2234434",
+   "crossref_status": 200,
+   "title": "Optimal Betting Odds Against Insider Traders",
+   "authors": [
+    "Shin, Hyun Song"
+   ],
+   "journal": "The Economic Journal",
+   "year": 1991,
+   "volume": "101",
+   "issue": "408",
+   "pages": "1179",
+   "openalex_status": 200,
+   "cited_by_count": 193,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "shin1993": {
+   "doi": "10.2307/2234240",
+   "crossref_status": 200,
+   "title": "Measuring the Incidence of Insider Trading in a Market for State-Contingent Claims",
+   "authors": [
+    "Shin, Hyun Song"
+   ],
+   "journal": "The Economic Journal",
+   "year": 1993,
+   "volume": "103",
+   "issue": "420",
+   "pages": "1141",
+   "openalex_status": 200,
+   "cited_by_count": 228,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "strumbelj2014": {
+   "doi": "10.1016/j.ijforecast.2014.02.008",
+   "crossref_status": 200,
+   "title": "On determining probability forecasts from betting odds",
+   "authors": [
+    "Štrumbelj, Erik"
+   ],
+   "journal": "International Journal of Forecasting",
+   "year": 2014,
+   "volume": "30",
+   "issue": "4",
+   "pages": "934-943",
+   "openalex_status": 200,
+   "cited_by_count": 124,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "clarke2017": {
+   "doi": "10.11648/j.ajss.20170506.12",
+   "crossref_status": 200,
+   "title": "Adjusting Bookmaker’s Odds to Allow for Overround",
+   "authors": [
+    "Clarke, Stephen",
+    "Kovalchik, Stephanie",
+    "Ingram, Martin"
+   ],
+   "journal": "American Journal of Sports Science",
+   "year": 2017,
+   "volume": "5",
+   "issue": "6",
+   "pages": "45-49",
+   "openalex_status": 200,
+   "cited_by_count": 17,
+   "open_access_url": "http://article.sciencepublishinggroup.com/pdf/10.11648.j.ajss.20170506.12.pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": true
+  },
+  "dawson2007": {
+   "doi": "10.1111/j.1467-985x.2006.00451.x",
+   "crossref_status": 200,
+   "title": "Are Football Referees Really Biased and Inconsistent?: Evidence on the Incidence of Disciplinary Sanction in the English Premier League",
+   "authors": [
+    "Dawson, Peter",
+    "Dobson, Stephen",
+    "Goddard, John",
+    "Wilson, John"
+   ],
+   "journal": "Journal of the Royal Statistical Society Series A: Statistics in Society",
+   "year": 2007,
+   "volume": "170",
+   "issue": "1",
+   "pages": "231-250",
+   "openalex_status": 200,
+   "cited_by_count": 191,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "boyko2007": {
+   "doi": "10.1080/02640410601038576",
+   "crossref_status": 200,
+   "title": "Referee bias contributes to home advantage in English Premiership football",
+   "authors": [
+    "Boyko, Ryan H.",
+    "Boyko, Adam R.",
+    "Boyko, Mark G."
+   ],
+   "journal": "Journal of Sports Sciences",
+   "year": 2007,
+   "volume": "25",
+   "issue": "11",
+   "pages": "1185-1194",
+   "openalex_status": 200,
+   "cited_by_count": 398,
+   "open_access_url": "https://www.tandfonline.com/doi/pdf/10.1080/02640410601038576?download=true",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "brier1950": {
+   "doi": "10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
+   "crossref_status": 200,
+   "title": "VERIFICATION OF FORECASTS EXPRESSED IN TERMS OF PROBABILITY",
+   "authors": [
+    "BRIER, GLENN W."
+   ],
+   "journal": "Monthly Weather Review",
+   "year": 1950,
+   "volume": "78",
+   "issue": "1",
+   "pages": "1-3",
+   "openalex_status": 200,
+   "cited_by_count": 7688,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "murphy1973": {
+   "doi": "10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2",
+   "crossref_status": 200,
+   "title": "A New Vector Partition of the Probability Score",
+   "authors": [
+    "Murphy, Allan H."
+   ],
+   "journal": "Journal of Applied Meteorology",
+   "year": 1973,
+   "volume": "12",
+   "issue": "4",
+   "pages": "595-600",
+   "openalex_status": 200,
+   "cited_by_count": 1364,
+   "open_access_url": "https://journals.ametsoc.org/downloadpdf/journals/apme/12/4/1520-0450_1973_012_0595_anvpot_2_0_co_2.pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "gneiting_raftery2007": {
+   "doi": "10.1198/016214506000001437",
+   "crossref_status": 200,
+   "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+   "authors": [
+    "Gneiting, Tilmann",
+    "Raftery, Adrian E"
+   ],
+   "journal": "Journal of the American Statistical Association",
+   "year": 2007,
+   "volume": "102",
+   "issue": "477",
+   "pages": "359-378",
+   "openalex_status": 200,
+   "cited_by_count": 9099,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "cox1958": {
+   "doi": "10.1093/biomet/45.3-4.562",
+   "crossref_status": 200,
+   "title": "Two further applications of a model for binary regression",
+   "authors": [
+    "COX, D. R."
+   ],
+   "journal": "Biometrika",
+   "year": 1958,
+   "volume": "45",
+   "issue": "3-4",
+   "pages": "562-565",
+   "openalex_status": 200,
+   "cited_by_count": 640,
+   "open_access_url": null,
+   "abstract_available_openalex": false,
+   "abstract_available_semanticscholar": false
+  },
+  "zadrozny_elkan2002": {
+   "doi": "10.1145/775047.775151",
+   "crossref_status": 200,
+   "title": "Transforming classifier scores into accurate multiclass probability estimates",
+   "authors": [
+    "Zadrozny, Bianca",
+    "Elkan, Charles"
+   ],
+   "journal": "Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining",
+   "year": 2002,
+   "volume": null,
+   "issue": null,
+   "pages": "694-699",
+   "openalex_status": 200,
+   "cited_by_count": 2134,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "niculescu_caruana2005": {
+   "doi": "10.1145/1102351.1102430",
+   "crossref_status": 200,
+   "title": "Predicting good probabilities with supervised learning",
+   "authors": [
+    "Niculescu-Mizil, Alexandru",
+    "Caruana, Rich"
+   ],
+   "journal": "Proceedings of the 22nd international conference on Machine learning  - ICML '05",
+   "year": 2005,
+   "volume": null,
+   "issue": null,
+   "pages": "625-632",
+   "openalex_status": 200,
+   "cited_by_count": 3238,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "vancalster2019": {
+   "doi": "10.1186/s12916-019-1466-7",
+   "crossref_status": 200,
+   "title": "Calibration: the Achilles heel of predictive analytics",
+   "authors": [
+    "",
+    "Van Calster, Ben",
+    "McLernon, David J.",
+    "van Smeden, Maarten",
+    "Wynants, Laure",
+    "Steyerberg, Ewout W."
+   ],
+   "journal": "BMC Medicine",
+   "year": 2019,
+   "volume": "17",
+   "issue": "1",
+   "pages": null,
+   "openalex_status": 200,
+   "cited_by_count": 3964,
+   "open_access_url": "https://bmcmedicine.biomedcentral.com/track/pdf/10.1186/s12916-019-1466-7",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "diebold_mariano1995": {
+   "doi": "10.1080/07350015.1995.10524599",
+   "crossref_status": 200,
+   "title": "Comparing Predictive Accuracy",
+   "authors": [
+    "Diebold, Francis X.",
+    "Mariano, Roberto S."
+   ],
+   "journal": "Journal of Business &amp; Economic Statistics",
+   "year": 1995,
+   "volume": "13",
+   "issue": "3",
+   "pages": "253-263",
+   "openalex_status": 200,
+   "cited_by_count": 7677,
+   "open_access_url": "https://ink.library.smu.edu.sg/soe_research/347",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "kunsch1989": {
+   "doi": "10.1214/aos/1176347265",
+   "crossref_status": 200,
+   "title": "The Jackknife and the Bootstrap for General Stationary Observations",
+   "authors": [
+    "Kunsch, Hans R."
+   ],
+   "journal": "The Annals of Statistics",
+   "year": 1989,
+   "volume": "17",
+   "issue": "3",
+   "pages": "1217-1241",
+   "openalex_status": 200,
+   "cited_by_count": 3392,
+   "open_access_url": "https://projecteuclid.org/journals/annals-of-statistics/volume-17/issue-3/The-Jackknife-and-the-Bootstrap-for-General-Stationary-Observations/10.1214/aos/1176347265.pdf",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "politis_romano1994": {
+   "doi": "10.1080/01621459.1994.10476870",
+   "crossref_status": 200,
+   "title": "The Stationary Bootstrap",
+   "authors": [
+    "Politis, Dimitris N.",
+    "Romano, Joseph P."
+   ],
+   "journal": "Journal of the American Statistical Association",
+   "year": 1994,
+   "volume": "89",
+   "issue": "428",
+   "pages": "1303-1313",
+   "openalex_status": 200,
+   "cited_by_count": 3232,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "white2000": {
+   "doi": "10.1111/1468-0262.00152",
+   "crossref_status": 200,
+   "title": "A Reality Check for Data Snooping",
+   "authors": [
+    "White, Halbert"
+   ],
+   "journal": "Econometrica",
+   "year": 2000,
+   "volume": "68",
+   "issue": "5",
+   "pages": "1097-1126",
+   "openalex_status": 200,
+   "cited_by_count": 2232,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "hansen2005": {
+   "doi": "10.1198/073500105000000063",
+   "crossref_status": 200,
+   "title": "A Test for Superior Predictive Ability",
+   "authors": [
+    "Hansen, Peter Reinhard"
+   ],
+   "journal": "Journal of Business &amp; Economic Statistics",
+   "year": 2005,
+   "volume": "23",
+   "issue": "4",
+   "pages": "365-380",
+   "openalex_status": 200,
+   "cited_by_count": 1454,
+   "open_access_url": "https://doi.org/10.17615/wehz-da64",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "benjamini_hochberg1995": {
+   "doi": "10.1111/j.2517-6161.1995.tb02031.x",
+   "crossref_status": 200,
+   "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+   "authors": [
+    "Benjamini, Yoav",
+    "Hochberg, Yosef"
+   ],
+   "journal": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+   "year": 1995,
+   "volume": "57",
+   "issue": "1",
+   "pages": "289-300",
+   "openalex_status": 200,
+   "cited_by_count": 124157,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "bailey2017_pbo": {
+   "doi": "10.21314/JCF.2016.322",
+   "crossref_status": 200,
+   "title": "The probability of backtest overfitting",
+   "authors": [
+    "Bailey, David",
+    "Borwein, Jonathan",
+    "López de Prado, Marcos",
+    "Zhu, Qiji Jim"
+   ],
+   "journal": "The Journal of Computational Finance",
+   "year": 2016,
+   "volume": null,
+   "issue": null,
+   "pages": null,
+   "openalex_status": 200,
+   "cited_by_count": 310,
+   "open_access_url": "https://doi.org/10.2139/ssrn.2326253",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "bailey_lopezdeprado2014_dsr": {
+   "doi": "10.3905/jpm.2014.40.5.094",
+   "crossref_status": 200,
+   "title": "The Deflated Sharpe Ratio:\n                    <i>Correcting for Selection Bias, Backtest</i>\n                    <i>Overfitting, and Non-Normality</i>",
+   "authors": [
+    "Bailey, David H.",
+    "López de Prado, Marcos"
+   ],
+   "journal": "The Journal of Portfolio Management",
+   "year": 2014,
+   "volume": "40",
+   "issue": "5",
+   "pages": "94-107",
+   "openalex_status": 200,
+   "cited_by_count": 373,
+   "open_access_url": "https://doi.org/10.2139/ssrn.2460551",
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  },
+  "harvey_liu2015": {
+   "doi": "10.3905/jpm.2015.42.1.013",
+   "crossref_status": 200,
+   "title": "Backtesting",
+   "authors": [
+    "Harvey, Campbell R.",
+    "Liu, Yan"
+   ],
+   "journal": "The Journal of Portfolio Management",
+   "year": 2015,
+   "volume": "42",
+   "issue": "1",
+   "pages": "13-28",
+   "openalex_status": 200,
+   "cited_by_count": 127,
+   "open_access_url": null,
+   "abstract_available_openalex": true,
+   "abstract_available_semanticscholar": false
+  }
+ },
+ "searches": {
+  "paul_weinbach_nba_totals": [
+   {
+    "doi": "10.1177/1527002502003003003",
+    "title": "Market Efficiency and a Profitable Betting Rule",
+    "journal": "Journal of Sports Economics",
+    "year": 2002,
+    "authors": [
+     "Paul",
+     "Weinbach"
+    ]
+   },
+   {
+    "doi": "10.3390/ijfs2020193",
+    "title": "Market Efficiency and Behavioral Biases in the WNBA  Betting Market",
+    "journal": "International Journal of Financial Studies",
+    "year": 2014,
+    "authors": [
+     "Paul",
+     "Weinbach"
+    ]
+   },
+   {
+    "doi": "10.5750/jgbe.v5i2.569",
+    "title": "REVISITING THE “HOT HAND” HYPOTHESIS IN THE NBA BETTING MARKET USING ACTUAL SPORTSBOOK BETTING PERCENTAGES ON FAVORITES AND UNDERDOGS",
+    "journal": "The Journal of Gambling Business and Economics",
+    "year": 2013,
+    "authors": [
+     "Paul",
+     "Weinbach",
+     "Humphreys"
+    ]
+   },
+   {
+    "doi": "10.1007/bf02761585",
+    "title": "Bettor preferences and market efficiency in football totals markets",
+    "journal": "Journal of Economics and Finance",
+    "year": 2005,
+    "authors": [
+     "Paul",
+     "Weinbach"
+    ]
+   },
+   {
+    "doi": "10.1177/1527002503260561",
+    "title": "“Testing Market Efficiency in the Major League Baseball Over-Under Betting Market”",
+    "journal": "Journal of Sports Economics",
+    "year": 2004,
+    "authors": [
+     "Paul",
+     "Weinbach"
+    ]
+   }
+  ],
+  "corners_count_model": [
+   {
+    "doi": "10.64628/aa.dh6ucg3tg",
+    "title": "Can AI improve football teams’ success from corner kicks? Liverpool and others are betting it can",
+    "journal": null,
+    "year": 2024,
+    "authors": [
+     "Scanlan"
+    ]
+   },
+   {
+    "doi": "10.4324/9780203412992-85",
+    "title": "Figure 2. Percentage of corner kicks into each area (relative percentage of attempts on goal in brackets). (Note: as if all corner kicks are from the left side as looking towards goal).",
+    "journal": "Science and Football V",
+    "year": 2005,
+    "authors": []
+   },
+   {
+    "doi": "10.4324/9780203412992-84",
+    "title": "Notational Analysis of Corner Kicks in English Premier League Soccer",
+    "journal": "Science and Football V",
+    "year": 2005,
+    "authors": []
+   },
+   {
+    "doi": "10.59295/spd2024s.103",
+    "title": "Tactical strategy of throw-ins and corner kicks - their use in the football game",
+    "journal": "Integrare prin cercetare și inovare. Științe sociale",
+    "year": 2025,
+    "authors": [
+     "Sîrghi"
+    ]
+   },
+   {
+    "doi": "10.3390/su13147562",
+    "title": "Observational Analysis of Corner Kicks in High-Level Football: A Mixed Methods Study",
+    "journal": "Sustainability",
+    "year": 2021,
+    "authors": [
+     "Maneiro",
+     "Losada",
+     "Portell",
+     "Ardá"
+    ]
+   }
+  ],
+  "nba_player_props_efficiency": [
+   {
+    "doi": "10.1016/j.frl.2015.02.004",
+    "title": "Player absence and betting lines in the NBA",
+    "journal": "Finance Research Letters",
+    "year": 2015,
+    "authors": [
+     "Dare",
+     "Dennis",
+     "Paul"
+    ]
+   },
+   {
+    "doi": "10.1017/cbo9780511493614.013",
+    "title": "Market efficiency of the 50–30–20–10 horse-racing spread betting market",
+    "journal": "Information Efficiency in Financial and Betting Markets",
+    "year": 2005,
+    "authors": [
+     "Twomey"
+    ]
+   },
+   {
+    "doi": "10.2139/ssrn.5888162",
+    "title": "Analyzing the Relationship Between Clutch Time Usage Rate and NBA Player Efficiency",
+    "journal": null,
+    "year": 2026,
+    "authors": [
+     "Evangelista",
+     "Jain",
+     "Cervantes"
+    ]
+   },
+   {
+    "doi": "10.1142/9789812819192_0029",
+    "title": "Subjective Information and Market Efficiency in a Betting Market",
+    "journal": "World Scientific Handbook in Financial Economics Series",
+    "year": 2008,
+    "authors": [
+     "Figlewski"
+    ]
+   },
+   {
+    "doi": "10.1123/jsm.2019-0046",
+    "title": "Betting Market Outcomes and NBA Television Viewership",
+    "journal": "Journal of Sport Management",
+    "year": 2020,
+    "authors": [
+     "Salaga",
+     "Tainsky",
+     "Mondello"
+    ]
+   }
+  ],
+  "cards_betting_market": [
+   {
+    "doi": "10.2139/ssrn.7553345",
+    "title": "Multi-Source Football Representation Learning for 2.5-Goal Threshold Prediction and Selective Betting Market Utility",
+    "journal": null,
+    "year": 2026,
+    "authors": [
+     "Kutalek",
+     "Sedmidubsky"
+    ]
+   },
+   {
+    "doi": "10.51224/srxiv.397",
+    "title": "Referee bias in Scottish football",
+    "journal": null,
+    "year": 2024,
+    "authors": [
+     "Lawman"
+    ]
+   },
+   {
+    "doi": "10.5750/jpm.v12i2.1562",
+    "title": "Correlated Parlay Betting: An Analysis of Betting Market Profitability Scenarios in College Football",
+    "journal": "The Journal of Prediction Markets",
+    "year": 2018,
+    "authors": [
+     "Davis",
+     "Dawson",
+     "Krieger"
+    ]
+   },
+   {
+    "doi": "10.4337/9781785364556.00010",
+    "title": "Evaluating probabilities for a football in-play betting market",
+    "journal": "The Economics of Sports Betting",
+    "year": 2017,
+    "authors": [
+     "Dobson",
+     "Goddard"
+    ]
+   },
+   {
+    "doi": "10.2139/ssrn.2977118",
+    "title": "Biases in the Football Betting Market",
+    "journal": null,
+    "year": 2017,
+    "authors": [
+     "Daunhawer",
+     "Schoch",
+     "Kosub"
+    ]
+   }
+  ],
+  "ou_goals_market_efficiency": [
+   {
+    "doi": "10.2139/ssrn.4318740",
+    "title": "Chance or Ability? The Efficiency of the Football Betting Market Revisited",
+    "journal": null,
+    "year": 2023,
+    "authors": [
+     "Groß",
+     "Rebeggiani"
+    ]
+   },
+   {
+    "doi": "10.5750/jpm.v7i2.614",
+    "title": "Analyzing Information Efficiency in the Betting Market for Association Football League Winners",
+    "journal": "The Journal of Prediction Markets",
+    "year": 2013,
+    "authors": [
+     "Hvattum"
+    ]
+   },
+   {
+    "doi": "10.1177/152700202237497",
+    "title": "Testing Market Efficiency in the Major League Baseball Over-Under Betting Market",
+    "journal": "Journal of Sports Economics",
+    "year": 2002,
+    "authors": [
+     "Brown",
+     "Abraham"
+    ]
+   },
+   {
+    "doi": "10.1086/295077",
+    "title": "Market Efficiency and Football Betting",
+    "journal": "The Journal of Business",
+    "year": 1968,
+    "authors": [
+     "Pankoff"
+    ]
+   },
+   {
+    "doi": "10.1177/1527002503260561",
+    "title": "“Testing Market Efficiency in the Major League Baseball Over-Under Betting Market”",
+    "journal": "Journal of Sports Economics",
+    "year": 2004,
+    "authors": [
+     "Paul",
+     "Weinbach"
+    ]
+   }
+  ],
+  "nba_totals_bias": [
+   {
+    "doi": "10.2202/1559-0410.1112",
+    "title": "Racial Bias in the NBA: Implications in Betting Markets",
+    "journal": "Journal of Quantitative Analysis in Sports",
+    "year": 2008,
+    "authors": [
+     "Larsen",
+     "Price",
+     "Wolfers"
+    ]
+   },
+   {
+    "doi": "10.4337/9781785364556.00013",
+    "title": "Market efficiency and the favorite–longshot bias: evidence from handball betting markets",
+    "journal": "The Economics of Sports Betting",
+    "year": 2017,
+    "authors": [
+     "Feddersen"
+    ]
+   },
+   {
+    "doi": "10.1080/00036846.2016.1213367",
+    "title": "Preseason bias in the NFL and NBA betting markets",
+    "journal": "Applied Economics",
+    "year": 2016,
+    "authors": [
+     "Davis",
+     "Krieger"
+    ]
+   },
+   {
+    "doi": "10.31235/osf.io/yg6ap_v1",
+    "title": "Revisiting Racial Bias in NBA Refereeing: First So Back, Then So Over",
+    "journal": null,
+    "year": 2025,
+    "authors": [
+     "Pipke"
+    ]
+   },
+   {
+    "doi": "10.1123/jsm.2019-0046",
+    "title": "Betting Market Outcomes and NBA Television Viewership",
+    "journal": "Journal of Sport Management",
+    "year": 2020,
+    "authors": [
+     "Salaga",
+     "Tainsky",
+     "Mondello"
+    ]
+   }
+  ],
+  "nba_player_points_props": [
+   {
+    "doi": "10.5040/9781350961104",
+    "title": "Basketball Player",
+    "journal": "Basketball Player",
+    "year": 2020,
+    "authors": []
+   },
+   {
+    "doi": "10.5406/illinois/9780252037610.003.0006",
+    "title": "Girls’ Six-Player Basketball",
+    "journal": "University of Illinois Press",
+    "year": 2017,
+    "authors": [
+     "Schultz",
+     "Lucas"
+    ]
+   },
+   {
+    "doi": "10.1016/j.frl.2015.02.004",
+    "title": "Player absence and betting lines in the NBA",
+    "journal": "Finance Research Letters",
+    "year": 2015,
+    "authors": [
+     "Dare",
+     "Dennis",
+     "Paul"
+    ]
+   },
+   {
+    "doi": "10.22215/etd/2021-14529",
+    "title": "Process-Oriented Player Evaluation Metrics for USports Basketball",
+    "journal": null,
+    "year": null,
+    "authors": [
+     "L'Oiseau"
+    ]
+   },
+   {
+    "doi": "10.5040/9781718218789.ch-011",
+    "title": "Becoming the Complete Player",
+    "journal": "Basketball for Women",
+    "year": 2012,
+    "authors": []
+   }
+  ]
+ },
+ "_note": "Resúmenes no incluidos: OpenAlex no redistribuye resúmenes en texto plano por razones legales y los derechos pertenecen a las editoriales. Regenerables localmente con phase0/verify_references.py (salida en research/abstracts_local.json, ignorada por git)."
+}

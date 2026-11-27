@@ -1,7 +1,7 @@
 """Ingesta de Football-Data.co.uk: descarga enrutada por partición y parser tolerante.
 
 - La descarga escribe cada temporada en el directorio RAW de SU partición
-  (dev / holdout / prospective). Los archivos RAW nunca se sobrescriben.
+  (dev / holdout / reserve). Los archivos RAW nunca se sobrescriben.
 - El parser NO descarta filas: recupera filas con más campos que la cabecera,
   normaliza alias (HT/AT, HG/AG, Res, PH/PSH), desambigua cabeceras repetidas y
   detecta la codificación por archivo.

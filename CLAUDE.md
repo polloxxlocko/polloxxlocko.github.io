@@ -21,13 +21,14 @@ recomendaciones de apuestas.
 | Elemento | Estado |
 |---|---|
 | GATE 0 | **Aprobado** por el usuario (2026-11-27) |
-| GATE 1 | **Completado, pendiente de revisión del usuario** (ver `GATE_1_REPORT.md`) |
-| GATE 2 | **NO autorizado.** No entrenar modelos definitivos sin autorización expresa |
+| GATE 1 | **Aprobado** por el usuario (2026-11-27), tras auditoría externa documental |
+| GATE 2 | **Autorizado (2026-11-27)** con 10 exigencias adicionales (ver `MODEL_SPECIFICATION.md` §A) |
+| GATE 3 | **NO autorizado.** El bloque de validación 2022/23-2023/24 está vallado |
 | Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
 | Fuente principal | Football-Data.co.uk |
 | Prueba final | **2024/25 y 2025/26: SELLADAS** |
-| Reserva prospectiva | **2026/27+: SELLADA** (decisión conservadora de GATE 1) |
+| Reserva histórica sellada | **2026/27+ (`reserve`): SELLADA**; confirmada por el usuario. **No es validación prospectiva** |
 | Evaluación económica | Exclusivamente simulada |
 | Prohibido sin autorización | Abrir el holdout, servicios de pago (The Odds API incluida), interfaces gráficas, otros mercados, apuestas reales o su automatización, avanzar de gate |
 
@@ -57,9 +58,9 @@ demostración de ineficiencia del mercado.
 - **Cargar desarrollo SOLO con `qsports.process.load_dev()` y `load_dev_benchmarks()`.**
   Ambas aplican `holdout.assert_no_reserved`. Todo pipeline nuevo debe llamar a
   `assert_no_reserved` sobre sus datos.
-- **Nunca** nombrar rutas reservadas (`data/holdout`, `data/prospective`) fuera de
+- **Nunca** nombrar rutas reservadas (`data/holdout`, `data/reserve`) fuera de
   `paths.py`/`holdout.py`; el test tripwire lo impide.
-- **Nunca crear `HOLDOUT_AUTHORIZATION.json` ni `PROSPECTIVE_AUTHORIZATION.json`** sin una
+- **Nunca crear `HOLDOUT_AUTHORIZATION.json` ni `RESERVE_AUTHORIZATION.json`** sin una
   instrucción expresa del usuario en la conversación, después del congelamiento del
   protocolo (`HOLDOUT_PROTECTION_PROTOCOL.md` §6).
 - Metadatos de nivel 0 de particiones reservadas: permitidos (inventario/integridad).
@@ -92,7 +93,7 @@ src/qsports/   paths, divisions, odds, ou, ingest, temporal, holdout, benchmark,
 configs/       holdout, source_reliability, exclusion_criteria, team_aliases, market_selection_matrix
 data/raw/      RAW de desarrollo + manifest.jsonl
 data/processed/dev/, data/features/dev/   desarrollo
-data/holdout/, data/prospective/          SELLADOS (raw, processed, registry, ACCESS_LOG)
+data/holdout/, data/reserve/              SELLADOS (raw, processed, registry, ACCESS_LOG)
 reports/phase0/, reports/gate1/           salidas reproducibles
 phase0/        scripts históricos de la Fase Cero (no reutilizar con datos reservados)
 tests/         pytest (unitarios, protección del holdout, integración)
@@ -109,11 +110,11 @@ matemática; semillas fijas; configuración en `configs/`; ningún valor crudo s
 | Gate | Estado |
 |---|---|
 | 0 Selección de mercado | Aprobado |
-| 1 Infraestructura de datos | Completado; pendiente de revisión |
-| 2 Modelo inicial | No autorizado |
-| 3 Validación histórica | No iniciado |
+| 1 Infraestructura de datos | Aprobado |
+| 2 Modelo inicial | En curso (autorizado) |
+| 3 Validación histórica | **No autorizado** |
 | 4 Auditoría | No iniciado |
-| 5 Prospectivo (simulado) | No iniciado |
+| 5 Prospectivo genuino (predicciones registradas antes de los partidos; simulado) | No iniciado |
 | 6 Interfaz | No iniciado |
 
 Si una etapa fracasa: detener, documentar e investigar, y decidir con el usuario.
@@ -128,12 +129,14 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 `README.md`. Futuros: `MODEL_SPECIFICATION.md` (G2), `BACKTEST_REPORT.md` (G3),
 `MODEL_AUDIT_REPORT.md` (G4).
 
-## 11. Decisiones pendientes del usuario
+## 11. Reglas específicas de GATE 2
 
-1. Revisar y aprobar GATE 1; autorizar o no GATE 2.
-2. Confirmar el sellado conservador de 2026/27.
-3. Revisar los 4 alias de equipos basados en juicio (`configs/team_aliases.json`).
-4. Repositorio remoto: publicado en https://github.com/polloxxlocko/polloxxlocko.github.io (público; 2026-11-27).
+- Seguir `MODEL_SPECIFICATION.md` §A (preregistro) y `configs/gate2.json`.
+- Toda evaluación pasa por `qsports.walkforward` (valla ≤ 2021/22) y `qsports.evaluation`.
+- Guardar **todas** las predicciones fuera de muestra (incluidas las descartadas) y los
+  registros de ajuste (tiempo, convergencia, memoria) en `experiments/gate2/`.
+- No construir un peldaño de complejidad sin la regla de justificación (§A5).
+- No avanzar a GATE 3 sin autorización expresa.
 
 ## 12. Publicación
 

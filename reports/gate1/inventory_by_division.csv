@@ -1,4 +1,4 @@
-div,country,competition,seasons_available,n_dev,n_holdout,n_prospective,dev_pct_ou_pre_any_0506+,dev_pct_ou_close_1920+,dev_pct_eligible_A_0506+,dev_pct_shots,dev_pct_corners,dev_pct_referee,dev_pct_missing_result,first_season_shots_ge90,rows_wider_total,encodings
+div,country,competition,seasons_available,n_dev,n_holdout,n_reserve,dev_pct_ou_pre_any_0506+,dev_pct_ou_close_1920+,dev_pct_eligible_A_0506+,dev_pct_shots,dev_pct_corners,dev_pct_referee,dev_pct_missing_result,first_season_shots_ge90,rows_wider_total,encodings
 B1,Bélgica,Pro League (First Division A),2000/01–2026/27 (27),6552,623,108,100.0,100.0,100.0,29.6,29.6,0.0,0.0,2017/18,305,utf-8-sig
 D1,Alemania,Bundesliga,2000/01–2026/27 (27),7344,612,90,100.0,100.0,99.9,95.8,95.8,8.3,0.0,2000/01,272,"cp1252,utf-8-sig"
 D2,Alemania,2. Bundesliga,2000/01–2026/27 (27),7344,612,108,99.9,100.0,99.9,39.4,39.4,8.3,0.0,2001/02,628,"cp1252,utf-8-sig"

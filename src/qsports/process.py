@@ -68,7 +68,7 @@ def build(download: bool = False, first: str = "0001", last: str = "2627") -> di
         ingest.download_seasons(ingest.season_codes(first, last))
     retrieved = retrieved_at_map()
     summary: dict = {"built_at_utc": dt.datetime.now(dt.timezone.utc).isoformat()}
-    for part in ("holdout", "prospective"):
+    for part in ("holdout", "reserve"):
         summary[f"sealed_{part}"] = holdout.seal(part, retrieved)
     dev, reports = build_dev(retrieved)
     paths.PROCESSED_DEV.mkdir(parents=True, exist_ok=True)
@@ -104,7 +104,7 @@ def build(download: bool = False, first: str = "0001", last: str = "2627") -> di
                                                        "content_sha256": holdout.content_hash(bench)},
         },
         "reserved": {part: {k: v for k, v in summary[f"sealed_{part}"].items() if k != "file_reports_level0"}
-                     for part in ("holdout", "prospective")},
+                     for part in ("holdout", "reserve")},
     }
     paths.DATA_MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False, default=str))
     summary["dev_rows"] = int(len(dev))

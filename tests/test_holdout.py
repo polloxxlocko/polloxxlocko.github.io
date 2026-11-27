@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 @pytest.mark.parametrize("code,part", [("0001", "dev"), ("2324", "dev"), ("2425", "holdout"), ("2526", "holdout"),
-                                       ("2627", "prospective"), ("2728", "prospective")])
+                                       ("2627", "reserve"), ("2728", "reserve")])
 def test_partition_mapping(code, part):
     assert paths.partition_of(code) == part
 
@@ -38,7 +38,7 @@ def test_open_reserved_denied_in_current_project_state():
     with pytest.raises(holdout.ReservedDataError, match="SELLADA|PROTOCOL"):
         holdout.open_reserved("holdout", purpose="test")
     with pytest.raises(holdout.ReservedDataError):
-        holdout.open_reserved("prospective", purpose="test")
+        holdout.open_reserved("reserve", purpose="test")
 
 
 def _fake_project(tmp_path, monkeypatch):
@@ -83,7 +83,7 @@ def test_incomplete_authorization_rejected(tmp_path, monkeypatch):
         holdout.open_reserved("holdout", "test")
 
 
-FORBIDDEN = ["HOLDOUT_DIR", "PROSPECTIVE_DIR", "data/holdout", "data/prospective", "matches_full.parquet",
+FORBIDDEN = ["HOLDOUT_DIR", "RESERVE_DIR", "data/holdout", "data/reserve", "matches_full.parquet",
              "open_reserved", "_full_path"]
 ALLOWED = {"src/qsports/paths.py", "src/qsports/holdout.py", "tests/test_holdout.py"}
 
@@ -108,13 +108,13 @@ def test_tripwire_notebooks_do_not_read_reserved():
         if ".ipynb_checkpoints" in nb.parts:
             continue
         text = nb.read_text(encoding="utf-8")
-        assert not re.search(r"data/(holdout|prospective)", text), nb
+        assert not re.search(r"data/(holdout|reserve)", text), nb
 
 
 def test_level0_contains_no_values():
     if not (paths.HOLDOUT_DIR / "processed" / "metadata_level0.parquet").exists():
         pytest.skip("Requiere el sellado")
-    for part in ("holdout", "prospective"):
+    for part in ("holdout", "reserve"):
         cols = set(holdout.load_level0(part).columns)
         leaked = {c for c in cols if c in {"fthg", "ftag", "ftr", "hthg", "htag", "total_goals", "over25", "hs", "hc",
                                            "hy", "referee"} or re.search(r"_(over|under|h|d|a)$", c)}

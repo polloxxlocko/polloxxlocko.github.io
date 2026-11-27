@@ -1,6 +1,6 @@
 {
- "partition": "prospective",
- "sealed_at_utc": "2026-11-27T01:38:46.145538+00:00",
+ "partition": "reserve",
+ "sealed_at_utc": "2026-11-27T02:37:14.497289+00:00",
  "seasons": [
   "2627"
  ],
@@ -2689,11 +2689,11 @@
  ],
  "raw_files": {
   "2627": {
-   "path": "data/prospective/raw/football_data/2627/data.zip",
+   "path": "data/reserve/raw/football_data/2627/data.zip",
    "sha256": "91f57d2f687f87781d3d07347eea2b8acedbf51f74e8ced2f84d52df50b11cdf"
   }
  },
- "full_content_sha256": "22f2fe5e86fd94931aefcc6dbca9f4c738393558c15e0d16a005e05883c91f74",
+ "full_content_sha256": "fba436a124843d575b28a058d6f9db7fecbb8c555523ffd23c02032ce323e068",
  "level0_content_sha256": "552032c958ad5227d812812d5ef77a9af4620104d4d23b840b74b6783e578f9a",
  "file_reports_level0": [
   {

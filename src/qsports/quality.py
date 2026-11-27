@@ -25,7 +25,7 @@ def _all_level0() -> pd.DataFrame:
     dev = pd.read_parquet(paths.PROCESSED_DEV / "metadata_level0.parquet")
     dev["partition"] = "dev"
     parts = [dev]
-    for p in ("holdout", "prospective"):
+    for p in ("holdout", "reserve"):
         x = holdout.load_level0(p)
         x["partition"] = p
         parts.append(x)
@@ -34,7 +34,7 @@ def _all_level0() -> pd.DataFrame:
 
 def _file_reports() -> pd.DataFrame:
     reps = json.loads((paths.PROCESSED_DEV / "file_reports.json").read_text())
-    for p in ("holdout", "prospective"):
+    for p in ("holdout", "reserve"):
         reps += holdout.registry(p)["file_reports_level0"]
     fr = pd.DataFrame([r for r in reps if "div" in r])
     return fr
@@ -94,7 +94,7 @@ def inventory() -> tuple[pd.DataFrame, pd.DataFrame]:
             "div": div, "country": DIVISIONS[div]["country"], "competition": DIVISIONS[div]["competition"],
             "seasons_available": f"{g.season.iloc[0]}–{g.season.iloc[-1]} ({len(g)})",
             "n_dev": int(d.n_rows.sum()), "n_holdout": int(g[g.partition == "holdout"].n_rows.sum()),
-            "n_prospective": int(g[g.partition == "prospective"].n_rows.sum()),
+            "n_reserve": int(g[g.partition == "reserve"].n_rows.sum()),
             "dev_pct_ou_pre_any_0506+": round(float(np.average(d[d.season_code >= "0506"].pct_ou_pre_any_single_or_avg,
                                                                 weights=d[d.season_code >= "0506"].n_rows)), 1),
             "dev_pct_ou_close_1920+": round(float(np.average(d19.pct_ou_close_any, weights=d19.n_rows)), 1) if len(d19) else None,
@@ -271,7 +271,7 @@ def pinnacle_investigation(dev: pd.DataFrame, bench: pd.DataFrame) -> dict:
                          "p90_absdiff": round(float(diff.quantile(.9)), 4)})
     p["dev_pin_vs_b365_by_season"] = rows
     # presencia (nivel 0) por mes en reservados
-    l0 = pd.concat([holdout.load_level0("holdout"), holdout.load_level0("prospective")])
+    l0 = pd.concat([holdout.load_level0("holdout"), holdout.load_level0("reserve")])
     l0["month"] = l0.match_date.dt.to_period("M").astype(str)
     pres = l0.groupby("month").agg(n=("match_id", "size"), pin_pre=("has_ou_pre_pin_pair", "mean"),
                                    pin_close=("has_ou_close_pin_pair", "mean"), b365_pre=("has_ou_pre_b365_pair", "mean"),

@@ -83,4 +83,4 @@ def test_no_pinnacle_after_rule_date_in_dev_by_construction(dev):
 def test_verify_all_ok():
     res = verify.verify_all()
     assert res["ok"], res
-    assert res["access_log_entries"] == {"holdout": 0, "prospective": 0}
+    assert res["access_log_entries"] == {"holdout": 0, "reserve": 0}

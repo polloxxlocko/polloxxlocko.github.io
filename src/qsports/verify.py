@@ -37,15 +37,15 @@ def verify_all() -> dict:
         c["dev_contains_no_reserved"] = False
         res["error"] = str(e)
     # 5. Reservados intactos
-    for part in ("holdout", "prospective"):
+    for part in ("holdout", "reserve"):
         v = holdout.verify_integrity(part)
         c[f"{part}_raw_unchanged"] = v["raw_ok"]
         c[f"{part}_level0_unchanged"] = v["level0_ok"]
     # 6. Estado del sello (informativo: debe seguir sellado en GATE 1)
     cfg = paths.holdout_config()
     res["holdout_sealed"] = not (paths.ROOT / cfg["authorization_file"]).exists()
-    res["prospective_sealed"] = not (paths.ROOT / cfg["prospective_authorization_file"]).exists()
+    res["reserve_sealed"] = not (paths.ROOT / cfg["reserve_authorization_file"]).exists()
     res["access_log_entries"] = {p: (len((holdout._access_log(p)).read_text().splitlines())
-                                     if holdout._access_log(p).exists() else 0) for p in ("holdout", "prospective")}
-    res["ok"] = all(c.values()) and res["holdout_sealed"] and res["prospective_sealed"]
+                                     if holdout._access_log(p).exists() else 0) for p in ("holdout", "reserve")}
+    res["ok"] = all(c.values()) and res["holdout_sealed"] and res["reserve_sealed"]
     return res

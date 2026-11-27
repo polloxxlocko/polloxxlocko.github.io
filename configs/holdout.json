@@ -1,10 +1,13 @@
 {
-  "_doc": "Particiones temporales. Aprobado por el usuario en GATE 0 (2026-11-27): 2024/25 y 2025/26 = conjunto de prueba final reservado. 2026/27 en adelante = reserva prospectiva (decisión conservadora de GATE 1: es posterior al holdout y no debe informar el desarrollo). Cambiar este archivo requiere autorización expresa del usuario.",
-  "holdout_seasons": ["2425", "2526"],
-  "prospective_from_season": "2627",
+  "_doc": "Particiones temporales. Aprobado por el usuario en GATE 0 (2026-11-27): 2024/25 y 2025/26 = conjunto de prueba final reservado. 2026/27 en adelante = RESERVA HISTÓRICA SELLADA ('reserve'), confirmada por el usuario al aprobar GATE 1. La reserva NO es una validación prospectiva genuina: contiene partidos ya disputados y descargados antes de registrar predicciones. La validación prospectiva genuina (GATE 5) usa solo predicciones registradas y publicadas ANTES de cada partido. Cambiar este archivo requiere autorización expresa del usuario.",
+  "holdout_seasons": [
+    "2425",
+    "2526"
+  ],
+  "reserve_from_season": "2627",
   "dev_last_season": "2324",
   "unsealed": false,
   "authorization_file": "HOLDOUT_AUTHORIZATION.json",
-  "prospective_authorization_file": "PROSPECTIVE_AUTHORIZATION.json",
+  "reserve_authorization_file": "RESERVE_AUTHORIZATION.json",
   "protocol_freeze_file": "PROTOCOL_FREEZE.json"
 }

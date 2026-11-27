@@ -1,9 +1,10 @@
-"""Protección del conjunto de prueba final (holdout) y de la reserva prospectiva.
+"""Protección del conjunto de prueba final (holdout) y de la reserva histórica sellada (reserve).
 
 Particiones (configs/holdout.json):
   dev          temporadas <= 2023/24                  uso libre para desarrollo
   holdout      2024/25 y 2025/26                      conjunto de prueba final, SELLADO
-  prospective  2026/27 en adelante                    reserva prospectiva (GATE 5), SELLADA
+  reserve      2026/27 en adelante                    RESERVA HISTÓRICA SELLADA (no es validación
+                                                      prospectiva: sus partidos ya ocurrieron/se descargaron)
 
 Niveles de acceso a datos reservados:
   Nivel 0  metadatos: id, división, temporada, fecha, hora, equipos, banderas booleanas de
@@ -13,7 +14,7 @@ Niveles de acceso a datos reservados:
 
 Controles:
   1. Separación física: RAW y procesados reservados viven en data/holdout/ y
-     data/prospective/, nunca en data/raw/ ni data/processed/dev/.
+     data/reserve/, nunca en data/raw/ ni data/processed/dev/.
   2. Registro de match_ids reservados (sin resultados) -> `assert_no_reserved` detecta
      filas reservadas que entren por cualquier vía (p. ej., re-lectura de RAW).
   3. `open_reserved` exige un archivo de autorización del usuario ligado al hash del
@@ -61,8 +62,8 @@ class ReservedDataError(RuntimeError):
 def _part_dir(partition: str) -> Path:
     if partition == "holdout":
         return paths.HOLDOUT_DIR
-    if partition == "prospective":
-        return paths.PROSPECTIVE_DIR
+    if partition == "reserve":
+        return paths.RESERVE_DIR
     raise ValueError(partition)
 
 
@@ -96,7 +97,7 @@ def _raw_zips(partition: str) -> list[tuple[str, Path]]:
 def reserved_retrieved_at() -> dict[str, str]:
     """Fecha UTC de descarga de temporadas reservadas (desde sus manifiestos; sin contenido)."""
     out: dict[str, str] = {}
-    for part in ("holdout", "prospective"):
+    for part in ("holdout", "reserve"):
         mf = _part_dir(part) / "raw" / "football_data" / "manifest.jsonl"
         if mf.exists():
             for line in mf.read_text().splitlines():
@@ -196,7 +197,7 @@ def registry(partition: str) -> dict:
 
 def reserved_ids() -> set[str]:
     ids: set[str] = set()
-    for part in ("holdout", "prospective"):
+    for part in ("holdout", "reserve"):
         try:
             ids |= set(registry(part)["match_ids"])
         except ReservedDataError:
@@ -238,7 +239,7 @@ def protocol_freeze_hash() -> str | None:
 
 def _check_authorization(partition: str) -> dict:
     cfg = paths.holdout_config()
-    fname = cfg["authorization_file"] if partition == "holdout" else cfg["prospective_authorization_file"]
+    fname = cfg["authorization_file"] if partition == "holdout" else cfg["reserve_authorization_file"]
     p = paths.ROOT / fname
     if not p.exists():
         raise ReservedDataError(

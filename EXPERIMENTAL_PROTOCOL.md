@@ -1,6 +1,6 @@
 # EXPERIMENTAL_PROTOCOL — Protocolo experimental preliminar
 
-Versión 0.9 (preliminar) · 2026-11-27 · GATE 1
+Versión 0.10 (preliminar) · 2026-11-27 · revisado al inicio de GATE 2 (§2, §6, §10)
 
 Este protocolo se diseña **antes de entrenar cualquier modelo**. Se congelará (hash en
 `PROTOCOL_FREEZE.json`) al final de GATE 4 y antes de solicitar la apertura del holdout.
@@ -26,10 +26,12 @@ Reglas de interpretación:
 | Bloque | Temporadas | Uso |
 |---|---|---|
 | Burn-in | 2000/01-2004/05 | Solo para inicializar fuerzas de equipos; sin evaluación |
-| **Desarrollo interno** | 2005/06-2021/22 | Walk-forward: selección de variables, hiperparámetros, calibradores, umbrales, estructura del modelo |
-| **Validación de desarrollo** | 2022/23-2023/24 | Comparación de candidatos **congelados**; elección del modelo primario. Cada familia candidata se evalúa aquí **una vez** |
+| **Desarrollo interno — ajuste** (GATE 2) | 2005/06-2013/14 | Hiperparámetros, selección de variables, decisión de escalar complejidad |
+| **Desarrollo interno — prueba interna** (GATE 2) | 2014/15-2021/22 | Una evaluación por familia ya ajustada; reglas de adopción de `MODEL_SPECIFICATION.md` |
+| **Validación de desarrollo** (GATE 3) | 2022/23-2023/24 | Comparación de candidatos **congelados**; elección del modelo primario. Cada familia candidata se evalúa aquí **una vez**. **Vallado en GATE 2** (el motor walk-forward se niega a evaluarlo) |
 | **Prueba final (holdout)** | 2024/25-2025/26 | **Una sola** evaluación del modelo primario preregistrado, tras autorización |
-| Prospectivo | 2026/27+ | GATE 5 (predicciones registradas antes de cada partido) |
+| **Reserva histórica sellada** | 2026/27 (partidos ya disputados al descargar) | Sellada. **No es validación prospectiva**: sus resultados ya existían antes de registrar predicciones (§10) |
+| **Validación prospectiva genuina** (GATE 5) | Partidos futuros | Solo predicciones registradas y publicadas **antes** de cada partido (§10) |
 
 **Walk-forward (todas las fases).** Para cada fecha de captura τ (viernes o martes), el
 modelo se ajusta con los partidos con `match_date < τ` y predice todos los partidos cuya
@@ -81,25 +83,59 @@ n = 130.862, sin modelos entrenados), usando Δ = LL_C − LL_A:
 - Supuestos: independencia entre semanas no adyacentes; dependencia intra-semana
   capturada por deff; estacionariedad aproximada de σ_Δ entre regímenes.
 
-## 6. Criterios de decisión (preregistrados; los umbrales se confirman al congelar)
+## 6. Criterios de decisión (revisados en GATE 2: categorías mutuamente excluyentes)
 
-Sean Δ̄ e IC95 los del holdout, calculados con el método de §4. **SESOI** (mínimo efecto
-de interés) provisional = **0,001 nats por partido**, ≈0,15% del log loss del mercado. Se
-confirma o ajusta al congelar con la potencia del §5, y **nunca después** de abrir el
-holdout.
+**Notación.** Δ̄ = diferencia media pareada (modelo − referencia) de log loss sobre la
+muestra de la pregunta; **[L, U]** = intervalo bootstrap por bloques al 95% bilateral
+(§4); **δ** = SESOI, el mínimo efecto de interés práctico. δ provisional = **0,001 nats
+por partido** (≈0,15% del log loss del mercado). Se fija al congelar el protocolo con la
+potencia del §5 y **nunca** se modifica después de abrir el holdout. Δ̄ < 0 significa que
+el modelo es mejor. Exigir U < 0 equivale a una prueba unilateral al 2,5%.
 
-| Pregunta | ÉXITO | FRACASO | INCONCLUSO |
+**Partición** (L ≤ U siempre; cada resultado cae en **exactamente una** categoría):
+
+| Código | Categoría | Condición sobre [L, U] | Lectura |
 |---|---|---|---|
-| Q1 (vs C) | IC95 superior < 0 | IC95 inferior > −SESOI | Otros casos |
-| Q2 (vs A) | IC95 superior < 0 **y** Δ̄ < 0 también en la validación de desarrollo **y** calibración aceptable (\|pendiente − 1\| < 0,2; \|intercepto\| < 0,05) | IC95 inferior > −SESOI (se descartan mejoras relevantes) | Otros casos → **VENTAJA ESTADÍSTICA NO DEMOSTRADA** |
-| Q3 (económica) | Q2 = éxito **y** IC95 inferior del ROI > 0 con la regla de apuesta fijada en desarrollo, con precios Bet365 pre | IC95 superior del ROI < 0 | Otros casos (lo más probable por potencia) |
+| **S-R** | Superioridad estadística y relevante | U < −δ | Mejora distinguible del azar y mayor que δ con alta confianza |
+| **S-NR** | Superioridad estadística, relevancia no demostrada | −δ ≤ U < 0 | Mejora distinguible del azar; no se puede afirmar que supere δ |
+| **EQ** | Equivalencia práctica | L ≤ 0 ≤ U, L > −δ y U < δ | Sin diferencia distinguible y cualquier diferencia plausible es menor que δ |
+| **INC** | Inconcluso | L ≤ 0 ≤ U y (L ≤ −δ o U ≥ δ) | Los datos no permiten distinguir entre mejora relevante, equivalencia o empeoramiento |
+| **I-NR** | Inferioridad estadística, relevancia no demostrada | 0 < L ≤ δ | Peor que la referencia; no se puede afirmar que el empeoramiento supere δ |
+| **I-R** | Inferioridad estadística y relevante | L > δ | Peor que la referencia en más de δ con alta confianza |
+
+Verificación de la partición: S-R y S-NR exigen U < 0; I-NR e I-R exigen L > 0; EQ e INC
+exigen L ≤ 0 ≤ U y se separan por la posición de L y U respecto de ±δ. Los rangos no se
+solapan y cubren todos los casos. La función `qsports.evaluation.decision_category`
+implementa esta tabla y sus pruebas automáticas recorren los bordes.
+
+**Veredictos por pregunta** (holdout):
+
+| Pregunta | Referencia | Veredicto afirmativo | Veredicto negativo | Resto |
+|---|---|---|---|---|
+| **Q1** | C (frecuencia histórica) | S-R: "mejora relevante sobre una referencia simple"; S-NR: "mejora estadística de magnitud incierta" | EQ, I-NR, I-R: "no mejora a una referencia simple" | INC: **EVIDENCIA INSUFICIENTE** |
+| **Q2** | A (consenso pre-cierre) | S-R o S-NR **y** las 3 condiciones de validez | EQ, I-NR, I-R → **VENTAJA ESTADÍSTICA NO DEMOSTRADA** (con la categoría explícita) | INC → **VENTAJA ESTADÍSTICA NO DEMOSTRADA / EVIDENCIA INSUFICIENTE** |
+| **Q3** | ROI = 0 con precios observados | Misma partición aplicada a **−ROI**, con δ_ROI = 0,01 por unidad apostada (S-R ⇔ límite inferior del IC del ROI > 0,01; S-NR ⇔ 0 < límite inferior ≤ 0,01). Afirmativo solo con S-R o S-NR **y** Q2 afirmativo | EQ, I-NR, I-R | INC (lo más probable por potencia) |
+
+**Condiciones de validez de Q2** (si alguna falla, el veredicto es **VENTAJA ESTADÍSTICA
+NO DEMOSTRADA**, se reporta la categoría y se indica qué condición falló):
+1. Dirección consistente: Δ̄ < 0 también en la validación de desarrollo (2022/23-2023/24).
+2. Calibración aceptable en el holdout: |pendiente − 1| < 0,2 y |intercepto| < 0,05.
+3. El modelo evaluado es el único modelo primario declarado al congelar.
+
+**Información incremental deportiva** (comparación clave de M4, ver
+`MODEL_SPECIFICATION.md`): la misma partición se aplica a Δ(M4-sport − M4-cal). Solo
+**S-R o S-NR** permite afirmar que las variables deportivas aportan información más allá
+de recalibrar el mercado. EQ, INC o inferioridad → "aporte deportivo incremental **no
+demostrado**".
 
 Condiciones adicionales:
-- **Un único modelo primario** se declara al congelar. Los modelos y métricas
-  secundarios se reportan con corrección de Holm y la etiqueta "exploratorio".
+- Los modelos y métricas secundarios se reportan con corrección de Holm y la etiqueta
+  "exploratorio".
 - La regla de selección de apuestas (umbral de EV, tope de cuota 3,50, apuesta fija) se
   fija en el desarrollo interno, se verifica en la validación y no se cambia después.
 - Un CLV positivo o una mejora de log loss **no** son prueba suficiente de rentabilidad.
+- En GATE 2 estas categorías se calculan sobre la prueba interna (2014/15-2021/22) con
+  carácter **de desarrollo**: no constituyen veredictos de Q1-Q3.
 
 ## 7. Análisis de sensibilidad preregistrados
 
@@ -128,3 +164,24 @@ Condiciones adicionales:
 Se congela al final de GATE 4: este documento, `MARKET_BENCHMARK_SPECIFICATION.md`,
 `configs/*.json`, el código del modelo primario y sus parámetros, la regla de apuestas y el
 SESOI. Procedimiento de apertura en `HOLDOUT_PROTECTION_PROTOCOL.md` §6.
+
+## 10. Reserva histórica sellada frente a validación prospectiva genuina
+
+| | Reserva histórica sellada (2026/27) | Validación prospectiva genuina (GATE 5) |
+|---|---|---|
+| Partidos | Disputados y descargados el 2026-11-27 (2.680 filas) o los que se descarguen después del hecho | Partidos que aún no se han jugado cuando se registra la predicción |
+| ¿Existían los resultados antes de predecir? | **Sí** (están en disco, sellados) | **No** |
+| Garantía contra el uso de resultados | Procedimental (sello, guardas, log de accesos) | **Temporal y verificable por terceros**: la predicción existe antes del evento |
+| Uso permitido | Evaluación retrospectiva adicional, solo con autorización, después del holdout | Evaluación prospectiva principal (Q1-Q3) en GATE 5 |
+
+**Protocolo mínimo de la validación prospectiva genuina** (se detallará en GATE 5):
+1. Modelo, código y parámetros congelados con hash (commit git).
+2. Para cada partido: predicción generada con datos hasta la captura pre-cierre y
+   registrada en un archivo append-only con `match_id`, probabilidad, cuota observada y
+   fuente, momento de registro UTC, hash del modelo y versión de los datos.
+3. **Publicación antes del inicio** (commit firmado y push a un repositorio remoto). La
+   marca de tiempo de GitHub sirve como testigo externo. Una predicción registrada
+   después del inicio queda **inválida** y se excluye, sin reemplazo.
+4. Evaluación al cierre del período preregistrado, con los mismos criterios del §6.
+5. Ningún resultado de la reserva histórica 2026/27 se presenta como prospectivo.
+

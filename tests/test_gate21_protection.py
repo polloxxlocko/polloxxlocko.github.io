@@ -119,3 +119,14 @@ def test_real_fence_log_has_no_crossings():
     real = paths.ROOT / "logs" / "GATE3_FENCE_LOG.jsonl"
     assert real.exists()
     assert not [x for x in real.read_text().splitlines() if '"allowed"' in x]
+
+
+def test_evaluation_universe_is_fenced_too():
+    """La valla también protege la vía de evaluación (no solo el motor walk-forward)."""
+    from qsports import gate2
+    s = synthetic.generate(n_divisions=1, n_teams=6, seasons=("2122", "2223"), seed=4)
+    with pytest.raises(wf.FenceError):
+        gate2.universe(s, ["2223"])
+    assert len(gate2.universe(s, ["2122"])) > 0
+    ev = [json.loads(x) for x in paths.FENCE_LOG.read_text().splitlines()]
+    assert ev[-1]["outcome"] == "refused" and ev[-1]["label"] == "gate2.universe"

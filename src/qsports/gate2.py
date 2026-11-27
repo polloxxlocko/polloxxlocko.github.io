@@ -292,7 +292,9 @@ def run_config(family, config_id, params, factory, frame, seasons, block, scope,
 # ---------------------------------------------------------------- universos y selección (solo bloque de ajuste)
 def universe(frame: pd.DataFrame, seasons, mask_col: str | None = None) -> pd.DataFrame:
     """Universo explícito de una evaluación: partidos de `seasons` con resultado conocido y fecha de captura
-    estimable (requisito point-in-time), y opcionalmente con `mask_col` verdadero."""
+    estimable (requisito point-in-time), y opcionalmente con `mask_col` verdadero.
+    Toda evaluación pasa por aquí: la valla de GATE 3 se comprueba también en este punto (y registra el intento)."""
+    wf.check_fence(list(seasons), "gate2.universe")
     u = frame[frame["season_code"].isin(list(seasons)) & frame["over25"].notna()
               & frame["pre_odds_capture_date_est"].notna()]
     if mask_col:

@@ -311,3 +311,31 @@ punto por punto en `AUDIT_RESPONSE_GATE2.md`.
   impacto ≤ 4,5·10⁻¹² en la log loss media; 3 casos no reproducidos, todos de `_pp`.
 - **D-3:** con log1p, la misma selección de M3 y la misma decisión H1b (EQ). La prueba interna no
   se reevaluó.
+
+## E-006 · 2026-11-27 · GATE 3: validación 2022/23-2023/24 (una sola evaluación)
+
+**Autorización:** el usuario aprobó el cierre de GATE 2.1, aceptó definitivamente D-1 a D-4 y autorizó
+GATE 3 tras cinco comprobaciones previas. Las cinco se cumplieron:
+- corrección `sorted(departed)` (`ea5598d`);
+- prueba con varios `PYTHONHASHSEED`, que falla con el código antiguo;
+- nueva reproducción limpia, con los candidatos idénticos bit a bit y mismo SHA-256;
+- ejecutor con verificación de identidad e hiperparámetros y réplica de identidad en la prueba interna;
+- congelamiento (`e339fc6`) y autorización ligada a su hash (`3bf3750`).
+
+Preregistro en `MODEL_SPECIFICATION.md` Parte C (`e2ac6da`), comprometido antes de evaluar.
+
+**Ejecución:** `python experiments/gate3/run_gate3.py run --out experiments/gate3/validation_run`
+(árbol limpio en `3bf3750`; una vez; sello `logs/GATE3_EVALUATED.json`).
+
+**Resultados** (n = 15.488; bloques de 4 semanas calendario; δ = 0,001):
+- **M4-sport − M4-cal = −0,000007 [−0,000129; +0,000111] EQ** (comparación principal).
+- M4-sport − A = −0,00042 [−0,00077; −0,00008] S-NR.
+- M4-cal − A = −0,00042 [−0,00075; −0,00008] S-NR.
+- M2 − A = +0,00635 I-R; M2 − C = −0,00835 S-R; A − C = −0,0147 S-R.
+
+Las categorías no cambian con bloques de 2-12 semanas. La pendiente de calibración de A es 1,20; la de
+M4-cal, 1,06. El AUC de A y de M4 es igual (0,6097-0,6098). Q2, condición 1: dirección negativa
+(consistente). Q3 no evaluada.
+
+**Lectura:** el aporte deportivo de la desviación de M2 sigue sin demostrarse. La pequeña mejora sobre A
+procede de recalibrar el consenso. **VENTAJA ESTADÍSTICA NO DEMOSTRADA** (relevante).

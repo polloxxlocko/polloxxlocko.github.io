@@ -1,0 +1,6 @@
+{
+ "evaluated_utc": "2026-11-27T19:01:10.122360+00:00",
+ "out_dir": "experiments/gate3/validation_run",
+ "results_sha256": "f0046440851d388d5d79a8875eaf3efbc226ae890271867f6fc562a4b7ecd71a",
+ "frozen_candidates_sha256": "a08152ce46bd21c245135615f47572e195d98041cf5a81a7e1bfcb7a470ad7ab"
+}

@@ -17,6 +17,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "reports" / "gate2_1"
+if "--out-dir" in sys.argv:  # p. ej. experiments/gate3/records
+    OUT = ROOT / sys.argv[sys.argv.index("--out-dir") + 1]
 
 
 def git(*a):
@@ -42,7 +44,8 @@ def main():
     counts = {k: int(suite.get(k, 0)) for k in ("tests", "failures", "errors", "skipped")}
     counts["passed"] = counts["tests"] - counts["failures"] - counts["errors"] - counts["skipped"]
     head["counts"] = counts
-    other = [x for x in git("status", "--porcelain").splitlines() if f"pytest_{c7}." not in x and "reports/gate2_1/" not in x]
+    rel = str(OUT.relative_to(ROOT)) + "/"
+    other = [x for x in git("status", "--porcelain").splitlines() if f"pytest_{c7}." not in x and rel not in x]
     head["tree_clean_at_end_excluding_this_record"] = not other
     (OUT / f"pytest_{c7}.txt").write_text("# " + json.dumps(head, ensure_ascii=False) + "\n" + r.stdout + r.stderr)
     (OUT / f"pytest_{c7}.json").write_text(json.dumps(head, indent=1, ensure_ascii=False))

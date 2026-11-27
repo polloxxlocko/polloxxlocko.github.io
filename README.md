@@ -8,10 +8,14 @@ apuestas.**
 
 **Estado:** GATE 0 y GATE 1 aprobados · GATE 2 (modelos y validación interna) con aprobación
 metodológica condicionada · GATE 2.1 (correcciones de la auditoría) completado y pendiente de
-revisión · GATE 3 no autorizado. Resultado de desarrollo (2014/15-2021/22): los modelos
+revisión · GATE 3 (validación 2022/23-2023/24, una sola evaluación) completado y pendiente de revisión ·
+GATE 4 no autorizado. Resultado de desarrollo (2014/15-2021/22): los modelos
 evaluados (Poisson M1/M2, logística M3) no mejoran el consenso de mercado pre-cierre, y la
 desviación de M2 no añade información distinguible a una recalibración del mercado. Este
-resultado se limita a esos modelos, variables y períodos (ver `GATE_2_1_REPORT.md`).
+resultado se limita a esos modelos, variables y períodos (ver `GATE_2_1_REPORT.md`). En la validación 2022/23-2023/24 (`GATE_3_REPORT.md`): la
+desviación de M2 sigue sin aportar sobre el mercado recalibrado (EQ); recalibrar el consenso mejora a A
+de forma pequeña (S-NR, por debajo de δ); M2 es claramente peor que A (I-R). **VENTAJA ESTADÍSTICA NO
+DEMOSTRADA** en sentido relevante; Q3 no evaluada.
 
 > **¿Auditas este proyecto?** Empieza por [`AUDIT_GUIDE.md`](AUDIT_GUIDE.md): contenido,
 > exclusiones (datos de la fuente, holdout sellado, resúmenes de artículos), reproducción y

@@ -13,6 +13,9 @@ se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente
 > resultados corregidos en `GATE_2_1_REPORT.md`; reproducción limpia y comparación con lo publicado en
 > `REPRODUCIBILITY_REPORT.md`; registros de pruebas y manifiesto de hashes en `reports/gate2_1/`;
 > ZIP ligero sin Parquet: `python -m qsports audit-package --light`.
+> **GATE 3 (rama `gate3`):** preregistro en `MODEL_SPECIFICATION.md` Parte C; candidatos congelados en
+> `configs/gate3_frozen_candidates.json`; autorización en `GATE3_AUTHORIZATION.json`; resultados en
+> `GATE_3_REPORT.md` y `experiments/gate3/validation_run/`; registros en `experiments/gate3/records/`.
 
 ## 1. Contenido publicado
 

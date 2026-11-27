@@ -76,3 +76,11 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | G11 | "0 accesos registrados" demuestra que no se usó la apertura autorizada, no la ausencia absoluta de exposición | Exposición previa documentada en HOLDOUT_PROTECTION_PROTOCOL §5 |
 | G12 | El prior de ascendidos de M2 (`promoted_prior=True`) promedia sobre un `set` cuyo orden depende de `PYTHONHASHSEED`: no es determinista entre procesos | Diferencias < 10⁻⁸ solo en configuraciones `_pp` (no seleccionadas ni candidatas); corrección de una línea propuesta, pendiente de autorización (`REPRODUCIBILITY_REPORT.md` §3.2) |
 
+
+## GATE 3 (validación 2022/23-2023/24)
+| # | Limitación | Impacto |
+|---|---|---|
+| V1 | Q3 no evaluada: en el desarrollo no se congeló ninguna regla de selección de apuestas | No hay evidencia de rentabilidad simulada; definir una regla ahora requiere hacerlo antes del holdout y sin optimizarla con la validación |
+| V2 | La mejora de M4 sobre A (S-NR) procede de la recalibración de un consenso más comprimido en 2022/23-2023/24 (pendiente 1,20 frente a 1,10 en desarrollo) | Puede no ser estable en el tiempo; no es información deportiva |
+| V3 | Un ajuste de M2 en la validación marcado no convergente (F2, 2022-07-29, gradiente 1,0·10⁻⁵) no se pulió, para no volver a tocar la validación | Mismo artefacto que los 226 casos verificados en GATE 2.1 (impacto ≤ 2,7·10⁻⁸ en p) |
+| V4 | Validación de dos temporadas (n = 15.488) | IC de M4-sport − M4-cal ±1,2·10⁻⁴; suficiente para EQ frente a δ = 0,001, no para detectar efectos de 10⁻⁴ |

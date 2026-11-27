@@ -126,9 +126,10 @@ def test_real_fence_log_crossings_only_with_valid_authorization(monkeypatch):
     assert wf.fence_log_summary()["ok"]
 
 
-def test_evaluation_universe_is_fenced_too():
+def test_evaluation_universe_is_fenced_too(tmp_path, monkeypatch):
     """La valla también protege la vía de evaluación (no solo el motor walk-forward)."""
     from qsports import gate2
+    monkeypatch.setattr(paths, "ROOT", tmp_path)  # hermética: sin autorización de GATE 3
     s = synthetic.generate(n_divisions=1, n_teams=6, seasons=("2122", "2223"), seed=4)
     with pytest.raises(wf.FenceError):
         gate2.universe(s, ["2223"])

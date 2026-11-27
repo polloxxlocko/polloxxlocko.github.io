@@ -72,8 +72,9 @@ def test_identity_and_hyperparameter_tampering_detected(reference, mutate, match
         gate3.verify_frozen(frozen, require_authorization=False)
 
 
-def test_authorization_required(reference):
+def test_authorization_required(reference, tmp_path, monkeypatch):
     frozen, _, _ = reference
+    monkeypatch.setattr(paths, "ROOT", tmp_path / "sin_autorizacion")  # hermética
     with pytest.raises(wf.FenceError):
         gate3.verify_frozen(frozen, require_authorization=True)
 

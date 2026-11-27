@@ -1,0 +1,226 @@
+# {"commit": "2e04fcad0aa52380c54c6c044f4e204dc9e855b4", "tree_clean_at_start": true, "executed_by": "Claude (agente), contenedor cloud del proyecto", "command": "python -m pytest -v -p no:cacheprovider --junitxml=...", "started_utc": "2026-11-27T19:03:54.146678+00:00", "finished_utc": "2026-11-27T19:05:08.910223+00:00", "python": "3.13.18", "platform": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39", "exit_code": 1, "counts": {"tests": 178, "failures": 3, "errors": 0, "skipped": 0, "passed": 175}, "tree_clean_at_end_excluding_this_record": true}
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /home/user/polloxxlocko.github.io
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collecting ... collected 178 items
+
+tests/test_audit_package.py::test_manifests_allowed_data_forbidden PASSED [  0%]
+tests/test_audit_package.py::test_light_zip_selection PASSED             [  1%]
+tests/test_benchmark.py::test_pair_fair_validity_reasons PASSED          [  1%]
+tests/test_benchmark.py::test_pinnacle_masked_only_after_rule_date_and_rows_kept PASSED [  2%]
+tests/test_benchmark.py::test_max_pair_never_used_as_fair_probability PASSED [  2%]
+tests/test_benchmark.py::test_common_sample_requires_all_valid PASSED    [  3%]
+tests/test_benchmark.py::test_historical_frequency_is_point_in_time PASSED [  3%]
+tests/test_determinism.py::test_promoted_prior_identical_across_hash_seeds_synthetic PASSED [  4%]
+tests/test_determinism.py::test_promoted_prior_identical_across_hash_seeds_real_data PASSED [  5%]
+tests/test_evaluation.py::test_losses_reference_values PASSED            [  5%]
+tests/test_evaluation.py::test_calibration_recovers_known_slope PASSED   [  6%]
+tests/test_evaluation.py::test_murphy_identity_exact_for_discrete_forecasts PASSED [  6%]
+tests/test_evaluation.py::test_ece_small_when_calibrated_large_when_not PASSED [  7%]
+tests/test_evaluation.py::test_auc_matches_bruteforce PASSED             [  7%]
+tests/test_evaluation.py::test_week_ids_monday_to_sunday PASSED          [  8%]
+tests/test_evaluation.py::test_block_bootstrap_coverage_iid PASSED       [  8%]
+tests/test_evaluation.py::test_block_bootstrap_wider_under_weekly_shocks PASSED [  9%]
+tests/test_evaluation.py::test_diebold_mariano PASSED                    [ 10%]
+tests/test_evaluation.py::test_decision_category_borders[-0.005--0.002-S-R] PASSED [ 10%]
+tests/test_evaluation.py::test_decision_category_borders[-0.005--0.001-S-NR] PASSED [ 11%]
+tests/test_evaluation.py::test_decision_category_borders[-0.003--0.0005-S-NR] PASSED [ 11%]
+tests/test_evaluation.py::test_decision_category_borders[-0.0008-0.0008-EQ] PASSED [ 12%]
+tests/test_evaluation.py::test_decision_category_borders[-0.0008-0.0-EQ] PASSED [ 12%]
+tests/test_evaluation.py::test_decision_category_borders[-0.001-0.0005-INC] PASSED [ 13%]
+tests/test_evaluation.py::test_decision_category_borders[-0.003-0.003-INC] PASSED [ 14%]
+tests/test_evaluation.py::test_decision_category_borders[-0.0005-0.001-INC] PASSED [ 14%]
+tests/test_evaluation.py::test_decision_category_borders[0.0002-0.0008-I-NR] PASSED [ 15%]
+tests/test_evaluation.py::test_decision_category_borders[0.0005-0.001-I-NR] PASSED [ 15%]
+tests/test_evaluation.py::test_decision_category_borders[0.0011-0.003-I-R] PASSED [ 16%]
+tests/test_evaluation.py::test_decision_partition_is_exclusive_and_exhaustive PASSED [ 16%]
+tests/test_evaluation.py::test_mde_formula PASSED                        [ 17%]
+tests/test_evaluation.py::test_compare_detects_better_model PASSED       [ 17%]
+tests/test_evaluation_v21.py::test_probabilities_rejected[p0] PASSED     [ 18%]
+tests/test_evaluation_v21.py::test_probabilities_rejected[p1] PASSED     [ 19%]
+tests/test_evaluation_v21.py::test_probabilities_rejected[p2] PASSED     [ 19%]
+tests/test_evaluation_v21.py::test_probabilities_rejected[p3] PASSED     [ 20%]
+tests/test_evaluation_v21.py::test_probabilities_rejected[p4] PASSED     [ 20%]
+tests/test_evaluation_v21.py::test_outcomes_must_be_binary[y0] PASSED    [ 21%]
+tests/test_evaluation_v21.py::test_outcomes_must_be_binary[y1] PASSED    [ 21%]
+tests/test_evaluation_v21.py::test_outcomes_must_be_binary[y2] PASSED    [ 22%]
+tests/test_evaluation_v21.py::test_outcomes_must_be_binary[y3] PASSED    [ 23%]
+tests/test_evaluation_v21.py::test_dimensions_and_empty PASSED           [ 23%]
+tests/test_evaluation_v21.py::test_log_loss_exact_and_infinite_loss_rejected PASSED [ 24%]
+tests/test_evaluation_v21.py::test_unique_ids_and_one_to_one_merge PASSED [ 24%]
+tests/test_evaluation_v21.py::test_coverage_and_full_coverage_requirement PASSED [ 25%]
+tests/test_evaluation_v21.py::test_week_ids_are_consecutive_calendar_weeks PASSED [ 25%]
+tests/test_evaluation_v21.py::test_calendar_series_includes_empty_weeks_active_does_not PASSED [ 26%]
+tests/test_evaluation_v21.py::test_calendar_blocks_do_not_join_weeks_across_a_long_pause PASSED [ 26%]
+tests/test_evaluation_v21.py::test_bootstrap_rejects_replicates_without_observations PASSED [ 27%]
+tests/test_evaluation_v21.py::test_serial_dependence_block_bootstrap_covers_iid_week_bootstrap_does_not PASSED [ 28%]
+tests/test_evaluation_v21.py::test_serial_dependence_dm_hac_less_oversized_than_no_lag PASSED [ 28%]
+tests/test_evaluation_v21.py::test_no_dependence_block_choice_irrelevant_for_coverage PASSED [ 29%]
+tests/test_evaluation_v21.py::test_prob_categories_match_monte_carlo[0.0] PASSED [ 29%]
+tests/test_evaluation_v21.py::test_prob_categories_match_monte_carlo[-0.0006] PASSED [ 30%]
+tests/test_evaluation_v21.py::test_prob_categories_match_monte_carlo[0.0004] PASSED [ 30%]
+tests/test_evaluation_v21.py::test_prob_categories_match_monte_carlo[-0.0015] PASSED [ 31%]
+tests/test_evaluation_v21.py::test_power_profile_distinguishes_superiority_and_equivalence PASSED [ 32%]
+tests/test_evaluation_v21.py::test_weekly_autocorrelation_detects_persistence PASSED [ 32%]
+tests/test_gate21_protection.py::test_missing_registry_fails_closed_for_real_data PASSED [ 33%]
+tests/test_gate21_protection.py::test_inconsistent_registry_fails_closed PASSED [ 33%]
+tests/test_gate21_protection.py::test_walkforward_refuses_real_data_without_registry PASSED [ 34%]
+tests/test_gate21_protection.py::test_sealed_state_requires_existing_empty_access_log PASSED [ 34%]
+tests/test_gate21_protection.py::test_current_project_is_sealed_with_zero_accesses PASSED [ 35%]
+tests/test_gate21_protection.py::test_gate3_authorization_binding_and_logging PASSED [ 35%]
+tests/test_gate21_protection.py::test_incomplete_gate3_authorization_refused PASSED [ 36%]
+tests/test_gate21_protection.py::test_real_fence_log_crossings_only_with_valid_authorization PASSED [ 37%]
+tests/test_gate21_protection.py::test_evaluation_universe_is_fenced_too FAILED [ 37%]
+tests/test_gate2_cache.py::test_published_directory_is_read_only PASSED  [ 38%]
+tests/test_gate2_cache.py::test_clean_mode_requires_empty_directory PASSED [ 38%]
+tests/test_gate2_cache.py::test_reuse_only_with_valid_manifest PASSED    [ 39%]
+tests/test_gate2_cache.py::test_tampered_or_stale_outputs_are_recomputed PASSED [ 39%]
+tests/test_gate2_cache.py::test_feature_cache_validated_and_isolated PASSED [ 40%]
+tests/test_gate2_cache.py::test_load_preds_rejects_duplicates PASSED     [ 41%]
+tests/test_gate2_cache.py::test_train_max_date_stored_per_fit_and_joinable PASSED [ 41%]
+tests/test_gate2_cache.py::test_clean_mode_reuses_only_its_own_outputs PASSED [ 42%]
+tests/test_gate2_selection.py::test_selection_refuses_inner_test_rows PASSED [ 42%]
+tests/test_gate2_selection.py::test_selection_invariant_to_inner_test_outcomes PASSED [ 43%]
+tests/test_gate3.py::test_valid_frozen_candidates_pass PASSED            [ 43%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-ridge] PASSED [ 44%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-half_life_days] PASSED [ 44%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-seleccionado] PASSED [ 45%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-sport_cols] PASSED [ 46%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-Clase] PASSED [ 46%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-registro0] PASSED [ 47%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-registro1] PASSED [ 47%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-c\xf3digo] PASSED [ 48%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-alterada] PASSED [ 48%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-limpia] PASSED [ 49%]
+tests/test_gate3.py::test_identity_and_hyperparameter_tampering_detected[<lambda>-Candidatos] PASSED [ 50%]
+tests/test_gate3.py::test_authorization_required FAILED                  [ 50%]
+tests/test_gate3.py::test_build_factory_checks_attributes PASSED         [ 51%]
+tests/test_gate3.py::test_single_evaluation_guards PASSED                [ 51%]
+tests/test_gate3.py::test_freeze_never_overwrites PASSED                 [ 52%]
+tests/test_gate3.py::test_frozen_file_excluded_from_code_hash PASSED     [ 52%]
+tests/test_holdout.py::test_partition_mapping[0001-dev] PASSED           [ 53%]
+tests/test_holdout.py::test_partition_mapping[2324-dev] PASSED           [ 53%]
+tests/test_holdout.py::test_partition_mapping[2425-holdout] PASSED       [ 54%]
+tests/test_holdout.py::test_partition_mapping[2526-holdout] PASSED       [ 55%]
+tests/test_holdout.py::test_partition_mapping[2627-reserve] PASSED       [ 55%]
+tests/test_holdout.py::test_partition_mapping[2728-reserve] PASSED       [ 56%]
+tests/test_holdout.py::test_assert_no_reserved_rejects_reserved_seasons PASSED [ 56%]
+tests/test_holdout.py::test_assert_no_reserved_rejects_reserved_match_ids_even_if_relabelled PASSED [ 57%]
+tests/test_holdout.py::test_open_reserved_denied_in_current_project_state PASSED [ 57%]
+tests/test_holdout.py::test_authorization_flow_hash_binding_and_access_log PASSED [ 58%]
+tests/test_holdout.py::test_incomplete_authorization_rejected PASSED     [ 58%]
+tests/test_holdout.py::test_tripwire_reserved_paths PASSED               [ 59%]
+tests/test_holdout.py::test_tripwire_notebooks_do_not_read_reserved PASSED [ 60%]
+tests/test_holdout.py::test_level0_contains_no_values PASSED             [ 60%]
+tests/test_integration.py::test_dev_only_contains_dev_seasons PASSED     [ 61%]
+tests/test_integration.py::test_dev_and_reserved_ids_disjoint PASSED     [ 61%]
+tests/test_integration.py::test_match_ids_unique_and_no_duplicate_keys PASSED [ 62%]
+tests/test_integration.py::test_schema_core_columns PASSED               [ 62%]
+tests/test_integration.py::test_settlement_consistent PASSED             [ 63%]
+tests/test_integration.py::test_point_in_time_cutoff PASSED              [ 64%]
+tests/test_integration.py::test_benchmark_rows_aligned PASSED            [ 64%]
+tests/test_integration.py::test_benchmark_probabilities_valid PASSED     [ 65%]
+tests/test_integration.py::test_benchmark_C_matches_bruteforce PASSED    [ 65%]
+tests/test_integration.py::test_no_pinnacle_after_rule_date_in_dev_by_construction PASSED [ 66%]
+tests/test_integration.py::test_verify_all_ok PASSED                     [ 66%]
+tests/test_integration.py::test_alias_integrity_no_merged_distinct_teams PASSED [ 67%]
+tests/test_integration.py::test_alias_config_scope PASSED                [ 67%]
+tests/test_integration.py::test_pre_to_close_movement_gradient_regression PASSED [ 68%]
+tests/test_models.py::test_poisson_gradient_matches_numerical PASSED     [ 69%]
+tests/test_models.py::test_poisson_hessian_matches_numerical_and_newton_matches_lbfgs PASSED [ 69%]
+tests/test_models.py::test_model_invariant_to_future[M0a] PASSED         [ 70%]
+tests/test_models.py::test_model_invariant_to_future[M1] PASSED          [ 70%]
+tests/test_models.py::test_model_invariant_to_future[M2] PASSED          [ 71%]
+tests/test_models.py::test_model_invariant_to_future[M3] PASSED          [ 71%]
+tests/test_models.py::test_model_invariant_to_future[M4cal] PASSED       [ 72%]
+tests/test_models.py::test_model_invariant_to_future[M4sport] PASSED     [ 73%]
+tests/test_models.py::test_batch_independence[M1] PASSED                 [ 73%]
+tests/test_models.py::test_batch_independence[M3] PASSED                 [ 74%]
+tests/test_models.py::test_batch_independence[M4cal] PASSED              [ 74%]
+tests/test_models.py::test_batch_independence[M4sport] PASSED            [ 75%]
+tests/test_models.py::test_poisson_recovers_signal_and_converges PASSED  [ 75%]
+tests/test_models.py::test_m4_sport_vs_cal_detects_incremental_information_only_when_present[True-False] PASSED [ 76%]
+tests/test_models.py::test_m4_sport_vs_cal_detects_incremental_information_only_when_present[False-True] PASSED [ 76%]
+tests/test_odds_and_ou.py::test_implied_probability[2.0-0.5] PASSED      [ 77%]
+tests/test_odds_and_ou.py::test_implied_probability[1.5-0.6666666666666666] PASSED [ 78%]
+tests/test_odds_and_ou.py::test_implied_probability[3.5-0.285714] PASSED [ 78%]
+tests/test_odds_and_ou.py::test_expected_value_reference_cases[0.62-1.8-0.116] PASSED [ 79%]
+tests/test_odds_and_ou.py::test_expected_value_reference_cases[0.6-1.8-0.08] PASSED [ 79%]
+tests/test_odds_and_ou.py::test_expected_value_reference_cases[0.55-1.8--0.01] PASSED [ 80%]
+tests/test_odds_and_ou.py::test_expected_value_reference_cases[0.6-3.0-0.8] PASSED [ 80%]
+tests/test_odds_and_ou.py::test_overround_requires_complete_market PASSED [ 81%]
+tests/test_odds_and_ou.py::test_proportional_sums_to_one_and_ratio_preserved PASSED [ 82%]
+tests/test_odds_and_ou.py::test_power_method_properties PASSED           [ 82%]
+tests/test_odds_and_ou.py::test_clv_and_validity PASSED                  [ 83%]
+tests/test_odds_and_ou.py::test_logit_roundtrip PASSED                   [ 83%]
+tests/test_odds_and_ou.py::test_settlement_over25 PASSED                 [ 84%]
+tests/test_odds_and_ou.py::test_poisson_reference_and_over_formula PASSED [ 84%]
+tests/test_parser.py::test_rows_wider_than_header_are_recovered_and_aligned PASSED [ 85%]
+tests/test_parser.py::test_aliases_duplicate_headers_encodings_and_regimes PASSED [ 85%]
+tests/test_parser.py::test_match_id_uses_raw_names_and_team_alias_applied PASSED [ 86%]
+tests/test_parser.py::test_settlement_and_flags PASSED                   [ 87%]
+tests/test_parser.py::test_division_outside_universe_is_reported_not_parsed PASSED [ 87%]
+tests/test_temporal.py::test_capture_date_rule_for_each_weekday PASSED   [ 88%]
+tests/test_temporal.py::test_cutoff_never_after_match_and_same_day_excluded PASSED [ 88%]
+tests/test_temporal.py::test_capture_ambiguity[2023-10-06-15:00-True] PASSED [ 89%]
+tests/test_temporal.py::test_capture_ambiguity[2023-10-06-19:45-False] PASSED [ 89%]
+tests/test_temporal.py::test_capture_ambiguity[2023-10-03-12:30-True] PASSED [ 90%]
+tests/test_temporal.py::test_capture_ambiguity[2023-10-03-19:45-False] PASSED [ 91%]
+tests/test_temporal.py::test_capture_ambiguity[2023-10-07-12:30-False] PASSED [ 91%]
+tests/test_temporal.py::test_unverifiable_when_no_time_on_friday_or_tuesday PASSED [ 92%]
+tests/test_temporal.py::test_kickoff_uk_to_utc_handles_bst PASSED        [ 92%]
+tests/test_temporal.py::test_deadline_strings PASSED                     [ 93%]
+tests/test_temporal.py::test_same_day_night_match_cannot_use_earlier_same_day_result PASSED [ 93%]
+tests/test_temporal.py::test_capture_day_independent_of_kickoff_hour PASSED [ 94%]
+tests/test_walkforward.py::test_training_rows_strictly_before_tau_and_prematch_only PASSED [ 94%]
+tests/test_walkforward.py::test_postmatch_columns_unavailable_at_predict PASSED [ 95%]
+tests/test_walkforward.py::test_fit_never_after_capture_and_refit_schedule PASSED [ 96%]
+tests/test_walkforward.py::test_fence_blocks_validation_block_and_logs_attempt FAILED [ 96%]
+tests/test_walkforward.py::test_reserved_seasons_rejected PASSED         [ 97%]
+tests/test_walkforward.py::test_parallel_equals_serial PASSED            [ 97%]
+tests/test_walkforward.py::test_features_match_bruteforce PASSED         [ 98%]
+tests/test_walkforward.py::test_features_invariant_to_future_outcomes PASSED [ 98%]
+tests/test_walkforward.py::test_features_exclude_same_day PASSED         [ 99%]
+tests/test_walkforward.py::test_perturb_helper_changes_future_only PASSED [100%]
+
+=================================== FAILURES ===================================
+____________________ test_evaluation_universe_is_fenced_too ____________________
+
+    def test_evaluation_universe_is_fenced_too():
+        """La valla también protege la vía de evaluación (no solo el motor walk-forward)."""
+        from qsports import gate2
+        s = synthetic.generate(n_divisions=1, n_teams=6, seasons=("2122", "2223"), seed=4)
+>       with pytest.raises(wf.FenceError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE FenceError
+
+tests/test_gate21_protection.py:133: Failed
+_________________________ test_authorization_required __________________________
+
+reference = ({'reference_run': {'dir': '/tmp/pytest-of-root/pytest-40/test_authorization_required0/ref', 'git_commit': 'abc'}, 'co...PosixPath('/tmp/pytest-of-root/pytest-40/test_authorization_required0/ref/predictions/M2/M2__h480_r64__inner.parquet'))
+
+    def test_authorization_required(reference):
+        frozen, _, _ = reference
+>       with pytest.raises(wf.FenceError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE FenceError
+
+tests/test_gate3.py:77: Failed
+_____________ test_fence_blocks_validation_block_and_logs_attempt ______________
+
+    def test_fence_blocks_validation_block_and_logs_attempt():
+        s = synthetic.generate(n_divisions=1, n_teams=6, seasons=("2122", "2223"), seed=4)
+>       with pytest.raises(wf.FenceError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE FenceError
+
+tests/test_walkforward.py:64: Failed
+- generated xml file: /home/user/polloxxlocko.github.io/experiments/gate3/records/pytest_2e04fca.xml -
+=========================== short test summary info ============================
+FAILED tests/test_gate21_protection.py::test_evaluation_universe_is_fenced_too
+FAILED tests/test_gate3.py::test_authorization_required - Failed: DID NOT RAI...
+FAILED tests/test_walkforward.py::test_fence_blocks_validation_block_and_logs_attempt
+=================== 3 failed, 175 passed in 74.08s (0:01:14) ===================

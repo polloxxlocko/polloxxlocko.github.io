@@ -59,7 +59,8 @@ def test_fit_never_after_capture_and_refit_schedule(syn):
     assert len(logs) == int(np.ceil(n_caps / 4))
 
 
-def test_fence_blocks_validation_block_and_logs_attempt():
+def test_fence_blocks_validation_block_and_logs_attempt(tmp_path, monkeypatch):
+    monkeypatch.setattr(paths, "ROOT", tmp_path)  # hermética: sin autorización de GATE 3, sea cual sea el proyecto
     s = synthetic.generate(n_divisions=1, n_teams=6, seasons=("2122", "2223"), seed=4)
     with pytest.raises(wf.FenceError):
         wf.run(s, Probe, ["2223"], label="fence")

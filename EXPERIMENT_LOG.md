@@ -15,7 +15,7 @@ borran entradas. Las correcciones se registran como entradas nuevas.
 |---|---|
 | `phase0/download_football_data.py` | `data/raw/football_data/<temporada>/data.zip` + `manifest.jsonl` (SHA-256) |
 | `phase0/audit_football_data.py` | `reports/phase0/football_data_*.csv`, `football_data_audit_summary.json`, `pinnacle_vs_b365_ou_fairprob_absdiff.csv` |
-| `phase0/verify_references.py` | `research/references_verified.json` |
+| `phase0/verify_references.py` | `research/references_verified.json` (resúmenes solo locales, ver E-002) |
 | `phase0/market_selection.py` (semilla 20261127) | `reports/phase0/market_selection_results.json`, `market_selection_tables.md` |
 
 **Datos:** Football-Data.co.uk, temporadas 2000/01-2026/27, descargadas el 2026-11-27

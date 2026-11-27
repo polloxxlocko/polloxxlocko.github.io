@@ -11,3 +11,7 @@ __pycache__/
 dist/
 .pytest_cache/
 .ipynb_checkpoints/
+
+# Resúmenes de artículos: restricción legal de redistribución (solo uso local)
+research/abstracts_local.json
+research/abstracts_semanticscholar.json

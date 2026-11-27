@@ -6,8 +6,13 @@ Versión 1.0 · 2026-11-27 · Fase Cero
 
 Ninguna referencia de este documento se citó de memoria. Cada una pasó por
 `phase0/verify_references.py`, que consulta su DOI en Crossref (título, autores, revista,
-volumen, páginas) y en OpenAlex o Semantic Scholar (resumen). La salida queda guardada
-en `research/references_verified.json` y `research/abstracts_semanticscholar.json`.
+volumen, páginas) y en OpenAlex o Semantic Scholar (resumen). Los metadatos verificados
+quedan en `research/references_verified.json`, con banderas `abstract_available_*`.
+**Los resúmenes no se publican en el repositorio**: OpenAlex no redistribuye resúmenes en
+texto plano por razones legales y los derechos son de las editoriales. El script los
+regenera localmente en `research/abstracts_local.json`, ignorado por git, para que un
+auditor los consulte. Las citas breves de resúmenes en este documento se hacen a título
+de cita académica.
 
 **Niveles de verificación** (columna "Nivel" de la bibliografía):
 

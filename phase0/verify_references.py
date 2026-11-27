@@ -21,6 +21,9 @@ import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "research" / "references_verified.json"
+# Los resúmenes NO se versionan: OpenAlex no redistribuye resúmenes en texto plano por razones
+# legales y los derechos pertenecen a las editoriales. Se guardan solo localmente (gitignored).
+ABSTRACTS_LOCAL = ROOT / "research" / "abstracts_local.json"
 UA = {"User-Agent": "quantitative-sports-research/0.1 (reference verification)"}
 
 # Nota: 5 DOIs iniciales (escritos de memoria) resolvían a otros artículos o no existían;
@@ -116,7 +119,22 @@ def openalex(doi: str) -> dict:
         pos = {p: w for w, ps in inv.items() for p in ps}
         abstract = " ".join(pos[i] for i in sorted(pos))
     return {"openalex_status": 200, "cited_by_count": j.get("cited_by_count"),
-            "open_access_url": (j.get("open_access") or {}).get("oa_url"), "abstract": abstract}
+            "open_access_url": (j.get("open_access") or {}).get("oa_url"), "_abstract": abstract}
+
+
+def semantic_scholar_abstracts(dois: dict[str, str]) -> dict[str, str | None]:
+    """Resúmenes (o TLDR) vía Semantic Scholar batch, para los DOIs sin resumen en OpenAlex
+    (p. ej. Elsevier). Reproduce el paso usado en la Fase Cero."""
+    keys = list(dois)
+    r = requests.post("https://api.semanticscholar.org/graph/v1/paper/batch",
+                      params={"fields": "title,year,abstract,tldr"},
+                      json={"ids": ["DOI:" + dois[k] for k in keys]}, headers=UA, timeout=60)
+    out: dict[str, str | None] = {k: None for k in keys}
+    if r.status_code == 200:
+        for k, p in zip(keys, r.json()):
+            p = p or {}
+            out[k] = p.get("abstract") or (("TLDR: " + p["tldr"]["text"]) if (p.get("tldr") or {}).get("text") else None)
+    return out
 
 
 def crossref(doi: str) -> dict:
@@ -141,11 +159,15 @@ def crossref(doi: str) -> dict:
 
 def main() -> None:
     res = {"dois": {}, "searches": {}}
+    abstracts: dict[str, dict] = {}
     for key, doi in DOIS.items():
         rec = {"doi": doi, **crossref(doi)}
         time.sleep(0.2)
-        rec |= openalex(doi)
+        oa = openalex(doi)
         time.sleep(0.2)
+        abstracts[key] = {"openalex": oa.pop("_abstract", None)}
+        rec |= oa
+        rec["abstract_available_openalex"] = bool(abstracts[key]["openalex"])
         res["dois"][key] = rec
         print(f"{key:30s} {rec.get('crossref_status')} {rec.get('year')} | {str(rec.get('title'))[:90]}")
     for key, q in SEARCH.items():
@@ -158,8 +180,16 @@ def main() -> None:
                                  "authors": [a.get("family") for a in it.get("author", [])]}
                                 for it in items]
         time.sleep(0.3)
+    s2 = semantic_scholar_abstracts(DOIS)
+    for key in DOIS:
+        abstracts[key]["semanticscholar"] = s2.get(key)
+        res["dois"][key]["abstract_available_semanticscholar"] = bool(s2.get(key))
+    res["_note"] = ("Resúmenes no incluidos: OpenAlex no redistribuye resúmenes en texto plano por razones "
+                    "legales y los derechos pertenecen a las editoriales. Regenerables localmente con "
+                    "phase0/verify_references.py (salida en research/abstracts_local.json, ignorada por git).")
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(res, indent=1, ensure_ascii=False))
+    ABSTRACTS_LOCAL.write_text(json.dumps(abstracts, indent=1, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -10,7 +10,10 @@ Reglas:
 - Pausa entre peticiones para no sobrecargar la fuente.
 
 Uso:
-    python phase0/download_football_data.py --first 0001 --last 2627
+    python phase0/download_football_data.py --first 0001 --last 2324
+
+NOTA (GATE 1): para una reconstrucción completa use `python -m qsports download`, que enruta
+las temporadas reservadas a su partición sellada. Este script solo acepta temporadas de desarrollo.
 """
 from __future__ import annotations
 
@@ -50,7 +53,7 @@ def sha256(path: Path) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--first", default="0001")
-    ap.add_argument("--last", default="2627")
+    ap.add_argument("--last", default="2324")  # GATE 1: temporadas >= 2024/25 reservadas
     ap.add_argument("--sleep", type=float, default=2.0)
     args = ap.parse_args()
 

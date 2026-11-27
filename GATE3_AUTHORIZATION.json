@@ -1,0 +1,20 @@
+{
+ "partition": "validation_2223_2324",
+ "authorized_by": "usuario (propietario del proyecto)",
+ "authorized_at": "2026-11-27",
+ "user_statement": "Una vez superadas esas comprobaciones, autorizo GATE 3 exclusivamente para la validación 2022/23–2023/24, con una sola evaluación de los candidatos congelados.",
+ "conditions": [
+  "Corregir el no determinismo del prior de ascendidos con sorted(departed)",
+  "Prueba de reproducibilidad con distintos PYTHONHASHSEED",
+  "Repetir la reproducción limpia; decisiones y predicciones de los candidatos sin cambios",
+  "El ejecutor comprueba identidad e hiperparámetros de los candidatos congelados",
+  "Candidatos congelados: M4-sport, M4-cal y M2; SESOI = 0,001 nats; protocolo vigente",
+  "Holdout 2024/25-2025/26 y reserva 2026/27 sellados",
+  "Sin modelos ni variables nuevos",
+  "No fusionar con main",
+  "Informe completo y detención antes de GATE 4"
+ ],
+ "purpose": "GATE 3: validación histórica 2022/23-2023/24, una sola evaluación de los candidatos congelados",
+ "created_by_agent_on_explicit_user_instruction": true,
+ "frozen_candidates_sha256": "a08152ce46bd21c245135615f47572e195d98041cf5a81a7e1bfcb7a470ad7ab"
+}

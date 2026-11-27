@@ -1,175 +1,136 @@
 # CLAUDE.md — Quantitative Sports Intelligence
 
-Instrucciones permanentes del proyecto. Todo agente (humano o IA) que trabaje en este
-repositorio debe leer este archivo antes de actuar. Ante conflicto, prevalece la
-instrucción explícita más reciente del usuario.
+Instrucciones permanentes del proyecto. Todo agente (humano o IA) debe leer este archivo
+antes de actuar. Ante conflicto, prevalece la instrucción explícita más reciente del
+usuario.
 
 ## 1. Misión
 
-Construir conocimiento predictivo **verificable** sobre un único mercado deportivo.
+Investigar rigurosamente **si** existe una ventaja predictiva, no demostrar que existe.
 
-- **H1 (predictiva):** ¿un modelo cuantitativo especializado produce probabilidades que
-  mejoran consistentemente, fuera de muestra, las probabilidades implícitas del mercado?
-- **H2 (económica):** ¿esa mejora se traduce en valor esperado positivo con precios
-  efectivamente disponibles, incertidumbre estadística y condiciones de ejecución reales?
+- **Q1:** ¿el modelo estima mejor que referencias estadísticas simples?
+- **Q2:** ¿mejora las probabilidades del mercado con información comparable?
+- **Q3:** ¿esa mejora genera rentabilidad simulada con cuotas realmente observadas?
 
-Ninguna hipótesis se presupone verdadera. Un resultado negativo válido es preferible a
-un resultado positivo defectuoso. Este proyecto **no** es un servicio de pronósticos ni
-de recomendaciones de apuestas.
+Ninguna respuesta implica las otras. Un resultado negativo válido es preferible a un
+resultado positivo defectuoso. Este proyecto **no** es un servicio de pronósticos ni de
+recomendaciones de apuestas.
 
-## 2. Estado actual y alcance autorizado
+## 2. Estado y alcance autorizado
 
 | Elemento | Estado |
 |---|---|
-| Fase | **Fase Cero completada — GATE 0 pendiente de aprobación del usuario** |
-| Mercado recomendado | Fútbol, Over/Under 2,5 goles a tiempo reglamentario (ver `MARKET_SELECTION_REPORT.md`) |
-| Mercado aprobado | **Ninguno todavía** |
-| Motor predictivo | **No autorizado** hasta aprobación de GATE 0 |
-| Conjunto de prueba final | Propuesto: temporadas >= 2024/25 **selladas** (ver §6) |
+| GATE 0 | **Aprobado** por el usuario (2026-11-27) |
+| GATE 1 | **Completado, pendiente de revisión del usuario** (ver `GATE_1_REPORT.md`) |
+| GATE 2 | **NO autorizado.** No entrenar modelos definitivos sin autorización expresa |
+| Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
+| Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
+| Fuente principal | Football-Data.co.uk |
+| Prueba final | **2024/25 y 2025/26: SELLADAS** |
+| Reserva prospectiva | **2026/27+: SELLADA** (decisión conservadora de GATE 1) |
+| Evaluación económica | Exclusivamente simulada |
+| Prohibido sin autorización | Abrir el holdout, servicios de pago (The Odds API incluida), interfaces gráficas, otros mercados, apuestas reales o su automatización, avanzar de gate |
 
-Mientras GATE 0 no esté aprobado: no entrenar modelos, no construir features, no
-ejecutar backtests económicos. Una vez aprobado un mercado, **el alcance queda
-congelado**: no añadir mercados, deportes, líneas (p. ej. 1,5/3,5) ni competiciones
-fuera del universo preregistrado sin autorización expresa del usuario.
+La elección de O/U 2,5 es una decisión metodológica de viabilidad, **no** una
+demostración de ineficiencia del mercado.
 
 ## 3. Principios no negociables
 
 1. Nunca inventar datos, estadísticas, cuotas, resultados ni referencias.
-2. Ninguna probabilidad proviene de la intuición de un modelo de lenguaje: toda
-   probabilidad debe poder reproducirse ejecutando código con los mismos datos y parámetros.
-3. Una estimación no es la probabilidad verdadera. Ningún resultado es "seguro".
-4. Nunca usar información futura (point-in-time estricto).
-5. Nunca optimizar nada con el conjunto de prueba final; una vez examinado, deja de ser
-   independiente.
+2. Ninguna probabilidad proviene de la intuición de un modelo de lenguaje: todas se
+   reproducen con código, datos y parámetros versionados.
+3. Una estimación no es la probabilidad verdadera; ningún resultado es "seguro".
+4. Point-in-time estricto: solo resultados con `match_date < info_cutoff_date`.
+5. Nada se optimiza, calibra, selecciona ni explora con el holdout.
 6. Registrar todos los experimentos, incluidos los negativos (`EXPERIMENT_LOG.md`).
-7. No seleccionar retrospectivamente experimentos, ligas, umbrales o ventanas exitosas.
-8. Una racha, un alto % de aciertos o un ROI retrospectivo aislado no demuestran nada.
-9. Nunca usar cuotas ficticias (p. ej. suponer -110 o "cuota justa" del modelo) para
-   evaluar rentabilidad.
-10. **Nunca** desarrollar automatización de apuestas con dinero real.
-11. No eludir bloqueos de acceso, CAPTCHAs ni términos de uso (ver §8).
-12. Cuando falte evidencia, decirlo con estas etiquetas: `EVIDENCIA INSUFICIENTE`,
+7. No seleccionar a posteriori experimentos, ligas, umbrales, ventanas ni casas de referencia.
+8. Rachas, % de aciertos y ROI retrospectivo aislado no demuestran nada.
+9. Nunca usar cuotas ficticias. Nunca combinar casas para estimar márgenes o probabilidades justas.
+10. No eludir bloqueos de acceso ni términos de uso.
+11. Etiquetas obligatorias cuando falte evidencia: `EVIDENCIA INSUFICIENTE`,
     `MODELO NO VALIDADO`, `DATOS NO DISPONIBLES`, `VENTAJA ESTADÍSTICA NO DEMOSTRADA`.
+12. No afirmar que algo funciona sin haberlo probado; reportar los resultados reales de
+    las pruebas.
 
-## 4. Fundamentos matemáticos (convenciones obligatorias)
+## 4. Reglas operativas de datos (obligatorias desde GATE 1)
 
-- Probabilidad implícita: `p_imp = 1/Q` (umbral de equilibrio, no probabilidad verdadera).
-- Overround de un mercado **completo**: `sum(1/Q_i) - 1` (1X2 = tres resultados; O/U = dos).
-- Eliminación del margen (inicial): normalización proporcional `p_i = (1/Q_i)/sum(1/Q_j)`.
-  Métodos alternativos (power, Shin) solo con justificación empírica y documentación de
-  supuestos. Nota verificada: para dos resultados, Shin y el método aditivo coinciden
-  (Clarke et al. 2017).
-- Valor esperado binario sin devolución: `EV = p·Q - 1`. No descontar de nuevo el margen.
-  Casos de prueba obligatorios: (0,62; 1,80)→+11,6%; (0,60; 1,80)→+8,0%;
-  (0,55; 1,80)→-1,0%; (0,60; 3,00)→+80,0%.
-- Poisson independiente: `P(Over 2,5) = 1 - e^{-λ}(1 + λ + λ²/2)`, `λ = λ_home + λ_away`.
-- Advertencia Dixon-Coles: su corrección actúa sobre 0-0, 1-0, 0-1 y 1-1, todos Under 2,5;
-  con intensidades fijas se compensa en el agregado O/U 2,5. Cualquier mejora debe
-  provenir de la estimación de parámetros y verificarse empíricamente.
-- Distinguir siempre: xG histórico observado ≠ intensidad futura estimada ≠ goles reales.
-- Incertidumbre: separar aleatoria, de parámetros, de modelo y de datos. No llamar
-  "intervalo de confianza/credibilidad" a un rango que no lo sea.
+- **Cargar desarrollo SOLO con `qsports.process.load_dev()` y `load_dev_benchmarks()`.**
+  Ambas aplican `holdout.assert_no_reserved`. Todo pipeline nuevo debe llamar a
+  `assert_no_reserved` sobre sus datos.
+- **Nunca** nombrar rutas reservadas (`data/holdout`, `data/prospective`) fuera de
+  `paths.py`/`holdout.py`; el test tripwire lo impide.
+- **Nunca crear `HOLDOUT_AUTHORIZATION.json` ni `PROSPECTIVE_AUTHORIZATION.json`** sin una
+  instrucción expresa del usuario en la conversación, después del congelamiento del
+  protocolo (`HOLDOUT_PROTECTION_PROTOCOL.md` §6).
+- Metadatos de nivel 0 de particiones reservadas: permitidos (inventario/integridad).
+  Valores de cuotas (nivel 1) y resultados (nivel 2): prohibidos.
+- RAW es inmutable (SHA-256 en manifiestos); los CSV de la fuente no se redistribuyen.
+- Descargas: `python -m qsports download` (enruta por partición). El descargador de
+  `phase0/` se niega a bajar temporadas reservadas.
+- Antes de cerrar cualquier tarea: `python -m qsports verify` y `python -m pytest`.
 
-## 5. Arquitectura de datos
+## 5. Fundamentos matemáticos (convenciones)
+
+- `p_imp = 1/Q`; overround = `Σ 1/Q_i − 1` solo sobre un mercado completo de una casa y momento.
+- Primario: normalización proporcional; alternativo: potencia (Shin = aditivo con 2 resultados).
+- `EV = p·Q − 1` (no re-descontar el margen). Casos de prueba: (0,62; 1,80) → +11,6%;
+  (0,60; 1,80) → +8,0%; (0,55; 1,80) → −1,0%; (0,60; 3,00) → +80,0%.
+- `P(Over 2,5) = 1 − e^{−λ}(1 + λ + λ²/2)`; Dixon-Coles no altera O/U 2,5 con λ fijas.
+- Cuotas "pre" = previas al cierre (viernes ≤ 17:00 / martes ≤ 13:00 UK), **no de apertura**.
+
+## 6. Benchmarks (ver `MARKET_BENCHMARK_SPECIFICATION.md`)
+
+A (principal) = consenso promedio pre-cierre sin margen · A′ = por casa (Bet365; Pinnacle
+hasta el 22/07/2025) · A* = media de casas individuales · B = cierre (solo retrospectivo)
+· C = frecuencia histórica point-in-time por división.
+
+## 7. Arquitectura
 
 ```
-data/raw/        originales inmutables + manifest.jsonl (URL, fecha UTC, SHA-256)
-data/processed/  normalizados y validados (GATE 1)
-data/features/   variables point-in-time (GATE 2+)
+src/qsports/   paths, divisions, odds, ou, ingest, temporal, holdout, benchmark,
+               process, quality, verify, cli       (python -m qsports <cmd>)
+configs/       holdout, source_reliability, exclusion_criteria, team_aliases, market_selection_matrix
+data/raw/      RAW de desarrollo + manifest.jsonl
+data/processed/dev/, data/features/dev/   desarrollo
+data/holdout/, data/prospective/          SELLADOS (raw, processed, registry, ACCESS_LOG)
+reports/phase0/, reports/gate1/           salidas reproducibles
+phase0/        scripts históricos de la Fase Cero (no reutilizar con datos reservados)
+tests/         pytest (unitarios, protección del holdout, integración)
 ```
 
-- RAW nunca se sobrescribe ni se edita. Los archivos RAW no se versionan en git
-  (se re-descargan y se verifican por SHA-256).
-- Cada registro procesado debe conservar: id de evento, competición, temporada,
-  fecha/hora, participantes, fuente, **momento de disponibilidad**, fecha de recolección,
-  versión del dataset, indicadores de calidad y faltantes.
-- Distinguir fecha del evento de fecha de disponibilidad del dato.
-- Imputación solo con información dentro de la ventana de entrenamiento y documentada.
-- Particularidades conocidas de Football-Data (ver `DATA_FEASIBILITY_REPORT.md`):
-  filas con más campos que la cabecera (2001-2008), alias `HT/AT` en archivos griegos
-  antiguos, cuotas pre-cierre capturadas viernes/martes por la tarde, cuotas de
-  Pinnacle **no fiables desde el 23/07/2025**.
+## 8. Convenciones de código
 
-## 6. Validación
+Python ≥ 3.11; dependencias mínimas (`requirements-lock.txt`); funciones puras para la
+matemática; semillas fijas; configuración en `configs/`; ningún valor crudo se modifica
+(banderas `flag_*`); sin módulos vacíos; sin frontend.
 
-- División cronológica: entrenamiento → validación/selección → prueba final.
-- Walk-forward con ventanas expansivas/móviles; evaluación por temporada y por liga.
-- **Prohibida** la división aleatoria como validación principal.
-- **Sellado propuesto:** los RESULTADOS de las temporadas >= 2024/25 no se examinan
-  hasta que hipótesis, métricas, modelos y umbrales estén congelados y registrados.
-  En Fase Cero solo se usaron para cobertura y márgenes (que no dependen de resultados).
-  Pendiente de confirmación del usuario.
-- Pruebas de leakage obligatorias: información futura, estadísticas del propio partido,
-  cuotas posteriores al momento de predicción, transformaciones ajustadas con prueba,
-  duplicados, contaminación entre conjuntos.
-- Selección múltiple: registrar todo; preregistrar hipótesis y métricas antes de abrir
-  la prueba final; controlar falsos descubrimientos (p. ej. Benjamini-Hochberg, White
-  Reality Check / Hansen SPA cuando se comparen muchas variantes).
+## 9. Puertas
 
-## 7. Evaluación
+| Gate | Estado |
+|---|---|
+| 0 Selección de mercado | Aprobado |
+| 1 Infraestructura de datos | Completado; pendiente de revisión |
+| 2 Modelo inicial | No autorizado |
+| 3 Validación histórica | No iniciado |
+| 4 Auditoría | No iniciado |
+| 5 Prospectivo (simulado) | No iniciado |
+| 6 Interfaz | No iniciado |
 
-- Predictiva (primaria): log loss, Brier, comparación pareada contra el mercado sin
-  margen (Diebold-Mariano o bootstrap por bloques), calibración (diagrama de fiabilidad,
-  pendiente e intercepto, ECE), discriminación y nitidez **por separado**.
-- Económica (secundaria y separada): solo con cuotas históricas reales del momento de
-  predicción; ROI, drawdown, rachas, CLV (`Q_obtenida/Q_cierre - 1`) como indicador
-  complementario. Si no hay cuotas de Coolbet, rotular explícitamente el operador usado.
-- Referencia medida en Fase Cero (temporadas 2019/20-2023/24, 22 divisiones): Brier del
-  mercado de cierre O/U 2,5 sin margen ≈ 0,2406 frente a ≈ 0,25 de la climatología
-  (dentro de muestra). Cualquier modelo debe batir al mercado, no a la climatología.
+Si una etapa fracasa: detener, documentar e investigar, y decidir con el usuario.
 
-## 8. Fuentes y restricciones legales
+## 10. Documentos
 
-- Football-Data.co.uk: gratuita; fuente principal candidata.
-- Sports Reference (Basketball-Reference, FBref): sus términos prohíben usar sus datos
-  para "machine learning methods used to predict" y limitan a 10-20 peticiones/min.
-  **No usar para modelos.**
-- stats.nba.com / Understat / FBref: no accesibles desde el entorno cloud (bloqueo o
-  desafío anti-bot). **No eludir.**
-- The Odds API: históricos de pago (desde jun-2020; incluye Coolbet). Requiere
-  aprobación del usuario antes de cualquier gasto.
+Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
+`MARKET_SELECTION_REPORT.md`. GATE 1: `DATA_INVENTORY.md`, `DATA_QUALITY_REPORT.md`,
+`TEMPORAL_INTEGRITY_REPORT.md`, `HOLDOUT_PROTECTION_PROTOCOL.md`,
+`MARKET_BENCHMARK_SPECIFICATION.md`, `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`,
+`GATE_1_REPORT.md`. Transversales: `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `ROADMAP.md`,
+`README.md`. Futuros: `MODEL_SPECIFICATION.md` (G2), `BACKTEST_REPORT.md` (G3),
+`MODEL_AUDIT_REPORT.md` (G4).
 
-## 9. Convenciones de código
+## 11. Decisiones pendientes del usuario
 
-- Python >= 3.11 (entorno actual: 3.13). Dependencias mínimas: NumPy, SciPy, pandas,
-  statsmodels, scikit-learn, DuckDB/Parquet, Matplotlib, pytest. Añadir otras solo con
-  justificación escrita.
-- Funciones puras para la matemática de cuotas; tipado; docstrings con la fórmula.
-- Semillas fijas en todo proceso aleatorio; configuración en `configs/`.
-- Cada script de experimento escribe sus salidas en `reports/` o `experiments/` con la
-  versión del dataset (hash) y los parámetros.
-- Tests con pytest; casos matemáticos verificables independientemente
-  (p. ej. Poisson λ=1: P(X=0) ≈ 0,367879) y tolerancia documentada para truncamiento.
-- No crear módulos vacíos para aparentar arquitectura.
-- Sin frontend, microservicios, nube compleja ni autenticación hasta GATE 6.
-
-## 10. Puertas de validación
-
-| Gate | Requisito resumido | Estado |
-|---|---|---|
-| 0 | Investigación, fuentes auditadas, cuotas verificadas, mercado seleccionado, aprobación | **Pendiente de aprobación** |
-| 1 | Dataset real, integridad, timestamps, ingesta reproducible, tests | No iniciado |
-| 2 | Modelo interpretable, baselines, probabilidades reproducibles | No iniciado |
-| 3 | Backtest cronológico vs mercado, calibración, incertidumbre, negativos incluidos | No iniciado |
-| 4 | Auditoría adversarial, estabilidad, leakage, sobreajuste, sensibilidad | No iniciado |
-| 5 | Validación prospectiva preregistrada, solo simulada | No iniciado |
-| 6 | Interfaz (solo si 0-5 aportan evidencia sólida) | No iniciado |
-
-Si una etapa fracasa: no avanzar; documentar, investigar causas y decidir con el
-usuario si corregir o abandonar la hipótesis.
-
-## 11. Documentos del proyecto
-
-Existentes: `README.md`, `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
-`MARKET_SELECTION_REPORT.md`, `EXPERIMENT_LOG.md`, `LIMITATIONS.md`, `ROADMAP.md`.
-Se crearán al llegar a su gate (no antes, para no generar documentos vacíos):
-`MODEL_SPECIFICATION.md` (G2), `BACKTEST_REPORT.md` (G3), `MODEL_AUDIT_REPORT.md` (G4).
-
-## 12. Decisiones pendientes (requieren al usuario)
-
-1. Aprobar o rechazar el mercado recomendado (GATE 0).
-2. Confirmar el sellado de temporadas >= 2024/25 como prueba final.
-3. Universo de competiciones: propuesta = las 22 divisiones de Football-Data, sin
-   selección retrospectiva de ligas.
-4. Gasto opcional en The Odds API (cuotas históricas de Coolbet desde 2020).
-5. Repositorio remoto (GitHub) para persistir el trabajo: el contenedor actual es efímero.
+1. Revisar y aprobar GATE 1; autorizar o no GATE 2.
+2. Confirmar el sellado conservador de 2026/27.
+3. Revisar los 4 alias de equipos basados en juicio (`configs/team_aliases.json`).
+4. Repositorio remoto (GitHub) opcional para persistencia adicional.

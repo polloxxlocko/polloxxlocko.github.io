@@ -1,0 +1,16 @@
+{
+  "_doc": "Criterios de exclusión OBJETIVOS, definidos en GATE 1 antes de cualquier modelado. Prohibido excluir por resultados predictivos o económicos. Cambios requieren entrada en EXPERIMENT_LOG.md y autorización si afectan el holdout.",
+  "training_universe": {
+    "require_fields": ["match_date", "home_team", "away_team", "fthg", "ftag"],
+    "duplicate_keys": "excluir todas las filas con clave (div, fecha, local, visitante) duplicada y registrarlas"
+  },
+  "market_comparison_A": {
+    "pair": "ou_pre_avg",
+    "min_odds": 1.01,
+    "overround_range": [0.0, 0.25],
+    "exclude_capture_rule_ambiguous": true,
+    "first_season": "0506"
+  },
+  "division_season_market_A": {"min_eligible_fraction": 0.80},
+  "division_universe": {"rule": "una división se excluye del universo de comparación con el mercado solo si NINGUNA temporada de desarrollo >= 0506 cumple division_season_market_A; permanece en el universo de entrenamiento"}
+}

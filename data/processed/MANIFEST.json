@@ -1,0 +1,189 @@
+{
+ "dataset_version": "fd-2026-11-27-81dbe9fd981d",
+ "created_at_utc": "2026-11-27T01:25:27.086274+00:00",
+ "code_git_head": "2fede676110b290a5c2a9d3afa2dbea829a6225e",
+ "python": "3.13.18",
+ "packages": {
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "pyarrow": "19.0.1",
+  "requests": "2.34.2"
+ },
+ "raw_dev_files": {
+  "0001": {
+   "path": "data/raw/football_data/0001/data.zip",
+   "sha256": "56d48575f4100b37467f945fe8e06c69d70040f36071909493634d2d703ed6ef"
+  },
+  "0102": {
+   "path": "data/raw/football_data/0102/data.zip",
+   "sha256": "71c13582810352bedb98170acce85d8574115db2ca567231f0bd000124978781"
+  },
+  "0203": {
+   "path": "data/raw/football_data/0203/data.zip",
+   "sha256": "71a32fe8d545a66eeb3741f72ced5af95fad083e6229f6b54dde3f9a1b8e7331"
+  },
+  "0304": {
+   "path": "data/raw/football_data/0304/data.zip",
+   "sha256": "65c090af1e9dc6380a74d861b58e9b3ad96b44b46b6bd65d658ba54e394c7d7b"
+  },
+  "0405": {
+   "path": "data/raw/football_data/0405/data.zip",
+   "sha256": "2ebab6e1ec004e2d7a6b5e642f75c86ea0303c49a8197ea0a96d07e66c624f77"
+  },
+  "0506": {
+   "path": "data/raw/football_data/0506/data.zip",
+   "sha256": "598b520cb85ae1b9beb67f6c9ccf589bf83d773472a321e65522f072457b87e6"
+  },
+  "0607": {
+   "path": "data/raw/football_data/0607/data.zip",
+   "sha256": "ec5e92fbab5fb925e3fc89862a0931b885c5209ae5f35bc08ad84031c2dd3519"
+  },
+  "0708": {
+   "path": "data/raw/football_data/0708/data.zip",
+   "sha256": "25e7948b004aba3b6566d1ec1aa4f9e75fd3cdfd3f47f01a7def3736137686c0"
+  },
+  "0809": {
+   "path": "data/raw/football_data/0809/data.zip",
+   "sha256": "00164f38eb7706b908af0717d86a862f3f139a0fffa5f7c174caab7afd2f6067"
+  },
+  "0910": {
+   "path": "data/raw/football_data/0910/data.zip",
+   "sha256": "bdde8488309834c5960b92916cbfc0d3e909f52dab925ef1532f2decfb3fda2a"
+  },
+  "1011": {
+   "path": "data/raw/football_data/1011/data.zip",
+   "sha256": "7f874ac455d644dc8713c03b7f1fbcac98587a1ca021658a7672bb0d9fd3cd4c"
+  },
+  "1112": {
+   "path": "data/raw/football_data/1112/data.zip",
+   "sha256": "d750b4c6d21f522cda10b5c7c038802df4f9903ae5aa83d4ab3eabce844b3223"
+  },
+  "1213": {
+   "path": "data/raw/football_data/1213/data.zip",
+   "sha256": "ff119aa195bedcffe8df3121457be117509f51bd6229c058525fbcaa338c2888"
+  },
+  "1314": {
+   "path": "data/raw/football_data/1314/data.zip",
+   "sha256": "4842f097d198919edc4d4e66059fa54606e3e0ff70331b5fa075c32617c1d822"
+  },
+  "1415": {
+   "path": "data/raw/football_data/1415/data.zip",
+   "sha256": "e69e7701b9023cfa80da26a99e799717c1ca66899958b36663ad0584fbbeb3e9"
+  },
+  "1516": {
+   "path": "data/raw/football_data/1516/data.zip",
+   "sha256": "8d97b6f0a987d1ee208e21c95e00a0b7d53dcaa23c5d72601638a5c35c7f5e6c"
+  },
+  "1617": {
+   "path": "data/raw/football_data/1617/data.zip",
+   "sha256": "08b2243da79490835935a927f0fc773a060aa276e7d4881e666232d1566bc98e"
+  },
+  "1718": {
+   "path": "data/raw/football_data/1718/data.zip",
+   "sha256": "86000f657b8e7f8764d31189bd7f9fa73edb2f128ca64a0d3ea93141894c259a"
+  },
+  "1819": {
+   "path": "data/raw/football_data/1819/data.zip",
+   "sha256": "39f29ed74b7428b471f7a0e0ab28e5bc43611b7787d10e23bd38a4e512ac432b"
+  },
+  "1920": {
+   "path": "data/raw/football_data/1920/data.zip",
+   "sha256": "97dae86444f2683c4c95feeee1fd61e98ba212123a0bcb1cf94710506a195edc"
+  },
+  "2021": {
+   "path": "data/raw/football_data/2021/data.zip",
+   "sha256": "e7852023136ad15a3b821a6dc0175fc282874ca4dccaf3d5e578a02f3478c868"
+  },
+  "2122": {
+   "path": "data/raw/football_data/2122/data.zip",
+   "sha256": "8a633f9e6340f8e1deff46a0bc83341a5ce35250721b98a21a541083d20c8968"
+  },
+  "2223": {
+   "path": "data/raw/football_data/2223/data.zip",
+   "sha256": "64797eeba5a25286da0e0dfcaf82f7b31a4f821263cebb993573a120b7a9d558"
+  },
+  "2324": {
+   "path": "data/raw/football_data/2324/data.zip",
+   "sha256": "f86ac89c3df57be812fc25d4d4aeca0ef98b910483e59560c0f7b406118e3c5a"
+  }
+ },
+ "outputs": {
+  "processed/dev/matches.parquet": {
+   "rows": 182821,
+   "content_sha256": "81dbe9fd981d3f69d7f8e33af790ac92ca6f622d1fd6011d562fdfdc8efde2b9",
+   "seasons": [
+    "0001",
+    "0102",
+    "0203",
+    "0304",
+    "0405",
+    "0506",
+    "0607",
+    "0708",
+    "0809",
+    "0910",
+    "1011",
+    "1112",
+    "1213",
+    "1314",
+    "1415",
+    "1516",
+    "1617",
+    "1718",
+    "1819",
+    "1920",
+    "2021",
+    "2122",
+    "2223",
+    "2324"
+   ]
+  },
+  "processed/dev/metadata_level0.parquet": {
+   "rows": 182821,
+   "content_sha256": "8ea27a06793b7b4bb4149916e20cc141eda1f2aff228bb1570a0980288e41bfc"
+  },
+  "features/dev/market_benchmarks.parquet": {
+   "rows": 182821,
+   "content_sha256": "c2b1dd65d97daebb5680a49c9bbe8c29cd8e990ee82a692973be92864b8742e5"
+  }
+ },
+ "reserved": {
+  "holdout": {
+   "partition": "holdout",
+   "sealed_at_utc": "2026-11-27T01:25:30.518908+00:00",
+   "seasons": [
+    "2425",
+    "2526"
+   ],
+   "n_matches": 15328,
+   "raw_files": {
+    "2425": {
+     "path": "data/holdout/raw/football_data/2425/data.zip",
+     "sha256": "4dc3abfdc48a6b7e507873f356e9ef84c24e86e6dd654995a050e1aa5ed9f0de"
+    },
+    "2526": {
+     "path": "data/holdout/raw/football_data/2526/data.zip",
+     "sha256": "0cf572edf7185ac08bb56b0940056ed693a6300d7ca348c91700bbd5f9bbfa66"
+    }
+   },
+   "full_content_sha256": "999b87dd36ba672a4423c1921b7056157172d7804d0de4a6e25b8a3fb83f4512",
+   "level0_content_sha256": "8f841a5ec2d81b5a5ecef5f67f661926545f193542397ee7c2b3dc41f25438b9"
+  },
+  "prospective": {
+   "partition": "prospective",
+   "sealed_at_utc": "2026-11-27T01:25:32.874380+00:00",
+   "seasons": [
+    "2627"
+   ],
+   "n_matches": 2680,
+   "raw_files": {
+    "2627": {
+     "path": "data/prospective/raw/football_data/2627/data.zip",
+     "sha256": "91f57d2f687f87781d3d07347eea2b8acedbf51f74e8ced2f84d52df50b11cdf"
+    }
+   },
+   "full_content_sha256": "54a981e65c63d603b3c21a7495cd97ceac68dfb10475a4c114f75ae6c2cf0c7e",
+   "level0_content_sha256": "552032c958ad5227d812812d5ef77a9af4620104d4d23b840b74b6783e578f9a"
+  }
+ }
+}

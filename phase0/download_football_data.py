@@ -57,6 +57,12 @@ def main() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     s = requests.Session()
     s.headers["User-Agent"] = USER_AGENT
+    # GUARDA GATE 1 (2026-11-27): este script histórico escribe todo en data/raw/. Las temporadas
+    # reservadas (>= 2024/25) deben descargarse con `python -m qsports download`, que las
+    # enruta a su partición sellada. Se niega a procesar temporadas reservadas.
+    reserved = [c for c in season_codes(args.first, args.last) if c >= "2425"]
+    if reserved:
+        raise SystemExit(f"Temporadas reservadas {reserved}: use 'python -m qsports download'.")
     for code in season_codes(args.first, args.last):
         dest = RAW / code / "data.zip"
         url = BASE.format(season=code)

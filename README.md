@@ -1,27 +1,69 @@
 # Quantitative Sports Intelligence
 
 Investigación cuantitativa sobre si un modelo especializado puede mejorar, fuera de
-muestra, las probabilidades implícitas de un mercado deportivo (H1) y si esa mejora
-genera valor esperado con precios reales (H2). **No es un sistema de pronósticos ni de
-recomendaciones de apuestas, y no automatiza apuestas.**
+muestra, las probabilidades del mercado **Over/Under 2,5 goles** en fútbol (22 divisiones
+de Football-Data.co.uk), y si esa mejora generaría rentabilidad **simulada** con cuotas
+reales. **No es un sistema de pronósticos ni de recomendaciones, y no automatiza
+apuestas.**
 
-**Estado:** Fase Cero completada. GATE 0 (selección de mercado) pendiente de aprobación.
+**Estado:** GATE 0 aprobado · GATE 1 (infraestructura de datos) completado y pendiente de
+revisión · GATE 2 no autorizado.
 
-## Empezar a leer
-1. `MARKET_SELECTION_REPORT.md`: recomendación y decisiones pendientes.
-2. `DATA_FEASIBILITY_REPORT.md`: qué datos existen de verdad.
-3. `RESEARCH_FOUNDATIONS.md`: literatura verificada.
-4. `CLAUDE.md`: reglas permanentes del proyecto.
-5. `LIMITATIONS.md`, `ROADMAP.md` y `EXPERIMENT_LOG.md`.
+## Requisitos
+- Python ≥ 3.11 (probado con 3.13.18)
+- Conexión a internet para descargar los datos (~17 MB)
+- ~200 MB de disco
 
-## Reproducir la Fase Cero
-Requiere Python ≥ 3.11 con `numpy`, `pandas` y `requests`.
+## Reconstrucción desde cero (otro ordenador)
 ```bash
-python phase0/download_football_data.py --first 0001 --last 2627   # ~1 min, 17 MB
-python phase0/audit_football_data.py
-python phase0/verify_references.py      # requiere acceso a Crossref/OpenAlex
-python phase0/market_selection.py
+# 1. Obtener el código (desde el archivo descargable o un clon git)
+tar -xzf quantitative-sports-gate1.tar.gz && cd quantitative-sports
+
+# 2. Entorno reproducible
+python3 -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
+pip install -r requirements-lock.txt
+pip install -e .
+
+# 3. Descargar los datos (cada temporada va a su partición; dev / holdout / prospectivo)
+python -m qsports download --first 0001 --last 2627
+
+# 4. Construir: sella holdout y prospectivo, construye dev, benchmarks y manifiesto
+python -m qsports build
+
+# 5. Verificar integridad y protección (debe terminar con "ok": true)
+python -m qsports verify
+
+# 6. Informes de GATE 1 (inventario, calidad, diagnósticos temporales, Pinnacle)
+python -m qsports reports
+
+# 7. Pruebas automatizadas
+python -m pytest
 ```
-Los archivos RAW no se versionan. Su integridad se verifica con los SHA-256 de
-`data/raw/football_data/manifest.jsonl`. Football-Data puede actualizar las temporadas en
-curso, así que los hashes de 2026/27 cambiarán.
+
+**Sobre los hashes:** los SHA-256 esperados de cada `data.zip` están en
+`data/raw/football_data/manifest.jsonl` y en los `registry.json` de las particiones
+selladas. Si Football-Data corrigiera un archivo histórico, `verify` lo detectará como
+cambio de versión de datos. Hay que registrarlo antes de continuar.
+
+## Estructura
+| Ruta | Contenido |
+|---|---|
+| `src/qsports/` | Paquete: ingesta, temporalidad, protección del holdout, benchmarks, calidad, CLI |
+| `configs/` | Particiones, confiabilidad por fuente, criterios de exclusión, alias de equipos |
+| `data/raw/` | RAW de desarrollo (no versionado; manifiesto sí) |
+| `data/holdout/`, `data/prospective/` | **Sellados.** Solo se versionan el registro y el log de accesos |
+| `reports/gate1/` | Salidas reproducibles de GATE 1 |
+| `tests/` | 59 pruebas (unitarias, protección del holdout, integración) |
+| `phase0/` | Scripts históricos de la Fase Cero |
+
+## Documentos (orden de lectura sugerido)
+1. `GATE_1_REPORT.md`: informe ejecutivo de GATE 1
+2. `HOLDOUT_PROTECTION_PROTOCOL.md`, `MARKET_BENCHMARK_SPECIFICATION.md`,
+   `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`
+3. `DATA_INVENTORY.md`, `DATA_QUALITY_REPORT.md`, `TEMPORAL_INTEGRITY_REPORT.md`
+4. `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `CLAUDE.md`
+5. Fase Cero: `MARKET_SELECTION_REPORT.md`, `DATA_FEASIBILITY_REPORT.md`, `RESEARCH_FOUNDATIONS.md`
+
+## Licencia de datos
+Football-Data.co.uk no publica una licencia formal ("My data is free"). Este repositorio
+**no redistribuye** sus CSV: se descargan de la fuente y se verifican por hash.

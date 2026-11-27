@@ -1,6 +1,13 @@
-# RAW: se re-descarga y se verifica por SHA-256 (manifest.jsonl sí se versiona)
-data/raw/**/*.zip
-data/raw/**/*.part
+# Datos de la fuente: no se redistribuyen. Se re-descargan y se verifican por SHA-256.
+data/**/*.zip
+data/**/*.part
+data/**/*.parquet
+data/processed/dev/file_reports.json
+# Se versionan: manifest.jsonl, registry.json, ACCESS_LOG.jsonl, processed/MANIFEST.json
 __pycache__/
 *.pyc
+*.egg-info/
+.venv/
+dist/
+.pytest_cache/
 .ipynb_checkpoints/

@@ -1,0 +1,11 @@
+{
+  "_doc": "Alias de identidad de equipos (por país). El nombre crudo se conserva en *_team_raw; match_id usa el nombre crudo. Evidencia: E = empírica en los datos; J = juicio (cambio de denominación en la fuente, temporadas no solapadas). Revisado en GATE 1 (2026-11-27) a partir de una búsqueda sistemática de prefijos/subcadenas; los demás candidatos se consideraron clubes distintos (filiales B, clubes refundados, homónimos).",
+  "aliases": {
+    "Escocia": {"Raith": {"canonical": "Raith Rvs", "evidence": "E", "note": "SC1 2004/05: 'Raith Rvs' 35 partidos + 'Raith' 1 = 36 (temporada completa)"}},
+    "Grecia": {"OFI": {"canonical": "OFI Crete", "evidence": "J", "note": "'OFI' 2000/01-2014/15; 'OFI Crete' 2018/19+; sin solapamiento"}},
+    "Países Bajos": {"Roda": {"canonical": "Roda JC", "evidence": "J", "note": "'Roda JC' 2000/01-2009/10; 'Roda' 2010/11-2017/18"},
+                     "Sparta": {"canonical": "Sparta Rotterdam", "evidence": "J", "note": "'Sparta' 2000/01-2009/10; 'Sparta Rotterdam' 2016/17+"}},
+    "Inglaterra": {"Boston": {"canonical": "Boston Utd", "evidence": "J", "note": "'Boston' 2002/03-2006/07; 'Boston Utd' 2024/25+"}}
+  },
+  "not_aliased_reviewed": ["Airdrie vs Airdrie Utd (Airdrieonians disuelto en 2002; Airdrie United es otra entidad)", "Clyde vs Clydebank", "Dundee vs Dundee United", "Stuttgart vs Stuttgarter K", "Lommel vs Lommel SK", "filiales B (Ath Bilbao B, Barcelona B, Celta B, Malaga B, Real Madrid B, Sevilla B, Sociedad B, Villarreal B)", "Extremadura vs Extremadura UD", "Granada vs Granada 74", "Ajaccio vs Ajaccio GFCO (temporadas solapadas)", "Olympiakos vs Olympiakos Volou", "Chester vs Chesterfield", "Oxford vs Oxford City", "Gaziantep vs Gaziantepspor"]
+}

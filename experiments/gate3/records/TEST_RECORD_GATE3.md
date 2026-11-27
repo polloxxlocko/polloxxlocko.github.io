@@ -15,3 +15,4 @@ la espera de que el usuario le adjunte el ZIP ligero.
 | T7 | `pytest` formal | `2e04fca` | **175 superadas, 3 fallos**: pruebas dependientes del estado, ya con autorización real (ver `README.md`) |
 | T8 | `pytest` formal | `a27897a` | **178 superadas, 0 fallos** (`pytest_a27897a.*`) |
 | T9 | `python -m qsports verify` | `a27897a` | `ok`; 0/0 accesos registrados; valla con 4 cruces autorizados y 0 no autorizados |
+| T10 | ZIP ligero de GATE 3 (`experiments/gate3_analysis/build_light_gate3.py`), extraído en un directorio vacío e instalado en un entorno virtual limpio | `25944d9` | 0 Parquet, 0 ZIP de la fuente; pytest: **162 superadas, 16 omitidas** (integración, sin datos de la fuente); `audit-synthetic`: `"ok": true`; `dist/audit_package_gate3_light.zip` (0,95 MB; SHA-256 empieza por `dd5132fb402bb286`). Un primer ZIP sin `GATE3_AUTHORIZATION.json` falló 1 prueba, como debía: había cruces de la valla sin autorización visible |

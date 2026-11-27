@@ -122,6 +122,15 @@ validación el consenso A está más comprimido (pendiente 1,20 frente a 1,10). 
 - **Sin cambios:** ningún modelo ni variable nuevos, ni el mercado, las fuentes o el protocolo. No se
   fusionó con `main`.
 
+## 7b. Pruebas y paquete (ejecutados por Claude; el auditor no los ha ejecutado aún)
+- `pytest` formal en `a27897a`: **178 superadas, 0 fallos** (`experiments/gate3/records/pytest_a27897a.*`).
+  En `2e04fca` hubo 3 fallos: pruebas de la valla dependientes del estado, ya con autorización real.
+  Se corrigieron haciéndolas herméticas; el registro fallido se conserva.
+- ZIP ligero de GATE 3 (`dist/audit_package_gate3_light.zip`, 0,95 MB, sin Parquet), probado en un
+  entorno limpio: 162 superadas, 16 omitidas (integración); `audit-synthetic` → `"ok": true`.
+- Manifiesto de hashes: `experiments/gate3/records/HASH_MANIFEST_GATE3.json`. El hash del código actual
+  sigue siendo igual al congelado.
+
 ## 8. Decisiones para ti (me detengo antes de GATE 4)
 1. ¿Apruebas GATE 3 con estos resultados?
 2. **Q3:** ¿quieres definir y congelar una regla de selección de apuestas simulada (umbral de EV, tope de

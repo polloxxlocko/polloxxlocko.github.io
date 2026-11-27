@@ -1,0 +1,64 @@
+{
+ "M1": [
+  {
+   "config_id": "M1__w365_r1",
+   "block": "tuning",
+   "wall_s": 28.57,
+   "cpu_main_s": 3.55,
+   "sum_fit_s": 59.62,
+   "max_rss_main_mb": 1096.6,
+   "n_fits": 8715,
+   "n_nonconverged": 0,
+   "n_preds": 69892,
+   "n_nan_preds": 11
+  },
+  {
+   "config_id": "M1__w365_r4",
+   "block": "tuning",
+   "wall_s": 31.75,
+   "cpu_main_s": 3.43,
+   "sum_fit_s": 65.83,
+   "max_rss_main_mb": 1096.6,
+   "n_fits": 8715,
+   "n_nonconverged": 0,
+   "n_preds": 69892,
+   "n_nan_preds": 11
+  },
+  {
+   "config_id": "M1__w365_r16",
+   "block": "tuning",
+   "wall_s": 27.94,
+   "cpu_main_s": 3.33,
+   "sum_fit_s": 57.61,
+   "max_rss_main_mb": 1096.6,
+   "n_fits": 8715,
+   "n_nonconverged": 0,
+   "n_preds": 69892,
+   "n_nan_preds": 11
+  },
+  {
+   "config_id": "M1__w730_r1",
+   "block": "tuning",
+   "wall_s": 32.56,
+   "cpu_main_s": 3.3,
+   "sum_fit_s": 75.16,
+   "max_rss_main_mb": 1096.6,
+   "n_fits": 8715,
+   "n_nonconverged": 0,
+   "n_preds": 69892,
+   "n_nan_preds": 11
+  },
+  {
+   "config_id": "M1__w730_r4",
+   "block": "tuning",
+   "wall_s": 31.81,
+   "cpu_main_s": 3.24,
+   "sum_fit_s": 74.12,
+   "max_rss_main_mb": 1096.6,
+   "n_fits": 8715,
+   "n_nonconverged": 0,
+   "n_preds": 69892,
+   "n_nan_preds": 11
+  }
+ ]
+}

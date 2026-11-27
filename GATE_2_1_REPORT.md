@@ -134,8 +134,10 @@ precisión de máquina. Esta vez está **medido en los 226 casos**, no extrapola
 ## 7. Paquetes de auditoría
 - **ZIP ligero** (`python -m qsports audit-package --light`): código, pruebas, configuración,
   documentación, dependencias, muestra sintética y metadatos de nivel 0 necesarios para fallar
-  cerrado; **sin Parquet** ni datos de la fuente o sellados. Probado por Claude en un entorno virtual
-  limpio (ver `reports/gate2_1/TEST_RECORD.md`).
+  cerrado; **sin Parquet** ni datos de la fuente o sellados. Construido desde `5add761` (0,73 MB, 254
+  archivos). Probado por Claude en un entorno virtual limpio: 144 pruebas superadas y 15 omitidas
+  (integración, sin datos de la fuente); `audit-synthetic` → `"ok": true`
+  (`reports/gate2_1/TEST_RECORD.md`, A8).
 - Paquete completo (`python -m qsports audit-package`): incluye además las predicciones publicadas.
 
 ## 8. Decisiones que necesito de ti

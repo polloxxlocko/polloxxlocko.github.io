@@ -149,3 +149,65 @@ Scholar pasa a `null` en los 38 DOIs no consultados en la Fase Cero (antes `Fals
 
 **Holdout:** sin accesos (ACCESS_LOG vacío). Solo se publican registros (ids hash, conteos,
 hashes), sin cuotas ni resultados.
+
+---
+
+## E-003 · 2026-11-27 · GATE 2: preregistro, evaluador, walk-forward y modelos (infraestructura)
+
+**Autorización:** GATE 2 aprobado por el usuario con 10 exigencias adicionales. GATE 3 no
+autorizado.
+
+**Antes de cualquier experimento:**
+1. Partición `prospective` renombrada a `reserve` (reserva histórica sellada), para no
+   confundirla con validación prospectiva genuina (exigencia 2). Código, configuración,
+   pruebas y directorios actualizados; `verify` ok; 59/59 pruebas.
+2. EXPERIMENTAL_PROTOCOL §6 reescrito con 6 categorías mutuamente excluyentes (S-R, S-NR,
+   EQ, INC, I-NR, I-R) y §10 (reserva frente a prospectiva genuina) (exigencias 1 y 2).
+3. Preregistro `MODEL_SPECIFICATION.md` §A + `configs/gate2.json`, commit `e35e224`
+   (2026-11-27T02:42Z), antes de escribir modelos.
+
+**Infraestructura (exigencia 3: evaluador y walk-forward antes que los modelos):**
+- `evaluation.py` (23 pruebas: calibración, Murphy, ECE, AUC, cobertura del bootstrap
+  por bloques, DM, partición de decisión verificada con predicados independientes).
+- `walkforward.py` (valla ≤ 2021/22; lista blanca de columnas pre-partido; aserción de
+  entrenamiento < τ), `features.py` (EWMA con `merge_asof` estricto), `synthetic.py`.
+- `models.py` (FreqModel, PoissonModel M1/M2, LogisticFeatureModel M3, MarketModel
+  M4-cal/M4-sport, MarketNull).
+- Pruebas anti-filtración en entrenamiento, features, transformaciones (independencia de
+  lote), calibración y selección (invariancia al futuro en todos los modelos).
+
+**Problemas encontrados y resolución (resultados negativos del proceso):**
+- La primera prueba de invariancia de M3 falló. Diagnóstico: error de **la prueba**, no
+  del modelo. Con reajuste cada 4 capturas, un ajuste en τ_k ≤ τ0 predice capturas
+  posteriores a τ0 cuyas variables usan legítimamente datos anteriores a su propia captura.
+  La propiedad correcta se define por fecha de captura del partido. Corregida.
+- Validación metodológica sintética de M4 (antes de usar datos reales): con mercado
+  completo, M4-sport − M4-cal = INC (+0,0006); con mercado que ignora la forma, S-R
+  (−0,0060). Convertida en prueba automática.
+- `forkserver` no admite `lambda` ni scripts por stdin → fábricas con `functools.partial`
+  y ejecución desde script.
+- **Optimizador:** L-BFGS-B tardaba ~59 ms por ajuste Poisson (95% en la rutina interna
+  de SciPy). Se sustituyó por **Newton-Raphson con Hessiana analítica** y búsqueda lineal
+  de Armijo: 7,8 ms por ajuste, mediana de 3 iteraciones, óptimo igual o mejor (prueba
+  `test_poisson_hessian_matches_numerical_and_newton_matches_lbfgs`). **Desviación de la
+  Parte A** (que decía "L-BFGS"): no cambia el modelo ni el óptimo, solo el algoritmo.
+- **Sobresuscripción de hilos BLAS:** la primera ejecución real (4 procesos × varios hilos
+  sobre 4 núcleos) tardó 243 s por configuración. Con 1 hilo por proceso: 22 s. Se detuvo
+  la ejecución y sus salidas se **conservan** en
+  `experiments/gate2/aborted_run1_blas_multithread/`. Diferencia máxima de probabilidad
+  entre ambas ejecuciones: 6,7·10⁻⁹ (equivalentes). Una ejecución anterior con L-BFGS se
+  detuvo antes de producir predicciones.
+- `rm` de la copia de trabajo antigua (`/home/user/quantitative-sports`) denegado por el
+  sistema de permisos. La copia sigue en el disco, sin archivos RAW (movidos al
+  repositorio actual).
+
+**Desviación D-1 (2026-11-27, antes de ver M3, M4 o la prueba interna).** La selección
+Poisson en el bloque de ajuste quedó en el **borde** de la grilla preregistrada (M1: ridge
+16 y ventana 1.095 días, ambos máximos; M2: ridge 16, máximo). Una grilla que no acota el
+óptimo produce una evaluación sesgada. Se detuvo la cadena **antes** de la prueba interna
+y se fijó una regla uniforme (`configs/gate2.json → boundary_rule`): extender hacia
+afuera cualquier dimensión numérica con ≥ 3 valores cuyo óptimo quede en el borde (×1,5
+ventanas; ×2 ridge y semivida Poisson; ×10 ridge logística), con un máximo de 3 pasos y solo
+con el bloque de ajuste. En ese momento había 9 configuraciones M3 guardadas cuyas métricas
+**no se habían consultado**. Todas las configuraciones (originales y extendidas) se
+conservan.

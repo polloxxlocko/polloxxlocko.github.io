@@ -1,0 +1,1029 @@
+{
+ "M1__w365_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r16_pp": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": true
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h5_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 5,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h5_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 5,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h5_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 5,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h5_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 5,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h5_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 5,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h5_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 5,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h5_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 5,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h5_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 5,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h5_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 5,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r32": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 32
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1642_r64": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 64
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w730_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 730,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w1095_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 1095,
+   "ridge": 128
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M1__w1642_r128": {
+  "family": "M1",
+  "params": {
+   "window_days": 1642,
+   "ridge": 128
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h120_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M2__h120_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 120,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h240_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 240,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r1": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 1.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r4": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 4.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r16": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 16.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r32": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 32,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r64": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h960_r128": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 960,
+   "ridge": 128,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M2__h480_r64_pp": {
+  "family": "M2",
+  "params": {
+   "half_life_days": 480,
+   "ridge": 64,
+   "max_history_days": 1460,
+   "promoted_prior": true
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h5_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 5,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h5_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 5,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h5_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 5,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h15_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 15,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h15_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 15,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h15_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 15,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h15_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 15,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h15_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 15,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h15_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 15,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h15_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 15,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h15_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 15,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h15_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 15,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h15_r1": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 15,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h15_r10": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 15,
+   "ridge": 10.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h15_r100": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 15,
+   "ridge": 100.0
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M3__G_h5_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 5,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h5_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 5,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h5_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 5,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h5_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 5,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__G_h15_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "G",
+   "ewm_half_life_matches": 15,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GS_h15_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GS",
+   "ewm_half_life_matches": 15,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GST_h15_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GST",
+   "ewm_half_life_matches": 15,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M3__GSTC_h15_r1000": {
+  "family": "M3",
+  "params": {
+   "feature_set": "GSTC",
+   "ewm_half_life_matches": 15,
+   "ridge": 1000
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M0b__A": {
+  "family": "M0b_A",
+  "params": {
+   "source": "p_A_consensus"
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M0a__C": {
+  "family": "M0a_C",
+  "params": {
+   "source": "p_C_hist_freq"
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M0a__w730": {
+  "family": "M0a_w730",
+  "params": {
+   "window_days": 730
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M4cal__hNone": {
+  "family": "M4cal",
+  "params": {
+   "half_life_days": null,
+   "require_cols": [
+    "inp_m2"
+   ]
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M4cal__h730": {
+  "family": "M4cal",
+  "params": {
+   "half_life_days": 730,
+   "require_cols": [
+    "inp_m2"
+   ]
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M4sport__h730_r10": {
+  "family": "M4sport",
+  "params": {
+   "half_life_days": 730,
+   "ridge": 10.0,
+   "sport_cols": [
+    "inp_m2"
+   ],
+   "require_cols": [
+    "inp_m2"
+   ]
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M4sport__h730_r100": {
+  "family": "M4sport",
+  "params": {
+   "half_life_days": 730,
+   "ridge": 100.0,
+   "sport_cols": [
+    "inp_m2"
+   ],
+   "require_cols": [
+    "inp_m2"
+   ]
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M4sport__h730_r1000": {
+  "family": "M4sport",
+  "params": {
+   "half_life_days": 730,
+   "ridge": 1000.0,
+   "sport_cols": [
+    "inp_m2"
+   ],
+   "require_cols": [
+    "inp_m2"
+   ]
+  },
+  "blocks": [
+   "inner",
+   "tuning"
+  ]
+ },
+ "M4sport__h730_r10000": {
+  "family": "M4sport",
+  "params": {
+   "half_life_days": 730,
+   "ridge": 10000,
+   "sport_cols": [
+    "inp_m2"
+   ],
+   "require_cols": [
+    "inp_m2"
+   ]
+  },
+  "blocks": [
+   "tuning"
+  ]
+ }
+}

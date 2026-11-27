@@ -43,7 +43,7 @@ Implementado y probado (paquete `src/qsports/`, 59 pruebas):
 - `MODEL_AUDIT_REPORT.md`: estabilidad por temporada y liga, dependencia de variables,
   sensibilidad al momento de captura, PBO.
 
-## GATE 5 — Laboratorio prospectivo (solo simulado)
+## GATE 5 — Validación prospectiva genuina (predicciones registradas antes de cada partido; solo simulada)
 - Registro append-only de predicciones antes de cada partido. Métricas principales: log
   loss frente al mercado, calibración y CLV. El ROI es secundario por potencia (ver
   `MARKET_SELECTION_REPORT.md` §6).

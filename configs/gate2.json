@@ -1,23 +1,119 @@
 {
   "_doc": "Preregistro GATE 2 (2026-11-27). Fijado ANTES de ejecutar experimentos. Cambios: solo con entrada en EXPERIMENT_LOG.md. El bloque de validación (2022/23-2023/24) está vallado: GATE 3 requiere autorización expresa.",
   "blocks": {
-    "burn_in_seasons": ["0001", "0102", "0203", "0304", "0405"],
-    "tuning_seasons_poisson": ["0506", "0607", "0708", "0809", "0910", "1011", "1112", "1213", "1314"],
-    "tuning_seasons_stacked": ["0607", "0708", "0809", "0910", "1011", "1112", "1213", "1314"],
-    "inner_test_seasons": ["1415", "1516", "1617", "1718", "1819", "1920", "2021", "2122"],
+    "burn_in_seasons": [
+      "0001",
+      "0102",
+      "0203",
+      "0304",
+      "0405"
+    ],
+    "tuning_seasons_poisson": [
+      "0506",
+      "0607",
+      "0708",
+      "0809",
+      "0910",
+      "1011",
+      "1112",
+      "1213",
+      "1314"
+    ],
+    "tuning_seasons_stacked": [
+      "0607",
+      "0708",
+      "0809",
+      "0910",
+      "1011",
+      "1112",
+      "1213",
+      "1314"
+    ],
+    "inner_test_seasons": [
+      "1415",
+      "1516",
+      "1617",
+      "1718",
+      "1819",
+      "1920",
+      "2021",
+      "2122"
+    ],
     "fence_max_eval_season": "2122"
   },
-  "refit": {"poisson_every_n_captures": 1, "logistic_every_n_captures": 4},
-  "grids": {
-    "M1_poisson_window": {"window_days": [365, 730, 1095], "ridge": [1.0, 4.0, 16.0]},
-    "M2_poisson_decay": {"half_life_days": [120, 240, 480], "ridge": [1.0, 4.0, 16.0], "max_history_days": 1460,
-                         "stage2_promoted_prior": [true]},
-    "M3_logistic": {"feature_sets": ["G", "GS", "GST", "GSTC"], "ewm_half_life_matches": [5, 15], "ridge": [1.0, 10.0, 100.0]},
-    "M4_cal": {"half_life_days": [null, 730]},
-    "M4_sport": {"ridge": [10.0, 100.0, 1000.0]}
+  "refit": {
+    "poisson_every_n_captures": 1,
+    "logistic_every_n_captures": 4
   },
-  "selection": {"criterion": "media de log loss en el bloque de ajuste (muestra común de la familia)",
-                "bootstrap": {"block_weeks": 4, "n_boot_tuning": 2000, "n_boot_inner": 10000, "seed": 20261127}},
+  "grids": {
+    "M1_poisson_window": {
+      "window_days": [
+        365,
+        730,
+        1095
+      ],
+      "ridge": [
+        1.0,
+        4.0,
+        16.0
+      ]
+    },
+    "M2_poisson_decay": {
+      "half_life_days": [
+        120,
+        240,
+        480
+      ],
+      "ridge": [
+        1.0,
+        4.0,
+        16.0
+      ],
+      "max_history_days": 1460,
+      "stage2_promoted_prior": [
+        true
+      ]
+    },
+    "M3_logistic": {
+      "feature_sets": [
+        "G",
+        "GS",
+        "GST",
+        "GSTC"
+      ],
+      "ewm_half_life_matches": [
+        5,
+        15
+      ],
+      "ridge": [
+        1.0,
+        10.0,
+        100.0
+      ]
+    },
+    "M4_cal": {
+      "half_life_days": [
+        null,
+        730
+      ]
+    },
+    "M4_sport": {
+      "ridge": [
+        10.0,
+        100.0,
+        1000.0
+      ]
+    }
+  },
+  "selection": {
+    "criterion": "media de log loss en el bloque de ajuste (muestra común de la familia)",
+    "bootstrap": {
+      "block_weeks": 4,
+      "n_boot_tuning": 2000,
+      "n_boot_inner": 10000,
+      "seed": 20261127
+    }
+  },
   "ladder_rules": {
     "M2_justified_if": "Delta(M2*-M1*) en ajuste con U < 0",
     "M3_shots_enter_M4_sport_if": "Delta(M3 con tiros - M3 solo goles) en ajuste con U < 0",
@@ -25,5 +121,25 @@
     "M5_bivariate_if": "|correlacion residual local-visitante| > 0.05 con IC95 excluyendo 0",
     "M5_gbm_if": "no se considera en GATE 2 salvo no linealidad documentada en la calibracion de M4-sport"
   },
-  "sesoi_nats": 0.001
+  "sesoi_nats": 0.001,
+  "boundary_rule": {
+    "_doc": "DESVIACIÓN D-1 del preregistro (2026-11-27, decidida tras ver solo la selección Poisson en el bloque de ajuste y ANTES de ver resultados de M3, M4 o de la prueba interna). Motivo: la grilla preregistrada no acotó el óptimo (ridge y ventana de M1 en el máximo). Regla uniforme para todas las familias: si la configuración elegida está en el borde de una dimensión numérica con >= 3 valores preregistrados, se extiende esa dimensión hacia afuera (multiplicando/dividiendo por el factor) y se re-selecciona; máximo 3 extensiones por dimensión; las demás dimensiones se mantienen completas. Solo con el bloque de ajuste.",
+    "max_steps": 3,
+    "dims": {
+      "M1_poisson_window": {
+        "window_days": 1.5,
+        "ridge": 2.0
+      },
+      "M2_poisson_decay": {
+        "half_life_days": 2.0,
+        "ridge": 2.0
+      },
+      "M3_logistic": {
+        "ridge": 10.0
+      },
+      "M4_sport": {
+        "ridge": 10.0
+      }
+    }
+  }
 }

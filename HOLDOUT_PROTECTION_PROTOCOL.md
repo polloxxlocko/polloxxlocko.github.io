@@ -8,12 +8,14 @@ Versión 1.0 · 2026-11-27 · GATE 1
 |---|---|---:|---|---|
 | **dev** | 2000/01–2023/24 | 182.821 | Abierta | Todo el desarrollo: variables, modelos, hiperparámetros, calibración, umbrales, estrategias, exploración |
 | **holdout** | 2024/25, 2025/26 | 15.328 | **SELLADA** | Solo metadatos de nivel 0 (§2) hasta la autorización del usuario |
-| **prospective** | 2026/27 en adelante | 2.680 (en curso) | **SELLADA** | Solo nivel 0; reservada para GATE 5 |
+| **reserve** (antes `prospective`) | 2026/27 en adelante | 2.680 (descargadas el 2026-11-27) | **SELLADA** | Solo nivel 0. **Reserva histórica**, no validación prospectiva (§7) |
 
 **Decisión conservadora de GATE 1 sobre 2026/27.** El usuario reservó 2024/25 y 2025/26.
 La temporada 2026/27 es *posterior* al holdout. Usarla en desarrollo dejaría que información
 futura respecto del conjunto de prueba influyera en el diseño del modelo. Por eso se sella
-también, como reserva prospectiva. Si el usuario lo decide, puede liberarse más adelante.
+también, como **reserva histórica sellada** (confirmado por el usuario al aprobar GATE 1). En GATE 2 la
+partición se renombró de `prospective` a `reserve` para no confundirla con una validación
+prospectiva genuina (§7).
 
 ## 2. Niveles de acceso a datos reservados
 
@@ -31,12 +33,12 @@ tiene margen en [0; 0,25]") no informa sobre resultados ni permite ajustar nada.
 
 | # | Control | Implementación | Prueba automática |
 |---|---|---|---|
-| 1 | **Separación física** | RAW reservado en `data/holdout/raw/` y `data/prospective/raw/`; procesados reservados en `data/{holdout,prospective}/processed/`. Desarrollo solo en `data/raw/` y `data/processed/dev/` | `test_dev_only_contains_dev_seasons`; `verify`: `no_reserved_seasons_in_raw_dev` |
+| 1 | **Separación física** | RAW reservado en `data/holdout/raw/` y `data/reserve/raw/`; procesados reservados en `data/{holdout,reserve}/processed/`. Desarrollo solo en `data/raw/` y `data/processed/dev/` | `test_dev_only_contains_dev_seasons`; `verify`: `no_reserved_seasons_in_raw_dev` |
 | 2 | **Descarga enrutada** | `qsports.ingest.download_seasons` escribe cada temporada en el RAW de su partición. El descargador histórico de la Fase Cero se niega a descargar temporadas ≥ 2024/25 | — |
-| 3 | **Registro de match_ids reservados** | `data/{holdout,prospective}/registry.json`: ids, conteos y hashes, sin resultados ni cuotas | `test_assert_no_reserved_rejects_reserved_match_ids_even_if_relabelled` |
+| 3 | **Registro de match_ids reservados** | `data/{holdout,reserve}/registry.json`: ids, conteos y hashes, sin resultados ni cuotas | `test_assert_no_reserved_rejects_reserved_match_ids_even_if_relabelled` |
 | 4 | **Guarda en tiempo de ejecución** | `holdout.assert_no_reserved(df)` rechaza temporadas reservadas **o** ids registrados, aunque la temporada se haya re-etiquetado. Se llama en `load_dev()`, `load_dev_benchmarks()` y la construcción. **Todo pipeline de GATE 2+ debe cargar datos solo con `process.load_dev()`** | `test_assert_no_reserved_rejects_reserved_seasons`; `test_dev_and_reserved_ids_disjoint` |
 | 5 | **Autorización ligada al protocolo** | `holdout.open_reserved()` exige `HOLDOUT_AUTHORIZATION.json` con firmante, fecha, declaración, propósito y el **hash del protocolo congelado** (`PROTOCOL_FREEZE.json`). Si cualquier archivo congelado cambia, el acceso se deniega | `test_open_reserved_denied_in_current_project_state`; `test_authorization_flow_hash_binding_and_access_log`; `test_incomplete_authorization_rejected` |
-| 6 | **Registro de accesos append-only** | Cada apertura añade una línea a `data/{partición}/ACCESS_LOG.jsonl` (versionado en git) | `test_authorization_flow_hash_binding_and_access_log`; `verify`: `access_log_entries = 0` |
+| 6 | **Registro de accesos append-only** | Cada apertura añade una línea a `data/{holdout,reserve}/ACCESS_LOG.jsonl` (versionado en git) | `test_authorization_flow_hash_binding_and_access_log`; `verify`: `access_log_entries = 0` |
 | 7 | **Tripwire de código** | Ningún archivo `.py` fuera de `paths.py`, `holdout.py` y `test_holdout.py` puede contener rutas o funciones de acceso reservado; los notebooks tampoco | `test_tripwire_reserved_paths`; `test_tripwire_notebooks_do_not_read_reserved` |
 | 8 | **Nivel 0 sin valores** | Los metadatos reservados no contienen columnas de goles, estadísticas ni cuotas | `test_level0_contains_no_values` |
 | 9 | **Hashes de integridad** | SHA-256 de cada `data.zip` reservado y hash de contenido del nivel 0, en el registro. `python -m qsports verify` los recalcula | `test_verify_all_ok` |
@@ -44,7 +46,7 @@ tiene margen en [0; 0,25]") no informa sobre resultados ni permite ajustar nada.
 **Pruebas de mutación hechas en GATE 1** (para confirmar que los controles detectan
 fallos reales):
 - Se añadió un script que lee `data/holdout/...` → el tripwire **falló** como debía.
-- Se alteró un byte del `data.zip` prospectivo → `verify` **marcó** `prospective_raw_unchanged = false`.
+- Se alteró un byte del `data.zip` de 2026/27 → `verify` **marcó** la alteración (`*_raw_unchanged = false`).
 
 Ambas mutaciones se revirtieron y el hash original se comprobó.
 
@@ -60,7 +62,7 @@ acceso legítimo queda en el registro.
 |---|---|
 | `data/holdout/raw/football_data/2425/data.zip` | `4dc3abfdc48a6b7e507873f356e9ef84c24e86e6dd654995a050e1aa5ed9f0de` |
 | `data/holdout/raw/football_data/2526/data.zip` | `0cf572edf7185ac08bb56b0940056ed693a6300d7ca348c91700bbd5f9bbfa66` |
-| `data/prospective/raw/football_data/2627/data.zip` | `91f57d2f687f87781d3d07347eea2b8acedbf51f74e8ced2f84d52df50b11cdf` |
+| `data/reserve/raw/football_data/2627/data.zip` | `91f57d2f687f87781d3d07347eea2b8acedbf51f74e8ced2f84d52df50b11cdf` |
 
 Coinciden con los hashes de la descarga original de la Fase Cero (manifiesto RAW), así que
 los archivos no cambiaron entre la descarga y el sellado. Los hashes de contenido de los
@@ -124,3 +126,13 @@ de modelado**.
 5. Ejecutar **una única** evaluación preregistrada. El acceso queda en `ACCESS_LOG.jsonl`.
 6. Una vez abierto, el holdout deja de ser independiente: ningún ajuste posterior puede
    evaluarse en él.
+
+## 7. Reserva histórica sellada frente a validación prospectiva genuina
+
+La reserva 2026/27 **no** es una validación prospectiva. Sus partidos ya se disputaron y sus
+resultados se descargaron el 2026-11-27, antes de registrar ninguna predicción. Su
+protección es procedimental. Una validación prospectiva genuina (GATE 5) exige predicciones
+registradas y publicadas **antes** de cada partido, con testigo temporal externo (commit y
+push). Ver `EXPERIMENTAL_PROTOCOL.md` §10. Ningún resultado de la reserva se presentará como
+prospectivo.
+

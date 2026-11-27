@@ -1,0 +1,16 @@
+{
+ "M1": [
+  {
+   "config_id": "M1__w365_r1",
+   "block": "tuning",
+   "wall_s": 242.92,
+   "cpu_main_s": 3.33,
+   "sum_fit_s": 825.46,
+   "max_rss_main_mb": 732.7,
+   "n_fits": 8715,
+   "n_nonconverged": 0,
+   "n_preds": 69892,
+   "n_nan_preds": 11
+  }
+ ]
+}

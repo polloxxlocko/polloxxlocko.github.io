@@ -84,3 +84,41 @@ def test_verify_all_ok():
     res = verify.verify_all()
     assert res["ok"], res
     assert res["access_log_entries"] == {"holdout": 0, "reserve": 0}
+
+
+# ---------------------------------------------------------------- recomendaciones de la auditoría de GATE 1
+def test_alias_integrity_no_merged_distinct_teams(dev):
+    """Un alias erróneo que fusionara dos clubes distintos duplicaría apariciones en una temporada."""
+    assert not (dev["home_team"] == dev["away_team"]).any()
+    t = pd.concat([dev[["div", "season_code", "home_team"]].rename(columns={"home_team": "team"}),
+                   dev[["div", "season_code", "away_team"]].rename(columns={"away_team": "team"})])
+    n = t.groupby(["div", "season_code", "team"]).size()
+    med = n.groupby(level=[0, 1]).transform("median")
+    assert (n <= 1.25 * med).all(), n[n > 1.25 * med].head()
+
+
+def test_alias_config_scope(dev):
+    import json
+    from qsports import paths as P
+    al = json.loads((P.CONFIGS / "team_aliases.json").read_text())["aliases"]
+    for country, m in al.items():
+        sub = dev[dev["country"] == country]
+        raw = set(sub["home_team_raw"]) | set(sub["away_team_raw"])
+        canon = set(sub["home_team"]) | set(sub["away_team"])
+        for name, v in m.items():
+            assert name in raw, (country, name)              # el alias corresponde a un nombre real del país
+            assert v["canonical"] in canon and name not in canon
+            other = dev[dev["country"] != country]
+            assert name not in set(other["home_team_raw"]) | set(other["away_team_raw"])
+
+
+def test_pre_to_close_movement_gradient_regression(dev, bench):
+    """Regresión de la evidencia de la regla de captura: el movimiento pre→cierre crece con los días
+    transcurridos desde la captura (vie<sáb<dom<lun; mar<mié). Alarma si la fuente cambia su política."""
+    d = dev[(dev.season_code >= "1920")]
+    b = bench.loc[d.index]
+    m = b.A_consensus_valid & b.B_consensus_valid
+    move = (b.p_B_consensus - b.p_A_consensus).abs()[m]
+    med = move.groupby(d.weekday[m]).median()
+    assert med[4] < med[5] < med[6] < med[0]
+    assert med[1] < med[2]

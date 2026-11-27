@@ -31,11 +31,11 @@ en adelante.
 | 2017/18 | Estadísticas (tiros, córners, tarjetas) en las 22 divisiones (antes, ~10) | Predictores de tiros disponibles en todas las ligas desde aquí |
 | 2019/20 | Promedio y máximo pasan a **Oddsportal** (`Avg`, `Max`); se añaden cuotas de **cierre** (`C`); hora de inicio | Cambio de régimen del benchmark A; nace el benchmark B |
 | 23/07/2025 | Pinnacle no fiable; excluido de promedios y máximos | Regla `PIN-2025-07-23` (período reservado) |
-| 2026/27 | Columnas xG (`HxG`/`AxG`) | Solo prospectivo |
+| 2026/27 | Columnas xG (`HxG`/`AxG`) | Solo en la reserva sellada; utilizable en validación prospectiva genuina |
 
 ### Tabla A — Resumen por división
 
-| Div | País | Competición | Temporadas | Partidos dev | Holdout | Prospectivo | O/U pre ≥05/06 (dev) | O/U cierre ≥19/20 (dev) | Elegible A ≥05/06 (dev) | Tiros (dev) | Córners (dev) | Árbitro (dev) | Tiros ≥90% desde | Filas anchas recuperadas | Codificación |
+| Div | País | Competición | Temporadas | Partidos dev | Holdout | Reserva 2026/27 | O/U pre ≥05/06 (dev) | O/U cierre ≥19/20 (dev) | Elegible A ≥05/06 (dev) | Tiros (dev) | Córners (dev) | Árbitro (dev) | Tiros ≥90% desde | Filas anchas recuperadas | Codificación |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|
 | B1 | Bélgica | Pro League (First Division A) | 2000/01–2026/27 (27) | 6552 | 623 | 108 | 100.0% | 100.0% | 100.0% | 29.6% | 29.6% | 0.0% | 2017/18 | 305 | utf-8-sig |
 | D1 | Alemania | Bundesliga | 2000/01–2026/27 (27) | 7344 | 612 | 90 | 100.0% | 100.0% | 99.9% | 95.8% | 95.8% | 8.3% | 2000/01 | 272 | cp1252,utf-8-sig |
@@ -91,7 +91,7 @@ en adelante.
 | 2023/24 | dev | 7800 | 7800 | 100.0 | 99.9 | 99.3 | 0.0 | 100.0 | 100.0 | 99.6 | 99.2 | 92.9 | 92.9 | 43.0 | 100.0 | 0.0 | oddsportal |
 | 2024/25 | holdout | 7681 | 7681 | 100.0 | 100.0 | 99.6 | 0.0 | 100.0 | 100.0 | 99.8 | 99.3 | 92.8 | 92.8 | 43.7 | 100.0 | 0.0 | oddsportal |
 | 2025/26 | holdout | 7647 | 7646 | 99.8 | 99.7 | 38.2 | 0.0 | 100.0 | 100.0 | 38.7 | 98.4 | 92.8 | 92.8 | 43.9 | 100.0 | 0.0 | oddsportal |
-| 2026/27 | prospective | 2680 | 2680 | 100.0 | 99.9 | 0.0 | 0.0 | 100.0 | 100.0 | 0.0 | 100.0 | 100.0 | 100.0 | 45.4 | 100.0 | 83.1 | oddsportal |
+| 2026/27 | reserve | 2680 | 2680 | 100.0 | 99.9 | 0.0 | 0.0 | 100.0 | 100.0 | 0.0 | 100.0 | 100.0 | 100.0 | 45.4 | 100.0 | 83.1 | oddsportal |
 
 ### Tabla C — Casas/agregados presentes en cabeceras (unión de divisiones)
 
@@ -121,7 +121,7 @@ Notas de lectura:
   las segundas divisiones y ligas pequeñas es **2017/18**.
 - "Filas anchas" = filas con más campos que la cabecera, recuperadas sin pérdida
   (2001/02-2009/10).
-- Las cifras de holdout y prospectivo son **conteos de filas** (nivel 0). 2025/26 incluye 1
+- Las cifras de holdout y reserva son **conteos de filas** (nivel 0). 2025/26 incluye 1
   fila sin resultado (presencia).
 
 ## 3. Particularidades por división

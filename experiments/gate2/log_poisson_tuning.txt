@@ -1,0 +1,93 @@
+== etapa poisson_tuning
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/scope.py", line 228, in resolve
+    return self.scope[key]
+           ~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/collections/__init__.py", line 1022, in __getitem__
+    return self.__missing__(key)            # support subclasses that define __missing__
+           ~~~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/collections/__init__.py", line 1014, in __missing__
+    raise KeyError(key)
+KeyError: ''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/scope.py", line 243, in resolve
+    return self.temps[key]
+           ~~~~~~~~~~^^^^^
+KeyError: ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/polloxxlocko.github.io/experiments/gate2/run.py", line 232, in <module>
+    STAGES[s]()
+    ~~~~~~~~~^^
+  File "/home/user/polloxxlocko.github.io/experiments/gate2/run.py", line 29, in stage_poisson_tuning
+    best2f, tab2f = gate2.select_best(gate2.load_preds("M2").query("block == 'tuning' and config_id in @[best2, pp]"),
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/frame.py", line 5195, in query
+    res = self.eval(
+        expr,
+    ...<6 lines>...
+        resolvers=resolvers or (),
+    )
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/frame.py", line 5375, in eval
+    return _eval(expr, inplace=inplace, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/eval.py", line 370, in eval
+    parsed_expr = Expr(expr, engine=engine, parser=parser, env=env)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 819, in __init__
+    self.terms = self.parse()
+                 ~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 838, in parse
+    return self._visitor.visit(self.expr)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 426, in visit_Module
+    return self.visit(expr, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 429, in visit_Expr
+    return self.visit(node.value, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 756, in visit_BoolOp
+    return reduce(visitor, operands)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 750, in visitor
+    rhs = self._try_visit_binop(y)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 745, in _try_visit_binop
+    return self.visit(bop)
+           ~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 729, in visit_Compare
+    return self.visit(binop)
+           ~~~~~~~~~~^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 541, in visit_BinOp
+    op, op_class, left, right = self._maybe_transform_eq_ne(node)
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 462, in _maybe_transform_eq_ne
+    right = self.visit(node.right, side="right")
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 582, in visit_Subscript
+    value = self.visit(node.value)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 420, in visit
+    return visitor(node, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/expr.py", line 551, in visit_Name
+    return self.term_type(node.id, self.env, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/ops.py", line 91, in __init__
+    self._value = self._resolve_name()
+                  ~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/ops.py", line 115, in _resolve_name
+    res = self.env.resolve(local_name, is_local=is_local)
+  File "/usr/local/lib/python3.13/site-packages/pandas/core/computation/scope.py", line 245, in resolve
+    raise UndefinedVariableError(key, is_local) from err
+pandas.errors.UndefinedVariableError: local variable '' is not defined

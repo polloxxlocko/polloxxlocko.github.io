@@ -107,6 +107,10 @@ def reserved_retrieved_at() -> dict[str, str]:
     return out
 
 
+def has_raw(partition: str) -> bool:
+    return any((_part_dir(partition) / "raw" / "football_data").glob("*/data.zip"))
+
+
 # ---------------------------------------------------------------- hashes
 PROVENANCE_TIME_COLUMNS = ("dataset_retrieved_at_utc",)
 

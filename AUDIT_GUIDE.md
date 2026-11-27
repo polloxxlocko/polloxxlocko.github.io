@@ -15,8 +15,8 @@ se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente
 | Pruebas automáticas | `tests/` (59 pruebas) |
 | Dependencias | `pyproject.toml`, `requirements-lock.txt` (versiones exactas) |
 | Configuración | `configs/` (particiones, confiabilidad por fuente, exclusiones, alias, matriz de selección) |
-| Manifiestos de datos | `data/raw/football_data/manifest.jsonl`, `data/{holdout,prospective}/raw/football_data/manifest.jsonl`, `data/{holdout,prospective}/registry.json`, `data/processed/MANIFEST.json` |
-| Registro de accesos al holdout | `data/{holdout,prospective}/ACCESS_LOG.jsonl` (vacíos: 0 accesos) |
+| Manifiestos de datos | `data/raw/football_data/manifest.jsonl`, `data/{holdout,reserve}/raw/football_data/manifest.jsonl`, `data/{holdout,reserve}/registry.json`, `data/processed/MANIFEST.json` |
+| Registro de accesos al holdout | `data/{holdout,reserve}/ACCESS_LOG.jsonl` (vacíos: 0 accesos) |
 | Informes de investigación | `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`, `MARKET_SELECTION_REPORT.md` |
 | Documentos de GATE 1 | `DATA_INVENTORY.md`, `DATA_QUALITY_REPORT.md`, `TEMPORAL_INTEGRITY_REPORT.md`, `HOLDOUT_PROTECTION_PROTOCOL.md`, `MARKET_BENCHMARK_SPECIFICATION.md`, `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`, `GATE_1_REPORT.md` |
 | Registro de experimentos y limitaciones | `EXPERIMENT_LOG.md`, `LIMITATIONS.md`, `ROADMAP.md`, `CLAUDE.md` |
@@ -27,7 +27,7 @@ se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente
 | Excluido | Motivo | Cómo lo obtiene el auditor |
 |---|---|---|
 | CSV/ZIP de Football-Data.co.uk | Sin licencia formal de redistribución ("My data is free") | `python -m qsports download`; integridad verificable con los SHA-256 de los manifiestos |
-| **Conjunto de prueba final sellado** (2024/25-2025/26) y reserva prospectiva (2026/27): RAW y procesados | Protección metodológica del holdout | Solo se publican el registro (ids hash, conteos, hashes; **sin cuotas ni resultados**) y el log de accesos |
+| **Conjunto de prueba final sellado** (2024/25-2025/26) y reserva histórica sellada (2026/27, partición `reserve`): RAW y procesados | Protección metodológica del holdout | Solo se publican el registro (ids hash, conteos, hashes; **sin cuotas ni resultados**) y el log de accesos |
 | Resúmenes de artículos en texto plano | OpenAlex no los redistribuye por razones legales; derechos de las editoriales | `python phase0/verify_references.py` los regenera en `research/abstracts_local.json` (ignorado por git) |
 | Credenciales, tokens, `.env` | No existen en el proyecto: el escaneo de todo el historial no encontró ninguno | — |
 | Parquet procesados, entornos virtuales, cachés | Derivados regenerables | `python -m qsports build` |
@@ -102,7 +102,7 @@ Se calcularon antes del sellado. Solo usaron cuotas y presencia de datos, sin re
 
 En el mismo clon limpio:
 - **Hashes de contenido idénticos** al manifiesto versionado en los 7 artefactos:
-  desarrollo, nivel 0, benchmarks, y holdout y prospectivo completos y de nivel 0. Los
+  desarrollo, nivel 0, benchmarks, y holdout y reserva completos y de nivel 0. Los
   reservados se compararon por hash, sin abrirlos.
 - Informes `reports/gate1/*` regenerados **idénticos**.
 - `python -m qsports verify`: ok; `pytest`: **59/59**.

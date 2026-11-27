@@ -69,7 +69,11 @@ def build(download: bool = False, first: str = "0001", last: str = "2627") -> di
     retrieved = retrieved_at_map()
     summary: dict = {"built_at_utc": dt.datetime.now(dt.timezone.utc).isoformat()}
     for part in ("holdout", "reserve"):
-        summary[f"sealed_{part}"] = holdout.seal(part, retrieved)
+        if holdout.has_raw(part):
+            summary[f"sealed_{part}"] = holdout.seal(part, retrieved)
+        else:  # auditoría sin temporadas reservadas: se conserva el registro versionado (ids, hashes)
+            summary[f"sealed_{part}"] = {k: v for k, v in holdout.registry(part).items() if k != "match_ids"}
+            summary[f"sealed_{part}"]["note"] = "RAW reservado ausente: sellado omitido; registro versionado conservado"
     dev, reports = build_dev(retrieved)
     paths.PROCESSED_DEV.mkdir(parents=True, exist_ok=True)
     dev.to_parquet(paths.PROCESSED_DEV / "matches.parquet", index=False)

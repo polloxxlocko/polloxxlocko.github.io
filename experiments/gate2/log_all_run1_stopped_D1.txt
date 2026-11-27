@@ -1,0 +1,37 @@
+== etapa poisson_tuning
+{
+ "M1_selected": "M1__w1095_r16",
+ "M2_selected_stage1": "M2__h240_r16",
+ "M2_promoted_candidate": "M2__h240_r16_pp",
+ "M2_selected": "M2__h240_r16",
+ "ladder_M2_vs_M1_tuning": {
+  "n": 69881,
+  "delta_logloss": {
+   "mean": -0.0016483077955107618,
+   "lo": -0.0022208309691751434,
+   "hi": -0.0011283928587867765,
+   "n": 69881,
+   "weeks": 420,
+   "block_weeks": 4,
+   "n_boot": 2000,
+   "seed": 20261127
+  },
+  "category": "S-R",
+  "dm": {
+   "stat": -6.0838352030755525,
+   "p_value": 1.1734121556600535e-09,
+   "mean": -0.0016483077955107618,
+   "lag": 5,
+   "se": 0.0002709323544262828
+  },
+  "delta_brier": -0.0007788196156378891,
+  "sd_delta": 0.07465555330487747,
+  "deff_week": 1.0393648957099204,
+  "logloss_model": 0.6872905295032128,
+  "logloss_ref": 0.6889388372987236
+ },
+ "M2_justified": true
+}
+== etapa m3_tuning
+/usr/local/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown: {'/mp-cw3_pwr9', '/mp-bjo99oer', '/mp-x_1bmhar', '/mp-b8yifv16', '/mp-_nlcmlqv'}
+  warnings.warn(

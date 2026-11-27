@@ -28,10 +28,10 @@ python3 -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts
 pip install -r requirements-lock.txt
 pip install -e .
 
-# 3. Descargar los datos (cada temporada va a su partición; dev / holdout / prospectivo)
+# 3. Descargar los datos (cada temporada va a su partición; dev / holdout / reserve)
 python -m qsports download --first 0001 --last 2627
 
-# 4. Construir: sella holdout y prospectivo, construye dev, benchmarks y manifiesto
+# 4. Construir: sella holdout y reserva, construye dev, benchmarks y manifiesto
 python -m qsports build
 
 # 5. Verificar integridad y protección (debe terminar con "ok": true)
@@ -55,7 +55,7 @@ cambio de versión de datos. Hay que registrarlo antes de continuar.
 | `src/qsports/` | Paquete: ingesta, temporalidad, protección del holdout, benchmarks, calidad, CLI |
 | `configs/` | Particiones, confiabilidad por fuente, criterios de exclusión, alias de equipos |
 | `data/raw/` | RAW de desarrollo (no versionado; manifiesto sí) |
-| `data/holdout/`, `data/prospective/` | **Sellados.** Solo se versionan el registro y el log de accesos |
+| `data/holdout/`, `data/reserve/` | **Sellados.** Solo se versionan el registro y el log de accesos |
 | `reports/gate1/` | Salidas reproducibles de GATE 1 |
 | `tests/` | 59 pruebas (unitarias, protección del holdout, integración) |
 | `phase0/` | Scripts históricos de la Fase Cero |

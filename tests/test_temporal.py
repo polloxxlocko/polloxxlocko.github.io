@@ -62,3 +62,21 @@ def test_kickoff_uk_to_utc_handles_bst():
 def test_deadline_strings():
     out = temporal.add_temporal_fields(_frame(["2023-10-07", "2023-10-04"], ["15:00", "19:45"]))
     assert list(out["pre_odds_capture_deadline_uk"]) == ["2023-10-06 17:00", "2023-10-03 13:00"]
+
+
+def test_same_day_night_match_cannot_use_earlier_same_day_result():
+    """Viernes 19:00 y viernes 21:00: el resultado del primero no puede alimentar al segundo (corte por
+    fecha estricta; la hora no da orden fiable)."""
+    from qsports import benchmark
+    d = _frame(["2023-10-05", "2023-10-06", "2023-10-06"], ["19:45", "19:00", "21:00"])
+    d["div"], d["over25"] = "X", [1.0, 1.0, 0.0]
+    d = temporal.add_temporal_fields(d)
+    p = benchmark.historical_frequency(d)
+    assert p.iloc[2] == pytest.approx((1 + 1) / (1 + 2))  # solo el jueves cuenta; el de las 19:00 no
+
+
+def test_capture_day_independent_of_kickoff_hour():
+    """El día de captura depende solo de la fecha; la hora solo marca ambigüedad."""
+    a = temporal.add_temporal_fields(_frame(["2023-10-06", "2023-10-06"], ["12:00", "20:00"]))
+    assert a["pre_odds_capture_date_est"].nunique() == 1
+    assert list(a["capture_rule_ambiguous"]) == [True, False]

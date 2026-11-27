@@ -1,0 +1,12 @@
+{
+ "M1__w365_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ }
+}

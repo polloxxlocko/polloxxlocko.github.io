@@ -1,0 +1,3 @@
+== etapa poisson_tuning
+/usr/local/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown: {'/mp-kg824a20', '/mp-3wtwarit', '/mp-42ojc71e', '/mp-8d2htyuk', '/mp-xtuzqwr2'}
+  warnings.warn(

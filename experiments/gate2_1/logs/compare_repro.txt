@@ -1,0 +1,42 @@
+{
+ "repro_dir_manifest": {
+  "git_commit": "a724e84c29f05332c0a40903b8b9f4c9624029a6",
+  "git_dirty": false,
+  "clean": true,
+  "code_hash": "6878ed920bd6e90e83ab49cacc4e8fd8517d67721dc28e8b69b94a1b38e2d01b",
+  "dataset": {
+   "dev_matches_content_sha256": "41d9503c0d33477ce57b100f66cb35082590a3f4d85600aa1acd692d76b4f5b9",
+   "dev_benchmarks_content_sha256": "c2b1dd65d97daebb5680a49c9bbe8c29cd8e990ee82a692973be92864b8742e5",
+   "n_dev_rows": 182821
+  },
+  "started_utc": "2026-11-27T11:08:32.664395+00:00",
+  "finished_utc": "2026-11-27T11:52:12.247529+00:00",
+  "wall_s": 208.4,
+  "sealed_unchanged": true,
+  "artifacts_set_sha256": "26e025bf6d88499bc39b870e659b6cb7686981ec3668d00953e01ecfea2e74c9"
+ },
+ "configs_published": 99,
+ "configs_repro": 98,
+ "configs_only_published": [
+  {
+   "family": "M2",
+   "config_id": "M2__h240_r16_pp",
+   "block": "tuning"
+  }
+ ],
+ "configs_only_repro": [],
+ "prediction_rows_compared": 6485374,
+ "prediction_rows_not_bitwise_equal": 10974,
+ "prediction_max_abs_diff": 8.542283103096793e-09,
+ "prediction_rows_only_one_side": 0,
+ "fitlogs_all_flags_equal": false,
+ "fitlogs_nonconverged_published": 226,
+ "fitlogs_nonconverged_repro": 224,
+ "fitlogs_train_max_date_equal": true,
+ "selections_all_equal": true,
+ "grid_paths_all_equal": true,
+ "inner_same_method_max_abs_diff": 6.938893903907228e-18,
+ "inner_same_method_categories_equal": true,
+ "inner_calendar_categories_changed": [],
+ "script_sha256": "6faee262bc7de64efb6c7f46386d8933961e880fd708f666d4b1890d6f1531b3"
+}

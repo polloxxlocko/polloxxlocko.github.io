@@ -1,0 +1,20 @@
+{
+ "key": "1ae7d61cd8275874e43c9537f940a54de81c9fd1bec8be3742cf86f03517765a",
+ "family": "M4cal",
+ "config_id": "M4cal__h730",
+ "block": "tuning",
+ "params": {
+  "half_life_days": 730,
+  "require_cols": [
+   "inp_m2"
+  ]
+ },
+ "sha256": "c1b8c27a979297d916fe277af84139d8161180bb20489a0924c14c0711d9b1ef",
+ "fitlog": "fitlogs/M4cal/M4cal__h730__tuning.parquet",
+ "fitlog_sha256": "2011eb63a501cc172203640719576620d363c32a5ab50dcfa58a51c79262900f",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 157,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T11:47:40.675849+00:00"
+}

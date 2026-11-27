@@ -1,0 +1,20 @@
+{
+ "key": "cc68b1c6dd8f6194abcf2d6347ff0cbc7b956d4fd5ed94b63043715275008964",
+ "family": "M2",
+ "config_id": "M2__h960_r128",
+ "block": "tuning",
+ "params": {
+  "half_life_days": 960,
+  "ridge": 128,
+  "max_history_days": 1460,
+  "promoted_prior": false
+ },
+ "sha256": "a1bcda3d8a2ab40317546a70e8800fdbff4e581a80b76436be53487b48bd45fd",
+ "fitlog": "fitlogs/M2/M2__h960_r128__tuning.parquet",
+ "fitlog_sha256": "4b1cd36c1247b780bb4efe0d047bb6df115ccf23ed8962db2551c371c600227c",
+ "n_rows": 69892,
+ "n_unique_match_id": 69892,
+ "n_nan_p_over": 11,
+ "n_fits": 8715,
+ "completed_utc": "2026-11-27T11:40:45.565615+00:00"
+}

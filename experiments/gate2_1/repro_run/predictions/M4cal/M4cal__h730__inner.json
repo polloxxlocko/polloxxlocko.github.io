@@ -1,0 +1,20 @@
+{
+ "key": "e3a10c054bea5383992db0969af46b92303777f25bb33f8978c86893ca8b070f",
+ "family": "M4cal",
+ "config_id": "M4cal__h730",
+ "block": "inner",
+ "params": {
+  "half_life_days": 730,
+  "require_cols": [
+   "inp_m2"
+  ]
+ },
+ "sha256": "2a6f9908f530452e3be54e2c27c8a3135fa47d8cee9fe286ce64ddf3f3bb5ff9",
+ "fitlog": "fitlogs/M4cal/M4cal__h730__inner.parquet",
+ "fitlog_sha256": "6dd4d7980095e88ae19d6261fce3128efddeb40aa5b6fe44a2ee01ee23e4c565",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 107,
+ "n_fits": 169,
+ "completed_utc": "2026-11-27T11:48:00.654124+00:00"
+}

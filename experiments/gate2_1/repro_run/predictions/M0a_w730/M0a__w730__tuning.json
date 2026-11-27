@@ -1,0 +1,17 @@
+{
+ "key": "87997f62e02b629a899624582109f0c2de934f88b9e8ca141c8beacc7565d654",
+ "family": "M0a_w730",
+ "config_id": "M0a__w730",
+ "block": "tuning",
+ "params": {
+  "window_days": 730
+ },
+ "sha256": "3f3e4ce51b0f26e550995ca05f3b71badffcb26450e105c24e1519e98998c3a9",
+ "fitlog": "fitlogs/M0a_w730/M0a__w730__tuning.parquet",
+ "fitlog_sha256": "551058f5e5b8e753163e88becf334bd1d9cab94022319e2b9c07d458a899e573",
+ "n_rows": 69892,
+ "n_unique_match_id": 69892,
+ "n_nan_p_over": 0,
+ "n_fits": 8715,
+ "completed_utc": "2026-11-27T11:45:26.735190+00:00"
+}

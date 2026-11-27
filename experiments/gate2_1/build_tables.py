@@ -21,6 +21,10 @@ def f(x, d=5):
     return s.replace(".", ",")
 
 
+def pr(x):
+    return "—" if x is None else f"{x:.3f}".replace(".", ",")
+
+
 def g(x):
     return "—" if x is None else f"{x:.2e}".replace(".", ",")
 
@@ -29,7 +33,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repro", required=True)
     a = ap.parse_args()
-    rep = Path(a.repro)
+    rep = Path(a.repro).resolve()
     R = json.loads((rep / "results.json").read_text())
     E = R["evaluate"]
     P = json.loads((ROOT / "experiments" / "gate2" / "results.json").read_text())["evaluate"]
@@ -76,7 +80,7 @@ def main():
         r = pw[k]
         pp = r.get("profile_holdout") or {}
         L.append(f"| {k} | {g(r['se_dev'])} | {g(pp.get('se'))} | {g(pp.get('mde_superiority_vs_zero'))} | "
-                 f"{g(pp.get('mde_superiority_relevant'))} | {f(pp.get('p_equivalence_at_zero'), 3)} | "
+                 f"{g(pp.get('mde_superiority_relevant'))} | {pr(pp.get('p_equivalence_at_zero'))} | "
                  f"{g(pp.get('max_theta_equivalence'))} | {g(pp.get('se_needed_equivalence'))} |")
     L.append("\n## T5. Cobertura del universo de la prueba interna\n")
     L.append("| Pronóstico | Esperadas | Cubiertas | Faltantes | Sobrantes |")
@@ -104,7 +108,11 @@ def main():
         L.append(f"- Cadenas con predicciones idénticas bit a bit a las publicadas: {s['chains_predictions_bitwise_equal']}/{s['n_chains']}; "
                  f"con el mismo conjunto de ajustes no convergentes: {s['chains_same_nonconverged_set']}/{s['n_chains']}.")
         L.append(f"- Criterio estricto: {s['strict_criterion']}. Alcanzado en {s['fits_strict_reached']}/{s['n_checked']}.")
-        L.append(f"- Gradiente residual publicado: {g(s['gmax_std']['min'])}-{g(s['gmax_std']['max'])}; tras pulir: "
+        import pandas as pd
+        F = pd.read_csv(ROOT / "experiments" / "gate2_1" / "convergence_check_fits.csv")
+        r = F[F["reproduced_as_nonconverged"]]
+        L.append(f"- Gradiente residual de la solución publicada (casos reproducidos, n = {len(r)}): "
+                 f"{g(r['gmax_std'].min())}-{g(r['gmax_std'].max())}; tras pulir (226 casos): "
                  f"{g(s['gmax_strict']['min'])}-{g(s['gmax_strict']['max'])}.")
         o = s["objective_diff_f_std_minus_f_strict"]
         L.append(f"- f(θ publicado) − f(θ estricto): mín {g(o['min'])}, mediana {g(o['median'])}, máx {g(o['max'])}; max|Δθ| = {g(s['dtheta_max'])}.")

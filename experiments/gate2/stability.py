@@ -65,7 +65,9 @@ rl = json.loads((gate2.OUT / "runlog.json").read_text())
 for fam, recs in rl.items():
     L = gate2.load_fitlogs(fam)
     L = L[L.wall_ms > 0] if "wall_ms" in L else L
-    nc = L[~L.converged]
+    if "message" not in L:  # benchmarks (A, C): sin ajustes
+        L = L.assign(message=pd.Series(dtype=str))
+    nc = L[~L.converged.astype(bool)]
     gm = nc.message.str.extract(r"gmax=(\S+)")[0].astype(float) if len(nc) else pd.Series(dtype=float)
     conv[fam] = {"fits": int(len(L)), "nonconverged": int(len(nc)), "rate": round(len(nc) / max(len(L), 1), 6),
                  "nonconv_gmax_max": float(gm.max()) if len(gm) else None,

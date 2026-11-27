@@ -7,12 +7,13 @@ Cada ejecución indica el commit exacto. "Árbol limpio" = `git status --porcela
 | # | Qué | Commit | Resultado | Registro |
 |---|---|---|---|---|
 | A1 | `python -m pytest` (registro formal con JUnit) | ver `pytest_<commit>.json` | ver archivo | `reports/gate2_1/pytest_<commit>.{txt,xml,json}` (generado por `experiments/gate2_1/record_pytest.py`, que exige árbol limpio) |
-| A2 | `python -m pytest` antes de cada commit de código de GATE 2.1 | `7af9669`, `a6c8745` | 157 y 158 superadas, 0 fallos (salida en el historial de la sesión; el registro formal es A1) | — |
+| A2 | `python -m pytest` antes de cada commit de código de GATE 2.1 | `7af9669`, `a6c8745`, `a724e84` | 157, 158 y 159 superadas, 0 fallos (salida en el historial de la sesión; el registro formal es A1) | — |
 | A3 | `python -m qsports verify` | todos los commits de GATE 2.1 | `ok: true`; accesos registrados 0/0; valla sin cruces | salida de `verify` (JSON) |
-| A4 | Reproducción limpia completa (`run.py all --clean`) + `m3_spec_sensitivity` | `a6c8745` (árbol limpio) | ver `REPRODUCIBILITY_REPORT.md` | `experiments/gate2_1/repro_run/RUN_MANIFEST.json` |
-| A5 | Comparación con lo publicado | — | ver `REPRODUCIBILITY_REPORT.md` | `experiments/gate2_1/repro_comparison.json` |
-| A6 | Verificación de los 226 ajustes no convergentes | `a6c8745` (código del modelo) | ver `GATE_2_1_REPORT.md` §4 | `experiments/gate2_1/convergence_check.{json,_fits.csv}` |
-| A7 | Evidencia sintética del evaluador | — | ver `AUDIT_RESPONSE_GATE2.md` §2 | `experiments/gate2_1/evaluator_evidence.json` |
+| A4 | Reproducción limpia completa (`run.py all --clean`) + `m3_spec_sensitivity` + `stability.py` | `a724e84` (árbol limpio) | 2.400 s + 208 s; selecciones y categorías idénticas a lo publicado; 99,83% de predicciones bit a bit | `experiments/gate2_1/repro_run/RUN_MANIFEST.json`; `experiments/gate2_1/logs/` |
+| A5 | Comparación con lo publicado | código de `a724e84` | ver `REPRODUCIBILITY_REPORT.md` §2 | `experiments/gate2_1/repro_comparison.json` |
+| A6 | Verificación de los 226 ajustes no convergentes | código de `a724e84` (hash `6878ed92…` en el JSON) | 226/226 al criterio estricto; \|Δp\| ≤ 2,7·10⁻⁸ | `experiments/gate2_1/convergence_check.json` y `convergence_check_fits.csv` |
+| A7 | Evidencia sintética del evaluador | código de `7af9669` en adelante (sin cambios en `evaluation.py` salvo la función de autocorrelación) | ver `AUDIT_RESPONSE_GATE2.md` §2 | `experiments/gate2_1/evaluator_evidence.json` |
+| A7b | Dependencia del prior de ascendidos respecto de `PYTHONHASHSEED` (semillas 0, 1, 2 y repetición con 0) | código de `a724e84` | máx. \|Δp\| 6,6·10⁻⁹ entre semillas; idéntico con la misma semilla | `REPRODUCIBILITY_REPORT.md` §3.2 |
 | A8 | ZIP ligero en entorno virtual limpio (instalado con `requirements-lock.txt`) | ver `GATE_2_1_REPORT.md` §7 | pytest y `audit-synthetic` | `GATE_2_1_REPORT.md` §7 |
 | A9 | Comprobación de cobertura y duplicados en las predicciones publicadas de GATE 2 | `1780027` (datos publicados) | 61.137/61.137 filas elegibles cubiertas por los 8 pronósticos; 0 duplicados (configuración, bloque, partido) en todos los archivos | `AUDIT_RESPONSE_GATE2.md` §3 |
 

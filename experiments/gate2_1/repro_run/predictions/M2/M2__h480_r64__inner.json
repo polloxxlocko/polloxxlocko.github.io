@@ -1,0 +1,20 @@
+{
+ "key": "103a8964ce56e5fc5ace402e737387d53c4fc72404dfee79c43499c8a798768a",
+ "family": "M2",
+ "config_id": "M2__h480_r64",
+ "block": "inner",
+ "params": {
+  "half_life_days": 480,
+  "ridge": 64,
+  "max_history_days": 1460,
+  "promoted_prior": false
+ },
+ "sha256": "43b4c0718614f4a5129e28ad47b5fbfc640e1bdc15f30a2e5d55567fd42324b3",
+ "fitlog": "fitlogs/M2/M2__h480_r64__inner.parquet",
+ "fitlog_sha256": "bb511d0daa2ce002a06c4c01914381977868e9046008f59796a59f3a6c55c979",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 0,
+ "n_fits": 7659,
+ "completed_utc": "2026-11-27T11:46:45.245542+00:00"
+}

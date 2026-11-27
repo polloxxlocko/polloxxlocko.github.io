@@ -1,0 +1,24 @@
+{
+ "key": "fc6d91caad5b8e4c932a11b983d001565d9527f49f233e8bf451ed7f7e60a518",
+ "family": "M4sport",
+ "config_id": "M4sport__h730_r1000",
+ "block": "inner",
+ "params": {
+  "half_life_days": 730,
+  "ridge": 1000.0,
+  "sport_cols": [
+   "inp_m2"
+  ],
+  "require_cols": [
+   "inp_m2"
+  ]
+ },
+ "sha256": "e64723a49cf77bde4d215768e209b34a378a80d9bda33c4182aeb1135ee653f3",
+ "fitlog": "fitlogs/M4sport/M4sport__h730_r1000__inner.parquet",
+ "fitlog_sha256": "89d847abbb898bb3e75f396b4a21ee78557dcfe9ca2775b46927d83b892d5722",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 107,
+ "n_fits": 169,
+ "completed_utc": "2026-11-27T11:48:09.147887+00:00"
+}

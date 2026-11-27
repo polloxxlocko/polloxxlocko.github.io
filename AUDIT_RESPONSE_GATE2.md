@@ -1,14 +1,15 @@
 # AUDIT_RESPONSE_GATE2 — Respuesta a la auditoría independiente de GATE 2
 
 Fecha: 2026-11-27 · Commit auditado: `1780027b` (rama `gate2`) · Correcciones: rama `gate2.1`
-(código en `7af9669` y `a6c8745`; resultados y documentos en commits posteriores de la misma rama).
+(código en `7af9669`, `a6c8745` y `a724e84`; la reproducción limpia corrió sobre `a724e84`; resultados
+y documentos en commits posteriores que no modifican código de `src/`, `run.py` ni `configs/`).
 
 Veredicto recibido: **aprobación metodológica condicionada**. D-1 aceptada; D-2 aceptada
 condicionalmente; GATE 3 **no** autorizado; fase correctiva GATE 2.1 solicitada.
 
 Regla que seguí: aceptar un hallazgo solo si el código, una prueba o un cálculo lo confirman, y
 discrepar con evidencia si no. **Los nueve bloques de hallazgos se confirmaron en el código o en los
-documentos.** No encontré ninguno incorrecto. En tres puntos añado matices con evidencia (§10).
+documentos.** No encontré ninguno incorrecto. Añado matices con evidencia y un hallazgo propio (§10).
 
 Cifras de esta respuesta: `GATE_2_1_REPORT.md`, `REPRODUCIBILITY_REPORT.md` y los archivos que se
 citan. "Ejecutado por Claude" significa ejecutado en el contenedor del proyecto. No tengo evidencia de
@@ -44,10 +45,17 @@ qué pruebas ejecutó el auditor (ver `reports/gate2_1/TEST_RECORD.md`).
   y de la valla antes y después, y SHA-256 de cada artefacto.
 - `experiments/gate2_1/compare_repro.py` compara la ejecución limpia con lo publicado, fila a fila.
 
-**Evidencia:** `tests/test_gate2_cache.py` (7 pruebas: solo lectura, directorio vacío, reutilización
+**Evidencia:** `tests/test_gate2_cache.py` (8 pruebas: solo lectura, directorio vacío, reutilización
 solo con manifiesto, archivos alterados o entradas distintas se recalculan, caché de variables
-aislada y validada, duplicados, enlace de `train_max_date`). Resultado de la ejecución limpia y su
-comparación: `REPRODUCIBILITY_REPORT.md`.
+aislada y validada, duplicados, enlace de `train_max_date`, y el modo limpio reutiliza solo lo que
+produjo la propia ejecución).
+
+**Resultado de la ejecución limpia** (`REPRODUCIBILITY_REPORT.md`; commit `a724e84`, 2.400 s):
+- mismas selecciones, la misma ruta de extensión D-1 y las mismas 13 categorías de la prueba interna;
+- 6.474.400 de 6.485.374 predicciones (99,83%) idénticas bit a bit;
+- las diferencias, < 10⁻⁸, son todas de una configuración no seleccionada (§10.4);
+- la configuración `M2__h240_r16_pp`, presente en lo publicado, procedía de la ejecución detenida
+  antes de D-1. Confirma que lo publicado mezclaba salidas de dos ejecuciones.
 
 ## 2. Evaluador estadístico — ACEPTADO (desviación D-4)
 
@@ -147,7 +155,16 @@ del criterio de parada, pero solo había reajustado **24**.
 4. Informa la diferencia de objetivo, el gradiente residual, max|Δθ|, |Δp| máximo y medio, el
    impacto en log loss y los casos no reproducibles.
 
-**Resultado:** `GATE_2_1_REPORT.md` §4 y `experiments/gate2_1/convergence_check.json`.
+**Resultado** (`GATE_2_1_REPORT.md` §4; `experiments/gate2_1/convergence_check.json` y `_fits.csv`):
+- Los 226 alcanzan el criterio estricto (gradiente final ≤ 2,1·10⁻¹³).
+- f(θ publicado) − f(θ pulido) está entre −6,8·10⁻¹³ y 0, es decir, no hay mejora del objetivo a
+  precisión de máquina; max|Δθ| = 7,7·10⁻⁸.
+- En las 1.800 filas que predijeron, |Δp| es como máximo 2,7·10⁻⁸ (medio 4,2·10⁻⁹). El impacto
+  máximo en la log loss media de una configuración es 4,5·10⁻¹².
+- 223 se reproducen como no convergentes. Los 3 restantes pertenecen a la configuración no
+  seleccionada `M2__h480_r64_pp`, cuyo resultado depende del orden de un `set`, y este a su vez de
+  `PYTHONHASHSEED` (hallazgo nuevo de GATE 2.1, `REPRODUCIBILITY_REPORT.md` §3.2). Ningún caso quedó
+  sin explicar.
 
 ## 6. Consistencia documental — ACEPTADO (desviación D-3)
 
@@ -212,4 +229,10 @@ permitidos) para la potencia, como en GATE 2.
    alguno se materializó en lo publicado (`REPRODUCIBILITY_REPORT.md`).
 3. **La evidencia sintética también me corrige.** La prueba de dependencia serial muestra que
    ningún bloque de 2-12 semanas da cobertura nominal con dependencia muy persistente. No lo oculto:
-   lo uso para leer la sensibilidad real (§2).
+   lo uso para leer la sensibilidad real (§2). En los datos de desarrollo la autocorrelación semanal
+   es baja y ninguna categoría cambia con el bloque.
+4. **Hallazgo propio de GATE 2.1 (no señalado por el auditor).** La reproducción limpia descubrió un
+   no determinismo en el prior de ascendidos de M2: el orden de iteración de un `set` depende de
+   `PYTHONHASHSEED`. Afecta solo a configuraciones `_pp` no seleccionadas, con diferencias < 10⁻⁸. Lo
+   documento y propongo una corrección de una línea, sin aplicarla: cambiaría el código después de la
+   reproducción oficial (`REPRODUCIBILITY_REPORT.md` §3.2).

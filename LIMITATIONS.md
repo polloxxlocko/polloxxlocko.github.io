@@ -62,7 +62,7 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | G1 | Conjunto de información limitado (goles, tiros, tiros a puerta, córners, cuotas pre-cierre); sin xG histórico, alineaciones, lesiones, clima | El "aporte deportivo no demostrado" se refiere a este conjunto |
 | G2 | M1 quedó en el borde de la grilla de ridge tras 3 extensiones (D-1) | M1 puede estar algo subregularizado; no afecta a M2 ni a M4 |
 | G3 | Grillas modestas y búsqueda por grilla, no optimización continua | Óptimos aproximados; diferencias entre vecinos < 4·10⁻⁴ (Poisson) y < 10⁻⁵ (M3) |
-| G4 | Criterio de parada de Newton sensible a la precisión numérica (226 falsos "sin convergencia") | Impacto medido ≤ 2,1·10⁻⁹ en p; mejora pendiente |
+| G4 | Criterio de parada de Newton sensible a la precisión numérica (226 falsos "sin convergencia") | GATE 2.1: verificados los 226 uno a uno; todos alcanzan un criterio 100× más estricto, \|Δp\| ≤ 2,7·10⁻⁸, impacto en log loss media ≤ 4,5·10⁻¹² (`GATE_2_1_REPORT.md` §4). Mejora del criterio pendiente |
 | G5 | La prueba interna es de desarrollo; las categorías no son veredictos | Confirmación formal solo en GATE 3 y en el holdout |
 | G6 | Primeras temporadas de M3 y M4 con poco entrenamiento (NaN excluidos) | Muestras comunes algo menores al inicio del bloque de ajuste |
 
@@ -74,4 +74,5 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | G9 | D-3: M3 usó el conteo lineal de partidos previos, no log(1 + n) como especificaba el preregistro | Los resultados de M3 de GATE 2 corresponden a la forma lineal; sensibilidad con log1p solo en el bloque de ajuste |
 | G10 | La potencia de superioridad y de equivalencia usa una aproximación normal y escala el error estándar de desarrollo por √(n_dev/n_holdout) | Supone estacionariedad de la varianza de Δ y de la dependencia entre desarrollo y holdout |
 | G11 | "0 accesos registrados" demuestra que no se usó la apertura autorizada, no la ausencia absoluta de exposición | Exposición previa documentada en HOLDOUT_PROTECTION_PROTOCOL §5 |
+| G12 | El prior de ascendidos de M2 (`promoted_prior=True`) promedia sobre un `set` cuyo orden depende de `PYTHONHASHSEED`: no es determinista entre procesos | Diferencias < 10⁻⁸ solo en configuraciones `_pp` (no seleccionadas ni candidatas); corrección de una línea propuesta, pendiente de autorización (`REPRODUCIBILITY_REPORT.md` §3.2) |
 

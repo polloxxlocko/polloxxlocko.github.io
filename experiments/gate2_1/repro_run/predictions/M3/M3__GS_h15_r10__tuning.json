@@ -1,0 +1,19 @@
+{
+ "key": "1a2ef2fd9f2fd8b53606f6ded7355668eef2870edc8013b1cda771d4467759f8",
+ "family": "M3",
+ "config_id": "M3__GS_h15_r10",
+ "block": "tuning",
+ "params": {
+  "feature_set": "GS",
+  "ewm_half_life_matches": 15,
+  "ridge": 10.0
+ },
+ "sha256": "99f53d381ad3457fde6f8aff6aa2a77472e4b486de54bfeec0969d7b2295dd7c",
+ "fitlog": "fitlogs/M3/M3__GS_h15_r10__tuning.parquet",
+ "fitlog_sha256": "454866b8b4568d0dbd6eb70631436ffdbf70c500370aeec7bf5fd282ce514682",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 0,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T11:43:23.810040+00:00"
+}

@@ -1,0 +1,19 @@
+{
+ "key": "a466fa5be482cecbbf339dc928ff6024afcf48368dee4f0e8a6df01afc768076",
+ "family": "M3",
+ "config_id": "M3__GST_h5_r100",
+ "block": "tuning",
+ "params": {
+  "feature_set": "GST",
+  "ewm_half_life_matches": 5,
+  "ridge": 100.0
+ },
+ "sha256": "e1559a8a687e542b8e6499e51dbfd08beaefca5c9ea31b2032735d7fc57850e5",
+ "fitlog": "fitlogs/M3/M3__GST_h5_r100__tuning.parquet",
+ "fitlog_sha256": "4bf7bfbfbf99a7f63a11bec0a836a933ce61e4c1bb1dafee1c01256f890ac233",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 0,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T11:42:32.679317+00:00"
+}

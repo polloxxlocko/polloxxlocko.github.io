@@ -1,0 +1,48 @@
+226 ajustes no convergentes en 164 cadenas (config, bloque, división)
+{
+ "n_nonconverged_published": 226,
+ "n_checked": 226,
+ "n_chains": 164,
+ "strict_criterion": "max|grad| <= 1e-10\u00b7max(1, \u03a3w)  (GATE 2: 1e-8\u00b7max(1, \u03a3w))",
+ "chains_predictions_bitwise_equal": 159,
+ "chains_same_nonconverged_set": 161,
+ "fits_reproduced_as_nonconverged": 223,
+ "fits_strict_reached": 226,
+ "objective_diff_f_std_minus_f_strict": {
+  "min": -6.821210263296962e-13,
+  "max": 0.0,
+  "median": -1.1368683772161603e-13
+ },
+ "gmax_std": {
+  "min": 4.1744385725905886e-14,
+  "max": 2.0138477491826734e-05
+ },
+ "gmax_strict": {
+  "min": 1.7763568394002505e-15,
+  "max": 2.1393997684526767e-13
+ },
+ "dtheta_max": 7.709646251963242e-08,
+ "max_abs_dp": 2.717562297416265e-08,
+ "mean_abs_dp_over_rows": 4.18919963126226e-09,
+ "rows_predicted_by_nonconverged_fits": 1800,
+ "dlogloss_sum_total": 3.441667899284351e-07,
+ "max_abs_impact_on_config_block_mean_logloss": 4.475356215645509e-12,
+ "by_family": [
+  {
+   "family": "M1",
+   "n": 63,
+   "max_abs_dp": 2.1144115347482284e-08,
+   "dlogloss_sum": 1.4808787554554392e-07
+  },
+  {
+   "family": "M2",
+   "n": 163,
+   "max_abs_dp": 2.717562297416265e-08,
+   "dlogloss_sum": 1.9607891438289116e-07
+  }
+ ],
+ "wall_s": 313.6,
+ "script_sha256": "d4e981a78a973d1b676f85242883fa0593ec625af50932477640e8ea4e66821b",
+ "code_hash": "6878ed920bd6e90e83ab49cacc4e8fd8517d67721dc28e8b69b94a1b38e2d01b"
+}
+casos no reproducibles o no pulidos: 3

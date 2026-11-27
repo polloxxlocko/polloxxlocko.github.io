@@ -292,3 +292,22 @@ punto por punto en `AUDIT_RESPONSE_GATE2.md`.
   cálculo más que se duplicaba. Corregido en `a724e84`.
 - Ninguna de las ejecuciones interrumpidas llegó a la prueba interna ni se usó para nada; sus
   directorios se borraron antes de relanzar.
+
+**Resultados (ejecución limpia sobre `a724e84`; detalle en `GATE_2_1_REPORT.md`):**
+- **Reproducción:** selecciones, ruta D-1 y las 13 categorías de la prueba interna, idénticas.
+  6.474.400 de 6.485.374 predicciones (99,83%) iguales bit a bit; el resto, solo en
+  `M2__h480_r64_pp`, difiere < 10⁻⁸. `M2__h240_r16_pp` (publicada) procedía de la ejecución
+  detenida antes de D-1.
+- **Hallazgo nuevo:** el prior de ascendidos no es determinista (orden de un `set` según
+  `PYTHONHASHSEED`; comprobado con semillas 0, 1 y 2). Afecta solo a `_pp`. Corrección propuesta,
+  no aplicada.
+- **Evaluador corregido:** ninguna categoría cambia con semanas calendario ni con bloques de 2, 4,
+  8 o 12 semanas. La autocorrelación semanal de Δ está entre −0,07 y +0,19 (rezagos 1, 2 y 4).
+  M4-sport − M4-cal = −0,00001 [−0,00006; +0,00004] EQ.
+- **Potencia (holdout, N = 15.154):** las comparaciones de M4 pueden demostrar equivalencia si
+  |θ| < ~6-9·10⁻⁴. Para declarar S-R, la mejora real tendría que ser > ~1,1·10⁻³. M2 − A no puede
+  demostrar equivalencia.
+- **Convergencia:** 226/226 verificados. Criterio estricto alcanzado en todos; |Δp| ≤ 2,7·10⁻⁸;
+  impacto ≤ 4,5·10⁻¹² en la log loss media; 3 casos no reproducidos, todos de `_pp`.
+- **D-3:** con log1p, la misma selección de M3 y la misma decisión H1b (EQ). La prueba interna no
+  se reevaluó.

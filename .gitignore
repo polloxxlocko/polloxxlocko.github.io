@@ -19,3 +19,4 @@ research/references_verified.partial.json
 
 # GATE 2.1: la reproducción limpia versiona manifiestos, resultados y hashes; no sus Parquet (se regeneran)
 experiments/gate2_1/repro_run/**/*.parquet
+experiments/gate3/repro_run/**/*.parquet

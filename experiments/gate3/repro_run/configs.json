@@ -1,0 +1,32 @@
+{
+ "M1__w365_r1": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 1.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r4": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 4.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ },
+ "M1__w365_r16": {
+  "family": "M1",
+  "params": {
+   "window_days": 365,
+   "ridge": 16.0
+  },
+  "blocks": [
+   "tuning"
+  ]
+ }
+}

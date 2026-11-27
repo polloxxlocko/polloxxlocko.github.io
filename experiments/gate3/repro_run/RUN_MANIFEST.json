@@ -1,0 +1,117 @@
+{
+ "started_utc": "2026-11-27T18:14:58.057999+00:00",
+ "stages": [
+  "poisson_tuning",
+  "m3_tuning",
+  "inner_base",
+  "m4",
+  "evaluate"
+ ],
+ "clean": true,
+ "git_commit": "ea5598dde4b3a811ebb8b73282e75065fb40b878",
+ "git_dirty": false,
+ "code_files_sha256": {
+  "configs/exclusion_criteria.json": "27abebc21d6252acd4b520d0ea7461b1fdecdcd8615d2813af3db88d29d93a62",
+  "configs/gate2.json": "de720811ea3d8a2f470a9418836f9ed4e4fe965433eef1129b4e71f6948507fb",
+  "configs/holdout.json": "c747b7216752488c9e1b98957386857a21528c941a49f759c2c9296dcfcbf631",
+  "configs/market_selection_matrix.json": "386356449ced886f3b110b1ab33ed065597e100ab599b68e3cb3cf92ec5d1423",
+  "configs/source_reliability.json": "00fc8f4e08b0c84aeab3f5b7859a61b5941893819d79c9f5d2166d4d7e2a9c6e",
+  "configs/team_aliases.json": "275dff95c0efacbb536cb19de3e6029676675818b616663c3e49bcbfd5196d47",
+  "experiments/gate2/run.py": "72b918cc1436ac3fb9b0c6af2994e633948fe3e23524058cc788ddd43ce2a7ac",
+  "experiments/gate3/run_gate3.py": "e7f21f5aa34a8e899da76fbd08f843743e6641c896d1b42048f4ed351b110a20",
+  "pyproject.toml": "f00268076fcb1aa94e389e2076186c7296e3916de4e4378932c0daea5ce2d690",
+  "requirements-lock.txt": "f0bef3e1567f40db680bba616b90d7369b74c3cba7bb11653475a22d1c66cf80",
+  "src/qsports/__init__.py": "c576fd1b8dd393a4841df3ce5f4a42b7359963273997cf75104cfdd5f83e8d14",
+  "src/qsports/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+  "src/qsports/audit_package.py": "bbb6baa7385f5d79681d4e014e525473d238e2c4f857e776f962c23c9df96740",
+  "src/qsports/audit_synthetic.py": "064479ddb16c4e869366f27b491968058dde7f0ff437a8a9ead74c24ac1d1196",
+  "src/qsports/benchmark.py": "cf3b34c236a17afd248119a4a893856c069b30b3b89fb4ddbea46ef46bb7d1c4",
+  "src/qsports/cli.py": "774072565596aa1235e0b64c398a2ece63d7dd1b42db425ecec1de8ddc173cfe",
+  "src/qsports/divisions.py": "074b78ae5b5d31698dd6cf532e8d3874a8078ca1be7b7a4eb2cf9cdcf7527a14",
+  "src/qsports/evaluation.py": "22ac0059be262a2e24a7cbcfc325bafe47844d4340b79c8260489576e969c3ae",
+  "src/qsports/features.py": "d3c10a7605c4c30c04e86a74c02cff2ffc1b3b3a58f2acaa8f771168245c400d",
+  "src/qsports/gate2.py": "6c93ae67c3ca470f0cbd5ca9b95f5ee129b827eda96e41f9338889d6df0ff41f",
+  "src/qsports/gate3.py": "ab1f32ac277b29fdfd51ec692ef0580853fbcfd9ec5043af00102ecc0a2c2bf4",
+  "src/qsports/holdout.py": "7302b988de54b5d107cb1c45ab0dfa7c0945ab36c0a06ceac2f5f2c759c5913e",
+  "src/qsports/ingest.py": "a0e4bdb209c2e14cb945d6a994dd7272879b8e13e494e80ec3ad549d021f4eb2",
+  "src/qsports/models.py": "25eea45c018dbe4a29bf3fd0bb919ee35fa9acc68644ebe03105666debe8bcc7",
+  "src/qsports/odds.py": "c2b5649c46599d556c92e1e8042d059534786e2ff4c9b51bc8794f92e3d9ef25",
+  "src/qsports/ou.py": "b506aff7ab73cec8ae1c3d673af4f260f0fbc09b0a609d36d329cbffee12984c",
+  "src/qsports/paths.py": "f316642a7099e81bea65aabc9841f2497846d4c2267967020e47733a12ff5d18",
+  "src/qsports/process.py": "334e36222e7b25b2d79f8808df7346ddfcc484fdded020d0d41a600d21607730",
+  "src/qsports/quality.py": "eb70a365a521473b0a312862d005f41304fa4f93a8705467e5a40415e7d3166c",
+  "src/qsports/synthetic.py": "59e858d438ebf53e462d756673e15ca736f19f1e6551433016d66a87840bc130",
+  "src/qsports/temporal.py": "26e172ee2184bc0fccc28350cb1af9e8589a9c15aa6a8d30cc3f82c92650c955",
+  "src/qsports/validation.py": "3b713985f0260ae84b647b546e4e1eb7fe93fb62b3d24fbd0f2f788a6978d8e6",
+  "src/qsports/verify.py": "ac9ddabf9d8b3b181c8b5f3d0670c23caad746518c60c9144c26d1ff5e809591",
+  "src/qsports/walkforward.py": "1af254bc07c2a15a1d014fc4092d09fbb7a4af5c761d45bf46f49daef61a9c52"
+ },
+ "code_hash": "ec1c590e6babf78814a028c8fb6a684c53fb2ae6541d249dec17015c46b5a6ee",
+ "dataset": {
+  "dev_matches_content_sha256": "41d9503c0d33477ce57b100f66cb35082590a3f4d85600aa1acd692d76b4f5b9",
+  "dev_benchmarks_content_sha256": "c2b1dd65d97daebb5680a49c9bbe8c29cd8e990ee82a692973be92864b8742e5",
+  "n_dev_rows": 182821
+ },
+ "versions": {
+  "python": "3.13.18",
+  "platform": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "scipy": "1.16.3",
+  "pyarrow": "19.0.1"
+ },
+ "threads_env": {
+  "OPENBLAS_NUM_THREADS": "1",
+  "OMP_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "sealed_before": {
+  "access_log_entries": {
+   "holdout": 0,
+   "reserve": 0
+  },
+  "fence_log": {
+   "present": true,
+   "allowed": 0,
+   "refused": 0,
+   "ok": true
+  }
+ },
+ "fence": {
+  "fence_max_eval_season": "2122",
+  "evaluated_blocks": {
+   "tuning_seasons_poisson": [
+    "0506",
+    "0607",
+    "0708",
+    "0809",
+    "0910",
+    "1011",
+    "1112",
+    "1213",
+    "1314"
+   ],
+   "tuning_seasons_stacked": [
+    "0607",
+    "0708",
+    "0809",
+    "0910",
+    "1011",
+    "1112",
+    "1213",
+    "1314"
+   ],
+   "inner_test_seasons": [
+    "1415",
+    "1516",
+    "1617",
+    "1718",
+    "1819",
+    "1920",
+    "2021",
+    "2122"
+   ]
+  }
+ },
+ "reads_published_outputs": false
+}

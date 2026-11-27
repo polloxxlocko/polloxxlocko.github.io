@@ -23,6 +23,14 @@ El informe de auditoría recibido (GATE 2.1) contiene conclusiones y solicitudes
 qué pruebas ejecutó el auditor, en qué commit ni con qué resultado**. Este registro no le atribuye
 ninguna ejecución. Si el auditor aporta sus registros, se añadirán aquí, separados de los de Claude.
 
+**Revisión de cierre de GATE 2.1 (según el mensaje del usuario del 2026-11-27; no reproducida por Claude):**
+el auditor informó haber verificado los registros individuales de los 226 ajustes, los cálculos de
+potencia, las correcciones del evaluador, los manifiestos de reproducción y la identidad de los 47
+archivos de código, pruebas, configuración y dependencias entre `a724e84`, `2603793` y `7dd6261`.
+**Pendiente:** la ejecución independiente de `pytest` y `audit-synthetic` por el auditor (a la espera de
+que el usuario pueda adjuntarle el ZIP ligero). Las ejecuciones de `pytest` y `audit-synthetic` de este
+registro son de Claude y no deben atribuirse al auditor.
+
 ## C. Registro histórico de GATE 2
 
 `reports/gate2_pytest_result.txt` ("114 passed") no indica commit y no corresponde al commit

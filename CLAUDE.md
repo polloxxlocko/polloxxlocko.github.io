@@ -22,9 +22,10 @@ recomendaciones de apuestas.
 |---|---|
 | GATE 0 | **Aprobado** por el usuario (2026-11-27) |
 | GATE 1 | **Aprobado** por el usuario (2026-11-27), tras auditoría externa documental |
-| GATE 2 | Completado; auditoría independiente: **aprobación metodológica condicionada**. D-1 aceptada; D-2 aceptada condicionalmente |
+| GATE 2 | Completado. D-1, D-2, D-3 y D-4 **aceptadas definitivamente** por el usuario (2026-11-27) |
 | GATE 2.1 | Fase correctiva (2026-11-27) en la rama `gate2.1`; ver `GATE_2_1_REPORT.md` y `AUDIT_RESPONSE_GATE2.md`. Desarrollo: aporte incremental de M4-sport (desviación de M2) sobre M4-cal **no demostrado** (EQ) en 2014/15-2021/22; la conclusión se limita a esos modelos, variables y períodos |
-| GATE 3 | **NO autorizado.** El bloque de validación 2022/23-2023/24 está vallado |
+| GATE 2.1 → cierre | **Aprobado** por el usuario (2026-11-27) |
+| GATE 3 | **Autorizado** (2026-11-27) solo para la validación 2022/23-2023/24, con **una sola evaluación** de los candidatos congelados (M4-sport, M4-cal, M2), tras corregir el no determinismo del prior de ascendidos, probarlo con varios `PYTHONHASHSEED`, repetir la reproducción limpia y verificar identidad e hiperparámetros. Rama `gate3`; preregistro en `MODEL_SPECIFICATION.md` Parte C. Detenerse antes de GATE 4 |
 | Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
 | Fuente principal | Football-Data.co.uk |
@@ -113,8 +114,8 @@ matemática; semillas fijas; configuración en `configs/`; ningún valor crudo s
 | 0 Selección de mercado | Aprobado |
 | 1 Infraestructura de datos | Aprobado |
 | 2 Modelo inicial | Completado; aprobación condicionada |
-| 2.1 Correcciones de auditoría | Completado; pendiente de revisión y de autorización de GATE 3 |
-| 3 Validación histórica | **No autorizado** |
+| 2.1 Correcciones de auditoría | Aprobado |
+| 3 Validación histórica | Autorizado con condiciones (una sola evaluación); ver §2 |
 | 4 Auditoría | No iniciado |
 | 5 Prospectivo genuino (predicciones registradas antes de los partidos; simulado) | No iniciado |
 | 6 Interfaz | No iniciado |

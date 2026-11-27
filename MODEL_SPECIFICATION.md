@@ -196,3 +196,67 @@ de M4, pero **no** para detectar mejoras de tamaño δ de M2 frente al mercado.
   impacto medido ≤ 2,1·10⁻⁹ en p); M3 y M4: 0.
 - Tiempo de ajuste mediano: Poisson 6-9 ms; M3 80 ms; M4 13-16 ms. Memoria máxima del
   proceso principal: 1,66 GB.
+
+---
+
+## Parte C — Preregistro de la evaluación de GATE 3 (escrito ANTES de evaluar)
+
+**Autorización (2026-11-27, mensaje del usuario):** "Una vez superadas esas comprobaciones, autorizo GATE 3
+exclusivamente para la validación 2022/23–2023/24, con una sola evaluación de los candidatos congelados."
+Condiciones previas exigidas y cómo se cumplen:
+
+| # | Condición | Cumplimiento |
+|---|---|---|
+| 1 | Corregir el no determinismo del prior de ascendidos (models.py, líneas 151 y 178) con `sorted(departed)` | Commit `ea5598d` |
+| 2 | Prueba de reproducibilidad con distintos `PYTHONHASHSEED` | `tests/test_determinism.py` (semillas 0-3 sintético; 0-2 datos reales T1). Falla con el código antiguo (prueba de mutación) |
+| 3 | Repetir la reproducción limpia y comprobar que las decisiones y predicciones de los candidatos no cambian | `experiments/gate3/repro_run` (commit `ea5598d`, `--clean`); comparación en `experiments/gate3/repro_comparison_vs_gate2_1.json` |
+| 4 | El ejecutor comprueba identidad e hiperparámetros, no solo el hash de la autorización | `qsports.gate3.verify_frozen` + `build_factory` + `identity_replay` (`tests/test_gate3.py`) |
+| 5 | Congelar M4-sport, M4-cal y M2; SESOI = 0,001; protocolo vigente | `configs/gate3_frozen_candidates.json` (creado tras 1-4) |
+
+**Candidatos congelados** (argumentos completos del constructor en el archivo congelado):
+- **M2*** `M2__h480_r64`: Poisson por división, semivida 480 d, ridge 64, historia máx. 1.460 d, sin prior de
+  ascendidos; reajuste en cada fecha de captura.
+- **M4-cal*** `M4cal__h730`: logit p = a + b·logit p_A, semivida 730 d; reajuste cada 4 capturas; filas de
+  entrenamiento con `inp_m2` disponible (las mismas que M4-sport).
+- **M4-sport*** `M4sport__h730_r1000`: M4-cal + β·(logit p_M2* − logit p_A), ridge 1.000 sobre β, semivida
+  730 d.
+
+**Ejecución (una sola vez):**
+1. Verificación de identidad.
+2. Réplica de identidad en la prueba interna: debe ser igual bit a bit a la reproducción de referencia.
+3. M2* walk-forward sobre 2022/23-2023/24, con cadena propia como en la prueba interna.
+4. M4 entrenado en cada τ con todas las filas anteriores a τ que tengan `inp_m2`. Las de 2005/06-2021/22
+   vienen de las predicciones de M2* de la reproducción de referencia (SHA-256 congelados); las de la
+   validación anteriores a τ, de M2* fuera de muestra.
+5. Benchmarks A (consenso pre-cierre sin margen) y C (frecuencia histórica point-in-time).
+6. Sello `logs/GATE3_EVALUATED.json`: impide una segunda evaluación.
+
+**Universo:** temporadas 2022/23 y 2023/24, resultado conocido, captura estimable, elegibilidad A
+(`elig_A`). Cobertura del 100% exigida a cada pronóstico. Tamaño previsto: unas 15.570 filas (15.630
+partidos; estimación por la tasa de elegibilidad del desarrollo, sin mirar resultados).
+
+**Comparaciones** (partición del protocolo §6; δ = 0,001 nats; bootstrap por bloques de 4 semanas
+calendario, 10.000 réplicas, semilla 20261127):
+1. **M4-sport − M4-cal**: comparación principal (aporte incremental de la desviación de M2).
+2. M4-sport − A, M4-cal − A, M2 − A (frente al mercado).
+3. M2 − C, A − C (contexto).
+
+Además: sensibilidad a bloques de 2, 4, 8 y 12 semanas calendario; Δ por temporada; calibración. Condición de
+validez 1 de Q2: dirección de M4-sport − A (Δ̄ < 0).
+
+**Potencia prevista** (se de desarrollo escalado a n ≈ 15.570; aproximación normal):
+
+| Comparación | se | MDE superioridad | Mejora real para S-R | P(IC ⊂ (−δ, δ) \| θ = 0) | Máx. \|θ\| con equivalencia al 80% |
+|---|---|---|---|---|---|
+| M4-sport − M4-cal | 4,8·10⁻⁵ | 1,35·10⁻⁴ | 1,14·10⁻³ | ≈ 1,00 | 8,6·10⁻⁴ |
+| M4-sport − A | 1,26·10⁻⁴ | 3,5·10⁻⁴ | 1,35·10⁻³ | ≈ 1,00 | 6,5·10⁻⁴ |
+| M4-cal − A | 1,17·10⁻⁴ | 3,3·10⁻⁴ | 1,33·10⁻³ | ≈ 1,00 | 6,7·10⁻⁴ |
+| M2 − A | 8,4·10⁻⁴ | 2,4·10⁻³ | 3,36·10⁻³ | ≈ 0,00 | no alcanzable |
+
+**Fuera de alcance de GATE 3:**
+- **Q3 (rentabilidad simulada): NO EVALUADA.** En el desarrollo no se congeló ninguna regla de selección
+  de apuestas (umbral de EV, tope de cuota). Definirla ahora, con la validación a la vista del plan,
+  sería una elección no preregistrada.
+- Modelos o variables nuevos, otros mercados, holdout y reserva: excluidos.
+- Las categorías de GATE 3 son resultados de **validación de desarrollo**, no veredictos de Q1-Q3, que se
+  reservan para el holdout. Se informa todo, sea cual sea el resultado.

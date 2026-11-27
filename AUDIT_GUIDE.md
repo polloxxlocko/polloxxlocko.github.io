@@ -1,13 +1,18 @@
 # AUDIT_GUIDE — Guía para una auditoría independiente
 
-Versión 1.0 · 2026-11-27 · Estado del proyecto: GATE 1 completado (pendiente de revisión);
-GATE 2 no iniciado.
+Versión 1.1 · 2026-11-27 · Estado del proyecto: GATE 0 y GATE 1 aprobados; GATE 2 con
+aprobación metodológica condicionada; GATE 2.1 (correcciones) completado y pendiente de
+revisión; GATE 3 no autorizado. (Las secciones 1-8 describen la publicación de GATE 1.)
 
 Este repositorio se publica para que un auditor independiente (humano o IA) evalúe la
 calidad científica, estadística y técnica del proyecto. La guía explica qué contiene, qué
 se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente.
 
 > **GATE 2:** para auditar modelos y experimentos, ver `AUDIT_RUN.md` y `GATE_2_REPORT.md`.
+> **GATE 2.1 (rama `gate2.1`):** respuesta a la auditoría de GATE 2 en `AUDIT_RESPONSE_GATE2.md`;
+> resultados corregidos en `GATE_2_1_REPORT.md`; reproducción limpia y comparación con lo publicado en
+> `REPRODUCIBILITY_REPORT.md`; registros de pruebas y manifiesto de hashes en `reports/gate2_1/`;
+> ZIP ligero sin Parquet: `python -m qsports audit-package --light`.
 
 ## 1. Contenido publicado
 

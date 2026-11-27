@@ -74,6 +74,12 @@ def configure(out_dir, mode: str = "resume") -> Path:
     return out_dir
 
 
+def _reusable() -> bool:
+    """Reutilizar salidas con manifiesto válido. En modo 'clean' el directorio empezó vacío, así que toda salida
+    válida que contenga la produjo ESTA ejecución (p. ej., configuraciones repetidas al extender la grilla)."""
+    return _RUN["mode"] in ("clean", "resume")
+
+
 def _writable() -> None:
     if _RUN["mode"] == "read_only" or OUT.resolve() == PUBLISHED.resolve():
         raise ReadOnlyError("Configure un directorio de ejecución (gate2.configure) antes de escribir.")
@@ -278,7 +284,7 @@ def run_config(family, config_id, params, factory, frame, seasons, block, scope,
     _writable()
     key = _config_key(family, config_id, params, frame, seasons, block, scope, every, columns)
     pf = _pred_path(family, config_id, block)
-    if _RUN["mode"] == "resume" and _manifest_ok(pf, key):
+    if _reusable() and _manifest_ok(pf, key):
         return pd.read_parquet(pf)
     t0, c0 = time.perf_counter(), resource.getrusage(resource.RUSAGE_SELF)
     preds, logs = wf.run(frame, factory, seasons, scope=scope, refit_every=every, label=config_id,
@@ -413,7 +419,7 @@ def run_configs_parallel(family, specs, frame, seasons, block, scope, every, n_j
     from concurrent.futures import ProcessPoolExecutor
     _writable()
     keys = {s[0]: _config_key(family, s[0], s[1], frame, seasons, block, scope, every, s[3]) for s in specs}
-    todo = [s for s in specs if not (_RUN["mode"] == "resume" and _manifest_ok(_pred_path(family, s[0], block),
+    todo = [s for s in specs if not (_reusable() and _manifest_ok(_pred_path(family, s[0], block),
                                                                                keys[s[0]]))]
     if not todo:
         return
@@ -435,7 +441,7 @@ def benchmark_preds(frame, col, family, cid, seasons, block):
     r = frame[frame["season_code"].isin(seasons)]  # igual que GATE 2 (el universo filtra al evaluar)
     key = _key(kind="benchmark", code=code_hash(), col=col, seasons=list(seasons),
                input=frame_hash(r[["match_id", col, "pre_odds_capture_date_est"]]))
-    if _RUN["mode"] == "resume" and _manifest_ok(_pred_path(family, cid, block), key):
+    if _reusable() and _manifest_ok(_pred_path(family, cid, block), key):
         return
     p = pd.DataFrame({"match_id": r["match_id"].values, "p_over": r[col].values,
                       "fit_tau": r["pre_odds_capture_date_est"].values})

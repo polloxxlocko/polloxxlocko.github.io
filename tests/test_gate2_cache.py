@@ -130,3 +130,13 @@ def test_train_max_date_stored_per_fit_and_joinable(rundir, frame):
                 how="left", validate="many_to_one")
     assert j["train_max_date"].notna().all()
     assert (pd.to_datetime(j["train_max_date"]) < pd.to_datetime(j["fit_tau"])).all()
+
+
+def test_clean_mode_reuses_only_its_own_outputs(rundir, frame, monkeypatch):
+    """En modo limpio no se lee nada anterior (directorio vacío), pero una configuración ya calculada y validada en
+    la MISMA ejecución (p. ej., al extender la grilla) se reutiliza en lugar de recalcularse."""
+    assert gate2._RUN["mode"] == "clean"
+    p1 = _run(frame)
+    with monkeypatch.context() as m:
+        _forbid_recompute(m)
+        pd.testing.assert_frame_equal(_run(frame).reset_index(drop=True), p1.reset_index(drop=True))

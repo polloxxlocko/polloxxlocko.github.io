@@ -1,0 +1,302 @@
+{
+ "neighbor_sensitivity_tuning": {
+  "M1": {
+   "selected": "M1__w1095_r128",
+   "n_configs": 24,
+   "closest_by_logloss": [
+    {
+     "config": "M1__w730_r128",
+     "mean_abs_dp": 0.01435449235310206,
+     "delta_logloss_vs_selected": 4.658271102964129e-06
+    },
+    {
+     "config": "M1__w730_r64",
+     "mean_abs_dp": 0.019519624346907703,
+     "delta_logloss_vs_selected": 0.0002766735461946501
+    },
+    {
+     "config": "M1__w1642_r128",
+     "mean_abs_dp": 0.013742176411016023,
+     "delta_logloss_vs_selected": 0.00036511084290291596
+    }
+   ]
+  },
+  "M2": {
+   "selected": "M2__h480_r64",
+   "n_configs": 26,
+   "closest_by_logloss": [
+    {
+     "config": "M2__h240_r64",
+     "mean_abs_dp": 0.010431290435564454,
+     "delta_logloss_vs_selected": 0.00010833061415715939
+    },
+    {
+     "config": "M2__h480_r128",
+     "mean_abs_dp": 0.011259428587088656,
+     "delta_logloss_vs_selected": 0.0003058399897627462
+    },
+    {
+     "config": "M2__h960_r128",
+     "mean_abs_dp": 0.00993553996365813,
+     "delta_logloss_vs_selected": 0.0003221671725736064
+    }
+   ]
+  },
+  "M3": {
+   "selected": "M3__GSTC_h15_r100",
+   "n_configs": 32,
+   "closest_by_logloss": [
+    {
+     "config": "M3__GS_h15_r10",
+     "mean_abs_dp": 0.006077095372993717,
+     "delta_logloss_vs_selected": 2.850236635265624e-06
+    },
+    {
+     "config": "M3__GS_h15_r1",
+     "mean_abs_dp": 0.0061097919486125946,
+     "delta_logloss_vs_selected": 3.6939380831935154e-06
+    },
+    {
+     "config": "M3__GS_h15_r100",
+     "mean_abs_dp": 0.0059837067986208544,
+     "delta_logloss_vs_selected": 5.253694636220274e-06
+    }
+   ]
+  },
+  "M4sport": {
+   "selected": "M4sport__h730_r1000",
+   "n_configs": 4,
+   "closest_by_logloss": [
+    {
+     "config": "M4sport__h730_r100",
+     "mean_abs_dp": 0.0015818758656910828,
+     "delta_logloss_vs_selected": 1.4614205247731604e-05
+    },
+    {
+     "config": "M4sport__h730_r10",
+     "mean_abs_dp": 0.0017901838906079558,
+     "delta_logloss_vs_selected": 1.804515953762742e-05
+    },
+    {
+     "config": "M4sport__h730_r10000",
+     "mean_abs_dp": 0.0041519276148247655,
+     "delta_logloss_vs_selected": 4.3841093037455536e-05
+    }
+   ]
+  },
+  "M4cal": {
+   "selected": "M4cal__h730",
+   "n_configs": 2,
+   "closest_by_logloss": [
+    {
+     "config": "M4cal__hNone",
+     "mean_abs_dp": 0.0035497621872858354,
+     "delta_logloss_vs_selected": 7.035812923639195e-05
+    }
+   ]
+  }
+ },
+ "M2_home_advantage_eta": {
+  "by_division_median_over_time": {
+   "B1": 0.291,
+   "D1": 0.2567,
+   "D2": 0.2577,
+   "E0": 0.2677,
+   "E1": 0.2437,
+   "E2": 0.2157,
+   "E3": 0.2003,
+   "EC": 0.2143,
+   "F1": 0.314,
+   "F2": 0.3485,
+   "G1": 0.4044,
+   "I1": 0.2829,
+   "I2": 0.3047,
+   "N1": 0.2983,
+   "P1": 0.2608,
+   "SC0": 0.2047,
+   "SC1": 0.1813,
+   "SC2": 0.1446,
+   "SC3": 0.142,
+   "SP1": 0.3021,
+   "SP2": 0.3178,
+   "T1": 0.2652
+  },
+  "overall_range": [
+   0.06503115767951233,
+   0.4576007796520175
+  ],
+  "season_median": {
+   "05": 0.2954,
+   "06": 0.2867,
+   "07": 0.2793,
+   "08": 0.2954,
+   "09": 0.2892,
+   "10": 0.298,
+   "11": 0.2758,
+   "12": 0.2462,
+   "13": 0.2573,
+   "14": 0.2521,
+   "15": 0.2444,
+   "16": 0.2561,
+   "17": 0.2454,
+   "18": 0.2377,
+   "19": 0.2402,
+   "20": 0.1969,
+   "21": 0.1911
+  }
+ },
+ "M2_baseline_mu_exp_goals_per_team": {
+  "05": 1.114,
+  "06": 1.082,
+  "07": 1.104,
+  "08": 1.108,
+  "09": 1.108,
+  "10": 1.118,
+  "11": 1.138,
+  "12": 1.176,
+  "13": 1.154,
+  "14": 1.164,
+  "15": 1.157,
+  "16": 1.163,
+  "17": 1.178,
+  "18": 1.174,
+  "19": 1.172,
+  "20": 1.196,
+  "21": 1.216
+ },
+ "M4cal_coefficients_path": {
+  "n_fits": 342,
+  "a_range": [
+   -0.08965442441198869,
+   0.014816980361360841
+  ],
+  "b_range": [
+   1.0044232249887963,
+   1.2339962755966765
+  ],
+  "b_last": 1.096963694647876
+ },
+ "M4sport_coefficients_path": {
+  "n_fits": 342,
+  "a_range": [
+   -0.09196540631538233,
+   0.014754122754085044
+  ],
+  "b_range": [
+   1.019445831553805,
+   1.206826183890235
+  ],
+  "b_last": 1.0673756059480797,
+  "beta_sport_range": [
+   -0.022173804077855967,
+   0.0522714865910529
+  ]
+ },
+ "convergence": {
+  "M1": {
+   "fits": 216819,
+   "nonconverged": 63,
+   "rate": 0.000291,
+   "nonconv_gmax_max": 2.01e-05,
+   "messages": {
+    "max_iter": 50,
+    "búsqueda lineal fallida": 13
+   }
+  },
+  "M2": {
+   "fits": 234249,
+   "nonconverged": 163,
+   "rate": 0.000696,
+   "nonconv_gmax_max": 1.85e-05,
+   "messages": {
+    "max_iter": 133,
+    "búsqueda lineal fallida": 30
+   }
+  },
+  "M3": {
+   "fits": 5705,
+   "nonconverged": 0,
+   "rate": 0.0,
+   "nonconv_gmax_max": null,
+   "messages": {}
+  },
+  "M0a_w730": {
+   "fits": 16374,
+   "nonconverged": 0,
+   "rate": 0.0,
+   "nonconv_gmax_max": null,
+   "messages": {}
+  },
+  "M4cal": {
+   "fits": 515,
+   "nonconverged": 0,
+   "rate": 0.0,
+   "nonconv_gmax_max": null,
+   "messages": {}
+  },
+  "M4sport": {
+   "fits": 861,
+   "nonconverged": 0,
+   "rate": 0.0,
+   "nonconv_gmax_max": null,
+   "messages": {}
+  }
+ },
+ "compute": {
+  "M1": {
+   "config_runs": 25,
+   "wall_s_total": 696.7,
+   "sum_fit_s_total": 1631.2,
+   "fit_ms_median": 6.44,
+   "fit_ms_p99": 19.9,
+   "max_rss_main_mb": 1659.4,
+   "nan_predictions": 264
+  },
+  "M2": {
+   "config_runs": 27,
+   "wall_s_total": 913.0,
+   "sum_fit_s_total": 2315.5,
+   "fit_ms_median": 8.6,
+   "fit_ms_p99": 21.92,
+   "max_rss_main_mb": 1659.4,
+   "nan_predictions": 286
+  },
+  "M3": {
+   "config_runs": 33,
+   "wall_s_total": 599.4,
+   "sum_fit_s_total": 518.2,
+   "fit_ms_median": 79.69,
+   "fit_ms_p99": 273.62,
+   "max_rss_main_mb": 1659.4,
+   "nan_predictions": 0
+  },
+  "M0a_w730": {
+   "config_runs": 2,
+   "wall_s_total": 16.0,
+   "sum_fit_s_total": 14.8,
+   "fit_ms_median": 0.83,
+   "fit_ms_p99": 1.73,
+   "max_rss_main_mb": 1659.4,
+   "nan_predictions": 0
+  },
+  "M4cal": {
+   "config_runs": 3,
+   "wall_s_total": 11.9,
+   "sum_fit_s_total": 7.5,
+   "fit_ms_median": 12.89,
+   "fit_ms_p99": 38.59,
+   "max_rss_main_mb": 1659.4,
+   "nan_predictions": 421
+  },
+  "M4sport": {
+   "config_runs": 5,
+   "wall_s_total": 22.3,
+   "sum_fit_s_total": 14.8,
+   "fit_ms_median": 15.54,
+   "fit_ms_p99": 44.99,
+   "max_rss_main_mb": 1659.4,
+   "nan_predictions": 735
+  }
+ },
+ "convergence_note": "Ajustes Poisson marcados sin convergencia: gmax <= 2e-5 (precisión numérica límite del criterio de Armijo). Reajuste de alta precisión en 24 casos: |Δp| máx = 2.1e-9 (ver EXPERIMENT_LOG E-004)."
+}

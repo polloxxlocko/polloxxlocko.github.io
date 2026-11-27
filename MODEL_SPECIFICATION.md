@@ -113,4 +113,78 @@ evaluador y pruebas de filtración) **sin** datos de la fuente ni datos sellados
 
 ## Parte B — Resultados
 
-*(Se completa al terminar los experimentos; ver `GATE_2_REPORT.md`.)*
+Resultados de **desarrollo** (no son veredictos de Q1-Q3). Fuentes:
+`experiments/gate2/results.json`, `stability.json`, `configs.json`, `runlog.json`.
+
+### B0. Desviaciones de la Parte A
+| Id | Desviación | Motivo | Momento |
+|---|---|---|---|
+| D-1 | Regla de extensión de borde de grilla (`configs/gate2.json → boundary_rule`) | La selección Poisson quedó en el borde de la grilla preregistrada (ridge y ventana máximos) | Tras ver solo la selección Poisson en ajuste; **antes** de ver M3, M4 o la prueba interna |
+| D-2 | Optimizador Poisson: Newton-Raphson con Hessiana analítica en vez de L-BFGS | Velocidad (×7,6) y precisión; mismo modelo y mismo óptimo (prueba automática) | Antes de cualquier resultado |
+
+### B1. Selecciones en el bloque de ajuste
+
+| Familia | Seleccionado | Grilla final (tras D-1) | Nota |
+|---|---|---|---|
+| M1 | ventana 1.095 d, ridge 128 | ventanas {365, 730, 1.095, 1.642}; ridge {1…128} | **Sigue en el borde de ridge** tras las 3 extensiones permitidas (limitación) |
+| M2 | semivida 480 d, ridge 64, sin prior de ascendidos | semivida {120, 240, 480, 960}; ridge {1…128} | Óptimo **interior**. El prior de ascendidos no mejora (0,685287 frente a 0,685269) |
+| M3 | GSTC, EWMA 15 partidos, ridge 100 | ridge {1, 10, 100, 1000} | Las 6 mejores configuraciones difieren en < 1e-5 |
+| M4-cal | semivida 730 d | {∞, 730} | 0,683855 frente a 0,683925 |
+| M4-sport | semivida 730 d, ridge 1.000, X = [logit p_M2* − logit p_A] | ridge {10…10.000} | Óptimo interior; la regularización fuerte acerca M4-sport a M4-cal |
+
+**Reglas de la escalera (§A5), bloque de ajuste:**
+- M2 frente a M1: Δ = −0,00057 [−0,00080; −0,00035], S-NR → **M2 justificado**.
+- H1b (tiros frente a solo goles, dentro de M3): Δ = −0,00003 [−0,00024; +0,00018], **EQ** →
+  las variables de tiros **no** entran en M4-sport.
+- M5 (diagnósticos con M2* en ajuste, n = 69.881): índice de dispersión 1,017 [1,005;
+  1,030] < 1,10 → binomial negativa **no justificada**. Correlación residual local-visitante
+  0,0135 [0,0055; 0,0216]: distinta de 0, pero |r| < 0,05 → Poisson bivariado **no
+  justificado**. Gradient boosting: sin no linealidad documentada (pendiente de calibración
+  de M4-sport = 1,005) → **no justificado**. **Ningún modelo M5 se implementó** (exigencia 9).
+
+### B2. Prueba interna 2014/15-2021/22 (una evaluación por familia; n = 61.137 filas elegibles A)
+
+| Comparación (modelo − referencia) | Δ log loss | IC95 bootstrap por bloques | Categoría |
+|---|---:|---|:---:|
+| M1 − C | −0,00520 | [−0,00597; −0,00442] | S-R |
+| M2 − C | −0,00593 | [−0,00677; −0,00510] | S-R |
+| M3 − C | −0,00519 | [−0,00584; −0,00450] | S-R |
+| M2 − M1 | −0,00073 | [−0,00098; −0,00047] | S-NR |
+| M3 − M2 | +0,00075 | [+0,00017; +0,00133] | I-NR |
+| **M2 − A** | **+0,00480** | [+0,00398; +0,00562] | **I-R** |
+| M3 − A | +0,00554 | [+0,00462; +0,00649] | I-R |
+| M4-cal − A | −0,00008 | [−0,00020; +0,00004] | EQ |
+| M4-sport − A | −0,00009 | [−0,00022; +0,00004] | EQ |
+| **M4-sport − M4-cal** | **−0,00001** | **[−0,00006; +0,00004]** | **EQ** |
+| A − C | −0,01073 | [−0,01198; −0,00953] | S-R |
+
+Log loss medio: A 0,67841; M4-cal 0,67833; M4-sport 0,67832; M2 0,68321; C 0,68914.
+Pendiente de calibración: A 1,103 (probabilidades ligeramente comprimidas); M4-cal 1,003;
+M2 1,008.
+
+**Lectura de desarrollo:**
+1. Los modelos deportivos superan a la frecuencia histórica (S-R), pero son claramente
+   **peores que el mercado** (M2 − A: I-R, en todas las temporadas y en ambos regímenes).
+2. Recalibrar el mercado (M4-cal) corrige su pendiente, pero no mejora el log loss de forma
+   distinguible (EQ).
+3. **Aporte deportivo incremental: no demostrado.** Δ(M4-sport − M4-cal) es EQ, con un IC
+   cuya amplitud (±0,00005) excluye cualquier mejora del orden de δ = 0,001. Igual en
+   Betbrain (2014/15-2018/19) y Oddsportal (2019/20-2021/22).
+
+### B3. Potencia para el holdout (supuestos en `EXPERIMENTAL_PROTOCOL.md` §5)
+N elegible en el holdout (conteo de nivel 0) = 15.154. MDE (α = 5% bilateral, potencia
+80%): M4-sport − A = 0,00036; M4-sport − M4-cal = 0,00014; M4-cal − A = 0,00033; M2 − A =
+0,00216 nats. Con δ = 0,001, el holdout tiene potencia suficiente para las comparaciones
+de M4, pero **no** para detectar mejoras de tamaño δ de M2 frente al mercado.
+
+### B4. Estabilidad, convergencia y consumo (`experiments/gate2/stability.json`)
+- Δ por temporada: M2 − A positivo en las 8 temporadas (+0,0028 a +0,0064); M4-cal − A y
+  M4-sport − M4-cal entre −0,0003 y +0,0001.
+- Configuraciones vecinas: diferencias de log loss < 0,0004 (M1, M2) y < 1e-5 (M3).
+- Localía η de M2: de ~0,29 (2005-2011) a ~0,19 (2020/21-2021/22).
+- Coeficiente b de M4: entre 1,00 y 1,23; β deportivo: de −0,02 a 0,05.
+- Ajustes: ~474.500 (M1 216.819; M2 234.249; M3 5.705; M4 1.376; M0 16.374). Sin
+  convergencia formal: M1 0,029%, M2 0,070% (gradiente ≤ 2·10⁻⁵, precisión límite;
+  impacto medido ≤ 2,1·10⁻⁹ en p); M3 y M4: 0.
+- Tiempo de ajuste mediano: Poisson 6-9 ms; M3 80 ms; M4 13-16 ms. Memoria máxima del
+  proceso principal: 1,66 GB.

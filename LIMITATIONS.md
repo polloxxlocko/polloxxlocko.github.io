@@ -55,3 +55,14 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 |---|---|---|
 | E1 | Contenedor cloud efímero sin repositorio remoto | Archivo descargable con historial git; reconstrucción desde cero verificada |
 | E2 | Algunas fuentes bloquean IPs cloud | No se eludió ningún bloqueo |
+
+## GATE 2 (modelos)
+| # | Limitación | Impacto |
+|---|---|---|
+| G1 | Conjunto de información limitado (goles, tiros, tiros a puerta, córners, cuotas pre-cierre); sin xG histórico, alineaciones, lesiones, clima | El "aporte deportivo no demostrado" se refiere a este conjunto |
+| G2 | M1 quedó en el borde de la grilla de ridge tras 3 extensiones (D-1) | M1 puede estar algo subregularizado; no afecta a M2 ni a M4 |
+| G3 | Grillas modestas y búsqueda por grilla, no optimización continua | Óptimos aproximados; diferencias entre vecinos < 4·10⁻⁴ (Poisson) y < 10⁻⁵ (M3) |
+| G4 | Criterio de parada de Newton sensible a la precisión numérica (226 falsos "sin convergencia") | Impacto medido ≤ 2,1·10⁻⁹ en p; mejora pendiente |
+| G5 | La prueba interna es de desarrollo; las categorías no son veredictos | Confirmación formal solo en GATE 3 y en el holdout |
+| G6 | Primeras temporadas de M3 y M4 con poco entrenamiento (NaN excluidos) | Muestras comunes algo menores al inicio del bloque de ajuste |
+

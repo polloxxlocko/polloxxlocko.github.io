@@ -22,7 +22,7 @@ recomendaciones de apuestas.
 |---|---|
 | GATE 0 | **Aprobado** por el usuario (2026-11-27) |
 | GATE 1 | **Aprobado** por el usuario (2026-11-27), tras auditoría externa documental |
-| GATE 2 | **Autorizado (2026-11-27)** con 10 exigencias adicionales (ver `MODEL_SPECIFICATION.md` §A) |
+| GATE 2 | **Completado (2026-11-27), pendiente de revisión** (ver `GATE_2_REPORT.md`). Desarrollo: aporte deportivo incremental sobre el mercado **no demostrado** (EQ) |
 | GATE 3 | **NO autorizado.** El bloque de validación 2022/23-2023/24 está vallado |
 | Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
@@ -111,7 +111,7 @@ matemática; semillas fijas; configuración en `configs/`; ningún valor crudo s
 |---|---|
 | 0 Selección de mercado | Aprobado |
 | 1 Infraestructura de datos | Aprobado |
-| 2 Modelo inicial | En curso (autorizado) |
+| 2 Modelo inicial | Completado; pendiente de revisión |
 | 3 Validación histórica | **No autorizado** |
 | 4 Auditoría | No iniciado |
 | 5 Prospectivo genuino (predicciones registradas antes de los partidos; simulado) | No iniciado |
@@ -125,8 +125,8 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 `MARKET_SELECTION_REPORT.md`. GATE 1: `DATA_INVENTORY.md`, `DATA_QUALITY_REPORT.md`,
 `TEMPORAL_INTEGRITY_REPORT.md`, `HOLDOUT_PROTECTION_PROTOCOL.md`,
 `MARKET_BENCHMARK_SPECIFICATION.md`, `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`,
-`GATE_1_REPORT.md`. Publicación: `AUDIT_GUIDE.md`. Transversales: `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `ROADMAP.md`,
-`README.md`. Futuros: `MODEL_SPECIFICATION.md` (G2), `BACKTEST_REPORT.md` (G3),
+`GATE_1_REPORT.md`, `AUDIT_RESPONSE_GATE1.md`. GATE 2: `MODEL_SPECIFICATION.md` (preregistro + resultados), `GATE_2_REPORT.md`, `AUDIT_RUN.md`. Publicación: `AUDIT_GUIDE.md`. Transversales: `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `ROADMAP.md`,
+`README.md`. Futuros: `BACKTEST_REPORT.md` (G3),
 `MODEL_AUDIT_REPORT.md` (G4).
 
 ## 11. Reglas específicas de GATE 2

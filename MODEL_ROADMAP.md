@@ -1,4 +1,8 @@
-# MODEL_ROADMAP — Secuencia de modelos (diseño; ninguno entrenado en GATE 1)
+# MODEL_ROADMAP — Secuencia de modelos
+
+> **Estado tras GATE 2 (2026-11-27):** M0-M4 implementados y evaluados en desarrollo; M5 **no**
+> implementado (diagnósticos bajo umbral). Resultados en `MODEL_SPECIFICATION.md` Parte B y
+> `GATE_2_REPORT.md`. El diseño original se conserva abajo.
 
 Versión 1.0 · 2026-11-27 · GATE 1
 

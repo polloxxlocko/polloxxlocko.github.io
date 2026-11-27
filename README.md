@@ -6,8 +6,9 @@ de Football-Data.co.uk), y si esa mejora generaría rentabilidad **simulada** co
 reales. **No es un sistema de pronósticos ni de recomendaciones, y no automatiza
 apuestas.**
 
-**Estado:** GATE 0 aprobado · GATE 1 (infraestructura de datos) completado y pendiente de
-revisión · GATE 2 no autorizado.
+**Estado:** GATE 0 y GATE 1 aprobados · GATE 2 (modelos y validación interna) completado y pendiente de
+revisión · GATE 3 no autorizado. Resultado de desarrollo: los modelos deportivos no mejoran el
+mercado pre-cierre (ver `GATE_2_REPORT.md`).
 
 > **¿Auditas este proyecto?** Empieza por [`AUDIT_GUIDE.md`](AUDIT_GUIDE.md): contenido,
 > exclusiones (datos de la fuente, holdout sellado, resúmenes de artículos), reproducción y
@@ -57,12 +58,14 @@ cambio de versión de datos. Hay que registrarlo antes de continuar.
 | `data/raw/` | RAW de desarrollo (no versionado; manifiesto sí) |
 | `data/holdout/`, `data/reserve/` | **Sellados.** Solo se versionan el registro y el log de accesos |
 | `reports/gate1/` | Salidas reproducibles de GATE 1 |
-| `tests/` | 59 pruebas (unitarias, protección del holdout, integración) |
+| `tests/` | 114 pruebas (unitarias, anti-filtración, metodología sintética, protección del holdout, integración) |
+| `experiments/gate2/` | Ejecutor, todas las predicciones fuera de muestra, registros de ajuste, resultados |
 | `phase0/` | Scripts históricos de la Fase Cero |
 
 ## Documentos (orden de lectura sugerido)
-0. `AUDIT_GUIDE.md`: guía para auditores
-1. `GATE_1_REPORT.md`: informe ejecutivo de GATE 1
+0. `AUDIT_GUIDE.md` y `AUDIT_RUN.md`: guías para auditores
+1. `GATE_2_REPORT.md` y `MODEL_SPECIFICATION.md`: modelos, preregistro y resultados de GATE 2
+2. `GATE_1_REPORT.md`: informe ejecutivo de GATE 1
 2. `HOLDOUT_PROTECTION_PROTOCOL.md`, `MARKET_BENCHMARK_SPECIFICATION.md`,
    `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`
 3. `DATA_INVENTORY.md`, `DATA_QUALITY_REPORT.md`, `TEMPORAL_INTEGRITY_REPORT.md`

@@ -1,4 +1,4 @@
-# Versiones exactas verificadas en GATE 1 (Python 3.13.18, Linux). Instalar con: pip install -r requirements-lock.txt
+# Versiones exactas verificadas en GATE 1-2 (Python 3.13.18, Linux). Instalar con: pip install -r requirements-lock.txt
 certifi==2026.11.20
 charset-normalizer==3.5.3
 idna==3.20
@@ -12,5 +12,6 @@ Pygments==2.21.0
 pytest==9.1.1
 python-dateutil==4.0.0
 requests==2.34.2
+scipy==1.16.3
 tzdata==2026.6
 urllib3==2.8.0

@@ -7,6 +7,8 @@ Este repositorio se publica para que un auditor independiente (humano o IA) eval
 calidad científica, estadística y técnica del proyecto. La guía explica qué contiene, qué
 se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente.
 
+> **GATE 2:** para auditar modelos y experimentos, ver `AUDIT_RUN.md` y `GATE_2_REPORT.md`.
+
 ## 1. Contenido publicado
 
 | Categoría | Ubicación |

@@ -211,3 +211,47 @@ ventanas; ×2 ridge y semivida Poisson; ×10 ridge logística), con un máximo d
 con el bloque de ajuste. En ese momento había 9 configuraciones M3 guardadas cuyas métricas
 **no se habían consultado**. Todas las configuraciones (originales y extendidas) se
 conservan.
+
+---
+
+## E-004 · 2026-11-27 · GATE 2: resultados de ajuste, prueba interna y diagnósticos
+
+**Ejecución:** `python experiments/gate2/run.py all` (1.343 s) tras D-1. Todas las salidas en
+`experiments/gate2/` (91 configuraciones, ~6,6 M de predicciones fuera de muestra, ~474.500
+ajustes registrados). Una primera ejecución "all" se detuvo **antes** de la prueba interna
+para aplicar D-1. Su registro se conserva en `log_all_run1_stopped_D1.txt`; las 9
+configuraciones M3 que había calculado se reutilizaron sin consultarse antes de fijar D-1.
+
+**Bloque de ajuste (decisiones de la escalera):**
+- M1* = ventana 1.095 d, ridge 128 (en el borde tras 3 extensiones: limitación).
+  M2* = semivida 480 d, ridge 64 (interior). Prior de ascendidos: no mejora → no adoptado.
+- M2 frente a M1: −0,00057 [−0,00080; −0,00035] S-NR → M2 justificado.
+- H1b (tiros frente a goles en M3): −0,00003 [−0,00024; +0,00018] EQ → **resultado negativo**
+  para H1b con este diseño. Los tiros no entran en M4-sport.
+- M5: dispersión 1,017 [1,005; 1,030]; r residual 0,0135 [0,0055; 0,0216] → ninguna extensión
+  justificada. **No se implementó M5.**
+- M4-cal* = semivida 730 d; M4-sport* = semivida 730 d, ridge 1.000 (interior tras 1
+  extensión).
+
+**Prueba interna 2014/15-2021/22 (n = 61.137; una evaluación por familia):**
+M2 − A = +0,00480 (I-R); M4-cal − A = −0,00008 (EQ); **M4-sport − M4-cal = −0,00001
+[−0,00006; +0,00004] (EQ)**; M2 − C = −0,00593 (S-R); M3 − M2 = +0,00075 (I-NR).
+Coherente por temporada y por régimen. Tabla completa en `MODEL_SPECIFICATION.md` §B2.
+
+**Convergencia:** M1 63/216.819 y M2 163/234.249 ajustes marcados sin convergencia
+(gradiente ≤ 2·10⁻⁵). Reajuste de alta precisión de 24 casos: |Δp| máx = 2,1·10⁻⁹ →
+falsos negativos del criterio de parada (mejora recomendada: criterio por decremento de
+Newton). M3 y M4: 0 sin convergencia.
+
+**Predicciones NaN (registradas, excluidas por muestra común):** M1 264 y M2 286 (primeros
+partidos de divisiones sin historia previa, p. ej. EC 2005/06); M4-cal 421 y M4-sport 735
+(menos de 200 filas de entrenamiento con entradas disponibles al inicio de 2006/07).
+
+**Almacenamiento:** predicciones reorganizadas en un archivo por configuración
+(`p_over` float64 idéntico bit a bit; λ en float32, error < 4,2·10⁻⁷; `train_max_date` y
+`n_train` retirados de las predicciones porque están en los registros de ajuste).
+
+**Incidencia de proceso:** el commit `7d9ee26` se hizo con 1 prueba fallida (tripwire sobre
+`audit_package.py`, que nombraba rutas reservadas para excluirlas). Corregido en `ec0b3d0`
+centralizando las marcas en `holdout.py`. Desde entonces los commits se condicionan al
+código de salida de pytest.

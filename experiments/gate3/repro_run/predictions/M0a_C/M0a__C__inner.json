@@ -1,0 +1,17 @@
+{
+ "key": "65464979bca51e389c49f4af4e42fa6858d3ea0e7c6aed03043de5fbea5e39a9",
+ "family": "M0a_C",
+ "config_id": "M0a__C",
+ "block": "inner",
+ "params": {
+  "source": "p_C_hist_freq"
+ },
+ "sha256": "98b501ea7dbad13bcba10cd4f764b8213196ec6641d24cde6d4e25147701f6ca",
+ "fitlog": "fitlogs/M0a_C/M0a__C__inner.parquet",
+ "fitlog_sha256": "e159d1c1a6d85bc89522b062cc780033e3a7993c2562d1f767cd90e606ab55d6",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 0,
+ "n_fits": 1,
+ "completed_utc": "2026-11-27T18:51:22.686311+00:00"
+}

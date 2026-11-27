@@ -1,0 +1,17 @@
+{
+ "key": "b83e7e87541016b971906cbd168914eecd7cb3767a40819adbf6020142f38a3e",
+ "family": "M0a_w730",
+ "config_id": "M0a__w730",
+ "block": "inner",
+ "params": {
+  "window_days": 730
+ },
+ "sha256": "abbc44142ef46403c9ea07b7620c7c4136d52ac105d2b1106a0563d987f14ccf",
+ "fitlog": "fitlogs/M0a_w730/M0a__w730__inner.parquet",
+ "fitlog_sha256": "585b65596116ab690e6efb2ff0b44d7d541b3c0c38c706c695181d2691b4c8fd",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 0,
+ "n_fits": 7659,
+ "completed_utc": "2026-11-27T18:51:32.273499+00:00"
+}

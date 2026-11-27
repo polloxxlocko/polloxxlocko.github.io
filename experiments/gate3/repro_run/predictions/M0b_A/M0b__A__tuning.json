@@ -1,0 +1,17 @@
+{
+ "key": "d60b5b6f3c94afd88730cc28fe8532bf5dd81429d0f7fdb5ed1d229756246f91",
+ "family": "M0b_A",
+ "config_id": "M0b__A",
+ "block": "tuning",
+ "params": {
+  "source": "p_A_consensus"
+ },
+ "sha256": "4ff1e760bf0903d666fc22abacbbdda87fa744d391461233a57575cdc878babc",
+ "fitlog": "fitlogs/M0b_A/M0b__A__tuning.parquet",
+ "fitlog_sha256": "585b560fa38be1f8d3f23ccc97aa97135b18adb174cd70a6d03f1f0846ab5b26",
+ "n_rows": 69893,
+ "n_unique_match_id": 69893,
+ "n_nan_p_over": 168,
+ "n_fits": 1,
+ "completed_utc": "2026-11-27T18:51:11.639448+00:00"
+}

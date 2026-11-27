@@ -1,0 +1,19 @@
+{
+ "key": "9a82503701b7207fe10468aaf97a07c69381161fec22baa999593625831f5cb9",
+ "family": "M3",
+ "config_id": "M3__GSTC_h15_r100",
+ "block": "inner",
+ "params": {
+  "feature_set": "GSTC",
+  "ewm_half_life_matches": 15,
+  "ridge": 100.0
+ },
+ "sha256": "dca18adedbca178ad0836e5d483effec30b345636ec07a7cf6dea5002fbe8851",
+ "fitlog": "fitlogs/M3/M3__GSTC_h15_r100__inner.parquet",
+ "fitlog_sha256": "74357f2174bf89b4b9915c4f319b9173f9e92b03369d83230f778c06923c233e",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 0,
+ "n_fits": 169,
+ "completed_utc": "2026-11-27T18:53:25.212254+00:00"
+}

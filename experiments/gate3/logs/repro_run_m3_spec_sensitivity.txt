@@ -1,0 +1,15 @@
+== etapa m3_spec_sensitivity
+{
+ "note": "solo bloque de ajuste; la prueba interna no se reeval\u00faa",
+ "M3log_selected": "M3log__GSTC_h15_r100",
+ "M3_selected_linear": "M3__GSTC_h15_r100",
+ "same_selection_up_to_transform": true,
+ "best_goals_only": "M3log__G_h15_r10",
+ "best_with_shots": "M3log__GSTC_h15_r100",
+ "shots_enter_M4_sport_log1p": false,
+ "shots_enter_M4_sport_linear": false,
+ "H1b_decision_unchanged": true
+}
+H1b log1p: {'mean': -8.139828409120539e-05, 'lo': -0.00028425731445269473, 'hi': 0.00013033733096741264, 'n': 62106, 'weeks': 411, 'weeks_with_matches': 373, 'block_weeks': 4, 'week_mode': 'calendar', 'n_boot': 2000, 'seed': 20261127, 'se_boot': 0.00010606376090407791} EQ
+log1p - lineal (M3*): {'mean': -5.562560924725367e-05, 'lo': -0.00012816376495728018, 'hi': 2.1712277580945786e-05, 'n': 62106, 'weeks': 411, 'weeks_with_matches': 373, 'block_weeks': 4, 'week_mode': 'calendar', 'n_boot': 2000, 'seed': 20261127, 'se_boot': 3.893287885196251e-05} EQ
+== fin 186s

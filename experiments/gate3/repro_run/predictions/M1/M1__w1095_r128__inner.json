@@ -1,0 +1,18 @@
+{
+ "key": "193f03e5cd5fec1e9e935551bae72c4ff063152141d6c456200b7836b5865e23",
+ "family": "M1",
+ "config_id": "M1__w1095_r128",
+ "block": "inner",
+ "params": {
+  "window_days": 1095,
+  "ridge": 128
+ },
+ "sha256": "8ea9e677813ff5b4db3359d2a947b756c13a0a9232656dc54704e557a4d75f07",
+ "fitlog": "fitlogs/M1/M1__w1095_r128__inner.parquet",
+ "fitlog_sha256": "8c8bcecfbea7c785456ee84a679ffd35e556b9873eda3725877d583e4b1d17c9",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 0,
+ "n_fits": 7659,
+ "completed_utc": "2026-11-27T18:52:02.547699+00:00"
+}

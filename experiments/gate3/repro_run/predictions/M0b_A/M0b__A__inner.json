@@ -1,0 +1,17 @@
+{
+ "key": "2b2b8ae5625c99f619a3e07eda1cfc8cf081ec5e8330aa042c9f7f49baaac999",
+ "family": "M0b_A",
+ "config_id": "M0b__A",
+ "block": "inner",
+ "params": {
+  "source": "p_A_consensus"
+ },
+ "sha256": "8bb02771b15eebe718860e23f7d8e2dd4b40fefc1ec31626bbc8dba0e6439a02",
+ "fitlog": "fitlogs/M0b_A/M0b__A__inner.parquet",
+ "fitlog_sha256": "0467741d76d8293bbfbde39f84cda454fedc250fb809fb3158a65485e3f9d4ee",
+ "n_rows": 61370,
+ "n_unique_match_id": 61370,
+ "n_nan_p_over": 107,
+ "n_fits": 1,
+ "completed_utc": "2026-11-27T18:51:22.531409+00:00"
+}

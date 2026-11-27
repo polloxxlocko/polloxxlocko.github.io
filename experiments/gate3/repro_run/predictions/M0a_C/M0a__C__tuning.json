@@ -1,0 +1,17 @@
+{
+ "key": "d70803ab948933e29ef449add0902478a28212ad95c6876e8417cecb7f6d4da2",
+ "family": "M0a_C",
+ "config_id": "M0a__C",
+ "block": "tuning",
+ "params": {
+  "source": "p_C_hist_freq"
+ },
+ "sha256": "2a08b63617e70cb0e34387d915041c3cbcfbc3a0d0879f94eefe19d4b533e164",
+ "fitlog": "fitlogs/M0a_C/M0a__C__tuning.parquet",
+ "fitlog_sha256": "d4c97049fb15c02fa5c41d6eca93eb720c9b5e41a5aad717a8215a30b27aed53",
+ "n_rows": 69893,
+ "n_unique_match_id": 69893,
+ "n_nan_p_over": 1,
+ "n_fits": 1,
+ "completed_utc": "2026-11-27T18:51:11.812796+00:00"
+}

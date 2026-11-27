@@ -1,0 +1,20 @@
+{
+ "key": "df18376855fb250e5579150f19572bb52d11f4d40825510296a92c0e8fe46843",
+ "family": "M3log",
+ "config_id": "M3log__GSTC_h15_r100",
+ "block": "tuning",
+ "params": {
+  "feature_set": "GSTC",
+  "ewm_half_life_matches": 15,
+  "ridge": 100.0,
+  "n_prior": "log1p"
+ },
+ "sha256": "5c00717566bb5301dfdc97ba078606ef58721fd2b2fda5e2b377a6af04248f48",
+ "fitlog": "fitlogs/M3log/M3log__GSTC_h15_r100__tuning.parquet",
+ "fitlog_sha256": "edbd30688f83223fbfd3852a4f9c6c8608dac01453890f5f34d9c5bdf5c19b7e",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 0,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T18:55:07.825863+00:00"
+}

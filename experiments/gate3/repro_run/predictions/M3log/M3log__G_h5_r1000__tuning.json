@@ -1,0 +1,20 @@
+{
+ "key": "7e8b67ef5fb2c54755e622eb5243577c54e0b7a85ed6a965ace50850cb30b13c",
+ "family": "M3log",
+ "config_id": "M3log__G_h5_r1000",
+ "block": "tuning",
+ "params": {
+  "feature_set": "G",
+  "ewm_half_life_matches": 5,
+  "ridge": 1000,
+  "n_prior": "log1p"
+ },
+ "sha256": "8396929a2b9a81303a5978e391b03c610e9e6a5ddf74a9f9e8ef4251664231ae",
+ "fitlog": "fitlogs/M3log/M3log__G_h5_r1000__tuning.parquet",
+ "fitlog_sha256": "7877cd18a039765ff6d1d5731e46fe259e678c04f9de93306828711bf15b02e0",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 0,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T18:57:32.713454+00:00"
+}

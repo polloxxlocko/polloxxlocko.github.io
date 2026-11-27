@@ -1,0 +1,18 @@
+{
+ "key": "945bad5141e34412461f0033b7249bbb9913341409449e40a333d2f5b0c8e8b6",
+ "family": "M1",
+ "config_id": "M1__w365_r128",
+ "block": "tuning",
+ "params": {
+  "window_days": 365,
+  "ridge": 128
+ },
+ "sha256": "e38270b566c80dbb7c87ac4e0881daf01ca2746c5263f26bbcef626ca2d51b70",
+ "fitlog": "fitlogs/M1/M1__w365_r128__tuning.parquet",
+ "fitlog_sha256": "4a247a95d51906fd7ccdbc819b14be2740a8def94724d4a32c04a21b165ea87f",
+ "n_rows": 69892,
+ "n_unique_match_id": 69892,
+ "n_nan_p_over": 11,
+ "n_fits": 8715,
+ "completed_utc": "2026-11-27T18:27:47.055234+00:00"
+}

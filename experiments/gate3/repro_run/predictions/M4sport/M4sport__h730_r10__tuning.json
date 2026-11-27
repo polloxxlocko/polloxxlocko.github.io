@@ -1,0 +1,24 @@
+{
+ "key": "d622238bbe515651e27b6f8a42a6e735142f0ee5c766c986f66bb2c2716f7d9d",
+ "family": "M4sport",
+ "config_id": "M4sport__h730_r10",
+ "block": "tuning",
+ "params": {
+  "half_life_days": 730,
+  "ridge": 10.0,
+  "sport_cols": [
+   "inp_m2"
+  ],
+  "require_cols": [
+   "inp_m2"
+  ]
+ },
+ "sha256": "96fb86c2a2f57b9416fe231c3359b252ea73bffe46085ce8d2cc0aa90f684758",
+ "fitlog": "fitlogs/M4sport/M4sport__h730_r10__tuning.parquet",
+ "fitlog_sha256": "4c9dcb3c6d1198d69481e0e27c4f28d3374c06831b1de2f26d72262c5aae2bf6",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 157,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T18:53:37.833580+00:00"
+}

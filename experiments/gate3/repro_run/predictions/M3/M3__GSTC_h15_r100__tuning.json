@@ -1,0 +1,19 @@
+{
+ "key": "d28b9e95dd725f6b452bba182d32fe2eaafef59f58a8f4147408de26249f94fc",
+ "family": "M3",
+ "config_id": "M3__GSTC_h15_r100",
+ "block": "tuning",
+ "params": {
+  "feature_set": "GSTC",
+  "ewm_half_life_matches": 15,
+  "ridge": 100.0
+ },
+ "sha256": "241eab2ee9c3cfd05b1fc3288e64c88e5d78dafd90b8443fa9ed4292cedb7f5a",
+ "fitlog": "fitlogs/M3/M3__GSTC_h15_r100__tuning.parquet",
+ "fitlog_sha256": "147a96152e76a47579750f88617bb9547b42c53ed892ca72e9ab8320897a2b53",
+ "n_rows": 62106,
+ "n_unique_match_id": 62106,
+ "n_nan_p_over": 0,
+ "n_fits": 173,
+ "completed_utc": "2026-11-27T18:50:02.069126+00:00"
+}

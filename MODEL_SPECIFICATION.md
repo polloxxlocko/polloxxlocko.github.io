@@ -88,19 +88,22 @@ incremental, más allá de una recalibración del mercado. Se clasifica con la p
 
 | Etapa | Control | Prueba |
 |---|---|---|
-| Entrenamiento | El motor entrega al modelo solo filas con `match_date < τ`. Lo verifica por aserción y registra `train_max_date` por predicción | `test_walkforward_*` |
+| Entrenamiento | El motor entrega al modelo solo filas con `match_date < τ`. Lo verifica por aserción y registra `train_max_date` y `n_train` **por ajuste** en los fitlogs (corregido en GATE 2.1: los archivos de predicciones no los contienen; se enlazan por `config_id`, `block`, `scope` y `fit_tau`) | `test_walkforward_*`; `test_train_max_date_stored_per_fit_and_joinable` |
 | Invariancia al futuro | Alterar resultados, estadísticas y cuotas de cierre de todos los partidos con fecha ≥ τ no cambia ninguna predicción hecha en τ | `test_*_invariant_to_future` (todos los modelos y features) |
 | Transformaciones | Estandarización e imputación se ajustan en `fit` con filas de entrenamiento. La predicción de una fila no depende de las demás filas del lote | `test_batch_independence` |
 | Features | EWMA con `merge_asof` estricto (`< info_cutoff_date`); comprobación por fuerza bruta | `test_features_*` |
 | Selección de variables e hiperparámetros | Funciones que reciben solo el bloque de ajuste; se niegan si reciben temporadas de prueba interna; resultado invariante a alterar la prueba interna | `test_selection_*` |
 | Calibración (M4-cal) | Ajustada en cada τ solo con filas < τ | Invariancia al futuro |
-| Valla GATE 3 | El motor rechaza evaluar temporadas > 2021/22 | `test_fence_*` |
+| Valla GATE 3 | El motor rechaza evaluar temporadas > 2021/22 salvo autorización ligada a los candidatos congelados; registra todo intento (GATE 2.1) | `test_fence_*`; `test_gate3_authorization_binding_and_logging` |
 
 ### A8. Trazabilidad (exigencias 6 y 7)
 - **Todas** las predicciones fuera de muestra de **todas** las configuraciones (también
   las descartadas) se guardan en `experiments/gate2/predictions/*.parquet`, con
-  `match_id`, `config_id`, `p_over`, `fit_tau` y `train_max_date`.
-- Cada ajuste registra tiempo, iteraciones, convergencia y tamaño de entrenamiento
+  `match_id`, `config_id`, `block`, `p_over` y `fit_tau` (los Poisson, además `lam_h` y
+  `lam_a`). *Corrección GATE 2.1:* `train_max_date` **no** está en esos archivos; está en
+  los fitlogs, un registro por ajuste, enlazable por (`config_id`, `block`, `scope`,
+  `fit_tau`), donde `scope` es la división del partido o `pooled`.
+- Cada ajuste registra tiempo, iteraciones, convergencia, `n_train` y `train_max_date`
   (`experiments/gate2/fitlogs/`). Cada etapa registra tiempo de pared, tiempo de CPU y
   memoria máxima (`experiments/gate2/runlog.json`).
 
@@ -121,6 +124,8 @@ Resultados de **desarrollo** (no son veredictos de Q1-Q3). Fuentes:
 |---|---|---|---|
 | D-1 | Regla de extensión de borde de grilla (`configs/gate2.json → boundary_rule`) | La selección Poisson quedó en el borde de la grilla preregistrada (ridge y ventana máximos) | Tras ver solo la selección Poisson en ajuste; **antes** de ver M3, M4 o la prueba interna |
 | D-2 | Optimizador Poisson: Newton-Raphson con Hessiana analítica en vez de L-BFGS | Velocidad (×7,6) y precisión; mismo modelo y mismo óptimo (prueba automática) | Antes de cualquier resultado |
+| D-3 | M3 usó el **conteo lineal** de partidos previos (estandarizado), no `log(1 + partidos previos)` como dice A3 | Discrepancia entre especificación e implementación detectada por la auditoría de GATE 2 (no fue una decisión) | Detectada en GATE 2.1. Los resultados de GATE 2 corresponden a la forma lineal. Sensibilidad con `log1p` solo en el bloque de ajuste: `experiments/gate2_1/repro_run/results.json → m3_spec_sensitivity` |
+| D-4 | El bootstrap formó bloques de semanas **activas**, no de semanas calendario como dice el protocolo §4 | Error de implementación detectado por la auditoría | Corregido en GATE 2.1; resultados con ambos métodos y sensibilidad a 2, 4, 8 y 12 semanas en `GATE_2_1_REPORT.md` |
 
 ### B1. Selecciones en el bloque de ajuste
 

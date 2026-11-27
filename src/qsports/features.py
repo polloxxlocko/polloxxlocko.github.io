@@ -56,14 +56,20 @@ def build_features(df: pd.DataFrame, half_life_matches: float = 10.0) -> pd.Data
         for c in [c for c in st.columns if c.endswith(("_for", "_against"))]:
             out[f"feat_{s}_{c}"] = m[c].astype(float)
         out[f"feat_{s}_n_prior"] = m["n_prior"].fillna(0).astype(float)
+        out[f"feat_{s}_log1p_n_prior"] = np.log1p(out[f"feat_{s}_n_prior"])  # forma preregistrada (GATE 2.1)
         out[f"feat_{s}_rest_days"] = (pd.to_datetime(df["match_date"]) - m["last_date"]).dt.days.astype(float)
     return out
 
 
-def feature_columns(group: str) -> list[str]:
+def feature_columns(group: str, n_prior: str = "linear") -> list[str]:
+    """Columnas de M3. `n_prior`: 'linear' = conteo de partidos previos estandarizado (lo que GATE 2
+    ejecutó y lo que usan sus resultados); 'log1p' = log(1 + partidos previos), la forma escrita en el
+    preregistro (MODEL_SPECIFICATION.md §A3). Discrepancia documentada en GATE 2.1 (desviación D-3)."""
+    if n_prior not in ("linear", "log1p"):
+        raise ValueError(n_prior)
     cols = []
     for s in ("h", "a"):
         for k in FEATURE_GROUPS[group]:
             cols += [f"feat_{s}_{k}_for", f"feat_{s}_{k}_against"]
-        cols += [f"feat_{s}_n_prior"]
+        cols += [f"feat_{s}_n_prior" if n_prior == "linear" else f"feat_{s}_log1p_n_prior"]
     return cols

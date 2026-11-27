@@ -1,0 +1,82 @@
+{
+ "design": "6 temporadas de 38 semanas activas + 14 de pausa; 20 partidos por semana; d = u_semana + e, e ~ N(0,1), u AR(1) con sd de innovación 0,5; media real 0",
+ "dependent_phi_0.7": {
+  "phi": 0.7,
+  "reps": 400,
+  "n_boot": 500,
+  "coverage_95": {
+   "calendar_block1": 0.6025,
+   "calendar_block2": 0.71,
+   "calendar_block4": 0.8225,
+   "calendar_block8": 0.8575,
+   "calendar_block12": 0.8675,
+   "active_block1": 0.605,
+   "active_block2": 0.73,
+   "active_block4": 0.8225,
+   "active_block8": 0.865,
+   "active_block12": 0.88
+  },
+  "dm_rejection_rate_at_5pct": {
+   "lag0": 0.4,
+   "hac_auto": 0.1425
+  }
+ },
+ "independent_weeks": {
+  "phi": 0.0,
+  "reps": 400,
+  "n_boot": 500,
+  "coverage_95": {
+   "calendar_block1": 0.945,
+   "calendar_block2": 0.9475,
+   "calendar_block4": 0.945,
+   "calendar_block8": 0.93,
+   "calendar_block12": 0.9125,
+   "active_block1": 0.945,
+   "active_block2": 0.94,
+   "active_block4": 0.9325,
+   "active_block8": 0.93,
+   "active_block12": 0.9175
+  },
+  "dm_rejection_rate_at_5pct": {
+   "lag0": 0.045,
+   "hac_auto": 0.0475
+  }
+ },
+ "validation_rejections": {
+  "p>1": "rechazado: p: 1 probabilidades fuera de [0, 1] (mín 0.5, máx 1.2)",
+  "p<0": "rechazado: p: 1 probabilidades fuera de [0, 1] (mín -0.1, máx 0.5)",
+  "p=inf": "rechazado: p: 1 valores infinitos",
+  "p=NaN": "rechazado: p: 1 valores faltantes (NaN); la política es fallar, no descartar (defina el universo de la comparación antes de evaluar)",
+  "y=2": "rechazado: y: resultados no binarios [np.float64(2.0)]",
+  "longitudes": "rechazado: Dimensiones distintas: {'y': 3, 'p': 2}",
+  "p=1,y=0 (pérdida infinita)": "rechazado: log loss infinita en 1 filas (probabilidad 0 o 1 contradicha por el resultado)"
+ },
+ "power_example": {
+  "se_0.0003": {
+   "se": 0.0003,
+   "delta": 0.001,
+   "alpha": 0.05,
+   "power_target": 0.8,
+   "mde_superiority_vs_zero": 0.0008404755654338904,
+   "mde_superiority_relevant": 0.0018404755654338905,
+   "p_equivalence_at_zero": 0.8303624464732815,
+   "p_EQ_category_at_zero": 0.8303624464732815,
+   "max_theta_equivalence": 0.00011393475472452104,
+   "se_needed_equivalence": 0.00030849767170602785,
+   "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+  },
+  "se_0.0008": {
+   "se": 0.0008,
+   "delta": 0.001,
+   "alpha": 0.05,
+   "power_target": 0.8,
+   "mde_superiority_vs_zero": 0.0022412681744903747,
+   "mde_superiority_relevant": 0.0032412681744903747,
+   "p_equivalence_at_zero": 0.0,
+   "p_EQ_category_at_zero": 0.0,
+   "max_theta_equivalence": null,
+   "se_needed_equivalence": 0.00030849767170602785,
+   "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+  }
+ }
+}

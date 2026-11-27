@@ -204,25 +204,40 @@ def registry(partition: str) -> dict:
     return json.loads(p.read_text())
 
 
+SYNTHETIC_ID_PREFIX = "syn"  # match_id de qsports.synthetic (sin datos de la fuente)
+
+
 def reserved_ids() -> set[str]:
+    """match_ids reservados (holdout + reserva). FAIL-CLOSED (GATE 2.1): si falta el registro de una
+    partición, no se puede comprobar que un conjunto de datos reales esté libre de partidos reservados, así
+    que se lanza ReservedDataError en lugar de asumir que no hay ninguno."""
     ids: set[str] = set()
     for part in ("holdout", "reserve"):
-        try:
-            ids |= set(registry(part)["match_ids"])
-        except ReservedDataError:
-            pass
+        reg = registry(part)  # lanza ReservedDataError si falta
+        if not isinstance(reg.get("match_ids"), list) or reg.get("n_matches") != len(reg["match_ids"]):
+            raise ReservedDataError(f"Registro de {part} incompleto o inconsistente: no se puede verificar.")
+        ids |= set(reg["match_ids"])
     return ids
 
 
 def assert_no_reserved(df: pd.DataFrame, context: str = "") -> None:
     """Falla si el DataFrame contiene temporadas reservadas o match_ids registrados como reservados.
-    Debe llamarse en todo pipeline de features/modelos antes de usar los datos."""
+    Debe llamarse en todo pipeline de features/modelos antes de usar los datos.
+    Con datos reales exige los registros de partidos reservados (fail-closed). Solo los datos sintéticos
+    (todos los match_id con prefijo 'syn') se verifican sin registro, por temporada."""
     if "season_code" in df.columns:
         parts = {paths.partition_of(s) for s in df["season_code"].dropna().unique()}
         if parts - {"dev"}:
             raise ReservedDataError(f"[{context}] temporadas reservadas presentes: {sorted(parts - {'dev'})}")
     if "match_id" in df.columns:
-        leaked = set(df["match_id"].dropna().unique()) & reserved_ids()
+        ids = df["match_id"].dropna().astype(str)
+        if len(ids) and ids.str.startswith(SYNTHETIC_ID_PREFIX).all():
+            return
+        try:
+            res = reserved_ids()
+        except ReservedDataError as e:
+            raise ReservedDataError(f"[{context}] fail-closed: {e}") from e
+        leaked = set(ids.unique()) & res
         if leaked:
             raise ReservedDataError(f"[{context}] {len(leaked)} match_id reservados presentes")
 
@@ -277,6 +292,38 @@ def open_reserved(partition: str, purpose: str) -> pd.DataFrame:
                             "purpose": purpose, "authorized_by": auth["authorized_by"],
                             "protocol_freeze_sha256": auth["protocol_freeze_sha256"]}, ensure_ascii=False) + "\n")
     return df
+
+
+def access_log_entries(partition: str) -> list[dict] | None:
+    """Entradas del registro de accesos (None si el archivo no existe: estado no verificable)."""
+    p = _access_log(partition)
+    if not p.exists():
+        return None
+    return [json.loads(line) for line in p.read_text().splitlines() if line.strip()]
+
+
+def seal_state(partition: str) -> dict:
+    """Estado del sello. Si no hay autorización, el registro de accesos debe existir y estar VACÍO.
+    Nota: cero accesos registrados demuestra que no se usó la apertura autorizada; no demuestra por sí solo
+    ausencia absoluta de exposición (ver HOLDOUT_PROTECTION_PROTOCOL.md §5)."""
+    cfg = paths.holdout_config()
+    fname = cfg["authorization_file"] if partition == "holdout" else cfg["reserve_authorization_file"]
+    authorized = (paths.ROOT / fname).exists()
+    entries = access_log_entries(partition)
+    st = {"partition": partition, "authorization_present": authorized,
+          "access_log_present": entries is not None, "access_log_entries": None if entries is None else len(entries)}
+    if not authorized:
+        st["ok"] = entries is not None and len(entries) == 0
+        st["rule"] = "sellado: el registro de accesos debe existir y tener 0 entradas"
+    else:
+        try:
+            auth = _check_authorization(partition)
+            st["ok"] = entries is not None and all(
+                e.get("protocol_freeze_sha256") == auth["protocol_freeze_sha256"] for e in entries)
+        except ReservedDataError as e:
+            st["ok"], st["error"] = False, str(e)
+        st["rule"] = "autorizado: cada acceso debe corresponder a la autorización vigente"
+    return st
 
 
 def verify_integrity(partition: str) -> dict:

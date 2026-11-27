@@ -1,6 +1,6 @@
 # EXPERIMENTAL_PROTOCOL — Protocolo experimental preliminar
 
-Versión 0.10 (preliminar) · 2026-11-27 · revisado al inicio de GATE 2 (§2, §6, §10)
+Versión 0.11 (preliminar) · 2026-11-27 · revisado al inicio de GATE 2 (§2, §6, §10) y en GATE 2.1 (§4, §4.1, §5, §6)
 
 Este protocolo se diseña **antes de entrenar cualquier modelo**. Se congelará (hash en
 `PROTOCOL_FREEZE.json`) al final de GATE 4 y antes de solicitar la apertura del holdout.
@@ -59,13 +59,43 @@ desagregados para seleccionar ligas.
 
 ## 4. Incertidumbre
 
-- **Bootstrap por bloques de semanas:** los partidos se agregan por semana calendario
-  (todas las ligas juntas, para capturar shocks comunes de una misma jornada) y se
-  remuestrean bloques móviles de 4 semanas consecutivas (dependencia serial: fuerzas de
-  equipo persistentes). 10.000 réplicas, semilla fija. Intervalos percentil al 95%.
-- **Diebold-Mariano** con varianza HAC (Newey-West) sobre la serie semanal de Δ̄.
+- **Bootstrap por bloques de semanas calendario:** los partidos se agregan por semana
+  calendario lunes-domingo (todas las ligas juntas, para capturar shocks comunes de una
+  misma jornada). La serie semanal incluye **explícitamente** todas las semanas entre la
+  primera y la última observación, también las semanas sin partidos (Σd = 0, n = 0).
+  Se remuestrean bloques móviles de 4 semanas de calendario consecutivas (dependencia
+  serial: fuerzas de equipo persistentes) para el estimador de razón Σd/Σn. 10.000 réplicas,
+  semilla fija. Intervalos percentil al 95%. Si una réplica no tuviera ninguna observación,
+  la evaluación falla (no se descarta en silencio).
+  - *Corrección GATE 2.1:* la implementación de GATE 2 formaba los bloques con semanas
+    **activas** (solo semanas con partidos), de modo que un bloque podía unir la última
+    semana de una temporada con la primera de la siguiente. Eso no coincidía con este texto.
+    Desde GATE 2.1 el método principal es el de semanas calendario; el de semanas activas se
+    conserva solo para comparar con lo publicado y como sensibilidad (`EXPERIMENT_LOG.md` E-005).
+  - *Sensibilidad preregistrada (GATE 2.1):* bloques de 2, 4, 8 y 12 semanas, con ambas
+    definiciones de semana, sobre resultados de desarrollo. El bloque principal sigue siendo 4.
+- **Diebold-Mariano** con varianza HAC (Newey-West, Bartlett) sobre la misma serie semanal
+  de calendario (los rezagos son semanas de calendario).
 - **Sensibilidad:** bootstrap por clusters de división-temporada.
 - Ningún rango se rotula como intervalo de confianza si su método no lo justifica.
+
+### 4.1 Validación de entradas y valores faltantes (GATE 2.1)
+
+Antes de calcular cualquier métrica (`qsports.validation`, `qsports.evaluation`):
+- Probabilidades finitas y en [0, 1]; resultados exactamente 0 o 1; vectores de igual
+  longitud y no vacíos; fechas válidas. Cualquier violación detiene la evaluación.
+- La log loss se calcula exactamente (sin recortes). Una probabilidad 0 o 1 contradicha por
+  el resultado (pérdida infinita) se rechaza.
+- **Universo explícito:** cada comparación define primero su universo (temporadas, resultado
+  conocido, fecha de captura estimable y, si corresponde, elegibilidad A). Se exige
+  `match_id` único en cada tabla y uniones 1:1 (`validate="one_to_one"`; nunca
+  `pivot_table`, que promediaría duplicados en silencio).
+- **Faltantes:** en la prueba interna y en toda evaluación confirmatoria cada pronóstico debe
+  cubrir el 100% del universo (si falta una predicción, la evaluación falla). En la selección
+  dentro del bloque de ajuste rige la **muestra común** preregistrada: filas con predicción
+  finita de todas las configuraciones comparadas; las excluidas se cuentan y se informan.
+- **Cobertura:** se informa, por pronóstico, el universo esperado, las filas cubiertas, las
+  faltantes y las sobrantes.
 
 ## 5. Potencia y tamaño de muestra (supuestos documentados)
 
@@ -82,6 +112,18 @@ n = 130.862, sin modelos entrenados), usando Δ = LL_C − LL_A:
   congelado en la validación de desarrollo, antes del congelamiento.
 - Supuestos: independencia entre semanas no adyacentes; dependencia intra-semana
   capturada por deff; estacionariedad aproximada de σ_Δ entre regímenes.
+
+**Superioridad frente a equivalencia (GATE 2.1).** La fórmula del MDE mide la potencia para
+**detectar superioridad**: el tamaño de la mejora real necesaria para que U < 0 con
+probabilidad 80%. **No** mide la potencia para **demostrar equivalencia**, que exige que
+todo el intervalo quede dentro de (−δ, δ). Con Δ̂ ~ N(θ, se²) e IC ≈ Δ̂ ± z·se
+(`qsports.evaluation.prob_categories` y `power_profile`):
+- Superioridad relevante (S-R): mejora real necesaria = δ + (z_{0,975} + z_{0,80})·se.
+- Equivalencia práctica demostrada (IC ⊂ (−δ, δ)): probabilidad = Φ((δ − θ)/se − z) −
+  Φ((−δ − θ)/se + z); con θ = 0 es 2Φ(δ/se − z) − 1. Requiere se ≤ δ / (z + Φ⁻¹(0,9)) ≈
+  δ/3,24 para una potencia del 80%.
+- El se del holdout se estima como se_bootstrap(desarrollo)·√(n_desarrollo/n_holdout).
+Un MDE pequeño no implica capacidad de demostrar equivalencia, y viceversa.
 
 ## 6. Criterios de decisión (revisados en GATE 2: categorías mutuamente excluyentes)
 
@@ -126,7 +168,16 @@ NO DEMOSTRADA**, se reporta la categoría y se indica qué condición falló):
 `MODEL_SPECIFICATION.md`): la misma partición se aplica a Δ(M4-sport − M4-cal). Solo
 **S-R o S-NR** permite afirmar que las variables deportivas aportan información más allá
 de recalibrar el mercado. EQ, INC o inferioridad → "aporte deportivo incremental **no
-demostrado**".
+demostrado**". Alcance (GATE 2.1): la conclusión se limita a los modelos, variables,
+formulaciones y períodos efectivamente evaluados (p. ej., M4-sport con la desviación
+logit p_M2* − logit p_A, en 2014/15-2021/22). No afirma que la información deportiva en
+general, otras variables u otras formulaciones carezcan de valor.
+
+**Equivalencia predictiva y rentabilidad (GATE 2.1).** Q2 y Q3 se responden por separado.
+Una equivalencia (o inferioridad) en log loss frente al mercado **no** demuestra por sí sola
+una rentabilidad simulada negativa, ni una superioridad demuestra una positiva: la
+rentabilidad depende de la regla de selección, de las cuotas observadas de cada casa y de su
+margen, y se evalúa solo en Q3.
 
 Condiciones adicionales:
 - Los modelos y métricas secundarios se reportan con corrección de Holm y la etiqueta

@@ -42,6 +42,9 @@ tiene margen en [0; 0,25]") no informa sobre resultados ni permite ajustar nada.
 | 7 | **Tripwire de código** | Ningún archivo `.py` fuera de `paths.py`, `holdout.py` y `test_holdout.py` puede contener rutas o funciones de acceso reservado; los notebooks tampoco | `test_tripwire_reserved_paths`; `test_tripwire_notebooks_do_not_read_reserved` |
 | 8 | **Nivel 0 sin valores** | Los metadatos reservados no contienen columnas de goles, estadísticas ni cuotas | `test_level0_contains_no_values` |
 | 9 | **Hashes de integridad** | SHA-256 de cada `data.zip` reservado y hash de contenido del nivel 0, en el registro. `python -m qsports verify` los recalcula | `test_verify_all_ok` |
+| 10 | **Registro fail-closed** (GATE 2.1) | Con datos reales, `assert_no_reserved` exige los registros de partidos reservados de ambas particiones; si falta uno o es inconsistente (`n_matches` ≠ número de ids), lanza `ReservedDataError` en lugar de asumir que no hay reservados. Solo los datos sintéticos (todos los `match_id` con prefijo `syn`) se verifican sin registro | `test_missing_registry_fails_closed_for_real_data`; `test_inconsistent_registry_fails_closed`; `test_walkforward_refuses_real_data_without_registry` |
+| 11 | **Sello con cero accesos** (GATE 2.1) | `verify` exige, para cada partición sin archivo de autorización, que `ACCESS_LOG.jsonl` **exista** y tenga **0** entradas (`*_seal_access_log_consistent`). Si hay autorización, cada acceso debe corresponder a su hash de protocolo | `test_sealed_state_requires_existing_empty_access_log`; `test_current_project_is_sealed_with_zero_accesses` |
+| 12 | **Valla de GATE 3 con autorización y registro** (GATE 2.1) | Evaluar temporadas posteriores a 2021/22 exige `GATE3_AUTHORIZATION.json` (firmante, fecha, declaración del usuario, propósito) ligado al SHA-256 de `configs/gate3_frozen_candidates.json`. Ya no existe un interruptor booleano. **Todo intento**, permitido o rechazado, se anota en `logs/GATE3_FENCE_LOG.jsonl`; `verify` falla si hay un cruce permitido sin autorización vigente | `test_fence_blocks_validation_block_and_logs_attempt`; `test_gate3_authorization_binding_and_logging`; `test_incomplete_gate3_authorization_refused`; `test_real_fence_log_has_no_crossings` |
 
 **Pruebas de mutación hechas en GATE 1** (para confirmar que los controles detectan
 fallos reales):
@@ -49,6 +52,13 @@ fallos reales):
 - Se alteró un byte del `data.zip` de 2026/27 → `verify` **marcó** la alteración (`*_raw_unchanged = false`).
 
 Ambas mutaciones se revirtieron y el hash original se comprobó.
+
+**Cero accesos registrados no es ausencia demostrada de exposición (GATE 2.1).** El registro
+de accesos prueba que no se usó la función de apertura autorizada. No prueba por sí solo que
+nadie haya visto datos reservados por otras vías: la exposición previa de nivel 1 de la Fase
+Cero (§5), las cifras agregadas que circularon antes del sellado, una lectura deliberada de
+los Parquet fuera del código o lo que haya visto cualquier persona que haya tenido acceso a
+la fuente pública. Por eso los informes dicen "0 accesos registrados", no "sin exposición".
 
 **Alcance honesto de la protección:** los controles impiden el uso **accidental**. No
 impiden que alguien con acceso al sistema de archivos lea los Parquet a propósito. La

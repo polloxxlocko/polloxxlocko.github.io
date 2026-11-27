@@ -1,5 +1,7 @@
 """Estabilidad, convergencia y consumo computacional de GATE 2 (exigencia 7).
-Uso: python experiments/gate2/stability.py  -> experiments/gate2/stability.json"""
+Uso: python experiments/gate2/stability.py --out DIR  -> DIR/stability.json
+(DIR = directorio de una ejecución de run.py; el directorio publicado es de solo lectura)."""
+import argparse
 import json
 
 import numpy as np
@@ -7,6 +9,9 @@ import pandas as pd
 
 from qsports import gate2
 
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--out", required=True)
+gate2.configure(_ap.parse_args().out, "resume")
 R = json.loads((gate2.OUT / "results.json").read_text())
 reg = gate2._registry()
 out = {}
@@ -18,7 +23,7 @@ nb = {}
 for fam, cid in sel.items():
     P = gate2.load_preds(fam)
     P = P[P.block == "tuning"]
-    w = P.pivot_table(index="match_id", columns="config_id", values="p_over").dropna()
+    w = P.pivot(index=["match_id"], columns="config_id", values="p_over").dropna()  # pivot falla ante duplicados
     hist = R["poisson_tuning"][f"{fam}_history"] if fam in ("M1", "M2") else (
         R["m3_tuning"]["M3_history"] if fam == "M3" else R["m4"][f"{fam}_history"])
     tab = {r["config_id"]: r["logloss"] for r in hist[-1]["table"]}
@@ -33,7 +38,7 @@ for fam, cid in sel.items():
 out["neighbor_sensitivity_tuning"] = nb
 
 # 2) Trayectorias de parámetros
-L2 = pd.read_parquet(gate2.OUT / "fitlogs" / "M2.parquet")
+L2 = gate2.load_fitlogs("M2")
 L2 = L2[(L2.config_id == sel["M2"]) & (L2.extra.str.len() > 2)].copy()
 ex = L2.extra.map(json.loads)
 L2["eta"], L2["mu"] = ex.map(lambda d: d.get("eta")), ex.map(lambda d: d.get("mu"))
@@ -45,7 +50,7 @@ out["M2_home_advantage_eta"] = {"by_division_median_over_time": g.groupby("scope
 out["M2_baseline_mu_exp_goals_per_team"] = {s: round(float(np.exp(v)), 3) for s, v in
                                             g.groupby("season")["mu"].median().items()}
 for fam in ("M4cal", "M4sport"):
-    L = pd.read_parquet(gate2.OUT / "fitlogs" / f"{fam}.parquet")
+    L = gate2.load_fitlogs(fam)
     L = L[(L.config_id == sel[fam]) & (L.extra.str.len() > 2)]
     co = np.array([json.loads(x)["coef"] for x in L.extra])
     out[f"{fam}_coefficients_path"] = {"n_fits": int(len(co)), "a_range": [float(co[:, 0].min()), float(co[:, 0].max())],
@@ -58,7 +63,7 @@ for fam in ("M4cal", "M4sport"):
 conv, comp = {}, {}
 rl = json.loads((gate2.OUT / "runlog.json").read_text())
 for fam, recs in rl.items():
-    L = pd.read_parquet(gate2.OUT / "fitlogs" / f"{fam}.parquet")
+    L = gate2.load_fitlogs(fam)
     L = L[L.wall_ms > 0] if "wall_ms" in L else L
     nc = L[~L.converged]
     gm = nc.message.str.extract(r"gmax=(\S+)")[0].astype(float) if len(nc) else pd.Series(dtype=float)
@@ -73,8 +78,8 @@ for fam, recs in rl.items():
                  "nan_predictions": int(sum(r["n_nan_preds"] for r in recs))}
 out["convergence"] = conv
 out["compute"] = comp
-out["convergence_note"] = ("Ajustes Poisson marcados sin convergencia: gmax <= 2e-5 (precisión numérica límite del criterio "
-                           "de Armijo). Reajuste de alta precisión en 24 casos: |Δp| máx = 2.1e-9 (ver EXPERIMENT_LOG E-004).")
+out["convergence_note"] = ("Ajustes Poisson marcados sin convergencia: verificación individual de TODOS los casos en "
+                           "experiments/gate2_1/convergence_check.json (GATE 2.1, exigencia 5).")
 (gate2.OUT / "stability.json").write_text(json.dumps(out, indent=1, ensure_ascii=False, default=float))
 print(json.dumps({k: out[k] for k in ("convergence", "compute")}, indent=1, default=float))
 print(json.dumps(out["neighbor_sensitivity_tuning"], indent=0, default=float)[:1500])

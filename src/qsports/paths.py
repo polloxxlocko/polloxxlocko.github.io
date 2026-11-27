@@ -22,6 +22,9 @@ RESERVE_DIR = DATA / "reserve"
 
 REPORTS_GATE1 = ROOT / "reports" / "gate1"
 
+# Registro append-only de intentos de cruzar la valla de GATE 3 (GATE 2.1)
+FENCE_LOG = ROOT / "logs" / "GATE3_FENCE_LOG.jsonl"
+
 
 def holdout_config() -> dict:
     return json.loads((CONFIGS / "holdout.json").read_text())

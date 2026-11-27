@@ -111,7 +111,15 @@
       "block_weeks": 4,
       "n_boot_tuning": 2000,
       "n_boot_inner": 10000,
-      "seed": 20261127
+      "seed": 20261127,
+      "week_mode": "calendar",
+      "week_mode_doc": "GATE 2.1: 'calendar' = bloques de semanas de CALENDARIO consecutivas (incluye semanas sin partidos), como dice EXPERIMENTAL_PROTOCOL.md §4. GATE 2 usó, por error de implementación, semanas ACTIVAS ('active'); se conserva solo para comparar con lo publicado.",
+      "sensitivity_block_weeks": [
+        2,
+        4,
+        8,
+        12
+      ]
     }
   },
   "ladder_rules": {
@@ -141,5 +149,17 @@
         "ridge": 10.0
       }
     }
+  },
+  "gate3_fence": {
+    "_doc": "GATE 2.1: cruzar la valla (evaluar temporadas > fence_max_eval_season) exige un archivo de autorización creado SOLO por instrucción expresa del usuario y ligado al hash de los candidatos congelados. Todo intento (permitido o rechazado) se registra en logs/GATE3_FENCE_LOG.jsonl.",
+    "authorization_file": "GATE3_AUTHORIZATION.json",
+    "frozen_candidates_file": "configs/gate3_frozen_candidates.json",
+    "required_fields": [
+      "authorized_by",
+      "authorized_at",
+      "user_statement",
+      "purpose",
+      "frozen_candidates_sha256"
+    ]
   }
 }

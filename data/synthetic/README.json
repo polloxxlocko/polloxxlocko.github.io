@@ -1,0 +1,16 @@
+{
+ "generator": "qsports.synthetic.generate",
+ "args": {
+  "n_divisions": 2,
+  "n_teams": 10,
+  "seasons": [
+   "0506",
+   "0607",
+   "0708"
+  ],
+  "seed": 11
+ },
+ "rows": 540,
+ "sha256": "0d1d15590039e353d31e1a00d80985c03056c8a54ccaa296765e02813047a680",
+ "note": "Datos sint\u00e9ticos con verdad conocida (true_p_over). No contienen datos de la fuente ni sellados. Regenerables con el generador y la semilla."
+}

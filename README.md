@@ -6,9 +6,12 @@ de Football-Data.co.uk), y si esa mejora generaría rentabilidad **simulada** co
 reales. **No es un sistema de pronósticos ni de recomendaciones, y no automatiza
 apuestas.**
 
-**Estado:** GATE 0 y GATE 1 aprobados · GATE 2 (modelos y validación interna) completado y pendiente de
-revisión · GATE 3 no autorizado. Resultado de desarrollo: los modelos deportivos no mejoran el
-mercado pre-cierre (ver `GATE_2_REPORT.md`).
+**Estado:** GATE 0 y GATE 1 aprobados · GATE 2 (modelos y validación interna) con aprobación
+metodológica condicionada · GATE 2.1 (correcciones de la auditoría) completado y pendiente de
+revisión · GATE 3 no autorizado. Resultado de desarrollo (2014/15-2021/22): los modelos
+evaluados (Poisson M1/M2, logística M3) no mejoran el consenso de mercado pre-cierre, y la
+desviación de M2 no añade información distinguible a una recalibración del mercado. Este
+resultado se limita a esos modelos, variables y períodos (ver `GATE_2_1_REPORT.md`).
 
 > **¿Auditas este proyecto?** Empieza por [`AUDIT_GUIDE.md`](AUDIT_GUIDE.md): contenido,
 > exclusiones (datos de la fuente, holdout sellado, resúmenes de artículos), reproducción y

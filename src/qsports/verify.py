@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 
-from . import holdout, ingest, paths, process
+from . import holdout, ingest, paths, process, walkforward
 
 
 def verify_all() -> dict:
@@ -41,11 +41,19 @@ def verify_all() -> dict:
         v = holdout.verify_integrity(part)
         c[f"{part}_raw_unchanged"] = v["raw_ok"]
         c[f"{part}_level0_unchanged"] = v["level0_ok"]
-    # 6. Estado del sello (informativo: debe seguir sellado en GATE 1)
+    # 6. Estado del sello (GATE 2.1): sellado => registro de accesos presente y con 0 entradas
     cfg = paths.holdout_config()
     res["holdout_sealed"] = not (paths.ROOT / cfg["authorization_file"]).exists()
     res["reserve_sealed"] = not (paths.ROOT / cfg["reserve_authorization_file"]).exists()
-    res["access_log_entries"] = {p: (len((holdout._access_log(p)).read_text().splitlines())
-                                     if holdout._access_log(p).exists() else 0) for p in ("holdout", "reserve")}
+    res["seal_state"] = {p: holdout.seal_state(p) for p in ("holdout", "reserve")}
+    for p in ("holdout", "reserve"):
+        c[f"{p}_seal_access_log_consistent"] = bool(res["seal_state"][p]["ok"])
+    res["access_log_entries"] = {p: res["seal_state"][p]["access_log_entries"] for p in ("holdout", "reserve")}
+    # 7. Valla de GATE 3: ningún cruce permitido sin autorización válida; intentos rechazados informados
+    fence = walkforward.fence_log_summary()
+    res["gate3_fence"] = fence
+    c["gate3_fence_no_unauthorized_crossing"] = bool(fence["ok"])
+    res["note"] = ("Cero accesos registrados prueba que no se usó la función de apertura autorizada; no es por sí sola una demostración "
+                   "absoluta de ausencia de exposición (HOLDOUT_PROTECTION_PROTOCOL.md §5).")
     res["ok"] = all(c.values()) and res["holdout_sealed"] and res["reserve_sealed"]
     return res

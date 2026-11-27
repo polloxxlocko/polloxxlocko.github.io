@@ -16,3 +16,6 @@ dist/
 research/abstracts_local.json
 research/abstracts_semanticscholar.json
 research/references_verified.partial.json
+
+# GATE 2.1: la reproducción limpia versiona manifiestos, resultados y hashes; no sus Parquet (se regeneran)
+experiments/gate2_1/repro_run/**/*.parquet

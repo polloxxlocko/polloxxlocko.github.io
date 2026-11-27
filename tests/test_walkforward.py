@@ -1,9 +1,11 @@
 """Motor walk-forward y features: garantías anti-filtración (exigencia 5)."""
+import json
+
 import numpy as np
 import pandas as pd
 import pytest
 
-from qsports import features, holdout, synthetic, walkforward as wf
+from qsports import paths, features, holdout, synthetic, walkforward as wf
 
 POST = ["fthg", "ftag", "over25", "total_goals", "hs", "as_", "hst", "ast", "hc", "ac",
         "ou_close_avg_over", "ou_close_avg_under", "true_p_over"]
@@ -57,13 +59,15 @@ def test_fit_never_after_capture_and_refit_schedule(syn):
     assert len(logs) == int(np.ceil(n_caps / 4))
 
 
-def test_fence_blocks_validation_block():
+def test_fence_blocks_validation_block_and_logs_attempt():
     s = synthetic.generate(n_divisions=1, n_teams=6, seasons=("2122", "2223"), seed=4)
     with pytest.raises(wf.FenceError):
         wf.run(s, Probe, ["2223"], label="fence")
     wf.run(s, Probe, ["2122"], label="fence-ok")
-    p, _ = wf.run(s, Probe, ["2223"], label="gate3", allow_beyond_fence=True)  # solo con autorización GATE 3
-    assert len(p) > 0
+    ev = [json.loads(x) for x in paths.FENCE_LOG.read_text().splitlines()]
+    assert len(ev) == 1 and ev[0]["outcome"] == "refused" and ev[0]["seasons"] == ["2223"]
+    with pytest.raises(TypeError):  # ya no existe un interruptor booleano para saltar la valla
+        wf.run(s, Probe, ["2223"], label="gate3", allow_beyond_fence=True)
 
 
 def test_reserved_seasons_rejected():

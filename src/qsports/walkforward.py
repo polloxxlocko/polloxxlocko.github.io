@@ -2,16 +2,22 @@
 
 Garantías (probadas en tests/test_walkforward.py):
 1. En cada fecha de ajuste τ, el modelo recibe SOLO filas con match_date < τ (aserción +
-   `train_max_date` registrado por predicción).
+   `train_max_date` y `n_train` registrados POR AJUSTE en el FitLog). `run` también los devuelve por
+   predicción, pero las predicciones persistidas (gate2._store) los omiten: se enlazan con su ajuste
+   por (config_id, block, scope, fit_tau), donde scope = división del partido o 'pooled'.
 2. Al predecir, el modelo recibe SOLO columnas pre-partido (lista blanca): nunca resultados,
    estadísticas del partido ni cuotas de cierre de las filas que predice.
 3. Una predicción para un partido con captura estimada c usa un ajuste con τ ≤ c.
 4. Valla GATE 3: se niega a evaluar temporadas posteriores a `fence_max_eval_season`
-   (configs/gate2.json) salvo `allow_beyond_fence=True`, reservado a GATE 3 autorizado.
+   (configs/gate2.json) salvo con un archivo de autorización válido (creado SOLO por instrucción
+   expresa del usuario) ligado al hash de los candidatos congelados. Todo intento de cruzar la
+   valla, permitido o rechazado, se anota en logs/GATE3_FENCE_LOG.jsonl (append-only).
 5. Rechaza datos reservados (holdout.assert_no_reserved).
 """
 from __future__ import annotations
 
+import datetime as dt
+import hashlib
 import json
 import multiprocessing as mp
 import time
@@ -42,12 +48,68 @@ def prematch_view(rows: pd.DataFrame) -> pd.DataFrame:
     return rows[keep]
 
 
-def check_fence(eval_seasons, allow_beyond_fence: bool = False) -> None:
+def _sha256(p) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def _fence_log(event: dict) -> None:
+    paths.FENCE_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with paths.FENCE_LOG.open("a") as f:
+        f.write(json.dumps({"at_utc": dt.datetime.now(dt.timezone.utc).isoformat(), **event},
+                           ensure_ascii=False, default=str) + "\n")
+
+
+def gate3_authorization() -> dict:
+    """Valida la autorización de GATE 3. Lanza FenceError si falta o no es válida."""
+    fc = gate2_config()["gate3_fence"]
+    p = paths.ROOT / fc["authorization_file"]
+    if not p.exists():
+        raise FenceError(f"No existe {fc['authorization_file']}: GATE 3 no está autorizado.")
+    auth = json.loads(p.read_text())
+    missing = [k for k in fc["required_fields"] if not auth.get(k)]
+    if missing:
+        raise FenceError(f"Autorización de GATE 3 incompleta: faltan {missing}.")
+    cand = paths.ROOT / fc["frozen_candidates_file"]
+    if not cand.exists():
+        raise FenceError(f"No existe {fc['frozen_candidates_file']}: los candidatos no están congelados.")
+    if auth["frozen_candidates_sha256"] != _sha256(cand):
+        raise FenceError("Los candidatos congelados cambiaron después de la autorización (hash distinto).")
+    return auth
+
+
+def check_fence(eval_seasons, label: str = "") -> None:
+    """Valla de GATE 3. Sin temporadas posteriores a la valla no hace nada. Con ellas, exige autorización
+    válida y registra el intento (permitido o rechazado)."""
     fence = gate2_config()["blocks"]["fence_max_eval_season"]
     bad = sorted(s for s in eval_seasons if s > fence)
-    if bad and not allow_beyond_fence:
+    if not bad:
+        return
+    try:
+        auth = gate3_authorization()
+    except FenceError as e:
+        _fence_log({"outcome": "refused", "label": label, "seasons": bad, "fence": fence, "reason": str(e)})
         raise FenceError(f"Temporadas {bad} > valla {fence}: el bloque de validación pertenece a GATE 3 "
-                         f"(requiere autorización expresa del usuario).")
+                         f"(requiere autorización expresa del usuario). {e}") from e
+    _fence_log({"outcome": "allowed", "label": label, "seasons": bad, "fence": fence,
+                "authorized_by": auth["authorized_by"], "frozen_candidates_sha256": auth["frozen_candidates_sha256"]})
+
+
+def fence_log_summary() -> dict:
+    """Resumen del registro de la valla para `verify`: un cruce 'allowed' sin autorización válida es un fallo."""
+    if not paths.FENCE_LOG.exists():
+        return {"present": False, "allowed": 0, "refused": 0, "ok": True,
+                "note": "sin registro: ningún intento de cruzar la valla"}
+    ev = [json.loads(x) for x in paths.FENCE_LOG.read_text().splitlines() if x.strip()]
+    allowed = [e for e in ev if e.get("outcome") == "allowed"]
+    refused = [e for e in ev if e.get("outcome") == "refused"]
+    ok = True
+    if allowed:
+        try:
+            auth = gate3_authorization()
+            ok = all(e.get("frozen_candidates_sha256") == auth["frozen_candidates_sha256"] for e in allowed)
+        except FenceError:
+            ok = False
+    return {"present": True, "allowed": len(allowed), "refused": len(refused), "ok": ok}
 
 
 @dataclass
@@ -113,8 +175,7 @@ def _div_job(div):
 
 
 def run(df: pd.DataFrame, factory, eval_seasons, scope: str = "division", refit_every: int = 1,
-        label: str = "", n_jobs: int = 1, allow_beyond_fence: bool = False,
-        columns: list[str] | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+        label: str = "", n_jobs: int = 1, columns: list[str] | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Ejecuta un walk-forward. `factory()` devuelve un modelo con fit(train, tau)->dict y predict(rows)->array.
     `columns`: subconjunto de columnas que necesita el modelo (reduce el coste de enviar datos a procesos)."""
     holdout.assert_no_reserved(df, f"walkforward:{label}")
@@ -122,7 +183,7 @@ def run(df: pd.DataFrame, factory, eval_seasons, scope: str = "division", refit_
         base = ["match_id", "div", "season_code", "match_date", "pre_odds_capture_date_est"]
         df = df[list(dict.fromkeys(base + list(columns)))]
     eval_seasons = list(eval_seasons)
-    check_fence(eval_seasons, allow_beyond_fence)
+    check_fence(eval_seasons, label)
     targets = df[df["season_code"].isin(eval_seasons) & df["pre_odds_capture_date_est"].notna()]
     if scope == "division":
         divs = sorted(targets["div"].unique())

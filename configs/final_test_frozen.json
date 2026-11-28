@@ -1,0 +1,237 @@
+{
+ "_doc": "Prueba final congelada en GATE 4 (holdout 2024/25-2025/26, una sola evaluación). Candidato primario único M4-cal h730 seleccionado por el usuario, idéntico al de GATE 3. Abrir el holdout requiere HOLDOUT_AUTHORIZATION.json, creado solo por instrucción expresa del usuario.",
+ "frozen_at_utc": "2026-11-28T02:19:32.193697+00:00",
+ "holdout_seasons": [
+  "2425",
+  "2526"
+ ],
+ "primary": {
+  "family": "M4cal",
+  "config_id": "M4cal__h730",
+  "model": "MarketModel",
+  "constructor_args": {
+   "sport_cols": [],
+   "ridge": 100.0,
+   "half_life_days": 730,
+   "require_cols": [
+    "inp_m2"
+   ],
+   "market_col": "p_A_consensus"
+  },
+  "scope": "pooled",
+  "refit_every": 4,
+  "columns": [
+   "p_A_consensus",
+   "over25",
+   "inp_m2"
+  ],
+  "inputs": {
+   "inp_m2": "M2"
+  }
+ },
+ "primary_count": 1,
+ "auxiliary_M2": {
+  "family": "M2",
+  "config_id": "M2__h480_r64",
+  "model": "PoissonModel",
+  "constructor_args": {
+   "half_life_days": 480,
+   "ridge": 64.0,
+   "max_history_days": 1460,
+   "promoted_prior": false
+  },
+  "scope": "division",
+  "refit_every": 1,
+  "columns": [
+   "home_team",
+   "away_team",
+   "fthg",
+   "ftag"
+  ]
+ },
+ "gate3_frozen": {
+  "file": "configs/gate3_frozen_candidates.json",
+  "sha256": "a08152ce46bd21c245135615f47572e195d98041cf5a81a7e1bfcb7a470ad7ab"
+ },
+ "model_files_sha256": {
+  "src/qsports/models.py": "25eea45c018dbe4a29bf3fd0bb919ee35fa9acc68644ebe03105666debe8bcc7",
+  "src/qsports/odds.py": "c2b5649c46599d556c92e1e8042d059534786e2ff4c9b51bc8794f92e3d9ef25",
+  "src/qsports/ou.py": "b506aff7ab73cec8ae1c3d673af4f260f0fbc09b0a609d36d329cbffee12984c",
+  "src/qsports/benchmark.py": "cf3b34c236a17afd248119a4a893856c069b30b3b89fb4ddbea46ef46bb7d1c4"
+ },
+ "model_files_unchanged_since_gate3": {
+  "src/qsports/models.py": true,
+  "src/qsports/odds.py": true,
+  "src/qsports/ou.py": true,
+  "src/qsports/benchmark.py": true
+ },
+ "code_hash": "f380539ce5a5ebc52c1ffef65519eadb91b69061253d92cfed84aa162e9af179",
+ "dataset": {
+  "dev_matches_content_sha256": "41d9503c0d33477ce57b100f66cb35082590a3f4d85600aa1acd692d76b4f5b9",
+  "dev_benchmarks_content_sha256": "c2b1dd65d97daebb5680a49c9bbe8c29cd8e990ee82a692973be92864b8742e5",
+  "dev_rows": 182821,
+  "holdout_full_content_sha256_sealed": "b859bdab4e6950bf0671808336852ba1458525d6f0c56f94af832d7b76b6e592",
+  "holdout_level0_content_sha256": "8f841a5ec2d81b5a5ecef5f67f661926545f193542397ee7c2b3dc41f25438b9",
+  "holdout_raw_files_sha256": {
+   "2425": "4dc3abfdc48a6b7e507873f356e9ef84c24e86e6dd654995a050e1aa5ed9f0de",
+   "2526": "0cf572edf7185ac08bb56b0940056ed693a6300d7ca348c91700bbd5f9bbfa66"
+  },
+  "holdout_n_matches_registry": 15328
+ },
+ "inputs_dev_inp_m2": [
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__tuning.parquet",
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__inner.parquet",
+  "experiments/gate3/validation_run/predictions_M2.parquet"
+ ],
+ "identity_reference": {
+  "seasons": [
+   "1415",
+   "1516",
+   "1617",
+   "1718",
+   "1819",
+   "1920",
+   "2021",
+   "2122"
+  ],
+  "pred_files": {
+   "M2": "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__inner.parquet",
+   "M4cal": "experiments/gate3/repro_run/predictions/M4cal/M4cal__h730__inner.parquet"
+  },
+  "inp_m2_files": [
+   "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__tuning.parquet",
+   "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__inner.parquet"
+  ]
+ },
+ "input_files_sha256": {
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__inner.parquet": "43b4c0718614f4a5129e28ad47b5fbfc640e1bdc15f30a2e5d55567fd42324b3",
+  "experiments/gate3/repro_run/predictions/M2/M2__h480_r64__tuning.parquet": "a4183f552b4bd02be590601d686c3a88acd092871b74ed156201b92d7984f25d",
+  "experiments/gate3/repro_run/predictions/M4cal/M4cal__h730__inner.parquet": "2a6f9908f530452e3be54e2c27c8a3135fa47d8cee9fe286ce64ddf3f3bb5ff9",
+  "experiments/gate3/validation_run/predictions_M2.parquet": "3d199b353d32d242c2e8da9741907be7f17e14d4e5365e1d9ca312b392583881"
+ },
+ "universe": "temporadas del holdout, resultado conocido, captura estimable, elig_A (par promedio válido, captura no ambigua, sin clave duplicada)",
+ "protocol": {
+  "sesoi_nats": 0.001,
+  "bootstrap": {
+   "week_mode": "calendar",
+   "block_weeks": 4,
+   "n_boot": 10000,
+   "seed": 20261127
+  },
+  "sensitivity_block_weeks": [
+   2,
+   4,
+   8,
+   12
+  ],
+  "decision_partition": "EXPERIMENTAL_PROTOCOL.md §6",
+  "Q1": "M4cal − C",
+  "Q2": "M4cal − A",
+  "Q3": "NO EVALUADA (protocolo económico separado)",
+  "q2_conditions": {
+   "validation_M4cal_minus_A_mean": -0.00041814074026310673,
+   "calibration_slope_tolerance": 0.2,
+   "calibration_intercept_tolerance": 0.05,
+   "single_primary_model": true
+  }
+ },
+ "power": {
+  "n_holdout_eligible_level0": 15154,
+  "delta": 0.001,
+  "method": "se_holdout = se_bootstrap (semanas calendario, bloque 4) · sqrt(n_origen / n_holdout); Δ̂ ~ Normal",
+  "Q2_M4cal_minus_A": {
+   "source": "GATE 3 (validación 2022/23-2023/24)",
+   "se_validation": 0.00017330918685438086,
+   "n_validation": 15488,
+   "se_holdout": 0.00017520867815197264,
+   "profile": {
+    "se": 0.00017520867815197264,
+    "delta": 0.001,
+    "alpha": 0.05,
+    "power_target": 0.8,
+    "mde_superiority_vs_zero": 0.0004908620427956791,
+    "mde_superiority_relevant": 0.0014908620427956792,
+    "p_equivalence_at_zero": 0.9998214054559897,
+    "p_EQ_category_at_zero": 0.95,
+    "max_theta_equivalence": 0.0005091379571998936,
+    "se_needed_equivalence": 0.00030849767170602785,
+    "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+   },
+   "category_probabilities": {
+    "0": {
+     "S-R": 8.77289061076514e-15,
+     "S-NR": 0.024999999999991227,
+     "I-R": 8.770761894538737e-15,
+     "I-NR": 0.02499999999999125,
+     "EQ": 0.95,
+     "INC": 0.0,
+     "CI_within_margin": 0.9998214054559897
+    },
+    "GATE3_estimate": {
+     "S-R": 6.427051519545193e-08,
+     "S-NR": 0.6651521532228873,
+     "I-R": 0.0,
+     "I-NR": 6.916546917201671e-06,
+     "EQ": 0.3348408659596802,
+     "INC": 0.0,
+     "CI_within_margin": 0.9132409451562109
+    },
+    "minus_delta": {
+     "S-R": 0.024999999999999977,
+     "S-NR": 0.9749107027279948,
+     "I-R": 0.0,
+     "I-NR": 8.770761894538737e-15,
+     "EQ": 8.929727199635806e-05,
+     "INC": 0.0,
+     "CI_within_margin": 0.025000000000000022
+    },
+    "minus_1.5delta": {
+     "S-R": 0.8142791076706195,
+     "S-NR": 0.18572089230899602,
+     "I-R": 0.0,
+     "I-NR": 0.0,
+     "EQ": 2.0384471888235112e-11,
+     "INC": 0.0,
+     "CI_within_margin": 7.407913835688618e-07
+    }
+   }
+  },
+  "Q2_M4cal_minus_A_development_for_comparison": {
+   "se_holdout": 0.00011875283901981305,
+   "profile": {
+    "se": 0.00011875283901981305,
+    "delta": 0.001,
+    "alpha": 0.05,
+    "power_target": 0.8,
+    "mde_superiority_vs_zero": 0.00033269619840685713,
+    "mde_superiority_relevant": 0.001332696198406857,
+    "p_equivalence_at_zero": 0.9999999998959093,
+    "p_EQ_category_at_zero": 0.95,
+    "max_theta_equivalence": 0.0006673038017814262,
+    "se_needed_equivalence": 0.00030849767170602785,
+    "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+   }
+  },
+  "Q1_M4cal_minus_C": {
+   "source": "desarrollo (prueba interna) y, como referencia, A − C de GATE 3",
+   "development_mean": -0.010810703258060026,
+   "se_holdout_from_development": 0.0013074560729083224,
+   "profile_from_development": {
+    "se": 0.0013074560729083224,
+    "delta": 0.001,
+    "alpha": 0.05,
+    "power_target": 0.8,
+    "mde_superiority_vs_zero": 0.0036629496071919876,
+    "mde_superiority_relevant": 0.004662949607191987,
+    "p_equivalence_at_zero": 0.0,
+    "p_EQ_category_at_zero": 0.0,
+    "max_theta_equivalence": null,
+    "se_needed_equivalence": 0.00030849767170602785,
+    "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+   },
+   "gate3_A_minus_C_mean": -0.014702633080987291,
+   "se_holdout_from_gate3_A_minus_C": 0.0014465708411029066,
+   "P_S_R_if_theta_equals_gate3_A_minus_C": 0.999999999999971
+  }
+ }
+}

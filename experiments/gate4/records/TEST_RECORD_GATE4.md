@@ -12,5 +12,5 @@ independiente.** Las comprobaciones del auditor están en `INDEPENDENT_AUDIT_REC
 | T5 | `python experiments/gate4/m4cal_audit.py` | árbol de `ec8b501` | `experiments/gate4/*.json` |
 | T6 | `pytest` completo antes del commit de código | `ec8b501` | 205 superadas, 1 omitida |
 | T7 | `run_final.py verify` tras congelar | `20af512` | Identidad e inputs correctos; dataset de desarrollo = autorizado |
-| T8 | `pytest` formal | ver `pytest_<commit>.*` en esta carpeta | — |
-| T9 | ZIP ligero de GATE 4 en entorno virtual limpio | ver más abajo | — |
+| T8 | `pytest` formal | `6482c1b` (árbol limpio) | **210 superadas, 0 fallos** (`pytest_6482c1b.*`) |
+| T9 | ZIP ligero de GATE 4 (`experiments/gate4/build_light_gate4.py`) en entorno virtual limpio | `e32503c` | 0 Parquet, 0 ZIP de la fuente; **193 superadas, 17 omitidas** (integración y pruebas con datos reales); `audit-synthetic` ok; hash del protocolo recalculado en el ZIP = `fd8685f1…`; `dist/audit_package_gate4_light.zip` (1,00 MB; SHA-256 empieza por `a80e46c3a12d4e06`) |

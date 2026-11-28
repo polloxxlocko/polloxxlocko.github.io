@@ -172,6 +172,12 @@ Pruebas, todas con datos sintéticos salvo la negativa en modo real:
 - negativa en modo real sin registrar accesos;
 - identidad de la especificación congelada frente a 5 manipulaciones.
 
+## 8b. Pruebas y paquete (ejecutados por Claude)
+- `pytest` formal en `6482c1b`: **210 superadas, 0 fallos** (`experiments/gate4/records/pytest_6482c1b.*`).
+- ZIP ligero de GATE 4 (`dist/audit_package_gate4_light.zip`, 1,00 MB, sin Parquet), en un entorno limpio:
+  193 superadas y 17 omitidas (las que necesitan datos reales); `audit-synthetic` ok; el hash del protocolo
+  recalculado dentro del ZIP coincide (`fd8685f1…`).
+
 ## 9. Comprobaciones independientes frente a las de Claude
 Detalle en `experiments/gate4/records/INDEPENDENT_AUDIT_RECORD.md`.
 - **El auditor (ChatGPT), sobre el ZIP de `25944d9`:**

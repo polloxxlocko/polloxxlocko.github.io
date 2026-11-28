@@ -212,3 +212,20 @@ Experimento confirmatorio **concluido**. El holdout 2024/25-2025/26 ya no es ind
 parámetro o regla posterior puede evaluarse en él. La reserva 2026/27 sigue sellada. **No se inicia ninguna
 nueva línea de investigación** sin una decisión expresa del usuario. Eso incluye el protocolo económico
 separado de Q3.
+
+## 10. Cierre (2026-11-28)
+- El usuario **aprobó definitivamente** el cierre del experimento confirmatorio y aceptó los veredictos:
+  **Q1: AFIRMATIVO; Q2: VENTAJA ESTADÍSTICA NO DEMOSTRADA; Q3: NO EVALUADA.**
+- El incidente I-1 se aceptó como una incidencia de procedimiento posterior al sellado, debidamente
+  documentada, que no invalida los resultados según la evidencia disponible.
+- **Auditoría independiente (ChatGPT) del cierre**, según el usuario; Claude no la reprodujo:
+  - 449/449 hashes del paquete;
+  - 39/39 archivos congelados, sin modificaciones desde GATE 4.1;
+  - hash del protocolo coincidente;
+  - hash de resultados coincidente con el sello de evaluación;
+  - 35 pruebas independientes superadas, 0 fallos, 1 omitida y 4 excluidas.
+
+  La ejecución completa de `pytest` sigue **sin certificarse de forma independiente** por la falta de
+  PyArrow en el entorno del auditor. Las 218 pruebas superadas son ejecuciones de Claude.
+- **La primera línea de investigación queda oficialmente concluida.** Cualquier investigación posterior
+  requiere una hipótesis nueva, evidencia que la justifique y autorización expresa.

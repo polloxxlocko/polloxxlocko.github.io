@@ -48,3 +48,16 @@ Fuente: mensaje del usuario del 2026-11-28. **Claude no reprodujo estas comproba
 | Hallazgos confirmados con pruebas sintéticas | A: el hash del holdout no se comparaba con la especificación congelada. B: una interrupción tras la carga y antes del sello permitía un segundo intento |
 
 Corrección en GATE 4.1: ver `MODEL_AUDIT_REPORT.md` §12 y `experiments/gate4_1/`.
+
+## D. Auditor independiente (ChatGPT): cierre del experimento (prueba final)
+Fuente: mensaje del usuario del 2026-11-28. **Claude no reprodujo estas comprobaciones.**
+
+| Comprobación del auditor | Resultado informado |
+|---|---|
+| Hashes del paquete final (`PACKAGE_MANIFEST.json`) | 449/449 |
+| Archivos congelados | 39/39, sin modificaciones desde GATE 4.1 |
+| Hash del protocolo (`9c81e301…`) | coincidente |
+| Hash de resultados frente al sello de evaluación | coincidente |
+| Pruebas independientes | 35 superadas, 0 fallos, 1 omitida, 4 excluidas |
+| `pytest` completo | **no certificado** de forma independiente (sin PyArrow) |
+| Incidente I-1 | aceptado por el usuario como incidencia de procedimiento que no invalida los resultados |

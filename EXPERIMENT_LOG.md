@@ -423,3 +423,28 @@ conserva intacto.
 
 **Archivos congelados:** sin cambios; el hash sigue siendo `9c81e301…`. Reserva: 0 accesos. Informe
 definitivo: `FINAL_EXPERIMENT_REPORT.md`.
+
+## E-010 · 2026-11-28 · Cierre de la primera línea de investigación
+
+**Decisión del usuario:**
+- cierre del experimento confirmatorio aprobado;
+- veredictos aceptados: Q1 AFIRMATIVO, Q2 VENTAJA ESTADÍSTICA NO DEMOSTRADA, Q3 NO EVALUADA;
+- incidente I-1 aceptado como incidencia de procedimiento posterior al sellado que no invalida los
+  resultados.
+
+**Auditoría independiente del cierre** (ChatGPT, según el usuario):
+- 449/449 hashes del paquete;
+- 39/39 archivos congelados sin cambios desde GATE 4.1;
+- hash del protocolo y hash de resultados coincidentes con el sello;
+- 35 pruebas superadas, 0 fallos, 1 omitida y 4 excluidas;
+- `pytest` completo sin certificar (sin PyArrow).
+
+**Reglas a partir de ahora:**
+- conservar todo;
+- no reevaluar el holdout;
+- reserva sellada;
+- sin modelos nuevos ni Q3;
+- no fusionar con `main`;
+- nuevas investigaciones solo con hipótesis nueva, evidencia y autorización expresa.
+
+La primera línea queda **oficialmente concluida**.

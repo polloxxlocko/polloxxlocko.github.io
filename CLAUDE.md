@@ -34,8 +34,9 @@ recomendaciones de apuestas.
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
 | Fuente principal | Football-Data.co.uk |
 | Prueba final | **2024/25 y 2025/26: ABIERTAS una sola vez** (2026-11-28, autorización del usuario, protocolo `9c81e301…`). Evaluación sellada; ya **no son independientes**. Ver `FINAL_EXPERIMENT_REPORT.md` |
-| Resultado confirmatorio | Q1 AFIRMATIVO (M4-cal − C, S-R); **Q2 VENTAJA ESTADÍSTICA NO DEMOSTRADA** (M4-cal − A, EQ); Q3 NO EVALUADA. Experimento **concluido** |
-| Incidente I-1 | Acceso no evaluativo al holdout durante `pytest`, posterior al sellado; registrado sin alterar; corregido con una guarda en las pruebas |
+| Resultado confirmatorio | Q1 AFIRMATIVO (M4-cal − C, S-R); **Q2 VENTAJA ESTADÍSTICA NO DEMOSTRADA** (M4-cal − A, EQ); Q3 NO EVALUADA. Veredictos **aceptados definitivamente** por el usuario (2026-11-28) |
+| **Primera línea de investigación** | **OFICIALMENTE CONCLUIDA** (2026-11-28). Toda investigación posterior requiere una **hipótesis nueva, evidencia que la justifique y autorización expresa** del usuario |
+| Incidente I-1 | Acceso no evaluativo al holdout durante `pytest`, posterior al sellado; registrado sin alterar; corregido con una guarda en las pruebas. **Aceptado** por el usuario como incidencia de procedimiento que no invalida los resultados |
 | Reserva histórica sellada | **2026/27+ (`reserve`): SELLADA**; confirmada por el usuario. **No es validación prospectiva** |
 | Evaluación económica | Exclusivamente simulada |
 | Prohibido sin autorización | Abrir el holdout, servicios de pago (The Odds API incluida), interfaces gráficas, otros mercados, apuestas reales o su automatización, avanzar de gate |
@@ -123,7 +124,7 @@ matemática; semillas fijas; configuración en `configs/`; ningún valor crudo s
 | 2.1 Correcciones de auditoría | Aprobado |
 | 3 Validación histórica | Aprobado |
 | 4 / 4.1 Auditoría y congelamiento | Aprobados |
-| Prueba final (holdout) | **Ejecutada una sola vez** (2026-11-28); rama `final`; experimento concluido. No iniciar nuevas líneas sin decisión del usuario |
+| Prueba final (holdout) | **Ejecutada una sola vez** (2026-11-28); rama `final`; cierre **aprobado**. Línea 1 concluida |
 | 5 Prospectivo genuino (predicciones registradas antes de los partidos; simulado) | No iniciado |
 | 6 Interfaz | No iniciado |
 
@@ -182,3 +183,14 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 Nunca versionar: CSV/ZIP de la fuente, datos reservados (solo registro y log), resúmenes de
 artículos en texto plano (`research/abstracts_local.json`), credenciales. Antes de cada push:
 escaneo de secretos, `python -m qsports verify` y `python -m pytest`.
+
+## 13. Cierre de la primera línea (2026-11-28, decisión del usuario)
+
+- **Conservar íntegramente** código, experimentos, resultados (incluidos los negativos), registros y
+  documentación. No borrar ni reescribir el historial; las ramas `gate2` … `final` se mantienen.
+- **No volver a evaluar el holdout** 2024/25-2025/26 bajo ningún concepto.
+- **Mantener sellada la reserva** 2026/27+.
+- **No desarrollar nuevos modelos ni iniciar Q3.**
+- **No fusionar con `main`.**
+- Cualquier investigación posterior exige una hipótesis nueva, evidencia que la justifique y autorización
+  expresa, con un protocolo propio preregistrado antes de mirar datos nuevos.

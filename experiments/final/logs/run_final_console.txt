@@ -1,0 +1,16 @@
+{
+ "Q1": {
+  "verdict": "AFIRMATIVO",
+  "reading": "mejora relevante sobre una referencia simple"
+ },
+ "Q2": {
+  "verdict": "VENTAJA ESTADÍSTICA NO DEMOSTRADA",
+  "category": "EQ",
+  "failed_conditions": []
+ },
+ "Q3": {
+  "verdict": "NO EVALUADA",
+  "reading": "protocolo económico separado, exclusivamente simulado"
+ }
+}
+EXIT=0

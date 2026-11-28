@@ -1,0 +1,285 @@
+{
+ "started_utc": "2026-11-28T02:49:58.591507+00:00",
+ "authorization": {
+  "authorized_by": "usuario (propietario del proyecto)",
+  "authorized_at": "2026-11-28",
+  "protocol_freeze_sha256": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f"
+ },
+ "spec_verification": {
+  "code_hash": "20071eccfce617eff94f367a6188181bebf485a818d9aa8f50c0e5dd031084be",
+  "primary": "M4cal__h730",
+  "auxiliary": "M2__h480_r64",
+  "missing_inputs": []
+ },
+ "dev_dataset": {
+  "dev_matches_content_sha256": "41d9503c0d33477ce57b100f66cb35082590a3f4d85600aa1acd692d76b4f5b9",
+  "dev_benchmarks_content_sha256": "c2b1dd65d97daebb5680a49c9bbe8c29cd8e990ee82a692973be92864b8742e5"
+ },
+ "identity_replay": {
+  "M2": {
+   "rows": 61370,
+   "bitwise_equal": 61370,
+   "not_equal": 0
+  },
+  "M4cal": {
+   "rows": 61370,
+   "bitwise_equal": 61370,
+   "not_equal": 0
+  }
+ },
+ "holdout_dataset": {
+  "full_content_sha256": "b859bdab4e6950bf0671808336852ba1458525d6f0c56f94af832d7b76b6e592",
+  "rows": 15328,
+  "matches_registry": true,
+  "matches_frozen_spec": true
+ },
+ "evaluation": {
+  "n": 15154,
+  "seasons": [
+   "2425",
+   "2526"
+  ],
+  "coverage": {
+   "M4cal": {
+    "context": "final:M4cal",
+    "expected": 15154,
+    "predicted": 15328,
+    "covered": 15154,
+    "missing": 0,
+    "extra": 174,
+    "coverage": 1.0
+   }
+  },
+  "delta": 0.001,
+  "bootstrap": {
+   "week_mode": "calendar",
+   "block_weeks": 4,
+   "n_boot": 10000,
+   "seed": 20261127
+  },
+  "describe": {
+   "M4cal": {
+    "n": 15154,
+    "logloss": 0.6792404152133233,
+    "brier": 0.24318805317472447,
+    "cal_slope": 0.9220667374622323,
+    "cal_slope_model_intercept": 0.015580439010323601,
+    "cal_intercept_in_the_large": 0.012383973668381407,
+    "cal_converged": true,
+    "ece": 0.009432467228755527,
+    "sharp_sd": 0.08822776818846599,
+    "sharp_mean_abs_from_half": 0.06987416066271998,
+    "auc": 0.591326569649675,
+    "mean_p": 0.5115200546584067,
+    "base_rate": 0.5145176191104659
+   },
+   "A": {
+    "n": 15154,
+    "logloss": 0.6791836041205965,
+    "brier": 0.24315576883610263,
+    "cal_slope": 1.0385020452106324,
+    "cal_slope_model_intercept": 0.021130597183684173,
+    "cal_intercept_in_the_large": 0.022348342768235937,
+    "cal_converged": true,
+    "ece": 0.01003363599431118,
+    "sharp_sd": 0.07904983205411328,
+    "sharp_mean_abs_from_half": 0.06237103114266429,
+    "auc": 0.5913294722413651,
+    "mean_p": 0.5090731690347746,
+    "base_rate": 0.5145176191104659
+   },
+   "C": {
+    "n": 15154,
+    "logloss": 0.6930755180524707,
+    "brier": 0.2499543544170652,
+    "cal_slope": 0.59579521268799,
+    "cal_slope_model_intercept": 0.08040258882994,
+    "cal_intercept_in_the_large": 0.09573971541941523,
+    "cal_converged": true,
+    "ece": 0.034730843108371816,
+    "sharp_sd": 0.044935076828776406,
+    "sharp_mean_abs_from_half": 0.036153563056433524,
+    "auc": 0.5307305662900602,
+    "mean_p": 0.4907811897994059,
+    "base_rate": 0.5145176191104659
+   }
+  },
+  "comparisons": {
+   "Q1": {
+    "comparison": "M4cal-C",
+    "n": 15154,
+    "delta_logloss": {
+     "mean": -0.013835102839147406,
+     "lo": -0.016961533070213447,
+     "hi": -0.011029527982146245,
+     "n": 15154,
+     "weeks": 97,
+     "weeks_with_matches": 90,
+     "block_weeks": 4,
+     "week_mode": "calendar",
+     "n_boot": 10000,
+     "seed": 20261127,
+     "se_boot": 0.001508347191660812
+    },
+    "category": "S-R",
+    "dm": {
+     "stat": -8.931217242637027,
+     "p_value": 4.213467757033882e-19,
+     "mean": -0.013835102839147406,
+     "lag": 3,
+     "se": 0.0015490724795159568,
+     "week_mode": "calendar"
+    },
+    "delta_brier": -0.0067663012423407375,
+    "sd_delta": 0.16265077647900889,
+    "deff_week": 1.1600755759765682,
+    "week_mode": "calendar",
+    "logloss_model": 0.6792404152133233,
+    "logloss_ref": 0.6930755180524707,
+    "levels": {
+     "statistical_superiority": true,
+     "relevant_superiority": true,
+     "profitability": "NO EVALUADA (Q3: protocolo económico separado, exclusivamente simulado)"
+    }
+   },
+   "Q2": {
+    "comparison": "M4cal-A",
+    "n": 15154,
+    "delta_logloss": {
+     "mean": 5.681109272681788e-05,
+     "lo": -0.00029248274364881554,
+     "hi": 0.00038084747187327713,
+     "n": 15154,
+     "weeks": 97,
+     "weeks_with_matches": 90,
+     "block_weeks": 4,
+     "week_mode": "calendar",
+     "n_boot": 10000,
+     "seed": 20261127,
+     "se_boot": 0.00016940992078710363
+    },
+    "category": "EQ",
+    "dm": {
+     "stat": 0.32648691907393407,
+     "p_value": 0.7440559846462695,
+     "mean": 5.681109272681788e-05,
+     "lag": 3,
+     "se": 0.0001740072554452107,
+     "week_mode": "calendar"
+    },
+    "delta_brier": 3.228433862189254e-05,
+    "sd_delta": 0.020186004050802817,
+    "deff_week": 1.104825771792366,
+    "week_mode": "calendar",
+    "logloss_model": 0.6792404152133233,
+    "logloss_ref": 0.6791836041205965,
+    "levels": {
+     "statistical_superiority": false,
+     "relevant_superiority": false,
+     "profitability": "NO EVALUADA (Q3: protocolo económico separado, exclusivamente simulado)"
+    }
+   }
+  },
+  "block_sensitivity": {
+   "Q1": [
+    {
+     "block_weeks": 2,
+     "lo": -0.01667077584488604,
+     "hi": -0.011147158939076588,
+     "category": "S-R"
+    },
+    {
+     "block_weeks": 4,
+     "lo": -0.016961533070213447,
+     "hi": -0.011029527982146245,
+     "category": "S-R"
+    },
+    {
+     "block_weeks": 8,
+     "lo": -0.016824159838272287,
+     "hi": -0.011213472604570132,
+     "category": "S-R"
+    },
+    {
+     "block_weeks": 12,
+     "lo": -0.016691036532633194,
+     "hi": -0.011364458169020287,
+     "category": "S-R"
+    }
+   ],
+   "Q2": [
+    {
+     "block_weeks": 2,
+     "lo": -0.0002824905607399234,
+     "hi": 0.0003876651712850831,
+     "category": "EQ"
+    },
+    {
+     "block_weeks": 4,
+     "lo": -0.00029248274364881554,
+     "hi": 0.00038084747187327713,
+     "category": "EQ"
+    },
+    {
+     "block_weeks": 8,
+     "lo": -0.00024325560447316973,
+     "hi": 0.00028106531410803244,
+     "category": "EQ"
+    },
+    {
+     "block_weeks": 12,
+     "lo": -0.00020700312751655077,
+     "hi": 0.0002249345892454608,
+     "category": "EQ"
+    }
+   ]
+  },
+  "q2_conditions": {
+   "1_direccion_en_validacion": true,
+   "2_calibracion_en_holdout": true,
+   "3_modelo_primario_unico": true
+  },
+  "verdicts": {
+   "Q1": {
+    "verdict": "AFIRMATIVO",
+    "reading": "mejora relevante sobre una referencia simple"
+   },
+   "Q2": {
+    "verdict": "VENTAJA ESTADÍSTICA NO DEMOSTRADA",
+    "category": "EQ",
+    "failed_conditions": []
+   },
+   "Q3": {
+    "verdict": "NO EVALUADA",
+    "reading": "protocolo económico separado, exclusivamente simulado"
+   }
+  },
+  "per_season": {
+   "Q1": {
+    "2425": -0.014881921566860376,
+    "2526": -0.01277437659545579
+   },
+   "Q2": {
+    "2425": 0.00010922904627227043,
+    "2526": 3.696740170531609e-06
+   }
+  }
+ },
+ "fits": {
+  "M4cal": {
+   "n_fits": 42,
+   "nonconverged": 0
+  },
+  "M2_aux": {
+   "n_fits": 1959,
+   "nonconverged": 5
+  }
+ },
+ "finished_utc": "2026-11-28T02:50:59.421323+00:00",
+ "artifacts_sha256": {
+  "fitlogs_M2_aux.parquet": "7d5062de6cc12740e181dd3bda81b16dfabeef1d0901f9e2a9f6e15a99419cea",
+  "fitlogs_M4cal.parquet": "a5fb294900d9f39ae6887fea51f84ab1d10e9bebd6300c5ec3413a34f339182b",
+  "predictions_M2_aux.parquet": "b5b914b95faa28b6f64a0245c17b7af2de9a7de2c82244eb57f871a0b97b5669",
+  "predictions_M4cal.parquet": "f66cd9cdcea26d36acd6e47b6c6a420524e3a69eafe75e67d825ca036b804f3e"
+ }
+}

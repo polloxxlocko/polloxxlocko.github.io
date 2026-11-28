@@ -1,0 +1,3 @@
+{"at_utc": "2026-11-28T02:50:45.970012+00:00", "state": "started", "out_dir": "/home/user/polloxxlocko.github.io/experiments/final/holdout_run", "protocol_freeze_sha256": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f"}
+{"at_utc": "2026-11-28T02:50:47.147766+00:00", "state": "opened", "rows": 15328, "full_content_sha256": "b859bdab4e6950bf0671808336852ba1458525d6f0c56f94af832d7b76b6e592"}
+{"at_utc": "2026-11-28T02:50:59.423232+00:00", "state": "finished", "results_sha256": "a8a0d3a2a2604afb7a4d49d4d1188a959908252dfe16809fccd6bddd9c37aef7"}

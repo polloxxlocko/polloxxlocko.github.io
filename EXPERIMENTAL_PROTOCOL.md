@@ -1,6 +1,6 @@
 # EXPERIMENTAL_PROTOCOL — Protocolo experimental preliminar
 
-Versión 0.11 (preliminar) · 2026-11-27 · revisado al inicio de GATE 2 (§2, §6, §10) y en GATE 2.1 (§4, §4.1, §5, §6)
+Versión 1.0 (congelada en GATE 4, 2026-11-28) · revisado al inicio de GATE 2 (§2, §6, §10), en GATE 2.1 (§4, §4.1, §5, §6) y en GATE 4 (§9)
 
 Este protocolo se diseña **antes de entrenar cualquier modelo**. Se congelará (hash en
 `PROTOCOL_FREEZE.json`) al final de GATE 4 y antes de solicitar la apertura del holdout.
@@ -211,6 +211,17 @@ Condiciones adicionales:
 - Prohibido reportar solo el mejor resultado.
 
 ## 9. Congelamiento
+
+**GATE 4 (2026-11-28): protocolo congelado.** Este documento, `FINAL_TEST_PROTOCOL.md`,
+`MARKET_BENCHMARK_SPECIFICATION.md`, toda la configuración (`configs/*.json`, incluida
+`configs/final_test_frozen.json`), todo `src/qsports`, el ejecutor `experiments/final/run_final.py` y las
+dependencias están listados en `PROTOCOL_FREEZE.json`. Decisiones del usuario incluidas en el congelamiento:
+- modelo primario único **M4-cal h730**, idéntico al de GATE 3;
+- δ = 0,001 nats;
+- Q1 = M4-cal − C y Q2 = M4-cal − A, con las tres condiciones de validez de §6;
+- **Q3 NO EVALUADA** en este experimento confirmatorio (protocolo económico separado, solo simulado).
+
+Texto original de esta sección:
 
 Se congela al final de GATE 4: este documento, `MARKET_BENCHMARK_SPECIFICATION.md`,
 `configs/*.json`, el código del modelo primario y sus parámetros, la regla de apuestas y el

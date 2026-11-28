@@ -84,3 +84,11 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | V2 | La mejora de M4 sobre A (S-NR) procede de la recalibración de un consenso más comprimido en 2022/23-2023/24 (pendiente 1,20 frente a 1,10 en desarrollo) | Puede no ser estable en el tiempo; no es información deportiva |
 | V3 | Un ajuste de M2 en la validación marcado no convergente (F2, 2022-07-29, gradiente 1,0·10⁻⁵) no se pulió, para no volver a tocar la validación | Mismo artefacto que los 226 casos verificados en GATE 2.1 (impacto ≤ 2,7·10⁻⁸ en p) |
 | V4 | Validación de dos temporadas (n = 15.488) | IC de M4-sport − M4-cal ±1,2·10⁻⁴; suficiente para EQ frente a δ = 0,001, no para detectar efectos de 10⁻⁴ |
+
+## GATE 4 (congelamiento)
+| # | Limitación | Impacto |
+|---|---|---|
+| F1 | Con la potencia esperada, Q2 solo puede alcanzar S-R si la mejora real de M4-cal sobre A es ≥ ~1,5·10⁻³ (GATE 3 estimó 4,2·10⁻⁴) | El resultado más favorable plausible es S-NR (superioridad estadística sin relevancia demostrada) |
+| F2 | La ventaja de M4-cal es una recalibración de la compresión del consenso (b de 1,00 a 1,23 según el período) | Puede variar en el holdout; la condición 2 de Q2 (calibración) lo controla parcialmente |
+| F3 | El hash del holdout cargado solo puede verificarse al abrirlo; la equivalencia parquet ↔ hash se apoya en que el desarrollo (mismo procedimiento) la cumple en `verify` | Si no coincidiera, el ejecutor se detiene sin evaluar |
+| F4 | M4-cal depende de M2* para definir sus filas de entrenamiento (no para predecir) | Reproducido exactamente: M2* auxiliar en el holdout |

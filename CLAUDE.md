@@ -25,7 +25,10 @@ recomendaciones de apuestas.
 | GATE 2 | Completado. D-1, D-2, D-3 y D-4 **aceptadas definitivamente** por el usuario (2026-11-27) |
 | GATE 2.1 | Fase correctiva (2026-11-27) en la rama `gate2.1`; ver `GATE_2_1_REPORT.md` y `AUDIT_RESPONSE_GATE2.md`. Desarrollo: aporte incremental de M4-sport (desviación de M2) sobre M4-cal **no demostrado** (EQ) en 2014/15-2021/22; la conclusión se limita a esos modelos, variables y períodos |
 | GATE 2.1 → cierre | **Aprobado** por el usuario (2026-11-27) |
-| GATE 3 | **Autorizado** (2026-11-27) solo para la validación 2022/23-2023/24, con **una sola evaluación** de los candidatos congelados (M4-sport, M4-cal, M2), tras corregir el no determinismo del prior de ascendidos, probarlo con varios `PYTHONHASHSEED`, repetir la reproducción limpia y verificar identidad e hiperparámetros. Rama `gate3`; preregistro en `MODEL_SPECIFICATION.md` Parte C. **Ejecutado una sola vez (2026-11-27)**; sello `logs/GATE3_EVALUATED.json`; informe `GATE_3_REPORT.md`. **GATE 4 no autorizado** |
+| GATE 3 | **Autorizado** (2026-11-27) solo para la validación 2022/23-2023/24, con **una sola evaluación** de los candidatos congelados (M4-sport, M4-cal, M2), tras corregir el no determinismo del prior de ascendidos, probarlo con varios `PYTHONHASHSEED`, repetir la reproducción limpia y verificar identidad e hiperparámetros. Rama `gate3`; preregistro en `MODEL_SPECIFICATION.md` Parte C. **Ejecutado una sola vez (2026-11-27)**; sello `logs/GATE3_EVALUATED.json`; informe `GATE_3_REPORT.md`. **Aprobado definitivamente** (2026-11-28) |
+| Candidato primario del holdout | **M4-cal h730**, seleccionado por el usuario (2026-11-28), con la configuración exacta evaluada en GATE 3 |
+| GATE 4 | **Autorizado** (2026-11-28): auditoría de M4-cal, congelamiento (`PROTOCOL_FREEZE.json`, `configs/final_test_frozen.json`, `FINAL_TEST_PROTOCOL.md`), ejecutor de la prueba final probado solo con datos sintéticos. **NO autoriza abrir el holdout.** Rama `gate4` |
+| Q3 | **NO EVALUADA** en el experimento confirmatorio; protocolo económico separado y solo simulado, más adelante |
 | Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
 | Fuente principal | Football-Data.co.uk |
@@ -115,8 +118,8 @@ matemática; semillas fijas; configuración en `configs/`; ningún valor crudo s
 | 1 Infraestructura de datos | Aprobado |
 | 2 Modelo inicial | Completado; aprobación condicionada |
 | 2.1 Correcciones de auditoría | Aprobado |
-| 3 Validación histórica | Completado (una sola evaluación); pendiente de revisión |
-| 4 Auditoría | No iniciado |
+| 3 Validación histórica | Aprobado |
+| 4 Auditoría y congelamiento | Completado; pendiente de revisión. **Apertura del holdout NO autorizada** |
 | 5 Prospectivo genuino (predicciones registradas antes de los partidos; simulado) | No iniciado |
 | 6 Interfaz | No iniciado |
 
@@ -130,7 +133,8 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 `MARKET_BENCHMARK_SPECIFICATION.md`, `EXPERIMENTAL_PROTOCOL.md`, `MODEL_ROADMAP.md`,
 `GATE_1_REPORT.md`, `AUDIT_RESPONSE_GATE1.md`. GATE 2: `MODEL_SPECIFICATION.md` (preregistro + resultados), `GATE_2_REPORT.md`, `AUDIT_RUN.md`. GATE 2.1: `AUDIT_RESPONSE_GATE2.md`, `GATE_2_1_REPORT.md`, `REPRODUCIBILITY_REPORT.md`, `reports/gate2_1/`. Publicación: `AUDIT_GUIDE.md`. Transversales: `LIMITATIONS.md`, `EXPERIMENT_LOG.md`, `ROADMAP.md`,
 `README.md`. GATE 3: `GATE_3_REPORT.md` (Q3 no evaluada: sin regla de apuestas congelada, por eso no hay
-`BACKTEST_REPORT.md`). Futuros: `MODEL_AUDIT_REPORT.md` (G4).
+`BACKTEST_REPORT.md`). GATE 4: `MODEL_AUDIT_REPORT.md`, `FINAL_TEST_PROTOCOL.md` (congelado), `configs/final_test_frozen.json`,
+`PROTOCOL_FREEZE.json`, `experiments/gate4/`.
 
 ## 11. Reglas específicas de GATE 2
 
@@ -157,6 +161,15 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
   Equivalencia predictiva ≠ rentabilidad (Q3 se evalúa aparte).
 - Registros de pruebas: con commit exacto, y separando lo ejecutado por Claude de lo
   comprobado por el auditor.
+
+## 11c. Reglas de GATE 4 y de la prueba final (obligatorias desde 2026-11-28)
+
+- Los archivos listados en `PROTOCOL_FREEZE.json` (protocolos, configuración, todo `src/qsports`, el ejecutor
+  final, dependencias) **no se modifican**. Cambiarlos invalida la autorización de apertura y exige un nuevo
+  congelamiento aprobado por el usuario.
+- **Nunca crear `HOLDOUT_AUTHORIZATION.json`** sin instrucción expresa del usuario en la conversación.
+- La prueba final solo se ejecuta con `python experiments/final/run_final.py run --out DIR`, **una vez**.
+- El ejecutor final solo se prueba con datos sintéticos.
 
 ## 12. Publicación
 

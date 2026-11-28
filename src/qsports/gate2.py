@@ -40,10 +40,10 @@ OUT = PUBLISHED  # directorio activo (lo cambia configure); por defecto solo lec
 N_JOBS = 4
 _RUN: dict = {"mode": "read_only", "features": paths.FEATURES_DEV}
 
-CODE_FILES_GLOBS = ("src/qsports/*.py", "experiments/gate2/run.py", "experiments/gate3/*.py", "configs/*.json",
-                    "requirements-lock.txt", "pyproject.toml")
+CODE_FILES_GLOBS = ("src/qsports/*.py", "experiments/gate2/run.py", "experiments/gate3/*.py", "experiments/final/*.py",
+                    "configs/*.json", "requirements-lock.txt", "pyproject.toml")
 # El archivo de candidatos congelados de GATE 3 guarda el hash del código: se excluye para evitar la circularidad.
-CODE_FILES_EXCLUDE = ("configs/gate3_frozen_candidates.json",)
+CODE_FILES_EXCLUDE = ("configs/gate3_frozen_candidates.json", "configs/final_test_frozen.json")
 
 
 class SelectionLeakError(RuntimeError):
@@ -299,11 +299,12 @@ def run_config(family, config_id, params, factory, frame, seasons, block, scope,
 
 
 # ---------------------------------------------------------------- universos y selección (solo bloque de ajuste)
-def universe(frame: pd.DataFrame, seasons, mask_col: str | None = None) -> pd.DataFrame:
+def universe(frame: pd.DataFrame, seasons, mask_col: str | None = None,
+             holdout_authorization: dict | None = None) -> pd.DataFrame:
     """Universo explícito de una evaluación: partidos de `seasons` con resultado conocido y fecha de captura
     estimable (requisito point-in-time), y opcionalmente con `mask_col` verdadero.
     Toda evaluación pasa por aquí: la valla de GATE 3 se comprueba también en este punto (y registra el intento)."""
-    wf.check_fence(list(seasons), "gate2.universe")
+    wf.check_fence(list(seasons), "gate2.universe", holdout_authorization)
     u = frame[frame["season_code"].isin(list(seasons)) & frame["over25"].notna()
               & frame["pre_odds_capture_date_est"].notna()]
     if mask_col:

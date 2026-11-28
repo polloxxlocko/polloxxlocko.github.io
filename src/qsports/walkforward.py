@@ -77,13 +77,34 @@ def gate3_authorization() -> dict:
     return auth
 
 
-def check_fence(eval_seasons, label: str = "") -> None:
-    """Valla de GATE 3. Sin temporadas posteriores a la valla no hace nada. Con ellas, exige autorización
-    válida y registra el intento (permitido o rechazado)."""
+def check_fence(eval_seasons, label: str = "", holdout_authorization: dict | None = None) -> None:
+    """Valla. Sin temporadas posteriores a la valla no hace nada. Con ellas registra el intento (permitido o
+    rechazado) y exige: para temporadas de desarrollo (2022/23-2023/24) la autorización de GATE 3; para el holdout
+    la autorización del holdout (recibida y verificada de nuevo aquí); la reserva no se admite nunca."""
     fence = gate2_config()["blocks"]["fence_max_eval_season"]
     bad = sorted(s for s in eval_seasons if s > fence)
     if not bad:
         return
+    res = [s for s in bad if paths.partition_of(s) == "reserve"]
+    hold = [s for s in bad if paths.partition_of(s) == "holdout"]
+    if res:
+        _fence_log({"outcome": "refused", "label": label, "seasons": bad, "fence": fence,
+                    "reason": "reserva sellada: nunca evaluable en este protocolo"})
+        raise FenceError(f"Temporadas {res} de la reserva sellada: no evaluables.")
+    if hold:
+        try:
+            if holdout_authorization is None:
+                raise holdout.ReservedDataError("no se recibió autorización del holdout")
+            holdout.verify_holdout_authorization(holdout_authorization)
+        except holdout.ReservedDataError as e:
+            _fence_log({"outcome": "refused", "label": label, "seasons": bad, "fence": fence, "reason": str(e)})
+            raise FenceError(f"Temporadas {hold} del holdout sellado: requiere autorización expresa. {e}") from e
+        _fence_log({"outcome": "allowed-holdout", "label": label, "seasons": hold, "fence": fence,
+                    "authorized_by": holdout_authorization["authorized_by"],
+                    "protocol_freeze_sha256": holdout_authorization["protocol_freeze_sha256"]})
+        bad = [s for s in bad if s not in hold]
+        if not bad:
+            return
     try:
         auth = gate3_authorization()
     except FenceError as e:
@@ -101,6 +122,7 @@ def fence_log_summary() -> dict:
                 "note": "sin registro: ningún intento de cruzar la valla"}
     ev = [json.loads(x) for x in paths.FENCE_LOG.read_text().splitlines() if x.strip()]
     allowed = [e for e in ev if e.get("outcome") == "allowed"]
+    allowed_h = [e for e in ev if e.get("outcome") == "allowed-holdout"]
     refused = [e for e in ev if e.get("outcome") == "refused"]
     ok = True
     if allowed:
@@ -109,7 +131,14 @@ def fence_log_summary() -> dict:
             ok = all(e.get("frozen_candidates_sha256") == auth["frozen_candidates_sha256"] for e in allowed)
         except FenceError:
             ok = False
-    return {"present": True, "allowed": len(allowed), "refused": len(refused), "ok": ok}
+    if allowed_h:
+        try:
+            ha = holdout.holdout_authorization()
+            ok = ok and all(e.get("protocol_freeze_sha256") == ha["protocol_freeze_sha256"] for e in allowed_h)
+        except holdout.ReservedDataError:
+            ok = False
+    return {"present": True, "allowed": len(allowed), "allowed_holdout": len(allowed_h), "refused": len(refused),
+            "ok": ok}
 
 
 @dataclass
@@ -175,15 +204,17 @@ def _div_job(div):
 
 
 def run(df: pd.DataFrame, factory, eval_seasons, scope: str = "division", refit_every: int = 1,
-        label: str = "", n_jobs: int = 1, columns: list[str] | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+        label: str = "", n_jobs: int = 1, columns: list[str] | None = None,
+        holdout_authorization: dict | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Ejecuta un walk-forward. `factory()` devuelve un modelo con fit(train, tau)->dict y predict(rows)->array.
-    `columns`: subconjunto de columnas que necesita el modelo (reduce el coste de enviar datos a procesos)."""
-    holdout.assert_no_reserved(df, f"walkforward:{label}")
+    `columns`: subconjunto de columnas que necesita el modelo (reduce el coste de enviar datos a procesos).
+    `holdout_authorization`: solo para la prueba final autorizada (se verifica de nuevo; la reserva sigue prohibida)."""
+    holdout.assert_no_reserved(df, f"walkforward:{label}", allow_holdout=holdout_authorization)
     if columns is not None:
         base = ["match_id", "div", "season_code", "match_date", "pre_odds_capture_date_est"]
         df = df[list(dict.fromkeys(base + list(columns)))]
     eval_seasons = list(eval_seasons)
-    check_fence(eval_seasons, label)
+    check_fence(eval_seasons, label, holdout_authorization)
     targets = df[df["season_code"].isin(eval_seasons) & df["pre_odds_capture_date_est"].notna()]
     if scope == "division":
         divs = sorted(targets["div"].unique())

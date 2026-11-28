@@ -16,6 +16,8 @@ se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente
 > **GATE 3 (rama `gate3`):** preregistro en `MODEL_SPECIFICATION.md` Parte C; candidatos congelados en
 > `configs/gate3_frozen_candidates.json`; autorización en `GATE3_AUTHORIZATION.json`; resultados en
 > `GATE_3_REPORT.md` y `experiments/gate3/validation_run/`; registros en `experiments/gate3/records/`.
+> **GATE 4 (rama `gate4`):** `MODEL_AUDIT_REPORT.md`, `FINAL_TEST_PROTOCOL.md`, `configs/final_test_frozen.json`,
+> `PROTOCOL_FREEZE.json`, `experiments/gate4/` (análisis y registros, incluido el registro de la auditoría independiente).
 
 ## 1. Contenido publicado
 

@@ -134,6 +134,19 @@ de modelado**.
    `HOLDOUT_AUTHORIZATION.json` con: `partition`, `authorized_by`, `authorized_at`,
    `user_statement` (cita textual), `purpose` y `protocol_freeze_sha256`.
 5. Ejecutar **una única** evaluación preregistrada. El acceso queda en `ACCESS_LOG.jsonl`.
+   Desde GATE 4: `python experiments/final/run_final.py run --out DIR` (`qsports.final_test`). El
+   ejecutor hace, en este orden:
+   - verifica la autorización y la identidad del candidato, del código y de las entradas;
+   - comprueba el hash del dataset de desarrollo;
+   - hace la réplica de identidad;
+   - carga el holdout con `holdout.load_authorized_holdout`, lo que deja una entrada en el registro de
+     accesos;
+   - verifica el hash de contenido sellado;
+   - evalúa una sola vez y escribe el sello `logs/FINAL_TEST_EVALUATED.json`.
+
+   El motor y el universo solo admiten filas del holdout con esa autorización, verificada de nuevo en
+   cada llamada, y cada uso queda registrado como `allowed-holdout` en `logs/GATE3_FENCE_LOG.jsonl`. La
+   reserva sigue prohibida.
 6. Una vez abierto, el holdout deja de ser independiente: ningún ajuste posterior puede
    evaluarse en él.
 

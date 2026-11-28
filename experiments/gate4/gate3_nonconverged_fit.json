@@ -1,0 +1,20 @@
+{
+ "div": "F2",
+ "fit_tau": "2022-07-29",
+ "published_message": "gmax=1.03e-05 max_iter",
+ "n_train_published": 8260,
+ "n_train_reconstructed": 8260,
+ "first_fit_of_chain_cold_start": true,
+ "reconstructed_message": "gmax=1.03e-05 max_iter",
+ "reproduces_published_message": true,
+ "f_std_minus_f_strict": -4.547473508864641e-13,
+ "gmax_std": 1.0299169742378211e-05,
+ "gmax_strict": 9.192646643896296e-14,
+ "strict_tol": 5.735920706104731e-08,
+ "strict_reached": true,
+ "dtheta_max": 3.7357015481020994e-08,
+ "team_pairs": 1056,
+ "max_abs_dp_over_all_pairs": 2.2826373569095892e-08,
+ "effect_on_M4cal": "ninguno: M4-cal solo usa la DISPONIBILIDAD de inp_m2 para definir sus filas de entrenamiento, y las predicciones de este ajuste existen con o sin pulido",
+ "validation_rows_or_outcomes_used": false
+}

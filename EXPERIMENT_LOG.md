@@ -339,3 +339,36 @@ M4-cal, 1,06. El AUC de A y de M4 es igual (0,6097-0,6098). Q2, condición 1: di
 
 **Lectura:** el aporte deportivo de la desviación de M2 sigue sin demostrarse. La pequeña mejora sobre A
 procede de recalibrar el consenso. **VENTAJA ESTADÍSTICA NO DEMOSTRADA** (relevante).
+
+## E-007 · 2026-11-28 · GATE 4: auditoría de M4-cal y congelamiento de la prueba final
+
+**Decisiones del usuario:**
+- GATE 3 aprobado.
+- Candidato primario único: **M4-cal h730**, con la configuración exacta evaluada.
+- Q3 queda NO EVALUADA en el experimento confirmatorio.
+- GATE 4 autorizado; apertura del holdout **no** autorizada.
+- La auditoría independiente ejecutó el ZIP de `25944d9`
+  (`experiments/gate4/records/INDEPENDENT_AUDIT_RECORD.md`).
+
+**Trabajo:**
+1. Auditoría de M4-cal: `tests/test_m4cal_audit.py` (8 pruebas) y `experiments/gate4/m4cal_audit.py`.
+2. Modo autorizado del holdout en el motor y el universo, con la reserva siempre prohibida
+   (`tests/test_gate4_holdout_mode.py`).
+3. Ejecutor de la prueba final `qsports.final_test`, probado solo con datos sintéticos
+   (`tests/test_final_test.py`). Se ensayó con datos reales **de desarrollo** (identidad bit a bit, hashes
+   del dataset), sin el holdout.
+4. Ajuste no convergente de GATE 3 documentado sin repetir la evaluación (solo datos anteriores a τ).
+5. Potencia reestimada con GATE 3.
+6. Congelamiento (`configs/final_test_frozen.json`, `PROTOCOL_FREEZE.json`).
+
+**Hallazgos de la auditoría:**
+- El argumento ridge de M4-cal es inerte.
+- La máscara de `inp_m2` excluye 10 de 146.585 filas utilizables; M2* se ejecuta como auxiliar en el
+  holdout para reproducirla.
+- El recorte de p_A no actúa.
+- 0 de 385 ajustes no convergentes, con b ∈ [1,004; 1,234].
+- El ajuste no convergente de GATE 3 (F2, 2022-07-29) se reproduce exactamente y su pulido cambia p en
+  ≤ 2,3·10⁻⁸; no afecta a M4-cal.
+
+**Potencia con GATE 3:** se en el holdout de 1,75·10⁻⁴. Para S-R hace falta una mejora real de
+≥ 1,49·10⁻³. Si la diferencia real fuese la de GATE 3: P(S-NR) = 0,67 y P(EQ) = 0,33.

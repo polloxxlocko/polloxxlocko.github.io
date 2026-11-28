@@ -1,0 +1,99 @@
+{
+ "n_holdout_eligible_level0": 15154,
+ "delta": 0.001,
+ "method": "se_holdout = se_bootstrap (semanas calendario, bloque 4) · sqrt(n_origen / n_holdout); Δ̂ ~ Normal",
+ "Q2_M4cal_minus_A": {
+  "source": "GATE 3 (validación 2022/23-2023/24)",
+  "se_validation": 0.00017330918685438086,
+  "n_validation": 15488,
+  "se_holdout": 0.00017520867815197264,
+  "profile": {
+   "se": 0.00017520867815197264,
+   "delta": 0.001,
+   "alpha": 0.05,
+   "power_target": 0.8,
+   "mde_superiority_vs_zero": 0.0004908620427956791,
+   "mde_superiority_relevant": 0.0014908620427956792,
+   "p_equivalence_at_zero": 0.9998214054559897,
+   "p_EQ_category_at_zero": 0.95,
+   "max_theta_equivalence": 0.0005091379571998936,
+   "se_needed_equivalence": 0.00030849767170602785,
+   "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+  },
+  "category_probabilities": {
+   "0": {
+    "S-R": 8.77289061076514e-15,
+    "S-NR": 0.024999999999991227,
+    "I-R": 8.770761894538737e-15,
+    "I-NR": 0.02499999999999125,
+    "EQ": 0.95,
+    "INC": 0.0,
+    "CI_within_margin": 0.9998214054559897
+   },
+   "GATE3_estimate": {
+    "S-R": 6.427051519545193e-08,
+    "S-NR": 0.6651521532228873,
+    "I-R": 0.0,
+    "I-NR": 6.916546917201671e-06,
+    "EQ": 0.3348408659596802,
+    "INC": 0.0,
+    "CI_within_margin": 0.9132409451562109
+   },
+   "minus_delta": {
+    "S-R": 0.024999999999999977,
+    "S-NR": 0.9749107027279948,
+    "I-R": 0.0,
+    "I-NR": 8.770761894538737e-15,
+    "EQ": 8.929727199635806e-05,
+    "INC": 0.0,
+    "CI_within_margin": 0.025000000000000022
+   },
+   "minus_1.5delta": {
+    "S-R": 0.8142791076706195,
+    "S-NR": 0.18572089230899602,
+    "I-R": 0.0,
+    "I-NR": 0.0,
+    "EQ": 2.0384471888235112e-11,
+    "INC": 0.0,
+    "CI_within_margin": 7.407913835688618e-07
+   }
+  }
+ },
+ "Q2_M4cal_minus_A_development_for_comparison": {
+  "se_holdout": 0.00011875283901981305,
+  "profile": {
+   "se": 0.00011875283901981305,
+   "delta": 0.001,
+   "alpha": 0.05,
+   "power_target": 0.8,
+   "mde_superiority_vs_zero": 0.00033269619840685713,
+   "mde_superiority_relevant": 0.001332696198406857,
+   "p_equivalence_at_zero": 0.9999999998959093,
+   "p_EQ_category_at_zero": 0.95,
+   "max_theta_equivalence": 0.0006673038017814262,
+   "se_needed_equivalence": 0.00030849767170602785,
+   "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+  }
+ },
+ "Q1_M4cal_minus_C": {
+  "source": "desarrollo (prueba interna) y, como referencia, A − C de GATE 3",
+  "development_mean": -0.010810703258060026,
+  "se_holdout_from_development": 0.0013074560729083224,
+  "profile_from_development": {
+   "se": 0.0013074560729083224,
+   "delta": 0.001,
+   "alpha": 0.05,
+   "power_target": 0.8,
+   "mde_superiority_vs_zero": 0.0036629496071919876,
+   "mde_superiority_relevant": 0.004662949607191987,
+   "p_equivalence_at_zero": 0.0,
+   "p_EQ_category_at_zero": 0.0,
+   "max_theta_equivalence": null,
+   "se_needed_equivalence": 0.00030849767170602785,
+   "assumption": "Δ̂ ~ Normal(θ, se²); IC percentil ≈ Δ̂ ± z·se"
+  },
+  "gate3_A_minus_C_mean": -0.014702633080987291,
+  "se_holdout_from_gate3_A_minus_C": 0.0014465708411029066,
+  "P_S_R_if_theta_equals_gate3_A_minus_C": 0.999999999999971
+ }
+}

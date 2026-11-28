@@ -207,12 +207,12 @@ def registry(partition: str) -> dict:
 SYNTHETIC_ID_PREFIX = "syn"  # match_id de qsports.synthetic (sin datos de la fuente)
 
 
-def reserved_ids() -> set[str]:
+def reserved_ids(partitions=("holdout", "reserve")) -> set[str]:
     """match_ids reservados (holdout + reserva). FAIL-CLOSED (GATE 2.1): si falta el registro de una
     partición, no se puede comprobar que un conjunto de datos reales esté libre de partidos reservados, así
     que se lanza ReservedDataError en lugar de asumir que no hay ninguno."""
     ids: set[str] = set()
-    for part in ("holdout", "reserve"):
+    for part in partitions:
         reg = registry(part)  # lanza ReservedDataError si falta
         if not isinstance(reg.get("match_ids"), list) or reg.get("n_matches") != len(reg["match_ids"]):
             raise ReservedDataError(f"Registro de {part} incompleto o inconsistente: no se puede verificar.")
@@ -220,21 +220,27 @@ def reserved_ids() -> set[str]:
     return ids
 
 
-def assert_no_reserved(df: pd.DataFrame, context: str = "") -> None:
+def assert_no_reserved(df: pd.DataFrame, context: str = "", allow_holdout: dict | None = None) -> None:
     """Falla si el DataFrame contiene temporadas reservadas o match_ids registrados como reservados.
     Debe llamarse en todo pipeline de features/modelos antes de usar los datos.
     Con datos reales exige los registros de partidos reservados (fail-closed). Solo los datos sintéticos
-    (todos los match_id con prefijo 'syn') se verifican sin registro, por temporada."""
+    (todos los match_id con prefijo 'syn') se verifican sin registro, por temporada.
+    `allow_holdout`: autorización del holdout (GATE 4: solo la prueba final). Se vuelve a verificar aquí; con ella
+    se admiten filas del holdout, pero la reserva sigue prohibida."""
+    allowed = {"dev"}
+    if allow_holdout is not None:
+        verify_holdout_authorization(allow_holdout)
+        allowed.add("holdout")
     if "season_code" in df.columns:
         parts = {paths.partition_of(s) for s in df["season_code"].dropna().unique()}
-        if parts - {"dev"}:
-            raise ReservedDataError(f"[{context}] temporadas reservadas presentes: {sorted(parts - {'dev'})}")
+        if parts - allowed:
+            raise ReservedDataError(f"[{context}] temporadas reservadas presentes: {sorted(parts - allowed)}")
     if "match_id" in df.columns:
         ids = df["match_id"].dropna().astype(str)
         if len(ids) and ids.str.startswith(SYNTHETIC_ID_PREFIX).all():
             return
         try:
-            res = reserved_ids()
+            res = reserved_ids(("reserve",) if allow_holdout is not None else ("holdout", "reserve"))
         except ReservedDataError as e:
             raise ReservedDataError(f"[{context}] fail-closed: {e}") from e
         leaked = set(ids.unique()) & res
@@ -324,6 +330,26 @@ def seal_state(partition: str) -> dict:
             st["ok"], st["error"] = False, str(e)
         st["rule"] = "autorizado: cada acceso debe corresponder a la autorización vigente"
     return st
+
+
+def holdout_authorization() -> dict:
+    """Autorización vigente del holdout (archivo del usuario + hash del protocolo congelado). Lanza si no es válida."""
+    return _check_authorization("holdout")
+
+
+def verify_holdout_authorization(auth: dict) -> None:
+    """Comprueba que una autorización recibida sigue siendo la vigente (mismo hash de protocolo y firmante)."""
+    cur = _check_authorization("holdout")
+    for k in ("protocol_freeze_sha256", "authorized_by", "authorized_at", "user_statement"):
+        if auth.get(k) != cur.get(k):
+            raise ReservedDataError(f"La autorización del holdout recibida no coincide con la vigente ({k}).")
+
+
+def load_authorized_holdout(purpose: str) -> tuple[pd.DataFrame, dict]:
+    """Prueba final (GATE 4+): datos completos del holdout con autorización válida (queda en el registro de
+    accesos) y el hash de contenido sellado contra el que el ejecutor debe verificarlos."""
+    df = open_reserved("holdout", purpose)
+    return df, {"full_content_sha256": registry("holdout")["full_content_sha256"]}
 
 
 def verify_integrity(partition: str) -> dict:

@@ -34,11 +34,23 @@ def test_assert_no_reserved_rejects_reserved_match_ids_even_if_relabelled():
         holdout.assert_no_reserved(sneaky, "test")
 
 
-def test_open_reserved_denied_in_current_project_state():
+def test_open_reserved_denied_without_authorization(tmp_path, monkeypatch):
+    """Hermética (incidente I-1): sin autorización en el proyecto, la apertura se deniega. Se ejecuta en una raíz
+    temporal sin autorización; nunca intenta abrir los datos reales."""
+    monkeypatch.setattr(paths, "ROOT", tmp_path)
+    monkeypatch.setattr(paths, "HOLDOUT_DIR", tmp_path / "h")
+    monkeypatch.setattr(paths, "RESERVE_DIR", tmp_path / "r")
     with pytest.raises(holdout.ReservedDataError, match="SELLADA|PROTOCOL"):
         holdout.open_reserved("holdout", purpose="test")
     with pytest.raises(holdout.ReservedDataError):
         holdout.open_reserved("reserve", purpose="test")
+
+
+def test_tests_cannot_open_real_reserved_data():
+    """La guarda de conftest impide abrir los datos reservados reales desde las pruebas, aunque exista autorización."""
+    for part in ("holdout", "reserve"):
+        with pytest.raises(RuntimeError, match="reales"):
+            holdout.open_reserved(part, purpose="test")
 
 
 def _fake_project(tmp_path, monkeypatch):
@@ -85,7 +97,7 @@ def test_incomplete_authorization_rejected(tmp_path, monkeypatch):
 
 FORBIDDEN = ["HOLDOUT_DIR", "RESERVE_DIR", "data/holdout", "data/reserve", "matches_full.parquet",
              "open_reserved", "_full_path"]
-ALLOWED = {"src/qsports/paths.py", "src/qsports/holdout.py", "tests/test_holdout.py"}
+ALLOWED = {"src/qsports/paths.py", "src/qsports/holdout.py", "tests/test_holdout.py", "tests/conftest.py"}  # conftest: guarda que IMPIDE abrir datos reservados reales en pruebas (incidente I-1)
 
 
 def test_tripwire_reserved_paths():

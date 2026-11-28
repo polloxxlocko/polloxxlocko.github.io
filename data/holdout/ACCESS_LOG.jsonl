@@ -1,1 +1,2 @@
 {"at_utc": "2026-11-28T02:50:46.208052+00:00", "partition": "holdout", "purpose": "Prueba final preregistrada (FINAL_TEST_PROTOCOL.md): una sola evaluación de M4-cal h730", "authorized_by": "usuario (propietario del proyecto)", "protocol_freeze_sha256": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f"}
+{"at_utc": "2026-11-28T02:53:00.498931+00:00", "partition": "holdout", "purpose": "test", "authorized_by": "usuario (propietario del proyecto)", "protocol_freeze_sha256": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f"}

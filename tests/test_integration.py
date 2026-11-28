@@ -81,9 +81,17 @@ def test_no_pinnacle_after_rule_date_in_dev_by_construction(dev):
 
 
 def test_verify_all_ok():
+    """Todos los controles de integridad verdaderos; reserva sellada con 0 accesos. El holdout está sellado (0 accesos)
+    salvo tras la prueba final autorizada: entonces `ok` es falso solo porque ya no está sellado, y sus accesos deben
+    ser coherentes con la autorización vigente."""
     res = verify.verify_all()
-    assert res["ok"], res
-    assert res["access_log_entries"] == {"holdout": 0, "reserve": 0}
+    assert all(res["checks"].values()), res["checks"]
+    assert res["reserve_sealed"] and res["access_log_entries"]["reserve"] == 0
+    if res["holdout_sealed"]:
+        assert res["ok"] and res["access_log_entries"]["holdout"] == 0
+    else:
+        assert res["seal_state"]["holdout"]["ok"]
+        assert (paths.ROOT / "logs" / "FINAL_TEST_EVALUATED.json").exists()
 
 
 # ---------------------------------------------------------------- recomendaciones de la auditoría de GATE 1

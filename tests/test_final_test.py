@@ -266,8 +266,20 @@ def test_q1_verdicts_and_superiority_levels():
     assert lv["statistical_superiority"] and lv["relevant_superiority"]
 
 
-def test_real_mode_refuses_without_authorization_and_logs_no_access(tmp_path):
-    """Modo real (repositorio verdadero, sin HOLDOUT_AUTHORIZATION.json): se niega y no registra ningún acceso."""
+def test_real_mode_refuses_after_single_evaluation(tmp_path):
+    """Repositorio real tras la prueba final: el sello y el marcador impiden cualquier nueva ejecución antes de
+    leer la autorización o los datos; no se registra ningún acceso."""
+    if not final_test.seal_path().exists():
+        pytest.skip("La prueba final aún no se ha ejecutado")
+    before = holdout.access_log_entries("holdout")
+    with pytest.raises(gate3.SingleEvaluationError):
+        final_test.run_final(tmp_path / "final")
+    assert holdout.access_log_entries("holdout") == before
+
+
+def test_real_mode_refuses_without_authorization_and_logs_no_access(tmp_path, monkeypatch):
+    """Hermética: proyecto sin HOLDOUT_AUTHORIZATION.json -> se niega antes de cargar nada; sin accesos registrados."""
+    monkeypatch.setattr(paths, "ROOT", tmp_path)
     before = holdout.access_log_entries("holdout")
     with pytest.raises(holdout.ReservedDataError):
         final_test.run_final(tmp_path / "final")

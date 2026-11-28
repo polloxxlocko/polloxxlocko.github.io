@@ -67,11 +67,17 @@ def test_sealed_state_requires_existing_empty_access_log(tmp_path, monkeypatch):
     assert not st["ok"] and st["access_log_entries"] == 1  # sellado con accesos: inconsistente
 
 
-def test_current_project_is_sealed_with_zero_accesses():
-    for part in ("holdout", "reserve"):
-        st = holdout.seal_state(part)
-        assert not st["authorization_present"]
-        assert st["ok"] and st["access_log_entries"] == 0, st
+def test_current_project_seal_state_consistent():
+    """Reserva: siempre sellada, 0 accesos. Holdout: sellado con 0 accesos, o (tras la prueba final autorizada) con
+    todos los accesos ligados a la autorización vigente y el sello de evaluación única presente."""
+    st = holdout.seal_state("reserve")
+    assert not st["authorization_present"] and st["ok"] and st["access_log_entries"] == 0, st
+    st = holdout.seal_state("holdout")
+    assert st["ok"], st
+    if not st["authorization_present"]:
+        assert st["access_log_entries"] == 0
+    else:
+        assert (paths.ROOT / "logs" / "FINAL_TEST_EVALUATED.json").exists()
 
 
 # ---------------------------------------------------------------- autorización de GATE 3

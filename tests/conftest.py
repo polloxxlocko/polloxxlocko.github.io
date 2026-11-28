@@ -18,3 +18,21 @@ from qsports import paths
 def _isolated_fence_log(tmp_path, monkeypatch):
     monkeypatch.setattr(paths, "FENCE_LOG", tmp_path / "GATE3_FENCE_LOG.jsonl")
     yield
+
+
+_REAL_RESERVED = {"holdout": paths.HOLDOUT_DIR.resolve(), "reserve": paths.RESERVE_DIR.resolve()}
+
+
+@pytest.fixture(autouse=True)
+def _never_open_real_reserved_data(monkeypatch):
+    """Guarda (incidente I-1 de la prueba final): ninguna prueba puede abrir datos reservados REALES, aunque exista
+    una autorización vigente. Solo se permite abrir particiones de proyectos temporales (rutas parcheadas)."""
+    from qsports import holdout
+    real_open = holdout.open_reserved
+
+    def guarded(partition, purpose):
+        if holdout._part_dir(partition).resolve() == _REAL_RESERVED.get(partition):
+            raise RuntimeError(f"Las pruebas no pueden abrir datos reservados reales ({partition}).")
+        return real_open(partition, purpose)
+    monkeypatch.setattr(holdout, "open_reserved", guarded)
+    yield

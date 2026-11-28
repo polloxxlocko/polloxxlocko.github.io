@@ -249,5 +249,6 @@ criterios de decisión.**
 **Nuevo congelamiento:** hash del protocolo **`9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f`**,
 que sustituye a `fd8685f1…`.
 
-**Pruebas (Claude):** 216 superadas y 0 fallos antes del commit (registro formal en
-`experiments/gate4_1/records/`).
+**Pruebas (Claude):** `pytest` formal en `7534b9d`, 216 superadas y 0 fallos. ZIP ligero de GATE 4.1 en un entorno
+limpio: 199 superadas y 17 omitidas (necesitan datos reales); `audit-synthetic` ok; el hash del protocolo
+recalculado dentro del ZIP coincide (`9c81e301…`). Registros en `experiments/gate4_1/records/`.

@@ -1,6 +1,6 @@
 {
  "_doc": "Prueba final congelada en GATE 4 (holdout 2024/25-2025/26, una sola evaluación). Candidato primario único M4-cal h730 seleccionado por el usuario, idéntico al de GATE 3. Abrir el holdout requiere HOLDOUT_AUTHORIZATION.json, creado solo por instrucción expresa del usuario.",
- "frozen_at_utc": "2026-11-28T02:19:32.193697+00:00",
+ "frozen_at_utc": "2026-11-28T02:32:19.143211+00:00",
  "holdout_seasons": [
   "2425",
   "2526"
@@ -65,7 +65,7 @@
   "src/qsports/ou.py": true,
   "src/qsports/benchmark.py": true
  },
- "code_hash": "f380539ce5a5ebc52c1ffef65519eadb91b69061253d92cfed84aa162e9af179",
+ "code_hash": "20071eccfce617eff94f367a6188181bebf485a818d9aa8f50c0e5dd031084be",
  "dataset": {
   "dev_matches_content_sha256": "41d9503c0d33477ce57b100f66cb35082590a3f4d85600aa1acd692d76b4f5b9",
   "dev_benchmarks_content_sha256": "c2b1dd65d97daebb5680a49c9bbe8c29cd8e990ee82a692973be92864b8742e5",

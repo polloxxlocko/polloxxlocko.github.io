@@ -92,3 +92,4 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | F2 | La ventaja de M4-cal es una recalibración de la compresión del consenso (b de 1,00 a 1,23 según el período) | Puede variar en el holdout; la condición 2 de Q2 (calibración) lo controla parcialmente |
 | F3 | El hash del holdout cargado solo puede verificarse al abrirlo; la equivalencia parquet ↔ hash se apoya en que el desarrollo (mismo procedimiento) la cumple en `verify` | Si no coincidiera, el ejecutor se detiene sin evaluar |
 | F4 | M4-cal depende de M2* para definir sus filas de entrenamiento (no para predecir) | Reproducido exactamente: M2* auxiliar en el holdout |
+| F5 | Una muerte abrupta del proceso (p. ej. SIGKILL) tras la apertura puede no dejar el estado `interrupted` | El marcador de intento, creado antes de abrir, persiste e impide igualmente el reintento automático |

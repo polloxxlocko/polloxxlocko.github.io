@@ -5,13 +5,17 @@ Candidato primario único: M4-cal h730, idéntico al congelado y evaluado en GAT
 auxiliar: define qué filas de entrenamiento tienen `inp_m2`, como en GATE 2-3. M4-cal no usa sus valores.
 
 Controles (tests/test_final_test.py, solo con datos sintéticos):
-1. Evaluación única: el directorio de salida no puede existir y no puede existir el sello.
+1. Evaluación única: el directorio de salida no puede existir, ni el sello, ni el MARCADOR DE INTENTO. El marcador
+   se crea de forma exclusiva (O_CREAT | O_EXCL) inmediatamente antes de abrir el holdout y nunca se borra: una
+   interrupción posterior o una ejecución concurrente no permite un segundo intento automático. Los estados
+   (inicio, apertura, finalización, interrupción) se anotan en un registro append-only.
 2. Autorización del holdout verificada ANTES de cargar nada del holdout; la reserva nunca se admite.
 3. Identidad: el candidato es exactamente el de GATE 3 (dict y SHA-256 del archivo congelado), con los mismos
    archivos de modelo, el mismo hash de código congelado y las mismas entradas; atributos instanciados verificados;
    réplica de identidad bit a bit en la prueba interna de desarrollo.
-4. Datos: hash de contenido del desarrollo = el autorizado; hash de contenido del holdout cargado = el sellado
-   en el registro. Benchmarks del desarrollo recalculados = los almacenados.
+4. Datos: hash de contenido del desarrollo = el autorizado. Holdout: antes de abrirlo, el hash del registro debe
+   ser igual al congelado en la especificación; tras cargarlo, su hash de contenido debe coincidir con AMBOS (registro
+   y especificación). Benchmarks del desarrollo recalculados = los almacenados.
 5. Protocolo congelado: δ = 0,001; bootstrap por bloques de 4 semanas calendario (10.000 réplicas, semilla fija);
    Q1 = M4-cal − C; Q2 = M4-cal − A con las tres condiciones de validez del protocolo §6; Q3 NO EVALUADA.
 """
@@ -19,6 +23,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -29,6 +34,8 @@ from . import evaluation as ev
 
 SPEC_REL = "configs/final_test_frozen.json"
 SEAL_REL = "logs/FINAL_TEST_EVALUATED.json"
+ATTEMPT_REL = "logs/FINAL_TEST_ATTEMPT.json"      # marcador exclusivo de intento (permanente)
+STATE_LOG_REL = "logs/FINAL_TEST_STATE_LOG.jsonl"  # registro append-only de estados
 MODEL_FILES = ("src/qsports/models.py", "src/qsports/odds.py", "src/qsports/ou.py", "src/qsports/benchmark.py")
 PURPOSE = "Prueba final preregistrada (FINAL_TEST_PROTOCOL.md): una sola evaluación de M4-cal h730"
 
@@ -47,6 +54,48 @@ def spec_path() -> Path:
 
 def seal_path() -> Path:
     return paths.ROOT / SEAL_REL
+
+
+def attempt_path() -> Path:
+    return paths.ROOT / ATTEMPT_REL
+
+
+def state_log_path() -> Path:
+    return paths.ROOT / STATE_LOG_REL
+
+
+def log_state(state: str, **info) -> None:
+    """Registro append-only de estados de la prueba final: started, opened, finished, interrupted."""
+    p = state_log_path()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with p.open("a") as f:
+        f.write(json.dumps({"at_utc": dt.datetime.now(dt.timezone.utc).isoformat(), "state": state, **info},
+                           ensure_ascii=False, default=str) + "\n")
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def read_states() -> list[dict]:
+    p = state_log_path()
+    return [json.loads(x) for x in p.read_text().splitlines() if x.strip()] if p.exists() else []
+
+
+def claim_attempt(info: dict) -> None:
+    """Crea el marcador de intento de forma EXCLUSIVA y persistente. Si ya existe (intento previo interrumpido o
+    ejecución concurrente), lanza SingleEvaluationError: no hay reintentos automáticos."""
+    p = attempt_path()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        fd = os.open(p, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+    except FileExistsError as e:
+        raise gate3.SingleEvaluationError(
+            f"{p} existe: ya hubo un intento de prueba final (posiblemente interrumpido o concurrente). No se permiten "
+            f"reintentos automáticos; cualquier decisión corresponde al usuario.") from e
+    with os.fdopen(fd, "w") as f:
+        f.write(json.dumps({"claimed_utc": dt.datetime.now(dt.timezone.utc).isoformat(), "pid": os.getpid(), **info},
+                           ensure_ascii=False, indent=1, default=str))
+        f.flush()
+        os.fsync(f.fileno())
 
 
 def load_spec() -> dict:
@@ -114,6 +163,9 @@ def verify_spec(spec: dict, require_inputs: bool = True) -> dict:
         raise FinalTestError("SESOI distinto de 0,001 nats.")
     if spec["holdout_seasons"] != paths.holdout_config()["holdout_seasons"]:
         raise FinalTestError("Temporadas del holdout distintas de las selladas.")
+    reg = holdout.registry("holdout")  # nivel 0: no abre el holdout
+    if spec["dataset"].get("holdout_full_content_sha256_sealed") != reg["full_content_sha256"]:
+        raise FinalTestError("El hash sellado del holdout en la especificación no coincide con el registro.")
     missing = []
     for rel, sha in spec["input_files_sha256"].items():
         p = paths.ROOT / rel
@@ -162,6 +214,10 @@ class RealData:
     def _read_many(self, rels):
         return pd.concat([self._read(x)[["match_id", "p_over"]] for x in rels], ignore_index=True).rename(
             columns={"p_over": "inp_m2"})
+
+    def registry_holdout_hash(self) -> str:
+        """Hash de contenido sellado del registro (nivel 0; no abre el holdout)."""
+        return holdout.registry("holdout")["full_content_sha256"]
 
     def load_holdout(self, purpose: str):
         df, meta = holdout.load_authorized_holdout(purpose)
@@ -279,6 +335,8 @@ def run_final(out_dir, data=None, spec: dict | None = None, verify_repo: bool = 
         raise gate3.SingleEvaluationError(f"{out_dir} ya existe: la prueba final admite una sola evaluación.")
     if seal_path().exists():
         raise gate3.SingleEvaluationError(f"{seal_path()} existe: la prueba final ya se evaluó.")
+    if attempt_path().exists():
+        raise gate3.SingleEvaluationError(f"{attempt_path()} existe: ya hubo un intento de prueba final; no se reintenta.")
     auth = holdout.holdout_authorization()  # sin autorización válida, nada más se ejecuta
     spec = spec or load_spec()
     data = data or RealData(spec)
@@ -290,38 +348,55 @@ def run_final(out_dir, data=None, spec: dict | None = None, verify_repo: bool = 
     report["dev_dataset"] = verify_dev_dataset(spec, dev, bench)
     base = base_from(dev, bench)
     report["identity_replay"] = identity_replay(spec, base, data.identity_reference())
-    hold, expected = data.load_holdout(PURPOSE)
-    got = holdout.content_hash(hold)
-    if got != expected:
-        raise DatasetHashError("El holdout cargado no coincide con el hash de contenido sellado.")
-    report["holdout_dataset"] = {"full_content_sha256": got, "rows": int(len(hold))}
-    holdout.assert_no_reserved(hold, "final:holdout", allow_holdout=auth)
-    frame = combined_frame(dev, bench, hold)
-    seas = spec["holdout_seasons"]
-    m2, m4 = spec["auxiliary_M2"], spec["primary"]
-    p2, l2 = wf.run(frame, gate3.build_factory(m2), seas, scope=m2["scope"], refit_every=m2["refit_every"],
-                    label="final-M2-aux", n_jobs=gate2.N_JOBS, columns=m2["columns"], holdout_authorization=auth)
-    inp = pd.concat([data.dev_inp_m2(), p2[["match_id", "p_over"]].rename(columns={"p_over": "inp_m2"})],
-                    ignore_index=True)
-    f4 = val.merge_one_to_one(frame, inp, context="final:inp_m2")
-    f4.index = frame.index
-    p4, l4 = wf.run(f4, gate3.build_factory(m4), seas, scope=m4["scope"], refit_every=m4["refit_every"],
-                    label="final-M4cal", n_jobs=1, columns=m4["columns"], holdout_authorization=auth)
-    out_dir.mkdir(parents=True)
-    for name, p, lg in (("M4cal", p4, l4), ("M2_aux", p2, l2)):
-        p.drop(columns=[c for c in ("train_max_date", "n_train") if c in p.columns]).to_parquet(
-            out_dir / f"predictions_{name}.parquet", index=False)
-        lg.to_parquet(out_dir / f"fitlogs_{name}.parquet", index=False)
-    report["evaluation"] = evaluate(spec, frame, {"M4cal": p4}, auth)
-    report["fits"] = {n: {"n_fits": int(len(lg)), "nonconverged": int((~lg["converged"]).sum())}
-                      for n, lg in (("M4cal", l4), ("M2_aux", l2))}
-    report["finished_utc"] = dt.datetime.now(dt.timezone.utc).isoformat()
-    report["artifacts_sha256"] = {f.name: gate2.sha256_file(f) for f in sorted(out_dir.glob("*.parquet"))}
-    (out_dir / "results.json").write_text(json.dumps(report, indent=1, ensure_ascii=False, default=float))
-    seal_path().parent.mkdir(parents=True, exist_ok=True)
-    seal_path().write_text(json.dumps({"evaluated_utc": report["finished_utc"], "out_dir": str(out_dir),
-                                       "results_sha256": gate2.sha256_file(out_dir / "results.json"),
-                                       "protocol_freeze_sha256": auth["protocol_freeze_sha256"]}, indent=1))
+    # A. Identidad del dataset reservado, ANTES de abrir: registro = especificación congelada
+    sealed_spec = spec["dataset"]["holdout_full_content_sha256_sealed"]
+    reg_hash = data.registry_holdout_hash()
+    if reg_hash != sealed_spec:
+        raise DatasetHashError("El hash sellado del registro del holdout no coincide con el de la especificación congelada.")
+    # B. Marcador exclusivo y persistente inmediatamente antes de la apertura
+    claim_attempt({"out_dir": str(out_dir), "protocol_freeze_sha256": auth["protocol_freeze_sha256"],
+                   "holdout_full_content_sha256_sealed": sealed_spec})
+    log_state("started", out_dir=str(out_dir), protocol_freeze_sha256=auth["protocol_freeze_sha256"])
+    try:
+        hold, expected = data.load_holdout(PURPOSE)
+        got = holdout.content_hash(hold)
+        if not (got == expected == reg_hash == sealed_spec):
+            raise DatasetHashError("El holdout cargado no coincide con el hash sellado del registro y de la "
+                                   "especificación congelada.")
+        log_state("opened", rows=int(len(hold)), full_content_sha256=got)
+        report["holdout_dataset"] = {"full_content_sha256": got, "rows": int(len(hold)),
+                                     "matches_registry": got == expected, "matches_frozen_spec": got == sealed_spec}
+        holdout.assert_no_reserved(hold, "final:holdout", allow_holdout=auth)
+        frame = combined_frame(dev, bench, hold)
+        seas = spec["holdout_seasons"]
+        m2, m4 = spec["auxiliary_M2"], spec["primary"]
+        p2, l2 = wf.run(frame, gate3.build_factory(m2), seas, scope=m2["scope"], refit_every=m2["refit_every"],
+                        label="final-M2-aux", n_jobs=gate2.N_JOBS, columns=m2["columns"], holdout_authorization=auth)
+        inp = pd.concat([data.dev_inp_m2(), p2[["match_id", "p_over"]].rename(columns={"p_over": "inp_m2"})],
+                        ignore_index=True)
+        f4 = val.merge_one_to_one(frame, inp, context="final:inp_m2")
+        f4.index = frame.index
+        p4, l4 = wf.run(f4, gate3.build_factory(m4), seas, scope=m4["scope"], refit_every=m4["refit_every"],
+                        label="final-M4cal", n_jobs=1, columns=m4["columns"], holdout_authorization=auth)
+        out_dir.mkdir(parents=True)
+        for name, p, lg in (("M4cal", p4, l4), ("M2_aux", p2, l2)):
+            p.drop(columns=[c for c in ("train_max_date", "n_train") if c in p.columns]).to_parquet(
+                out_dir / f"predictions_{name}.parquet", index=False)
+            lg.to_parquet(out_dir / f"fitlogs_{name}.parquet", index=False)
+        report["evaluation"] = evaluate(spec, frame, {"M4cal": p4}, auth)
+        report["fits"] = {n: {"n_fits": int(len(lg)), "nonconverged": int((~lg["converged"]).sum())}
+                          for n, lg in (("M4cal", l4), ("M2_aux", l2))}
+        report["finished_utc"] = dt.datetime.now(dt.timezone.utc).isoformat()
+        report["artifacts_sha256"] = {f.name: gate2.sha256_file(f) for f in sorted(out_dir.glob("*.parquet"))}
+        (out_dir / "results.json").write_text(json.dumps(report, indent=1, ensure_ascii=False, default=float))
+        seal_path().parent.mkdir(parents=True, exist_ok=True)
+        seal_path().write_text(json.dumps({"evaluated_utc": report["finished_utc"], "out_dir": str(out_dir),
+                                           "results_sha256": gate2.sha256_file(out_dir / "results.json"),
+                                           "protocol_freeze_sha256": auth["protocol_freeze_sha256"]}, indent=1))
+        log_state("finished", results_sha256=gate2.sha256_file(out_dir / "results.json"))
+    except BaseException as e:  # incluye KeyboardInterrupt y SystemExit
+        log_state("interrupted", error=type(e).__name__, message=str(e)[:500])
+        raise
     return report
 
 

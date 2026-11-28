@@ -372,3 +372,29 @@ procede de recalibrar el consenso. **VENTAJA ESTADÍSTICA NO DEMOSTRADA** (relev
 
 **Potencia con GATE 3:** se en el holdout de 1,75·10⁻⁴. Para S-R hace falta una mejora real de
 ≥ 1,49·10⁻³. Si la diferencia real fuese la de GATE 3: P(S-NR) = 0,67 y P(EQ) = 0,33.
+
+## E-008 · 2026-11-28 · GATE 4.1: controles de ejecución de la prueba final
+
+**Motivo:** la auditoría independiente de GATE 4 fue favorable respecto de M4-cal y del protocolo
+estadístico. Verificó 433/433 hashes, 39/39 archivos congelados, el hash del protocolo, 30 pruebas sin PyArrow,
+`audit-synthetic` y la potencia. Confirmó dos hallazgos con pruebas sintéticas:
+- **A:** el hash del holdout no se comparaba con la especificación congelada.
+- **B:** una interrupción entre la carga y el sello permitía un segundo intento.
+
+**Corrección (solo `src/qsports/final_test.py`):**
+- A: triple coincidencia (registro, especificación y datos), con comprobación previa del registro frente a
+  la especificación antes de abrir.
+- B: marcador exclusivo y persistente justo antes de abrir, más el registro de estados `started`, `opened`,
+  `finished` e `interrupted`.
+- Pruebas: 8 sintéticas nuevas en `tests/test_final_test.py` (interrupción, segundo intento, concurrencia,
+  fallos previos que no consumen el intento, y la triple coincidencia) y una manipulación más en la
+  verificación de la especificación.
+
+**Alcance demostrado:**
+- de los 39 archivos congelados cambian 3 (ejecutor, protocolo v1.1, especificación);
+- en la especificación solo cambian `code_hash` y la fecha;
+- la réplica de identidad de desarrollo sigue siendo bit a bit;
+- no se repitieron los experimentos de desarrollo.
+
+**Nuevo congelamiento:** hash del protocolo `9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f`.
+El holdout **no** se abrió.

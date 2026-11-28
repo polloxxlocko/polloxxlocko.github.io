@@ -36,9 +36,11 @@ class SyntheticData:
         b["p_C_hist_freq"] = benchmark.historical_frequency(self.dev)
         b["season_code"], b["div"] = self.dev["season_code"].values, self.dev["div"].values
         self.bench = b
-        spec["dataset"] = {"dev_matches_content_sha256": holdout.content_hash(self.dev),
-                           "dev_benchmarks_content_sha256": holdout.content_hash(self.bench)}
         self.expected_hold = holdout.content_hash(self.hold)
+        self.registry_hash = self.expected_hold  # "registro" sintético coherente con los datos
+        spec["dataset"] = {"dev_matches_content_sha256": holdout.content_hash(self.dev),
+                           "dev_benchmarks_content_sha256": holdout.content_hash(self.bench),
+                           "holdout_full_content_sha256_sealed": self.expected_hold}
         base = final_test.base_from(self.dev, self.bench)
         m2, m4 = spec["auxiliary_M2"], spec["primary"]
         p2, _ = wf.run(base, gate3.build_factory(m2), ["1920", "2021", "2122"], scope="division", label="syn-M2")
@@ -60,9 +62,12 @@ class SyntheticData:
     def identity_reference(self):
         return self.ref
 
+    def registry_holdout_hash(self):
+        return self.registry_hash
+
     def load_holdout(self, purpose):
         self.holdout_loaded = True
-        return self.hold, self.expected_hold
+        return self.hold, self.registry_hash
 
 
 @pytest.fixture()
@@ -97,6 +102,9 @@ def test_end_to_end_synthetic_single_evaluation(fake_project, world):
     assert (fake_project / "final" / "results.json").exists() and final_test.seal_path().exists()
     outs = [json.loads(x)["outcome"] for x in paths.FENCE_LOG.read_text().splitlines()]
     assert outs.count("allowed-holdout") == 3 and "refused" not in outs  # M2 auxiliar, M4-cal y universo
+    assert [x["state"] for x in final_test.read_states()] == ["started", "opened", "finished"]
+    assert final_test.attempt_path().exists()
+    assert rep["holdout_dataset"]["matches_registry"] and rep["holdout_dataset"]["matches_frozen_spec"]
     with pytest.raises(gate3.SingleEvaluationError):
         final_test.run_final(fake_project / "otra", data=data, spec=spec, verify_repo=False)
 
@@ -111,12 +119,111 @@ def test_refuses_without_authorization_before_loading_holdout(tmp_path, monkeypa
 
 
 def test_holdout_hash_mismatch_refused(fake_project):
+    """Datos cargados distintos del registro y de la especificación: se rechaza; el intento queda consumido
+    (el holdout llegó a cargarse) y registrado como interrumpido."""
     spec = synth_spec()
     data = SyntheticData(spec, seed=6)
     data.hold.loc[0, "fthg"] = data.hold.loc[0, "fthg"] + 1  # dato distinto del sellado
     with pytest.raises(final_test.DatasetHashError):
         final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
     assert not (fake_project / "final").exists() and not final_test.seal_path().exists()
+    assert [x["state"] for x in final_test.read_states()] == ["started", "interrupted"]
+    assert final_test.attempt_path().exists()
+
+
+def test_registry_and_data_agree_but_differ_from_frozen_spec(fake_project):
+    """Exigencia A: dataset y registro coinciden entre sí pero difieren de la especificación congelada -> rechazo,
+    ANTES de abrir el holdout y sin consumir el intento."""
+    spec = synth_spec()
+    data = SyntheticData(spec, seed=10)
+    data.hold.loc[0, "fthg"] = data.hold.loc[0, "fthg"] + 1
+    data.registry_hash = holdout.content_hash(data.hold)  # registro coherente con los datos alterados
+    with pytest.raises(final_test.DatasetHashError, match="especificación congelada"):
+        final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    assert not data.holdout_loaded and not final_test.attempt_path().exists() and not final_test.read_states()
+
+
+def test_loaded_data_must_match_frozen_spec_even_if_registry_changes_during_load(fake_project):
+    """Si el registro coincide con la especificación antes de abrir pero los datos cargados y el registro devuelto en
+    la carga coinciden entre sí y no con la especificación, también se rechaza."""
+    spec = synth_spec()
+    data = SyntheticData(spec, seed=11)
+    alt = data.hold.copy()
+    alt.loc[0, "fthg"] = alt.loc[0, "fthg"] + 1
+
+    def load(purpose):
+        data.holdout_loaded = True
+        return alt, holdout.content_hash(alt)
+    data.load_holdout = load
+    with pytest.raises(final_test.DatasetHashError):
+        final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    assert final_test.attempt_path().exists()
+
+
+def test_interruption_after_opening_blocks_second_attempt(fake_project, monkeypatch):
+    """Exigencia B: interrupción entre la apertura y el sello -> estados started/opened/interrupted, marcador
+    persistente, sin resultados ni sello; un segundo intento se rechaza antes de cargar nada."""
+    spec = synth_spec()
+    data = SyntheticData(spec, seed=12)
+
+    def boom(*a, **k):
+        raise KeyboardInterrupt("interrupción simulada")
+    with monkeypatch.context() as m:
+        m.setattr(final_test, "combined_frame", boom)
+        with pytest.raises(KeyboardInterrupt):
+            final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    states = final_test.read_states()
+    assert [x["state"] for x in states] == ["started", "opened", "interrupted"]
+    assert states[-1]["error"] == "KeyboardInterrupt"
+    assert final_test.attempt_path().exists()
+    assert not (fake_project / "final").exists() and not final_test.seal_path().exists()
+    data.holdout_loaded = False
+    with pytest.raises(gate3.SingleEvaluationError):
+        final_test.run_final(fake_project / "segundo", data=data, spec=spec, verify_repo=False)
+    assert not data.holdout_loaded
+
+
+def test_interruption_during_loading_blocks_second_attempt(fake_project):
+    spec = synth_spec()
+    data = SyntheticData(spec, seed=13)
+
+    def fail(purpose):
+        data.holdout_loaded = True
+        raise RuntimeError("fallo de E/S simulado durante la carga")
+    data.load_holdout = fail
+    with pytest.raises(RuntimeError):
+        final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    assert [x["state"] for x in final_test.read_states()] == ["started", "interrupted"]
+    with pytest.raises(gate3.SingleEvaluationError):
+        final_test.run_final(fake_project / "final", data=SyntheticData(synth_spec(), seed=13), spec=spec,
+                             verify_repo=False)
+
+
+def test_concurrent_attempt_refused_and_claim_is_exclusive(fake_project):
+    """Un marcador existente (p. ej. otra ejecución en curso) impide empezar; la creación es exclusiva."""
+    spec = synth_spec()
+    data = SyntheticData(spec, seed=14)
+    final_test.claim_attempt({"simulado": "ejecución concurrente"})
+    with pytest.raises(gate3.SingleEvaluationError):
+        final_test.claim_attempt({"segundo": True})
+    with pytest.raises(gate3.SingleEvaluationError):
+        final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    assert not data.holdout_loaded
+
+
+def test_failure_before_opening_does_not_consume_the_attempt(fake_project):
+    """Un error de configuración detectado antes de abrir (hash de desarrollo) no crea el marcador: el intento
+    solo se consume al abrir el holdout."""
+    spec = synth_spec()
+    data = SyntheticData(spec, seed=15)
+    good = spec["dataset"]["dev_matches_content_sha256"]
+    spec["dataset"]["dev_matches_content_sha256"] = "0" * 64
+    with pytest.raises(final_test.DatasetHashError):
+        final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    assert not final_test.attempt_path().exists() and not final_test.read_states()
+    spec["dataset"]["dev_matches_content_sha256"] = good
+    rep = final_test.run_final(fake_project / "final", data=data, spec=spec, verify_repo=False)
+    assert rep["evaluation"]["verdicts"]["Q3"]["verdict"] == "NO EVALUADA"
 
 
 def test_dev_hash_mismatch_refused(fake_project):
@@ -166,6 +273,7 @@ def test_real_mode_refuses_without_authorization_and_logs_no_access(tmp_path):
         final_test.run_final(tmp_path / "final")
     assert holdout.access_log_entries("holdout") == before
     assert not (tmp_path / "final").exists() and not final_test.seal_path().exists()
+    assert not final_test.attempt_path().exists() and not final_test.state_log_path().exists()
 
 
 def test_real_frozen_spec_identity_checks():
@@ -178,7 +286,8 @@ def test_real_frozen_spec_identity_checks():
                    lambda s: s["protocol"].__setitem__("sesoi_nats", 0.002),
                    lambda s: s.__setitem__("code_hash", "0" * 64),
                    lambda s: s["model_files_sha256"].__setitem__("src/qsports/models.py", "0" * 64),
-                   lambda s: s.__setitem__("holdout_seasons", ["2425"])):
+                   lambda s: s.__setitem__("holdout_seasons", ["2425"]),
+                   lambda s: s["dataset"].__setitem__("holdout_full_content_sha256_sealed", "0" * 64)):
         bad = copy.deepcopy(spec)
         mutate(bad)
         with pytest.raises(final_test.FinalTestError):

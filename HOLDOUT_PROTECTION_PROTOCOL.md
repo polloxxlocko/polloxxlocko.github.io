@@ -139,10 +139,15 @@ de modelado**.
    - verifica la autorización y la identidad del candidato, del código y de las entradas;
    - comprueba el hash del dataset de desarrollo;
    - hace la réplica de identidad;
+   - comprueba que el hash del registro del holdout es igual al de la especificación congelada (GATE 4.1);
+   - crea el marcador exclusivo y persistente `logs/FINAL_TEST_ATTEMPT.json` (GATE 4.1);
    - carga el holdout con `holdout.load_authorized_holdout`, lo que deja una entrada en el registro de
      accesos;
-   - verifica el hash de contenido sellado;
+   - verifica que su hash de contenido coincide con el registro **y** con la especificación;
    - evalúa una sola vez y escribe el sello `logs/FINAL_TEST_EVALUATED.json`.
+
+   Los estados (`started`, `opened`, `finished`, `interrupted`) quedan en `logs/FINAL_TEST_STATE_LOG.jsonl`.
+   Con el marcador presente, no hay reintentos automáticos.
 
    El motor y el universo solo admiten filas del holdout con esa autorización, verificada de nuevo en
    cada llamada, y cada uso queda registrado como `allowed-holdout` en `logs/GATE3_FENCE_LOG.jsonl`. La

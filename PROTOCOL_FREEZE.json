@@ -1,6 +1,6 @@
 {
- "_doc": "Congelamiento del protocolo de la prueba final (GATE 4, 2026-11-28). El hash del protocolo = SHA-256 encadenado de (ruta, SHA-256) de estos archivos en orden (qsports.holdout.protocol_freeze_hash). Cualquier cambio en uno de ellos invalida HOLDOUT_AUTHORIZATION.json.",
- "frozen_at_utc": "2026-11-28T02:20:09.377154+00:00",
+ "_doc": "Congelamiento del protocolo de la prueba final (GATE 4.1, 2026-11-28; sustituye al congelamiento fd8685f1… de GATE 4). El hash del protocolo = SHA-256 encadenado de (ruta, SHA-256) de estos archivos en orden (qsports.holdout.protocol_freeze_hash). Cualquier cambio en uno de ellos invalida HOLDOUT_AUTHORIZATION.json.",
+ "frozen_at_utc": "2026-11-28T02:32:31.613029+00:00",
  "files": [
   "EXPERIMENTAL_PROTOCOL.md",
   "FINAL_TEST_PROTOCOL.md",
@@ -44,10 +44,10 @@
  ],
  "files_sha256": {
   "EXPERIMENTAL_PROTOCOL.md": "6ea1fdac357aa5c8b8b32018da895cdd2813eac392e9b73f00f9376ab1968c45",
-  "FINAL_TEST_PROTOCOL.md": "44ff811b782183598002400c16f52c12b131c3763255799759567248d1e40a1e",
+  "FINAL_TEST_PROTOCOL.md": "cc6927ab2606edb4992b64f8bef9e3747e6ce2fe2f9208959627680bb656a9e7",
   "MARKET_BENCHMARK_SPECIFICATION.md": "94dc58d77d7a3251cfa5b93f5ec059b0c79c87b67240bcea693b761188c9dc26",
   "configs/exclusion_criteria.json": "27abebc21d6252acd4b520d0ea7461b1fdecdcd8615d2813af3db88d29d93a62",
-  "configs/final_test_frozen.json": "d03f15a2a0b9784985fdc140ed63f5cd372148c490c5b1676a9bd2ed36199f7c",
+  "configs/final_test_frozen.json": "f0e9d275a37e5f11aabd0028da3e5bc6d9289aa99c4eeb3dda710988b0b86618",
   "configs/gate2.json": "de720811ea3d8a2f470a9418836f9ed4e4fe965433eef1129b4e71f6948507fb",
   "configs/gate3_frozen_candidates.json": "a08152ce46bd21c245135615f47572e195d98041cf5a81a7e1bfcb7a470ad7ab",
   "configs/holdout.json": "c747b7216752488c9e1b98957386857a21528c941a49f759c2c9296dcfcbf631",
@@ -63,7 +63,7 @@
   "src/qsports/divisions.py": "074b78ae5b5d31698dd6cf532e8d3874a8078ca1be7b7a4eb2cf9cdcf7527a14",
   "src/qsports/evaluation.py": "22ac0059be262a2e24a7cbcfc325bafe47844d4340b79c8260489576e969c3ae",
   "src/qsports/features.py": "d3c10a7605c4c30c04e86a74c02cff2ffc1b3b3a58f2acaa8f771168245c400d",
-  "src/qsports/final_test.py": "cbd34d9fcc4829e83ae356d03dfb183d4486eb978ada61fb1f17695fb0258843",
+  "src/qsports/final_test.py": "a59d50daa1a42dff463352b73ee6a880e0962c259aaedcf50e8f3e8abbb2ff35",
   "src/qsports/gate2.py": "b31bf0643247fa50a8156d582ba8722389fd9d6de08514da05ac5ad8c69edc00",
   "src/qsports/gate3.py": "ab1f32ac277b29fdfd51ec692ef0580853fbcfd9ec5043af00102ecc0a2c2bf4",
   "src/qsports/holdout.py": "1cef5d92da79189a0bfd4820340d68df032e3a723f8cb39209a5307c58af7c3b",
@@ -83,5 +83,9 @@
   "requirements-lock.txt": "f0bef3e1567f40db680bba616b90d7369b74c3cba7bb11653475a22d1c66cf80",
   "pyproject.toml": "f00268076fcb1aa94e389e2076186c7296e3916de4e4378932c0daea5ce2d690"
  },
- "protocol_freeze_sha256_at_creation": "fd8685f1413cf94348538a6f5ca79024da82481d69026334bd6f8ea8ee3592d0"
+ "supersedes": {
+  "protocol_freeze_sha256": "fd8685f1413cf94348538a6f5ca79024da82481d69026334bd6f8ea8ee3592d0",
+  "commit": "20af512"
+ },
+ "protocol_freeze_sha256_at_creation": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f"
 }

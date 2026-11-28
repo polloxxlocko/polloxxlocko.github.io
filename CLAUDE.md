@@ -28,6 +28,7 @@ recomendaciones de apuestas.
 | GATE 3 | **Autorizado** (2026-11-27) solo para la validación 2022/23-2023/24, con **una sola evaluación** de los candidatos congelados (M4-sport, M4-cal, M2), tras corregir el no determinismo del prior de ascendidos, probarlo con varios `PYTHONHASHSEED`, repetir la reproducción limpia y verificar identidad e hiperparámetros. Rama `gate3`; preregistro en `MODEL_SPECIFICATION.md` Parte C. **Ejecutado una sola vez (2026-11-27)**; sello `logs/GATE3_EVALUATED.json`; informe `GATE_3_REPORT.md`. **Aprobado definitivamente** (2026-11-28) |
 | Candidato primario del holdout | **M4-cal h730**, seleccionado por el usuario (2026-11-28), con la configuración exacta evaluada en GATE 3 |
 | GATE 4 | **Autorizado** (2026-11-28): auditoría de M4-cal, congelamiento (`PROTOCOL_FREEZE.json`, `configs/final_test_frozen.json`, `FINAL_TEST_PROTOCOL.md`), ejecutor de la prueba final probado solo con datos sintéticos. **NO autoriza abrir el holdout.** Rama `gate4` |
+| GATE 4.1 | Correcciones de controles de ejecución pedidas por la auditoría: triple coincidencia del hash del holdout (registro, especificación y datos) y marcador exclusivo de intento con registro de estados. Nuevo hash del protocolo **`9c81e301…63f`** (sustituye a `fd8685f1…`). Rama `gate4.1`. **Apertura del holdout NO autorizada** |
 | Q3 | **NO EVALUADA** en el experimento confirmatorio; protocolo económico separado y solo simulado, más adelante |
 | Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
@@ -169,6 +170,7 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
   congelamiento aprobado por el usuario.
 - **Nunca crear `HOLDOUT_AUTHORIZATION.json`** sin instrucción expresa del usuario en la conversación.
 - La prueba final solo se ejecuta con `python experiments/final/run_final.py run --out DIR`, **una vez**.
+- **Nunca borrar** `logs/FINAL_TEST_ATTEMPT.json` ni editar `logs/FINAL_TEST_STATE_LOG.jsonl`. Tras una interrupción no se reintenta: decide el usuario.
 - El ejecutor final solo se prueba con datos sintéticos.
 
 ## 12. Publicación

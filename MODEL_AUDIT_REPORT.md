@@ -6,10 +6,10 @@ autorización expresa para abrir el holdout** · Holdout 2024/25-2025/26 y reser
 
 | Elemento congelado | Valor |
 |---|---|
-| Commit del congelamiento | `20af512` |
-| Hash del protocolo (`PROTOCOL_FREEZE.json`, 39 archivos) | `fd8685f1413cf94348538a6f5ca79024da82481d69026334bd6f8ea8ee3592d0` |
+| Congelamiento vigente (GATE 4.1, §12) | Hash del protocolo **`9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f`** (39 archivos); código `20071ecc…84be` |
+| Congelamiento de GATE 4, sustituido | `20af512`, hash `fd8685f1413cf94348538a6f5ca79024da82481d69026334bd6f8ea8ee3592d0` |
 | Especificación ejecutable | `configs/final_test_frozen.json` |
-| Hash del código congelado | `f380539ce5a5ebc52c1ffef65519eadb91b69061253d92cfed84aa162e9af179` |
+| Hash del código congelado | `20071eccfce617eff94f367a6188181bebf485a818d9aa8f50c0e5dd031084be` (GATE 4.1; en GATE 4 era `f380539c…f179`) |
 | Candidato primario único | **M4-cal h730** (`M4cal__h730`), idéntico al de GATE 3 |
 | Dataset de desarrollo autorizado | contenido `41d9503c…f5b9` (182.821 filas); benchmarks `c2b1dd65…42e5` |
 | Holdout autorizado (hash sellado, sin abrir) | contenido `b859bdab…e592`; nivel 0 `8f841a5e…38b9`; ZIP 2024/25 `4dc3abfd…f0de`, 2025/26 `0cf572ed…fa66`; 15.328 partidos en el registro |
@@ -206,3 +206,48 @@ Me detengo aquí. Para abrir el holdout necesito una **autorización expresa**. 
 `HOLDOUT_AUTHORIZATION.json` ligado al hash del protocolo `fd8685f1…` y ejecutaría **una sola vez**
 `python experiments/final/run_final.py run --out experiments/final/holdout_run`. Cualquier cambio en un
 archivo congelado antes de la apertura exigiría un nuevo congelamiento y una nueva autorización.
+
+## 12. GATE 4.1: correcciones de los controles de ejecución (2026-11-28)
+
+La auditoría independiente de GATE 4 confirmó con pruebas sintéticas dos hallazgos sobre los controles del
+ejecutor. **Se corrigieron sin modificar M4-cal, M2 auxiliar, hiperparámetros, SESOI, universo, estadística ni
+criterios de decisión.**
+
+**A. Identidad del dataset reservado.**
+- Antes, el hash del holdout cargado se comparaba solo con el registro.
+- Ahora:
+  - `verify_spec` y el ejecutor, antes de abrir, exigen que el hash del registro sea igual al de la
+    especificación congelada (`dataset.holdout_full_content_sha256_sealed`);
+  - tras cargar, el hash de contenido debe coincidir **a la vez** con el registro y con la especificación.
+- Prueba principal: dataset y registro coinciden entre sí pero no con la especificación, y el ejecutor lo
+  rechaza **antes de abrir**, sin consumir el intento. Se añade otra prueba en la que la discrepancia aparece
+  durante la carga.
+
+**B. Evaluación única ante interrupciones.**
+- **Marcador:** `logs/FINAL_TEST_ATTEMPT.json` se crea de forma exclusiva (`O_CREAT | O_EXCL`, fsync)
+  inmediatamente antes de abrir el holdout y es persistente; no se borra.
+- **Registro de estados:** `logs/FINAL_TEST_STATE_LOG.jsonl` anota `started`, `opened`, `finished` e
+  `interrupted` (esta última para cualquier excepción, Ctrl-C incluido).
+- **Comportamiento:** con el marcador presente, el ejecutor se niega antes de cargar nada. Los errores
+  detectados antes de abrir no consumen el intento.
+- **Pruebas sintéticas:**
+  - interrupción tras la apertura → `started`, `opened`, `interrupted`; segundo intento rechazado;
+  - interrupción durante la carga → `started`, `interrupted`; reintento rechazado;
+  - ejecución concurrente: el marcador ya existe y la creación es exclusiva;
+  - un fallo antes de abrir no consume el intento;
+  - en la ejecución completa, los estados son `started`, `opened`, `finished`.
+
+**Las modificaciones se limitan a los controles de ejecución** (`experiments/gate4_1/freeze_diff.json`):
+- de los 39 archivos congelados, cambian solo `src/qsports/final_test.py`, `FINAL_TEST_PROTOCOL.md` (v1.1)
+  y `configs/final_test_frozen.json`;
+- en la especificación cambian solo `code_hash` y `frozen_at_utc`. Son idénticos el candidato, el auxiliar,
+  el protocolo estadístico, los datasets, el universo, las entradas y los archivos de modelo;
+- la réplica de identidad con datos reales de desarrollo sigue siendo bit a bit (M2 y M4-cal, 61.370 filas
+  cada uno);
+- por eso no fue necesario repetir los experimentos de desarrollo.
+
+**Nuevo congelamiento:** hash del protocolo **`9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f`**,
+que sustituye a `fd8685f1…`.
+
+**Pruebas (Claude):** 216 superadas y 0 fallos antes del commit (registro formal en
+`experiments/gate4_1/records/`).

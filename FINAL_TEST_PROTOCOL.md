@@ -1,7 +1,9 @@
 # FINAL_TEST_PROTOCOL — Protocolo congelado de la prueba final (holdout 2024/25-2025/26)
 
-Versión 1.0 · Congelado en GATE 4 (2026-11-28) · Forma parte de `PROTOCOL_FREEZE.json`: cualquier cambio
-en este documento invalida la autorización de apertura.
+Versión 1.1 · Congelado en GATE 4 (2026-11-28) y vuelto a congelar en GATE 4.1 (2026-11-28) con dos controles
+de ejecución añadidos (§1 y §2). No cambian el modelo, los hiperparámetros, el SESOI, el universo, la estadística
+ni los criterios de decisión. Forma parte de `PROTOCOL_FREEZE.json`: cualquier cambio en este documento invalida la
+autorización de apertura.
 
 Especificación ejecutable: `configs/final_test_frozen.json`. Ejecutor: `qsports.final_test`
 (`experiments/final/run_final.py run --out DIR`).
@@ -12,17 +14,38 @@ Especificación ejecutable: `configs/final_test_frozen.json`. Ejecutor: `qsports
   `PROTOCOL_FREEZE.json`.
 - La reserva (2026/27 en adelante) no se abre en este protocolo: el motor la rechaza incluso con la
   autorización del holdout.
-- **Una sola evaluación.** El ejecutor se niega si existe el directorio de salida o el sello
-  `logs/FINAL_TEST_EVALUATED.json`. Tras abrirse, el holdout deja de ser independiente: ningún modelo,
-  parámetro o regla posterior puede evaluarse en él.
+- **Una sola evaluación.** El ejecutor se niega si existe cualquiera de estos tres:
+  - el directorio de salida;
+  - el sello `logs/FINAL_TEST_EVALUATED.json`;
+  - el **marcador de intento** `logs/FINAL_TEST_ATTEMPT.json` (GATE 4.1).
+- **Marcador de intento.** Se crea de forma exclusiva (O_CREAT | O_EXCL, con fsync) **inmediatamente antes de
+  abrir el holdout** y nunca se borra automáticamente. Por eso:
+  - una interrupción posterior a la apertura (error, Ctrl-C, caída del proceso) no permite un segundo
+    intento automático;
+  - tampoco lo permite una ejecución concurrente.
+
+  Los errores detectados **antes** de abrir (autorización, identidad, hash del desarrollo, hash del
+  registro) no crean el marcador. Retomar la prueba tras una interrupción exigiría una decisión explícita
+  del usuario, que quedaría documentada.
+- **Registro de estados** append-only `logs/FINAL_TEST_STATE_LOG.jsonl`: `started` (marcador creado, antes
+  de abrir), `opened` (holdout cargado y hash verificado), `finished` (resultados y sello escritos) e
+  `interrupted` (cualquier excepción tras el inicio, con su tipo). Una muerte abrupta del proceso puede no
+  dejar `interrupted`, pero el marcador sigue impidiendo el reintento.
+- Tras abrirse, el holdout deja de ser independiente: ningún modelo, parámetro o regla posterior puede
+  evaluarse en él.
 - Se informa todo, sea cual sea el resultado.
 
 ## 2. Datos autorizados (hashes en `configs/final_test_frozen.json`)
 - **Desarrollo:** dataset procesado con hash de contenido `41d9503c…f5b9` (182.821 filas) y benchmarks
   `c2b1dd65…42e5`. El ejecutor los recalcula al cargar y se detiene si no coinciden.
-- **Holdout:** hash de contenido sellado en el registro (`full_content_sha256`). El ejecutor calcula el
-  hash del holdout cargado y se detiene si no coincide. También constan el hash de nivel 0 y el
-  SHA-256 de cada ZIP RAW.
+- **Holdout:** hash de contenido sellado `b859bdab…e592`, congelado en la especificación
+  (`dataset.holdout_full_content_sha256_sealed`). GATE 4.1 refuerza tres comprobaciones:
+  - al verificar la especificación y **antes de abrir**, el hash del registro debe ser igual al congelado;
+  - **tras cargar**, el hash de contenido del holdout debe coincidir **a la vez** con el registro y con la
+    especificación congelada;
+  - si el dataset y el registro coinciden entre sí pero no con la especificación, se rechaza.
+
+  También constan el hash de nivel 0 y el SHA-256 de cada ZIP RAW.
 - **Benchmarks del holdout:** A (consenso pre-cierre sin margen, normalización proporcional) y C
   (frecuencia histórica point-in-time). Se recalculan con el mismo código sobre desarrollo + holdout. En
   las filas de desarrollo deben coincidir exactamente con los almacenados.

@@ -1,0 +1,34 @@
+{
+ "old_protocol_freeze_sha256": "fd8685f1413cf94348538a6f5ca79024da82481d69026334bd6f8ea8ee3592d0",
+ "new_protocol_freeze_sha256": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f",
+ "same_file_list": true,
+ "n_files": 39,
+ "files_changed": [
+  "FINAL_TEST_PROTOCOL.md",
+  "configs/final_test_frozen.json",
+  "src/qsports/final_test.py"
+ ],
+ "spec_top_level_keys_changed": [
+  "code_hash",
+  "frozen_at_utc"
+ ],
+ "spec_code_hash": {
+  "old": "f380539ce5a5ebc52c1ffef65519eadb91b69061253d92cfed84aa162e9af179",
+  "new": "20071eccfce617eff94f367a6188181bebf485a818d9aa8f50c0e5dd031084be"
+ },
+ "spec_identical_except": {
+  "primary": true,
+  "auxiliary_M2": true,
+  "protocol": true,
+  "dataset": true,
+  "holdout_seasons": true,
+  "model_files_sha256": true,
+  "input_files_sha256": true,
+  "identity_reference": true,
+  "inputs_dev_inp_m2": true,
+  "gate3_frozen": true,
+  "universe": true,
+  "power": true,
+  "primary_count": true
+ }
+}

@@ -31,3 +31,20 @@ producir fallos dispersos.
 Las 178 pruebas de `a27897a` y las 162 del ZIP son ejecuciones de Claude, **no** del auditor. La diferencia
 de 141 frente a 162 superadas en el mismo ZIP corresponde a los 21 casos (8 + 13) que el auditor atribuye a
 PyArrow.
+
+## C. Auditor independiente (ChatGPT), revisión de GATE 4
+Fuente: mensaje del usuario del 2026-11-28. **Claude no reprodujo estas comprobaciones.**
+
+| Comprobación del auditor | Resultado informado |
+|---|---|
+| Hashes del paquete de GATE 4 | 433/433 |
+| Archivos congelados | 39/39 |
+| Hash completo del protocolo (`fd8685f1…`) | verificado |
+| Pruebas automatizadas seleccionadas por no requerir PyArrow | 30 superadas, 0 fallos |
+| `audit-synthetic` | satisfactorio |
+| Cálculos de potencia | verificados |
+| Registros de acceso de holdout y reserva | vacíos |
+| `pytest` completo | **no certificado de forma independiente** (sin PyArrow en el entorno del auditor) |
+| Hallazgos confirmados con pruebas sintéticas | A: el hash del holdout no se comparaba con la especificación congelada. B: una interrupción tras la carga y antes del sello permitía un segundo intento |
+
+Corrección en GATE 4.1: ver `MODEL_AUDIT_REPORT.md` §12 y `experiments/gate4_1/`.

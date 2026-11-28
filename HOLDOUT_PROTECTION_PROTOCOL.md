@@ -164,3 +164,14 @@ registradas y publicadas **antes** de cada partido, con testigo temporal externo
 push). Ver `EXPERIMENTAL_PROTOCOL.md` §10. Ningún resultado de la reserva se presentará como
 prospectivo.
 
+
+## 8. Estado tras la prueba final (2026-11-28)
+- **Holdout 2024/25-2025/26:** abierto una vez, con la autorización expresa del usuario ligada al protocolo
+  `9c81e301…`. La evaluación única quedó sellada a las 02:50:59 UTC. Ya **no** es independiente.
+- **Registro de accesos del holdout: 2 entradas.**
+  - (1) La evaluación preregistrada, a las 02:50:46.
+  - (2) **Incidente I-1**, a las 02:53:00: una prueba automática antigua, dependiente del estado, abrió el
+    holdout durante `pytest`, ya con la autorización vigente. Datos cargados y descartados; sin cálculos;
+    posterior al sello. La entrada se conserva sin alterar. Corrección: guarda en `tests/conftest.py` que
+    impide a cualquier prueba abrir datos reservados reales.
+- **Reserva 2026/27:** sellada, 0 accesos.

@@ -398,3 +398,28 @@ estadístico. Verificó 433/433 hashes, 39/39 archivos congelados, el hash del p
 
 **Nuevo congelamiento:** hash del protocolo `9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f`.
 El holdout **no** se abrió.
+
+## E-009 · 2026-11-28 · Prueba final: evaluación única del holdout 2024/25-2025/26
+
+**Autorización:** expresa del usuario, ligada al protocolo `9c81e301…` (`HOLDOUT_AUTHORIZATION.json`,
+commit `bb2f3d6`). Comprobaciones previas superadas: hash del protocolo, integridad de RAW y nivel 0, sin
+duplicados, 0 accesos, identidad y dataset de desarrollo.
+
+**Ejecución:** `python experiments/final/run_final.py run --out experiments/final/holdout_run`, una vez,
+02:49:58-02:50:59 UTC. Estados `started`, `opened` y `finished`. Holdout cargado `b859bdab…` = registro =
+especificación.
+
+**Resultados** (n = 15.154; cobertura 100%):
+- Q1: M4-cal − C = −0,013835 [−0,016962; −0,011030] **S-R → AFIRMATIVO**.
+- Q2: M4-cal − A = +0,000057 [−0,000292; +0,000381] **EQ → VENTAJA ESTADÍSTICA NO DEMOSTRADA**. Las tres
+  condiciones de validez se cumplen; pendiente de M4-cal 0,922 y de A 1,039.
+- Q3: NO EVALUADA.
+- Categorías estables con bloques de 2 a 12 semanas y por temporada.
+
+**Incidente I-1:** a las 02:53:00, durante `pytest`, una prueba antigua dependiente del estado abrió el
+holdout real (entrada `"test"` en el registro de accesos). Fue posterior al sello y sin cálculos.
+Documentado y corregido solo en las pruebas (guarda en conftest; pruebas herméticas). El registro se
+conserva intacto.
+
+**Archivos congelados:** sin cambios; el hash sigue siendo `9c81e301…`. Reserva: 0 accesos. Informe
+definitivo: `FINAL_EXPERIMENT_REPORT.md`.

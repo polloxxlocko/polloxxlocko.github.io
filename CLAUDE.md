@@ -28,12 +28,14 @@ recomendaciones de apuestas.
 | GATE 3 | **Autorizado** (2026-11-27) solo para la validación 2022/23-2023/24, con **una sola evaluación** de los candidatos congelados (M4-sport, M4-cal, M2), tras corregir el no determinismo del prior de ascendidos, probarlo con varios `PYTHONHASHSEED`, repetir la reproducción limpia y verificar identidad e hiperparámetros. Rama `gate3`; preregistro en `MODEL_SPECIFICATION.md` Parte C. **Ejecutado una sola vez (2026-11-27)**; sello `logs/GATE3_EVALUATED.json`; informe `GATE_3_REPORT.md`. **Aprobado definitivamente** (2026-11-28) |
 | Candidato primario del holdout | **M4-cal h730**, seleccionado por el usuario (2026-11-28), con la configuración exacta evaluada en GATE 3 |
 | GATE 4 | **Autorizado** (2026-11-28): auditoría de M4-cal, congelamiento (`PROTOCOL_FREEZE.json`, `configs/final_test_frozen.json`, `FINAL_TEST_PROTOCOL.md`), ejecutor de la prueba final probado solo con datos sintéticos. **NO autoriza abrir el holdout.** Rama `gate4` |
-| GATE 4.1 | Correcciones de controles de ejecución pedidas por la auditoría: triple coincidencia del hash del holdout (registro, especificación y datos) y marcador exclusivo de intento con registro de estados. Nuevo hash del protocolo **`9c81e301…63f`** (sustituye a `fd8685f1…`). Rama `gate4.1`. **Apertura del holdout NO autorizada** |
+| GATE 4.1 | Correcciones de controles de ejecución: triple coincidencia del hash del holdout y marcador exclusivo de intento con registro de estados. Hash del protocolo **`9c81e301…63f`**. **Aprobado** (2026-11-28) |
 | Q3 | **NO EVALUADA** en el experimento confirmatorio; protocolo económico separado y solo simulado, más adelante |
 | Mercado (congelado) | Fútbol, **Over/Under 2,5 goles, solo prepartido**, tiempo reglamentario |
 | Universo | 22 divisiones de Football-Data.co.uk; exclusiones solo por criterios objetivos predefinidos (`configs/exclusion_criteria.json`) |
 | Fuente principal | Football-Data.co.uk |
-| Prueba final | **2024/25 y 2025/26: SELLADAS** |
+| Prueba final | **2024/25 y 2025/26: ABIERTAS una sola vez** (2026-11-28, autorización del usuario, protocolo `9c81e301…`). Evaluación sellada; ya **no son independientes**. Ver `FINAL_EXPERIMENT_REPORT.md` |
+| Resultado confirmatorio | Q1 AFIRMATIVO (M4-cal − C, S-R); **Q2 VENTAJA ESTADÍSTICA NO DEMOSTRADA** (M4-cal − A, EQ); Q3 NO EVALUADA. Experimento **concluido** |
+| Incidente I-1 | Acceso no evaluativo al holdout durante `pytest`, posterior al sellado; registrado sin alterar; corregido con una guarda en las pruebas |
 | Reserva histórica sellada | **2026/27+ (`reserve`): SELLADA**; confirmada por el usuario. **No es validación prospectiva** |
 | Evaluación económica | Exclusivamente simulada |
 | Prohibido sin autorización | Abrir el holdout, servicios de pago (The Odds API incluida), interfaces gráficas, otros mercados, apuestas reales o su automatización, avanzar de gate |
@@ -120,7 +122,8 @@ matemática; semillas fijas; configuración en `configs/`; ningún valor crudo s
 | 2 Modelo inicial | Completado; aprobación condicionada |
 | 2.1 Correcciones de auditoría | Aprobado |
 | 3 Validación histórica | Aprobado |
-| 4 Auditoría y congelamiento | Completado; pendiente de revisión. **Apertura del holdout NO autorizada** |
+| 4 / 4.1 Auditoría y congelamiento | Aprobados |
+| Prueba final (holdout) | **Ejecutada una sola vez** (2026-11-28); rama `final`; experimento concluido. No iniciar nuevas líneas sin decisión del usuario |
 | 5 Prospectivo genuino (predicciones registradas antes de los partidos; simulado) | No iniciado |
 | 6 Interfaz | No iniciado |
 
@@ -168,7 +171,8 @@ Fase Cero: `RESEARCH_FOUNDATIONS.md`, `DATA_FEASIBILITY_REPORT.md`,
 - Los archivos listados en `PROTOCOL_FREEZE.json` (protocolos, configuración, todo `src/qsports`, el ejecutor
   final, dependencias) **no se modifican**. Cambiarlos invalida la autorización de apertura y exige un nuevo
   congelamiento aprobado por el usuario.
-- **Nunca crear `HOLDOUT_AUTHORIZATION.json`** sin instrucción expresa del usuario en la conversación.
+- **Nunca crear `HOLDOUT_AUTHORIZATION.json`** sin instrucción expresa del usuario en la conversación. (Creado el 2026-11-28 por instrucción expresa; la prueba final ya se ejecutó: **no se repite**.)
+- **Las pruebas nunca abren datos reservados reales** (guarda en `tests/conftest.py`). No ejecutar código que lea particiones reservadas fuera del ejecutor autorizado.
 - La prueba final solo se ejecuta con `python experiments/final/run_final.py run --out DIR`, **una vez**.
 - **Nunca borrar** `logs/FINAL_TEST_ATTEMPT.json` ni editar `logs/FINAL_TEST_STATE_LOG.jsonl`. Tras una interrupción no se reintenta: decide el usuario.
 - El ejecutor final solo se prueba con datos sintéticos.

@@ -93,3 +93,10 @@ Documento vivo · Última actualización: 2026-11-27 (GATE 1)
 | F3 | El hash del holdout cargado solo puede verificarse al abrirlo; la equivalencia parquet ↔ hash se apoya en que el desarrollo (mismo procedimiento) la cumple en `verify` | Si no coincidiera, el ejecutor se detiene sin evaluar |
 | F4 | M4-cal depende de M2* para definir sus filas de entrenamiento (no para predecir) | Reproducido exactamente: M2* auxiliar en el holdout |
 | F5 | Una muerte abrupta del proceso (p. ej. SIGKILL) tras la apertura puede no dejar el estado `interrupted` | El marcador de intento, creado antes de abrir, persiste e impide igualmente el reintento automático |
+
+## Prueba final
+| # | Limitación | Impacto |
+|---|---|---|
+| H1 | El holdout se abrió y se evaluó: ya no puede usarse para evaluar nada posterior | Cualquier nueva hipótesis necesitará datos nuevos (p. ej., validación prospectiva genuina) |
+| H2 | Incidente I-1: un segundo acceso al holdout, no evaluativo y posterior al sello | Sin efecto en los resultados (sellados antes), pero el registro muestra 2 accesos |
+| H3 | Q2 negativo limitado a la información, los modelos y los períodos evaluados; Q3 no evaluada | No dice nada sobre otras fuentes de información ni sobre rentabilidad |

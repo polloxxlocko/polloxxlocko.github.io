@@ -18,6 +18,8 @@ se excluyó y por qué, cómo reproducir cada fase y qué se verificó realmente
 > `GATE_3_REPORT.md` y `experiments/gate3/validation_run/`; registros en `experiments/gate3/records/`.
 > **GATE 4 (rama `gate4`):** `MODEL_AUDIT_REPORT.md`, `FINAL_TEST_PROTOCOL.md`, `configs/final_test_frozen.json`,
 > `PROTOCOL_FREEZE.json`, `experiments/gate4/` (análisis y registros, incluido el registro de la auditoría independiente).
+> **Prueba final (rama `final`):** `FINAL_EXPERIMENT_REPORT.md`; `experiments/final/holdout_run/results.json`; registros
+> `logs/FINAL_TEST_*`, `data/holdout/ACCESS_LOG.jsonl` (2 entradas: evaluación e incidente I-1); `HOLDOUT_AUTHORIZATION.json`.
 
 ## 1. Contenido publicado
 

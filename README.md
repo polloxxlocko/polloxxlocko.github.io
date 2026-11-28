@@ -9,7 +9,7 @@ apuestas.**
 **Estado:** GATE 0 y GATE 1 aprobados · GATE 2 (modelos y validación interna) con aprobación
 metodológica condicionada · GATE 2.1 (correcciones de la auditoría) completado y pendiente de
 revisión · GATE 3 (validación 2022/23-2023/24, una sola evaluación) completado y pendiente de revisión ·
-GATE 3 aprobado · GATE 4 (auditoría y congelamiento de la prueba final) completado; **apertura del holdout no autorizada**. Resultado de desarrollo (2014/15-2021/22): los modelos
+GATE 3, 4 y 4.1 aprobados · **Prueba final ejecutada una sola vez (2026-11-28)**: Q1 AFIRMATIVO; **Q2 VENTAJA ESTADÍSTICA NO DEMOSTRADA** (M4-cal equivalente al mercado, EQ); Q3 no evaluada. Experimento concluido; ver [`FINAL_EXPERIMENT_REPORT.md`](FINAL_EXPERIMENT_REPORT.md). Resultado de desarrollo (2014/15-2021/22): los modelos
 evaluados (Poisson M1/M2, logística M3) no mejoran el consenso de mercado pre-cierre, y la
 desviación de M2 no añade información distinguible a una recalibración del mercado. Este
 resultado se limita a esos modelos, variables y períodos (ver `GATE_2_1_REPORT.md`). En la validación 2022/23-2023/24 (`GATE_3_REPORT.md`): la

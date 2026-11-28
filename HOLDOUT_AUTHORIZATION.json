@@ -1,0 +1,16 @@
+{
+ "partition": "holdout",
+ "authorized_by": "usuario (propietario del proyecto)",
+ "authorized_at": "2026-11-28",
+ "user_statement": "Autorizo expresamente abrir el holdout 2024/25–2025/26 para una única evaluación según el protocolo congelado 9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f.",
+ "instructions": [
+  "Ejecuta exclusivamente el protocolo v1.1 con M4-cal h730 como candidato primario único.",
+  "Mantén Q3 como NO EVALUADA.",
+  "No abras la reserva 2026/27.",
+  "No modifiques ningún archivo congelado.",
+  "No repitas la evaluación, independientemente del resultado."
+ ],
+ "purpose": "Prueba final preregistrada (FINAL_TEST_PROTOCOL.md v1.1): una sola evaluación de M4-cal h730 en el holdout 2024/25-2025/26",
+ "created_by_agent_on_explicit_user_instruction": true,
+ "protocol_freeze_sha256": "9c81e30189ba6732106873810f75140e79b71a3ac2152589d8f65421c601e63f"
+}

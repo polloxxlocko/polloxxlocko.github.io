@@ -12,4 +12,4 @@ revisado aún la prueba final.
 | T5 | Pruebas de la guarda y de las pruebas herméticas | árbol de trabajo | Superadas; registros sin cambios |
 | T6 | `pytest` completo con la guarda | árbol de trabajo y `2e4078d` | 218 superadas; registros de accesos sin cambios |
 | T7 | `pytest` formal | `2e4078d` | **218 superadas, 0 fallos** (`pytest_2e4078d.*`) |
-| T8 | ZIP ligero final en entorno virtual limpio | ver más abajo | — |
+| T8 | ZIP ligero final (`experiments/final_records/build_light_final.py`) en entorno virtual limpio | `266c2fe` | 0 Parquet, 0 ZIP de la fuente; **201 superadas, 17 omitidas** (necesitan datos reales); `audit-synthetic` ok; hash del protocolo en el ZIP = `9c81e301…`; `dist/audit_package_final_light.zip` (1,04 MB; SHA-256 empieza por `50f0e2db2f3eab92`) |
